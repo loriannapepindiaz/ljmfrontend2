@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Colores exactos del stitch + compatibilidad */
+@theme {
+  --color-primary: #C5A059;              /* Gold Accent principal */
+  --color-pearl-beige: #eacea9;          /* Usado en nav-link, textos suaves */
+  --color-midnight-blue: #0e1a34;        /* Fondo nav oscuro */
+  --color-background-light: #FDFCF0;     /* Light mode bg */
+  --color-background-dark: #0B1120;      /* Dark mode bg */
+  --color-luxury-blue: #16213E;          /* Alternativa blue */
+  --color-luxury-gold: #D4AF37;          /* Hover gold más intenso */
+}
+
+@layer base {
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+/* Estilos exactos del stitch */
+.glass-nav {
+  background: rgba(11, 17, 32, 0.85);
+  backdrop-filter: blur(12px);
+}
+
+.premium-card {
+  background: linear-gradient(135deg, rgba(197, 160, 89, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border: 1px solid rgba(197, 160, 89, 0.2);
+}
+
+.nav-link {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: #eacea9;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #C5A059;
+}
+
+/* Hero - versión luminosa y vibrante como en la primera foto */
+.hero-gradient {
+  background: 
+    linear-gradient(
+      to bottom, 
+      rgba(0, 0, 0, 0.10),      /* muy sutil arriba */
+      rgba(0, 0, 0, 0.05) 40%,  /* casi transparente en medio */
+      rgba(0, 0, 0, 0.20)       /* leve sombra abajo para contraste */
+    ),
+    url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=95&w=3000') 
+    center 35% / cover no-repeat;
+  
+  background-attachment: fixed;     /* efecto parallax suave */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Helpers (para mantener compatibilidad) */
+.text-primary       { color: var(--color-primary); }
+.bg-primary         { background-color: var(--color-primary); }
+.text-pearl-beige   { color: var(--color-pearl-beige); }
+.bg-luxury-gold     { background-color: var(--color-luxury-gold); }
+
+/* Mejora para texto blanco sobre fondo claro/vibrante */
+.text-shadow-hero {
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7), 0 4px 20px rgba(0,0,0,0.4);
+}
