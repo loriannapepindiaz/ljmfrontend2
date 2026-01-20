@@ -13,12 +13,12 @@
     "jsx": "react-jsx",
 
     /* Paths y baseUrl para imports fáciles */
-    "baseUrl": "src",
+    // Quitamos baseUrl porque está deprecado
     "paths": {
-      "@/*": ["*"],
-      "@/components/*": ["components/*"],
-      "@/features/*": ["features/*"],
-      "@/pages/*": ["pages/*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/features/*": ["./src/features/*"],
+      "@/pages/*": ["./src/pages/*"]
     },
 
     /* Linting y strictness */
