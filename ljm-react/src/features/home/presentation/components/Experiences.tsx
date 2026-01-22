@@ -1,20 +1,19 @@
-// src/features/home/presentation/components/Experiences.tsx
 import React from 'react';
 
-const Experiences = () => {
+const Experiences: React.FC = () => {
   return (
-    <section className="py-24 bg-background-light dark:bg-background-dark">
+    <section className="py-24 bg-[#FDFCF0]">
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
             <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
               Curated Selection
             </span>
-            <h2 className="text-4xl md:text-5xl font-display text-gray-900 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-display text-gray-900">
               Elite On-Board Experiences
             </h2>
           </div>
-          <p className="max-w-md text-gray-500 dark:text-gray-400 mt-4 md:mt-0 font-light italic">
+          <p className="max-w-md text-gray-600 mt-4 md:mt-0 font-light italic">
             Every detail is designed to offer you an unparalleled level of comfort and sophistication.
           </p>
         </div>
@@ -33,10 +32,10 @@ const Experiences = () => {
                 Premium
               </div>
             </div>
-            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white">
+            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
               Michelin Star Dining
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Cuisine crafted by world-renowned chefs in intimate settings.
             </p>
           </div>
@@ -54,10 +53,10 @@ const Experiences = () => {
                 Included
               </div>
             </div>
-            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white">
+            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
               Zenith Wellness Spa
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Holistic treatments inspired by the ancient rituals of the sea.
             </p>
           </div>
@@ -72,10 +71,10 @@ const Experiences = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
-            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white">
+            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
               Royal Penthouse Suites
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               Spacious private sanctuaries with panoramic ocean views.
             </p>
           </div>
@@ -90,10 +89,10 @@ const Experiences = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
-            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900 dark:text-white">
+            <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
               Starlight Observatory
             </h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            <p className="text-sm text-gray-600 leading-relaxed">
               An outdoor lounge for cocktails under the celestial canopy.
             </p>
           </div>

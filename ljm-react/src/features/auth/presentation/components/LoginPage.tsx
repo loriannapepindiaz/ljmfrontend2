@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ← AÑADE ESTO
+import { useNavigate } from 'react-router-dom';
 
-export default function LoginPage() { // ← EXPORT DEFAULT
+export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // ← NAVEGACIÓN
+  const navigate = useNavigate();
 
   const handleSignIn = () => {
-    // Aquí puedes agregar validación
     if (username && password) {
-      navigate('/home'); // ← VA A HOMEPAGE
+      navigate('/home');
     }
   };
 
@@ -30,13 +29,19 @@ export default function LoginPage() { // ← EXPORT DEFAULT
         
         {/* Header */}
         <div className="mb-8 text-center">
-          <p className="mb-2 text-sm font-medium tracking-widest text-[#eacea9]/80 uppercase font-montserrat">
+          <p className="mb-2 text-sm font-medium tracking-widest text-[#eacea9]/80 uppercase font-sans">
             LJM SEALINE
           </p>
-          <h1 className="text-5xl font-monsieur font-normal leading-tight text-white md:text-6xl">
-            Welcome Aboard
-          </h1>
-          <h2 className="mt-2 text-base font-normal text-white/80 md:text-lg font-montserrat">
+
+        <h1
+  style={{ fontFamily: "'Playfair Display', serif" }}
+  className="text-5xl md:text-6xl text-white"
+>
+  Welcome Aboard
+</h1>
+
+
+          <h2 className="mt-2 text-base font-normal text-white/80 md:text-lg font-sans">
             Access your voyage management system
           </h2>
         </div>
@@ -47,11 +52,15 @@ export default function LoginPage() { // ← EXPORT DEFAULT
             
             {/* Username */}
             <div className="relative flex flex-col">
-              <label className="pb-2 text-sm font-medium text-white/90 font-montserrat">Username</label>
+              <label className="pb-2 text-sm font-medium text-white/90 font-sans">
+                Username
+              </label>
+
               <div className="relative">
                 <span className="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-2xl">
                   person
                 </span>
+
                 <input
                   className="form-input h-14 w-full rounded-lg border border-[#eacea9]/20 bg-black/20 p-4 pl-12 text-base text-white placeholder:text-white/40 transition-all focus:border-[#eacea9] focus:outline-none"
                   placeholder="Enter your username"
@@ -63,11 +72,15 @@ export default function LoginPage() { // ← EXPORT DEFAULT
 
             {/* Password */}
             <div className="relative flex flex-col">
-              <label className="pb-2 text-sm font-medium text-white/90 font-montserrat">Password</label>
+              <label className="pb-2 text-sm font-medium text-white/90 font-sans">
+                Password
+              </label>
+
               <div className="relative">
                 <span className="material-symbols-outlined pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-white/50 text-2xl">
                   lock
                 </span>
+
                 <input
                   type="password"
                   className="form-input h-14 w-full rounded-lg border border-[#eacea9]/20 bg-black/20 p-4 pl-12 text-base text-white placeholder:text-white/40 transition-all focus:border-[#eacea9] focus:outline-none"
@@ -78,17 +91,17 @@ export default function LoginPage() { // ← EXPORT DEFAULT
               </div>
             </div>
 
-            {/* Botón con NAVEGACIÓN */}
+            {/* Botón */}
             <button 
-              onClick={handleSignIn} // ← FUNCIÓN DE NAVEGACIÓN
-              className="h-14 rounded-lg bg-[#eacea9] px-5 text-base font-bold text-black shadow-lg shadow-[#eacea9]/20 transition-all hover:brightness-110 active:scale-95 font-montserrat"
+              onClick={handleSignIn}
+              className="h-14 rounded-lg bg-[#eacea9] px-5 text-base font-bold text-black shadow-lg shadow-[#eacea9]/20 transition-all hover:brightness-110 active:scale-95 font-sans"
             >
               Sign In
             </button>
           </div>
         </div>
 
-        <p className="mt-8 text-center text-sm text-[#eacea9]/70 underline-offset-4 transition hover:text-[#eacea9] hover:underline font-montserrat">
+        <p className="mt-8 text-center text-sm text-[#eacea9]/70 underline-offset-4 transition hover:text-[#eacea9] hover:underline font-sans">
           Forgot your password?
         </p>
       </div>

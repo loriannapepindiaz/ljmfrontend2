@@ -21,11 +21,16 @@ export default {
         'accent-red': '#ED192D',           // Rojo de Lilo o detalles
         'stitch-black': '#0A0A0A',
       },
+
       fontFamily: {
-        // Si quieres mantenerlo "Disney" pero más juguetón
-        display: ['"Comic Sans MS"', '"Montserrat"', 'sans-serif'], // o usa 'Bangers' de Google Fonts para vibe cartoon
+        // Lo que ya tenías ✅
+        display: ['"Comic Sans MS"', '"Montserrat"', 'sans-serif'],
         sans: ['Montserrat', 'sans-serif'],
+
+        // 👉 NUEVA FUENTE AÑADIDA (Playfair Display con Swashes)
+        playfair: ["'Playfair Display'", "serif"],
       },
+
       // Opcional: sombras con glow cyan como los ojos de Stitch
       boxShadow: {
         'stitch-glow': '0 0 15px rgba(78, 188, 255, 0.6)',

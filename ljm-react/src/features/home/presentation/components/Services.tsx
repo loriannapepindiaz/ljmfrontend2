@@ -1,16 +1,15 @@
-// src/features/home/presentation/components/Services.tsx
 import React from 'react';
 
-const Services = () => {
+const Services: React.FC = () => {
   return (
-    <section className="py-24 bg-white/50 dark:bg-luxury-blue/30">
+    <section className="py-24 bg-[#FDFCF0]">
       <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
         <div className="lg:w-1/2 space-y-8">
           <div className="space-y-4">
             <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase">
               Unrivaled Service
             </span>
-            <h2 className="text-4xl md:text-5xl font-display leading-tight text-gray-900 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-display leading-tight text-gray-900">
               Travel to make sweet <br/> everlasting memories
             </h2>
           </div>
@@ -21,10 +20,10 @@ const Services = () => {
                 01
               </div>
               <div>
-                <h4 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
+                <h4 className="text-lg font-bold mb-2 text-gray-900">
                   Concierge at your beck and call
                 </h4>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                <p className="text-gray-600 text-sm">
                   Personalized service that anticipates your needs before you even realize them.
                 </p>
               </div>
@@ -35,10 +34,10 @@ const Services = () => {
                 02
               </div>
               <div>
-                <h4 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
+                <h4 className="text-lg font-bold mb-2 text-gray-900">
                   Immersion in Nature's Beauty
                 </h4>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                <p className="text-gray-600 text-sm">
                   Our itineraries are designed to bring you closer to the world's most pristine environments.
                 </p>
               </div>
@@ -49,10 +48,10 @@ const Services = () => {
                 03
               </div>
               <div>
-                <h4 className="text-lg font-bold mb-2 text-gray-900 dark:text-white">
+                <h4 className="text-lg font-bold mb-2 text-gray-900">
                   Culinary Masterpieces
                 </h4>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">
+                <p className="text-gray-600 text-sm">
                   A sensory journey through the world's finest flavors, paired with rare vintages.
                 </p>
               </div>
@@ -72,7 +71,7 @@ const Services = () => {
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuAow3GiW44_OHx1ael_1CJw0k_odqbSUeyqAJRvMNrc31d5PWur2ARTe25FwHv6rRaQCyklpCrG8mxBvxsqWup4jexY7HoDcLXIPGFHcsF9dBmp-HRxlcEfwWoI_UjEjySewDLPozEeXLtMIotRzrH9A_5ehtcPDczmjBGIljC8elIrqgxaCgxEmbMNhBGYR8Tx8A-kPGxjC3gJwMDHOgpKd1RBwb-997uP5KTqqhYOHeUxZMOSm1-lLB4HZmIjDRVJOa-TZtgfFa0"
             />
             {/* Badge animado superior */}
-            <div className="absolute top-10 -left-6 bg-white dark:bg-luxury-blue p-4 rounded-xl shadow-xl flex items-center gap-4 animate-bounce hover:pause">
+            <div className="absolute top-10 -left-6 bg-white p-4 rounded-xl shadow-xl flex items-center gap-4 animate-bounce hover:pause">
               <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200">
                 <img
                   alt="User"
@@ -80,13 +79,13 @@ const Services = () => {
                 />
               </div>
               <div>
-                <p className="text-[10px] font-bold dark:text-white">Amelia V. ⭐️ 5.0</p>
+                <p className="text-[10px] font-bold text-gray-900">Amelia V. ⭐️ 5.0</p>
                 <p className="text-[8px] text-gray-500 uppercase tracking-tighter">Gold Member</p>
               </div>
             </div>
 
             {/* Badge animado inferior */}
-            <div className="absolute bottom-20 -right-6 bg-white dark:bg-luxury-blue p-4 rounded-xl shadow-xl flex items-center gap-4 animate-pulse">
+            <div className="absolute bottom-20 -right-6 bg-white p-4 rounded-xl shadow-xl flex items-center gap-4 animate-pulse">
               <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200">
                 <img
                   alt="User"
@@ -94,7 +93,7 @@ const Services = () => {
                 />
               </div>
               <div>
-                <p className="text-[10px] font-bold dark:text-white">Julian R. ⭐️ 5.0</p>
+                <p className="text-[10px] font-bold text-gray-900">Julian R. ⭐️ 5.0</p>
                 <p className="text-[8px] text-gray-500 uppercase tracking-tighter">Elite Voyager</p>
               </div>
             </div>

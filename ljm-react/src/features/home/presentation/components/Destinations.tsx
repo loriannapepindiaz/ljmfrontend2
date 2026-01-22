@@ -1,12 +1,11 @@
-// src/features/home/presentation/components/Destinations.tsx
 import React from 'react';
 
-const Destinations = () => {
+const Destinations: React.FC = () => {
   return (
-    <section className="py-24">
+    <section className="py-24 bg-[#FDFCF0]">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-display mb-4 text-gray-900 dark:text-white">
+          <h2 className="text-4xl font-display mb-4 text-gray-900">
             Discover Your Next Destination
           </h2>
           <div className="flex flex-wrap justify-center gap-4 text-xs font-bold tracking-widest text-gray-500">
@@ -34,22 +33,22 @@ const Destinations = () => {
             <div className="p-8">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h4 className="text-2xl font-display mb-1 text-gray-900 dark:text-white">
+                  <h4 className="text-2xl font-display mb-1 text-gray-900">
                     Grecian Isles Odyssey
                   </h4>
-                  <p className="text-xs text-gray-400 flex items-center gap-1 uppercase tracking-widest">
+                  <p className="text-xs text-gray-500 flex items-center gap-1 uppercase tracking-widest">
                     <span className="material-symbols-outlined text-sm">location_on</span> Santorini, Greece
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-display text-primary">$4,850</p>
-                  <p className="text-[10px] text-gray-400 uppercase">per person</p>
+                  <p className="text-[10px] text-gray-500 uppercase">per person</p>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                 7 nights of sapphire waters, white-washed villages, and ancient history.
               </p>
-              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900 dark:text-white">
+              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900">
                 VIEW DETAILS
               </button>
             </div>
@@ -70,22 +69,22 @@ const Destinations = () => {
             <div className="p-8">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h4 className="text-2xl font-display mb-1 text-gray-900 dark:text-white">
+                  <h4 className="text-2xl font-display mb-1 text-gray-900">
                     Tropical Serenity
                   </h4>
-                  <p className="text-xs text-gray-400 flex items-center gap-1 uppercase tracking-widest">
+                  <p className="text-xs text-gray-500 flex items-center gap-1 uppercase tracking-widest">
                     <span className="material-symbols-outlined text-sm">location_on</span> Maldives Archipelago
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-display text-primary">$6,200</p>
-                  <p className="text-[10px] text-gray-400 uppercase">per person</p>
+                  <p className="text-[10px] text-gray-500 uppercase">per person</p>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                 Escape to a world of crystal lagoons and overwater bungalow luxury.
               </p>
-              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900 dark:text-white">
+              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900">
                 VIEW DETAILS
               </button>
             </div>
@@ -106,22 +105,22 @@ const Destinations = () => {
             <div className="p-8">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h4 className="text-2xl font-display mb-1 text-gray-900 dark:text-white">
+                  <h4 className="text-2xl font-display mb-1 text-gray-900">
                     Arctic Aurora Path
                   </h4>
-                  <p className="text-xs text-gray-400 flex items-center gap-1 uppercase tracking-widest">
+                  <p className="text-xs text-gray-500 flex items-center gap-1 uppercase tracking-widest">
                     <span className="material-symbols-outlined text-sm">location_on</span> Norwegian Fjords
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-2xl font-display text-primary">$5,100</p>
-                  <p className="text-[10px] text-gray-400 uppercase">per person</p>
+                  <p className="text-[10px] text-gray-500 uppercase">per person</p>
                 </div>
               </div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+              <p className="text-sm text-gray-600 mb-6 leading-relaxed">
                 Witness the dance of the Northern Lights from the comfort of our observation deck.
               </p>
-              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900 dark:text-white">
+              <button className="w-full border border-primary/50 py-3 rounded-lg text-xs font-bold tracking-[0.2em] group-hover:bg-primary group-hover:text-white transition-all text-gray-900">
                 VIEW DETAILS
               </button>
             </div>
@@ -129,7 +128,7 @@ const Destinations = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <button className="bg-gray-100 dark:bg-luxury-blue hover:bg-gray-200 dark:hover:bg-luxury-blue/50 px-10 py-4 rounded-full text-xs font-bold tracking-[0.2em] transition-all text-gray-900 dark:text-white">
+          <button className="bg-gray-200 hover:bg-gray-300 px-10 py-4 rounded-full text-xs font-bold tracking-[0.2em] transition-all text-gray-900">
             SHOW MORE VOYAGES
           </button>
         </div>
