@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+// Importa tu logo aquí (ajusta la ruta según donde lo guardes)
+import SealineLogo from '@/assets/logoljm.jfif';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,15 +9,20 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#0B1120]">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-2xl">sailing</span>
-          <span className="text-xl font-display font-bold tracking-widest text-primary">
+        {/* Logo - ahora usa la imagen de la estrella dorada */}
+        <Link to="/" className="flex items-center gap-2.5">
+          <img 
+            src={SealineLogo} 
+            alt="LJM Sealine Logo" 
+            className="h-9 w-auto object-contain" // ajusta h- (altura) según prefieras: h-8, h-10, h-12...
+          />
+          {/* Si quieres mantener el texto también, descomenta esto: */}
+          {/* <span className="text-xl font-display font-bold tracking-widest text-primary">
             LJM SEALINE
-          </span>
+          </span> */}
         </Link>
 
-        {/* Desktop Menu - Opciones exactas del HTML */}
+        {/* Desktop Menu - sin cambios */}
         <div className="hidden md:flex items-center gap-8 ml-auto mr-12">
           <a href="#" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
             DESTINATIONS
@@ -31,7 +38,7 @@ const Navbar: React.FC = () => {
           </a>
         </div>
 
-        {/* Right Section - SIGN IN como texto + RESERVE NOW */}
+        {/* Right Section - sin cambios */}
         <div className="hidden md:flex items-center gap-10">
           <button className="hidden sm:block text-xs font-medium tracking-widest text-pearl-beige hover:text-primary transition-colors">
             SIGN IN
@@ -41,7 +48,7 @@ const Navbar: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Button - sin cambios */}
         <button 
           className="md:hidden text-pearl-beige"
           onClick={() => setIsOpen(!isOpen)}
@@ -50,7 +57,7 @@ const Navbar: React.FC = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - sin cambios */}
       {isOpen && (
         <div className="md:hidden bg-[#0B1120] border-t border-pearl-beige/10 p-4 space-y-4">
           <a href="#" className="block text-pearl-beige hover:text-primary transition-colors">
