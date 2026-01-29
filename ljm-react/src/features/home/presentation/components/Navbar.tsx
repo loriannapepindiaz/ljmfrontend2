@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 // Importa tu logo aquí (ajusta la ruta según donde lo guardes)
-import SealineLogo from '@/assets/logoljm.jfif';
+<img src="/logo.png" alt="Logo" />
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,10 +12,11 @@ const Navbar: React.FC = () => {
         {/* Logo - ahora usa la imagen de la estrella dorada */}
         <Link to="/" className="flex items-center gap-2.5">
           <img 
-            src={SealineLogo} 
+            src="/logo.png" 
             alt="LJM Sealine Logo" 
-            className="h-9 w-auto object-contain" // ajusta h- (altura) según prefieras: h-8, h-10, h-12...
+            className="h-9 w-auto object-contain"
           />
+
           {/* Si quieres mantener el texto también, descomenta esto: */}
           {/* <span className="text-xl font-display font-bold tracking-widest text-primary">
             LJM SEALINE

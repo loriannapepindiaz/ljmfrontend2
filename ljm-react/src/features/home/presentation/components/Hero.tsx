@@ -1,19 +1,29 @@
-// src/features/home/presentation/components/Hero.tsx
-import React from 'react';
+import React, { useState } from 'react';
+
+interface MonthProps {
+  year: number;
+  month: number;          // 1 = enero, 2 = febrero, etc.
+  startDay: number;       // 0 = domingo, 1 = lunes, ..., 6 = sábado
+  daysInMonth: number;
+  monthName: string;
+}
 
 const Hero = () => {
-  const [showDestination, setShowDestination] = React.useState(false);
-  const [showDeparture, setShowDeparture] = React.useState(false);
-  const [showGuests, setShowGuests] = React.useState(false);
-  const [selectedDate, setSelectedDate] = React.useState(null);
-  const [adults, setAdults] = React.useState(2);
-  const [kids, setKids] = React.useState(0);
-  const [rooms, setRooms] = React.useState(1);
-  const [pets, setPets] = React.useState(false);
+  const [showDestination, setShowDestination] = useState(false);
+  const [showDeparture, setShowDeparture] = useState(false);
+  const [showGuests, setShowGuests] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
-  const getGuestsText = () => `${adults} Adultos, ${kids} Niños, ${rooms} Habitación${rooms > 1 ? 'es' : ''}`;
+  const [adults, setAdults] = useState(2);
+  const [kids, setKids] = useState(0);
+  const [rooms, setRooms] = useState(1);
+  const [pets, setPets] = useState(false);
 
-  const handleSelectDate = (date) => {
+  const getGuestsText = () => {
+    return `${adults} Adulto${adults !== 1 ? 's' : ''}, ${kids} Niño${kids !== 1 ? 's' : ''}, ${rooms} Habitación${rooms !== 1 ? 'es' : ''}`;
+  };
+
+  const handleSelectDate = (date: Date) => {
     setSelectedDate(date);
     setShowDeparture(false);
   };
@@ -22,30 +32,51 @@ const Hero = () => {
     setShowGuests(false);
   };
 
-  // Función para renderizar un mes del calendario
-  const renderMonth = (year, month, startDay, daysInMonth, monthName) => {
+  const renderMonth = ({ year, month, startDay, daysInMonth, monthName }: MonthProps) => {
     const days = [];
+
+    // Días vacíos antes del 1ero del mes
     for (let i = 0; i < startDay; i++) {
-      days.push(<div key={`empty-${i}`} className="p-2"></div>);
+      days.push(<div key={`empty-${i}`} className="p-2" />);
     }
+
+    // Días del mes
     for (let day = 1; day <= daysInMonth; day++) {
-      const isSelected = selectedDate && selectedDate.getDate() === day && selectedDate.getMonth() === month - 1 && selectedDate.getFullYear() === year;
-      const dayClass = isSelected ? 'bg-navy text-white rounded-full' : 'hover:bg-beige';
+      const isSelected =
+        selectedDate &&
+        selectedDate.getDate() === day &&
+        selectedDate.getMonth() === month - 1 &&
+        selectedDate.getFullYear() === year;
+
+      const dayClass = isSelected
+        ? 'bg-[#C5A059] text-white rounded-full'
+        : 'hover:bg-[#F5E6D3] hover:text-[#C5A059]';
+
       days.push(
         <button
           key={day}
-          className={`p-2 text-center font-medium ${dayClass}`}
+          type="button"
+          className={`p-2 text-center font-medium transition-colors ${dayClass}`}
           onClick={() => handleSelectDate(new Date(year, month - 1, day))}
         >
           {day}
         </button>
       );
     }
+
     return (
-      <div className="w-1/2">
-        <h3 className="text-center font-bold text-navy mb-2">{monthName} {year}</h3>
-        <div className="grid grid-cols-7 gap-1 text-center text-sm text-gray-600">
-          <span>Do</span><span>Lu</span><span>Ma</span><span>Mi</span><span>Ju</span><span>Vi</span><span>Sá</span>
+      <div className="w-1/2 min-w-[220px]">
+        <h3 className="text-center font-bold text-[#C5A059] mb-3 text-sm">
+          {monthName.charAt(0).toUpperCase() + monthName.slice(1)} {year}
+        </h3>
+        <div className="grid grid-cols-7 gap-1 text-center text-xs text-[#333333]">
+          <span>Do</span>
+          <span>Lu</span>
+          <span>Ma</span>
+          <span>Mi</span>
+          <span>Ju</span>
+          <span>Vi</span>
+          <span>Sá</span>
           {days}
         </div>
       </div>
@@ -64,108 +95,159 @@ const Hero = () => {
           Descubre los destinos más exclusivos a bordo de nuestros liners boutique. Un viaje donde el lujo se encuentra con la vastedad del océano.
         </p>
 
-        <div className="max-w-5xl mx-auto bg-luxury-blue p-2 rounded-2xl shadow-2xl border border-primary/20 flex flex-wrap md:flex-nowrap items-center gap-4 relative">
-          <div className="flex-1 min-w-[200px] px-6 py-4 border-r border-gray-700 flex flex-col items-start relative">
-            <span className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1">Destino</span>
+        <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm p-2 md:p-2.5 rounded-2xl shadow-2xl border border-[#C5A059]/20 flex flex-wrap md:flex-nowrap items-stretch gap-2 md:gap-0 relative">
+          {/* Destino */}
+          <div className="flex-1 min-w-[160px] px-4 md:px-5 py-3 border-r border-[#C5A059]/30 flex flex-col items-start relative">
+            <span className="text-[9px] md:text-xs font-bold text-[#C5A059] tracking-widest uppercase mb-0.5">
+              Destino
+            </span>
             <div className="flex items-center gap-2 w-full">
-              <span className="material-symbols-outlined text-gray-400 text-sm">location_on</span>
+              <span className="material-symbols-outlined text-[#9CA3AF] text-sm">location_on</span>
               <input
-                className="bg-transparent border-none focus:ring-0 text-sm w-full p-0 font-medium text-white"
+                className="bg-transparent border-none focus:ring-0 text-xs md:text-sm w-full p-0 font-medium text-[#333333] placeholder:text-[#999999]"
                 placeholder="¿Adónde?"
                 type="text"
                 onFocus={() => setShowDestination(true)}
+                onBlur={() => setTimeout(() => setShowDestination(false), 150)}
               />
             </div>
+
             {showDestination && (
-              <div className="absolute top-full left-0 bg-white dark:bg-luxury-blue rounded-xl shadow-xl p-4 z-10 w-full mt-2">
-                <h4 className="font-bold mb-2 text-navy">Destinos de moda</h4>
-                <ul className="text-left text-sm">
-                  <li className="flex items-center gap-2 py-1"><span className="material-symbols-outlined text-gray-400">location_on</span>Santo Domingo, República Dominicana</li>
-                  <li className="flex items-center gap-2 py-1"><span className="material-symbols-outlined text-gray-400">location_on</span>Punta Cana, República Dominicana</li>
-                  <li className="flex items-center gap-2 py-1"><span className="material-symbols-outlined text-gray-400">location_on</span>Las Terrenas, República Dominicana</li>
-                  <li className="flex items-center gap-2 py-1"><span className="material-symbols-outlined text-gray-400">location_on</span>San Felipe de Puerto Plata, República Dominicana</li>
-                  <li className="flex items-center gap-2 py-1"><span className="material-symbols-outlined text-gray-400">location_on</span>Bayahibe, República Dominicana</li>
+              <div className="absolute top-full left-0 bg-white rounded-xl shadow-xl p-3 z-20 w-full mt-2 text-left">
+                <h4 className="font-bold mb-2 text-[#C5A059] text-xs">Destinos de moda</h4>
+                <ul className="text-xs space-y-1.5">
+                  {[
+                    'Santo Domingo, Rep. Dom.',
+                    'Punta Cana, Rep. Dom.',
+                    'Las Terrenas, Rep. Dom.',
+                    'Puerto Plata, Rep. Dom.',
+                    'Bayahibe, Rep. Dom.',
+                  ].map((dest) => (
+                    <li key={dest} className="flex items-center gap-2 py-1 cursor-pointer text-[#333333] hover:text-[#C5A059]">
+                      <span className="material-symbols-outlined text-[#9CA3AF] text-sm">location_on</span>
+                      {dest}
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
           </div>
 
-          <div 
-            className="flex-1 min-w-[200px] px-6 py-4 border-r border-gray-700 flex flex-col items-start text-left cursor-pointer relative"
+          {/* Salida */}
+          <div
+            className="flex-1 min-w-[160px] px-4 md:px-5 py-3 border-r border-[#C5A059]/30 flex flex-col items-start cursor-pointer relative"
             onClick={() => setShowDeparture(!showDeparture)}
           >
-            <span className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1">Salida</span>
+            <span className="text-[9px] md:text-xs font-bold text-[#C5A059] tracking-widest uppercase mb-0.5">
+              Salida
+            </span>
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-gray-400 text-sm">calendar_today</span>
-              <span className="text-sm font-medium text-white">{selectedDate ? selectedDate.toLocaleDateString('es-ES') : 'Seleccione Fecha'}</span>
+              <span className="material-symbols-outlined text-[#9CA3AF] text-sm">calendar_today</span>
+              <span className="text-xs md:text-sm font-medium text-[#333333]">
+                {selectedDate
+                  ? selectedDate.toLocaleDateString('es-ES', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: '2-digit',
+                    })
+                  : 'Seleccionar'}
+              </span>
             </div>
+
             {showDeparture && (
-              <div className="absolute top-full left-0 bg-white dark:bg-luxury-blue rounded-xl shadow-xl p-4 z-10 w-[600px] mt-2">
-                <div className="flex justify-between mb-4 text-navy font-bold text-sm">
+              <div className="absolute top-full left-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-auto mt-2 max-h-96 overflow-y-auto">
+                <div className="flex justify-between mb-3 text-[#C5A059] font-semibold text-xs">
                   <span>Calendario</span>
-                  <span>Fechas flexibles</span>
+                  <span className="text-[#C5A059] cursor-pointer text-[11px]">Flexible</span>
                 </div>
-                <div className="flex gap-4">
-                  {renderMonth(2026, 1, 3, 31, 'enero')} {/* Enero 2026 empieza en jueves (weekday 3) */}
-                  {renderMonth(2026, 2, 6, 28, 'febrero')} {/* Febrero 2026 empieza en domingo (weekday 6) */}
+                <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+                  {renderMonth({ year: 2026, month: 1, startDay: 3, daysInMonth: 31, monthName: 'enero' })}
+                  {renderMonth({ year: 2026, month: 2, startDay: 6, daysInMonth: 28, monthName: 'febrero' })}
                 </div>
               </div>
             )}
           </div>
 
-          <div 
-            className="flex-1 min-w-[200px] px-6 py-4 border-r border-gray-700 flex flex-col items-start text-left cursor-pointer relative"
+          {/* Huéspedes */}
+          <div
+            className="flex-1 min-w-[160px] px-4 md:px-5 py-3 flex flex-col items-start cursor-pointer relative"
             onClick={() => setShowGuests(!showGuests)}
           >
-            <span className="text-[10px] font-bold text-primary tracking-widest uppercase mb-1">Huéspedes</span>
+            <span className="text-[9px] md:text-xs font-bold text-[#C5A059] tracking-widest uppercase mb-0.5">
+              Huéspedes
+            </span>
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-gray-400 text-sm">person_outline</span>
-              <span className="text-sm font-medium text-white">{getGuestsText()}</span>
+              <span className="material-symbols-outlined text-[#9CA3AF] text-sm">person_outline</span>
+              <span className="text-xs md:text-sm font-medium text-[#333333] line-clamp-1">{getGuestsText()}</span>
             </div>
+
             {showGuests && (
-              <div className="absolute top-full left-0 bg-white dark:bg-luxury-blue rounded-xl shadow-xl p-4 z-10 w-80 mt-2">
-                <div className="bg-primary text-white p-2 rounded-t-xl font-medium text-sm">
+              <div className="absolute top-full right-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-80 md:w-96 mt-2 max-h-96 overflow-y-auto">
+                <div className="bg-[#C5A059] text-white p-2.5 rounded-lg font-medium text-center mb-3 text-sm">
                   {getGuestsText()}
                 </div>
-                <div className="p-4">
-                  <div className="flex justify-between items-center mb-4">
-                    <span>Adultos</span>
-                    <div className="flex items-center gap-2">
-                      <button className="bg-beige p-1 rounded" onClick={() => setAdults(Math.max(1, adults - 1))}>-</button>
-                      <span>{adults}</span>
-                      <button className="bg-beige p-1 rounded" onClick={() => setAdults(adults + 1)}>+</button>
+
+                <div className="space-y-4">
+                  {[
+                    { label: 'Adultos', value: adults, setValue: setAdults, min: 1 },
+                    { label: 'Niños', value: kids, setValue: setKids, min: 0 },
+                    { label: 'Habitaciones', value: rooms, setValue: setRooms, min: 1 },
+                  ].map(({ label, value, setValue, min }) => (
+                    <div key={label} className="flex justify-between items-center">
+                      <span className="text-sm text-[#333333]">{label}</span>
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          className="w-7 h-7 bg-[#F5E6D3] rounded-full flex items-center justify-center hover:bg-[#E8D4BC] transition text-[#C5A059] text-sm"
+                          onClick={() => setValue(Math.max(min, value - 1))}
+                        >
+                          −
+                        </button>
+                        <span className="w-6 text-center font-medium text-[#333333] text-sm">{value}</span>
+                        <button
+                          type="button"
+                          className="w-7 h-7 bg-[#F5E6D3] rounded-full flex items-center justify-center hover:bg-[#E8D4BC] transition text-[#C5A059] text-sm"
+                          onClick={() => setValue(value + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
+                  ))}
+
+                  <div className="flex justify-between items-center pt-2 border-t border-[#E0E0E0]">
+                    <span className="text-sm text-[#333333]">¿Con mascotas?</span>
+                    <input
+                      type="checkbox"
+                      checked={pets}
+                      onChange={() => setPets(!pets)}
+                      className="w-4 h-4 accent-[#C5A059] cursor-pointer"
+                    />
                   </div>
-                  <div className="flex justify-between items-center mb-4">
-                    <span>Niños</span>
-                    <div className="flex items-center gap-2">
-                      <button className="bg-beige p-1 rounded" onClick={() => setKids(Math.max(0, kids - 1))}>-</button>
-                      <span>{kids}</span>
-                      <button className="bg-beige p-1 rounded" onClick={() => setKids(kids + 1)}>+</button>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center mb-4">
-                    <span>Habitaciones</span>
-                    <div className="flex items-center gap-2">
-                      <button className="bg-beige p-1 rounded" onClick={() => setRooms(Math.max(1, rooms - 1))}>-</button>
-                      <span>{rooms}</span>
-                      <button className="bg-beige p-1 rounded" onClick={() => setRooms(rooms + 1)}>+</button>
-                    </div>
-                  </div>
-                  <div className="flex justify-between items-center mb-4">
-                    <span>¿Viajas con mascotas?</span>
-                    <button className={`toggle ${pets ? 'bg-navy' : 'bg-gray-300'}`} onClick={() => setPets(!pets)} />
-                  </div>
-                  <p className="text-xs text-gray-500 mb-4">Los animales de servicio no se consideran mascotas. Más info sobre viajar con animales de servicio.</p>
-                  <button className="w-full bg-primary text-white py-2 rounded font-bold" onClick={handleCloseGuests}>Listo</button>
+
+                  <p className="text-[11px] text-[#666666]">
+                    Animales de servicio no son mascotas.
+                  </p>
+
+                  <button
+                    type="button"
+                    className="w-full bg-[#C5A059] hover:bg-[#D4AF37] text-white py-2 rounded-lg font-semibold transition text-sm"
+                    onClick={handleCloseGuests}
+                  >
+                    Listo
+                  </button>
                 </div>
               </div>
             )}
           </div>
 
-          <button className="w-full md:w-auto bg-primary hover:bg-luxury-gold text-white px-10 py-5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
-            <span className="material-symbols-outlined">search</span>
-            BUSCAR CRUCERO
+          {/* Botón Buscar */}
+          <button
+            type="button"
+            className="w-full md:w-auto bg-[#C5A059] hover:bg-[#D4AF37] text-white px-6 md:px-10 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg hover:shadow-xl text-xs md:text-sm flex-shrink-0"
+          >
+            <span className="material-symbols-outlined text-sm">search</span>
+            BUSCAR
           </button>
         </div>
       </div>
