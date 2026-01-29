@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+
+
+@theme {
+  --color-primary: #C5A059;
+  --color-pearl-beige: #eacea9;
+  --color-midnight-blue: #0e1a34;
+  --color-background-light: #FDFCF0;
+  --color-background-dark: #0B1120;
+  --color-luxury-blue: #16213E;
+  --color-luxury-gold: #D4AF37;
+  --color-night-blue: #0D1B2A;
+  --color-off-white: #FEFDFB;
+  --color-maroon-gold: #8B6F47;
+}
+
+@layer base {
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+.welcome-cursive {
+  font-family: 'Dancing Script', cursive;
+  font-weight: 600;
+}
+
+.font-action {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+
+
+.hero-gradient {
+  background: 
+    linear-gradient(
+      to bottom, 
+      rgba(11, 17, 32, 0.5),
+      rgba(11, 17, 32, 0.8) 40%,
+      rgba(11, 17, 32, 1)
+    ),
+    url('https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=2000') 
+    center 35% / cover no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
