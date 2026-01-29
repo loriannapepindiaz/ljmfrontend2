@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Services: React.FC = () => {
   return (
@@ -58,9 +58,9 @@ const Services: React.FC = () => {
             </div>
           </div>
 
-          <button className="bg-primary hover:bg-luxury-gold text-white px-8 py-4 rounded-full font-bold shadow-xl transition-all">
+          <Link to="/fleet" className="inline-block bg-primary hover:bg-luxury-gold text-white px-8 py-4 rounded-full font-bold shadow-xl transition-all text-center">
             EXPLORE THE FLEET
-          </button>
+          </Link>
         </div>
 
         <div className="lg:w-1/2 relative">

@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
               {/* Instagram */}
               <a
                 className="w-10 h-10 rounded-full border border-pearl-beige/30 flex items-center justify-center text-pearl-beige hover:bg-primary hover:text-midnight-blue hover:border-primary transition-all"
-                href="https://instagram.com/tu_cuenta"
+                href="https://instagram.com/ljmsealine"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en Instagram"
@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
               {/* X (Twitter) */}
               <a
                 className="w-10 h-10 rounded-full border border-pearl-beige/30 flex items-center justify-center text-pearl-beige hover:bg-primary hover:text-midnight-blue hover:border-primary transition-all"
-                href="https://x.com/tu_cuenta"
+                href="https://x.com/ljmsealine"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Síguenos en X (Twitter)"

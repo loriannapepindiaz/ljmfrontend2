@@ -8,7 +8,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#0B1120]">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+      <div className="container mx-auto px-6 py-4 flex justify-between items-center relative">
         {/* Logo - ahora usa la imagen de la estrella dorada */}
         <Link to="/" className="flex items-center gap-2.5">
           <img 
@@ -23,8 +23,11 @@ const Navbar: React.FC = () => {
           </span> */}
         </Link>
 
-        {/* Desktop Menu - sin cambios */}
-        <div className="hidden md:flex items-center gap-8 ml-auto mr-12">
+        {/* Desktop Menu - centrar */}
+        <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
+          <Link to="/" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
+            HOME
+          </Link>
           <Link to="/destinations" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
             DESTINATIONS
           </Link>
@@ -61,6 +64,9 @@ const Navbar: React.FC = () => {
       {/* Mobile Menu - sin cambios */}
       {isOpen && (
         <div className="md:hidden bg-[#0B1120] border-t border-pearl-beige/10 p-4 space-y-4">
+          <Link to="/" className="block text-pearl-beige hover:text-primary transition-colors">
+            HOME
+          </Link>
           <Link to="/destinations" className="block text-pearl-beige hover:text-primary transition-colors">
             DESTINATIONS
           </Link>
