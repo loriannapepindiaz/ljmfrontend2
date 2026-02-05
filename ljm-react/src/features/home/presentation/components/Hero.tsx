@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface MonthProps {
   year: number;
-  month: number;          // 1 = enero, 2 = febrero, etc.
-  startDay: number;       // 0 = domingo, 1 = lunes, ..., 6 = sábado
+  month: number;        // 1 = enero, 2 = febrero, etc.
+  startDay: number;     // 0 = domingo, 1 = lunes, ..., 6 = sábado
   daysInMonth: number;
   monthName: string;
 }
@@ -13,14 +13,47 @@ const Hero = () => {
   const [showDeparture, setShowDeparture] = useState(false);
   const [showGuests, setShowGuests] = useState(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-  const [adults, setAdults] = useState(2);
+  const [destination, setDestination] = useState('');
+  const [adults, setAdults] = useState(0);
   const [kids, setKids] = useState(0);
-  const [rooms, setRooms] = useState(1);
+  const [rooms, setRooms] = useState(0);
   const [pets, setPets] = useState(false);
+  // Draft values for the guests panel (changes only commit when user presses "Listo")
+  const [adultsDraft, setAdultsDraft] = useState(adults);
+  const [kidsDraft, setKidsDraft] = useState(kids);
+  const [roomsDraft, setRoomsDraft] = useState(rooms);
+  const [petsDraft, setPetsDraft] = useState(pets);
 
   const getGuestsText = () => {
     return `${adults} Adulto${adults !== 1 ? 's' : ''}, ${kids} Niño${kids !== 1 ? 's' : ''}, ${rooms} Habitación${rooms !== 1 ? 'es' : ''}`;
+  };
+
+  const handleOpenDestination = () => {
+    setShowDestination(true);
+    setShowDeparture(false);
+    setShowGuests(false);
+  };
+
+  const handleOpenDeparture = () => {
+    setShowDeparture(true);
+    setShowDestination(false);
+    setShowGuests(false);
+  };
+
+  const handleOpenGuests = () => {
+    // initialize drafts from committed values when opening
+    setAdultsDraft(adults);
+    setKidsDraft(kids);
+    setRoomsDraft(rooms);
+    setPetsDraft(pets);
+    setShowGuests(true);
+    setShowDestination(false);
+    setShowDeparture(false);
+  };
+
+  const handleSelectDestination = (dest: string) => {
+    setDestination(dest);
+    setShowDestination(false);
   };
 
   const handleSelectDate = (date: Date) => {
@@ -34,20 +67,16 @@ const Hero = () => {
 
   const renderMonth = ({ year, month, startDay, daysInMonth, monthName }: MonthProps) => {
     const days = [];
-
     // Días vacíos antes del 1ero del mes
     for (let i = 0; i < startDay; i++) {
       days.push(<div key={`empty-${i}`} className="p-2" />);
     }
-
     // Días del mes
     for (let day = 1; day <= daysInMonth; day++) {
-      const isSelected =
-        selectedDate &&
+      const isSelected = selectedDate &&
         selectedDate.getDate() === day &&
         selectedDate.getMonth() === month - 1 &&
         selectedDate.getFullYear() === year;
-
       const dayClass = isSelected
         ? 'bg-[#C5A059] text-white rounded-full'
         : 'hover:bg-[#F5E6D3] hover:text-[#C5A059]';
@@ -63,7 +92,6 @@ const Hero = () => {
         </button>
       );
     }
-
     return (
       <div className="w-1/2 min-w-[220px]">
         <h3 className="text-center font-bold text-[#C5A059] mb-3 text-sm">
@@ -90,11 +118,9 @@ const Hero = () => {
           Explora el Horizonte en <br />
           <span className="italic text-primary">Absoluta Elegancia</span>
         </h1>
-
         <p className="text-gray-200 text-lg md:text-xl max-w-2xl mx-auto mb-12 font-light">
           Descubre los destinos más exclusivos a bordo de nuestros liners boutique. Un viaje donde el lujo se encuentra con la vastedad del océano.
         </p>
-
         <div className="max-w-4xl mx-auto bg-white/95 backdrop-blur-sm p-2 md:p-2.5 rounded-2xl shadow-2xl border border-[#C5A059]/20 flex flex-wrap md:flex-nowrap items-stretch gap-2 md:gap-0 relative">
           {/* Destino */}
           <div className="flex-1 min-w-[160px] px-4 md:px-5 py-3 border-r border-[#C5A059]/30 flex flex-col items-start relative">
@@ -107,11 +133,12 @@ const Hero = () => {
                 className="bg-transparent border-none focus:ring-0 text-xs md:text-sm w-full p-0 font-medium text-[#333333] placeholder:text-[#999999]"
                 placeholder="¿Adónde?"
                 type="text"
-                onFocus={() => setShowDestination(true)}
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                onFocus={handleOpenDestination}
                 onBlur={() => setTimeout(() => setShowDestination(false), 150)}
               />
             </div>
-
             {showDestination && (
               <div className="absolute top-full left-0 bg-white rounded-xl shadow-xl p-3 z-20 w-full mt-2 text-left">
                 <h4 className="font-bold mb-2 text-[#C5A059] text-xs">Destinos de moda</h4>
@@ -123,7 +150,7 @@ const Hero = () => {
                     'Puerto Plata, Rep. Dom.',
                     'Bayahibe, Rep. Dom.',
                   ].map((dest) => (
-                    <li key={dest} className="flex items-center gap-2 py-1 cursor-pointer text-[#333333] hover:text-[#C5A059]">
+                    <li key={dest} onClick={() => handleSelectDestination(dest)} className="flex items-center gap-2 py-1 cursor-pointer text-[#333333] hover:text-[#C5A059]">
                       <span className="material-symbols-outlined text-[#9CA3AF] text-sm">location_on</span>
                       {dest}
                     </li>
@@ -132,11 +159,10 @@ const Hero = () => {
               </div>
             )}
           </div>
-
           {/* Salida */}
           <div
             className="flex-1 min-w-[160px] px-4 md:px-5 py-3 border-r border-[#C5A059]/30 flex flex-col items-start cursor-pointer relative"
-            onClick={() => setShowDeparture(!showDeparture)}
+            onClick={handleOpenDeparture}
           >
             <span className="text-[9px] md:text-xs font-bold text-[#C5A059] tracking-widest uppercase mb-0.5">
               Salida
@@ -153,7 +179,6 @@ const Hero = () => {
                   : 'Seleccionar'}
               </span>
             </div>
-
             {showDeparture && (
               <div className="absolute top-full left-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-auto mt-2 max-h-96 overflow-y-auto">
                 <div className="flex justify-between mb-3 text-[#C5A059] font-semibold text-xs">
@@ -167,11 +192,10 @@ const Hero = () => {
               </div>
             )}
           </div>
-
           {/* Huéspedes */}
           <div
             className="flex-1 min-w-[160px] px-4 md:px-5 py-3 flex flex-col items-start cursor-pointer relative"
-            onClick={() => setShowGuests(!showGuests)}
+            onClick={handleOpenGuests}
           >
             <span className="text-[9px] md:text-xs font-bold text-[#C5A059] tracking-widest uppercase mb-0.5">
               Huéspedes
@@ -180,18 +204,16 @@ const Hero = () => {
               <span className="material-symbols-outlined text-[#9CA3AF] text-sm">person_outline</span>
               <span className="text-xs md:text-sm font-medium text-[#333333] line-clamp-1">{getGuestsText()}</span>
             </div>
-
             {showGuests && (
-              <div className="absolute top-full right-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-80 md:w-96 mt-2 max-h-96 overflow-y-auto">
+              <div onClick={(e) => e.stopPropagation()} className="absolute top-full right-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-80 md:w-96 mt-2 max-h-96 overflow-y-auto">
                 <div className="bg-[#C5A059] text-white p-2.5 rounded-lg font-medium text-center mb-3 text-sm">
                   {getGuestsText()}
                 </div>
-
                 <div className="space-y-4">
                   {[
-                    { label: 'Adultos', value: adults, setValue: setAdults, min: 1 },
-                    { label: 'Niños', value: kids, setValue: setKids, min: 0 },
-                    { label: 'Habitaciones', value: rooms, setValue: setRooms, min: 1 },
+                    { label: 'Adultos', value: adultsDraft, setValue: setAdultsDraft, min: 0 },
+                    { label: 'Niños', value: kidsDraft, setValue: setKidsDraft, min: 0 },
+                    { label: 'Habitaciones', value: roomsDraft, setValue: setRoomsDraft, min: 0 },
                   ].map(({ label, value, setValue, min }) => (
                     <div key={label} className="flex justify-between items-center">
                       <span className="text-sm text-[#333333]">{label}</span>
@@ -214,25 +236,29 @@ const Hero = () => {
                       </div>
                     </div>
                   ))}
-
                   <div className="flex justify-between items-center pt-2 border-t border-[#E0E0E0]">
                     <span className="text-sm text-[#333333]">¿Con mascotas?</span>
                     <input
                       type="checkbox"
-                      checked={pets}
-                      onChange={() => setPets(!pets)}
+                      checked={petsDraft}
+                      onChange={() => setPetsDraft(!petsDraft)}
                       className="w-4 h-4 accent-[#C5A059] cursor-pointer"
                     />
                   </div>
-
                   <p className="text-[11px] text-[#666666]">
                     Animales de servicio no son mascotas.
                   </p>
-
                   <button
                     type="button"
                     className="w-full bg-[#C5A059] hover:bg-[#D4AF37] text-white py-2 rounded-lg font-semibold transition text-sm"
-                    onClick={handleCloseGuests}
+                    onClick={() => {
+                      // commit drafts to committed values and close panel
+                      setAdults(adultsDraft);
+                      setKids(kidsDraft);
+                      setRooms(roomsDraft);
+                      setPets(petsDraft);
+                      setShowGuests(false);
+                    }}
                   >
                     Listo
                   </button>
@@ -240,7 +266,6 @@ const Hero = () => {
               </div>
             )}
           </div>
-
           {/* Botón Buscar */}
           <button
             type="button"
