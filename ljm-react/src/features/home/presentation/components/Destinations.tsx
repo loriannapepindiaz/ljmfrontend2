@@ -1,5 +1,6 @@
-// components/Destinations.tsx - COMPLETO Y FUNCIONANDO ✅
+// components/Destinations.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface Destination {
   title: string;
@@ -161,12 +162,16 @@ const destinationsData: Record<string, Destination[]> = {
 
 const Destinations: React.FC = () => {
   const [activeTab, setActiveTab] = useState('MEDITERRANEAN');
+  const navigate = useNavigate();
   const tabs = ['MEDITERRANEAN', 'CARIBBEAN', 'ALASKA', 'SOUTH PACIFIC', 'ASIA & ARABIA'];
   const currentDestinations = destinationsData[activeTab] || [];
 
   const handleViewDetails = () => {
-  window.location.href = '/details';   // ← asegúrate que esté ASÍ
-};
+    // ✅ Navega a la página de detalles
+    navigate('/destination-details');
+    // ✅ Fuerza el scroll al inicio de la ventana
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
 
   return (
     <section className="py-24 bg-[#FDFCF0]">
@@ -243,7 +248,10 @@ const Destinations: React.FC = () => {
         <div className="mt-16 text-center">
           <button 
             className="bg-[#C5A059]/10 hover:bg-[#C5A059] hover:text-white px-10 py-4 rounded-full text-xs font-bold tracking-wide transition-all duration-300 text-[#C5A059] border-2 border-[#C5A059]/20 hover:border-[#C5A059]"
-            onClick={() => window.location.href = '/destinations'}
+            onClick={() => {
+              navigate('/destinations');
+              window.scrollTo({ top: 0, behavior: 'instant' });
+            }}
           >
             MOSTRAR MÁS VIAJES
           </button>
