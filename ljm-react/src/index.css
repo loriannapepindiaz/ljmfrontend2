@@ -1,9 +1,10 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @theme {
+  /* Mantenemos tus colores y aseguramos el dorado potente */
   --color-primary: #C5A059;
   --color-pearl-beige: #eacea9;
   --color-midnight-blue: #0e1a34;
@@ -14,11 +15,16 @@
   --color-night-blue: #0D1B2A;
   --color-off-white: #FEFDFB;
   --color-maroon-gold: #8B6F47;
+  
+  /* Alias para compatibilidad */
+  --color-accent: #eacea9;
+  --color-navy: #0e1a34;
 }
 
 @layer base {
   body {
     font-family: 'Montserrat', sans-serif;
+    @apply antialiased bg-background-dark text-off-white;
   }
 
   h1, h2, h3, .font-display {
@@ -26,6 +32,7 @@
   }
 }
 
+/* Tus clases originales preservadas */
 .welcome-cursive {
   font-family: 'Dancing Script', cursive;
   font-weight: 600;
@@ -34,11 +41,8 @@
 .font-action {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  letter-spacing: 0.1em;
 }
-
-
-
-
 
 .hero-gradient {
   background: 
@@ -55,3 +59,24 @@
   background-position: center;
 }
 
+/* Efectos Glassmorphism integrados */
+@layer components {
+  .glass-panel {
+    background: rgba(14, 26, 52, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(234, 202, 169, 0.2);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(234, 202, 169, 0.1);
+    transition: all 0.3s ease;
+  }
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}

@@ -5,41 +5,52 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Colores inspirados en Stitch (prioridad en azules icónicos)
-        primary: '#2972B6',          // Azul principal de Stitch (usa como accent principal)
-        'stitch-blue': '#2972B6',    // Alias claro
-        'stitch-light': '#4EBCFF',   // Highlights / cyan brillante
-        'stitch-dark': '#002790',    // Sombras profundas
-        'stitch-purple': '#945CB4',  // Morado de orejas / detalles traviesos
-        'stitch-navy': '#001D4F',    // Fondo oscuro navy
+        // --- PALETA STITCH (Identidad) ---
+        primary: '#2972B6',            // Azul principal de Stitch
+        'stitch-blue': '#2972B6',
+        'stitch-light': '#4EBCFF',     // Cyan brillante (Highlights)
+        'stitch-dark': '#002790',      // Sombras profundas
+        'stitch-purple': '#945CB4',    // Detalle de orejas
+        'stitch-navy': '#001D4F',      // Navy de Stitch
+        'navy': '#001D4F',             // Alias para compatibilidad con componentes
 
-        // Mantén o ajusta tus fondos para que combinen
-        "background-light": "#FDFCF0",     // Light mode suave (como cielo hawaiano claro)
-        'background-dark': '#0A1224',      // Dark mode (tu actual, perfecto para vibe Stitch nocturno)
-
-        // Opcionales extras para acentos (rojo de Lilo o negro)
-        'accent-red': '#ED192D',           // Rojo de Lilo o detalles
+        // --- ACENTOS Y FONDOS ---
+        'accent': '#F5F1E8',           // Beige perlado (necesario para text-accent)
+        'pearl-beige': '#F5F1E8',
+        'accent-red': '#ED192D',       // Rojo Lilo
         'stitch-black': '#0A0A0A',
+        
+        "background-light": "#FDFCF0", // Cielo hawaiano
+        'background-dark': '#0A1224',  // Espacio profundo
 
-        // Colores para Payment
-        'night-blue': '#0D1B2A',           // Azul oscuro para fondos de payment
-        'pearl-beige': '#F5F1E8',          // Beige perlado para texto
-        'maroon-gold': '#8B6F47',          // Dorado/marrón para acentos
-        'off-white': '#FEFDFB',            // Blanco crema
+        // --- COLORES PAYMENT / EXTRAS ---
+        'night-blue': '#0D1B2A',
+        'maroon-gold': '#8B6F47',
+        'off-white': '#FEFDFB',
       },
 
       fontFamily: {
-        // Lo que ya tenías ✅
+        // 'display' para títulos (Comic Sans le da el toque divertido de Stitch)
         display: ['"Comic Sans MS"', '"Montserrat"', 'sans-serif'],
+        // 'body' y 'sans' para lectura limpia
         sans: ['Montserrat', 'sans-serif'],
-
-        // 👉 NUEVA FUENTE AÑADIDA (Playfair Display con Swashes)
+        body: ['Montserrat', 'sans-serif'],
         playfair: ["'Playfair Display'", "serif"],
       },
 
-      // Opcional: sombras con glow cyan como los ojos de Stitch
       boxShadow: {
+        // Efecto neón tipo ojos de Stitch o tecnología alienígena
         'stitch-glow': '0 0 15px rgba(78, 188, 255, 0.6)',
+        'stitch-glow-strong': '0 0 25px rgba(41, 114, 182, 0.8)',
+      },
+
+      // Mantener bordes suaves pero definidos
+      borderRadius: {
+        'DEFAULT': '0.25rem',
+        'lg': '0.5rem',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        'full': '9999px',
       },
     },
   },
