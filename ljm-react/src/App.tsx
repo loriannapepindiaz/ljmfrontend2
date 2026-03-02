@@ -9,8 +9,11 @@ import PaymentPage from "./features/payment/presentation/pages/PaymentPage";
 // ✅ Importación de Experiencias
 import ExperiencesPage from "./features/experiences/presentation/pages/ExperiencesPage";
 
-// ✅ NUEVA IMPORTACIÓN DE ROOM (Basada en tu estructura de carpetas)
+// ✅ NUEVA IMPORTACIÓN DE ROOM
 import RoomPage from "./features/Room/presentation/pages/RoomPage";
+
+// ✅ NUEVA IMPORTACIÓN DE PERSONALIZACIÓN
+import PersonalizationPage from "./features/personalization/presentation/pages/PersonalizationPage";
 
 // Importamos la nueva página de detalles de destino
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
@@ -32,8 +35,11 @@ function App() {
         {/* ✅ RUTA DE EXPERIENCIAS */}
         <Route path="/experiences" element={<ExperiencesPage />} />
 
-        {/* ✅ NUEVA RUTA DE PERSONALIZACIÓN (ROOM) */}
+        {/* ✅ RUTA DE SELECCIÓN DE HABITACIÓN (ROOM) */}
         <Route path="/room" element={<RoomPage />} />
+
+        {/* ✅ NUEVA RUTA DE PERSONALIZACIÓN DE ITINERARIO */}
+        <Route path="/personalization" element={<PersonalizationPage />} />
 
         {/* RUTAS DE DETALLES */}
         <Route path="/details-suit" element={<DetailsSuitPage />} />
