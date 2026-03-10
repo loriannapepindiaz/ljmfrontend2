@@ -19,7 +19,7 @@ const AccommodationCard: FC<AccommodationProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-3xl overflow-hidden bg-white transition-all duration-500 border
+      className={`h-full flex flex-col rounded-3xl overflow-hidden bg-white transition-all duration-500 border
         ${
           isSelected
             ? "border-[#c5a059] ring-1 ring-[#c5a059]/50 shadow-xl"
@@ -27,7 +27,7 @@ const AccommodationCard: FC<AccommodationProps> = ({
         }`}
     >
       {/* Imagen */}
-      <div className="h-64 overflow-hidden">
+      <div className="h-64 overflow-hidden flex-shrink-0">
         <img
           src={image}
           alt={title}
@@ -35,13 +35,14 @@ const AccommodationCard: FC<AccommodationProps> = ({
         />
       </div>
 
-      {/* Contenido */}
-      <div className="p-8 flex flex-col">
+      {/* Contenido - Se añade flex-1 para que el contenedor crezca */}
+      <div className="p-8 flex flex-col flex-1">
         <h4 className="text-2xl font-serif font-bold mb-6 text-[#0e1a34] tracking-tight">
           {title}
         </h4>
 
-        <ul className="space-y-4 mb-10">
+        {/* El flex-grow aquí es el secreto: absorbe el espacio sobrante */}
+        <ul className="space-y-4 mb-10 flex-grow">
           {features.map((f, i) => (
             <li
               key={i}
@@ -55,7 +56,8 @@ const AccommodationCard: FC<AccommodationProps> = ({
           ))}
         </ul>
 
-        <div className="pt-6 border-t border-gray-50 flex items-center justify-between">
+        {/* mt-auto asegura que el footer siempre esté al final de la card */}
+        <div className="pt-6 border-t border-gray-50 flex items-center justify-between mt-auto">
           <div className="flex flex-col">
             <p className="text-[9px] text-gray-400 uppercase font-bold tracking-[0.15em] mb-1">
               Precio por noche

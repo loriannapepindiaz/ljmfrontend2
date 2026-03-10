@@ -49,7 +49,7 @@ function App() {
 
         {/* Rutas temporales / de transición */}
         <Route path="/details" element={<DestinationDetails />} />
-        <Route path="/gallery" element={<DestinationDetails />} />
+        
 
         {/* Catch-all */}
         <Route path="*" element={<SigninPage />} />
