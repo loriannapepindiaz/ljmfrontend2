@@ -13,7 +13,7 @@ const PersonalizationPage: FC = () => {
   const [selectedSuiteId, setSelectedSuiteId] = useState<number | null>(null);
   const [selectedExps, setSelectedExps] = useState<string[]>([]);
 
-  // Datos de Suites (He actualizado los IDs y las fotos para asegurar que carguen)
+  // Datos de Suites
   const suites = [
     { 
       id: 0, 
@@ -46,13 +46,13 @@ const PersonalizationPage: FC = () => {
 
   const selectedSuite = suites.find(s => s.id === selectedSuiteId);
 
+  // --- Función Única de Navegación ---
   const handleNextStep = () => {
-    navigate("/proxima-pagina"); 
+    navigate("/details-suit"); // ✅ Ambos botones llevan aquí ahora
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans antialiased text-[#0e1a34]">
-      {/* Navbar fija */}
       <div className="fixed top-0 w-full z-[100] bg-[#0e1a34]">
         <Navbar />
       </div>
@@ -60,7 +60,6 @@ const PersonalizationPage: FC = () => {
       <main className="flex-1 bg-white pt-24 md:pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-20">
           
-          {/* Cabecera con Botón Omitir Rediseñado (Más pequeño) */}
           <section className="mb-14">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-3xl">
@@ -72,7 +71,7 @@ const PersonalizationPage: FC = () => {
                 </p>
               </div>
 
-              {/* Botón Omitir: Estilizado y compacto */}
+              {/* Botón Omitir -> /details-suit */}
               <div className="pb-2">
                 <button 
                   onClick={handleNextStep}
@@ -84,7 +83,6 @@ const PersonalizationPage: FC = () => {
               </div>
             </div>
 
-            {/* Separador Alojamiento */}
             <div className="flex items-center gap-4 py-8 border-t border-[#0e1a34]/10 mt-12 mb-10">
               <span className="material-symbols-outlined text-[#0e1a34] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>king_bed</span>
               <h3 className="text-[10px] font-bold text-[#0e1a34] uppercase tracking-[0.4em] font-serif">
@@ -104,7 +102,6 @@ const PersonalizationPage: FC = () => {
             </div>
           </section>
 
-          {/* Barra de Resumen */}
           <div className="my-20">
             <SummaryBar 
               selectedSuiteName={selectedSuite ? selectedSuite.title : null} 
@@ -112,7 +109,6 @@ const PersonalizationPage: FC = () => {
             />
           </div>
 
-          {/* Sección de Experiencias (Fotos Arregladas) */}
           <section className="mb-24">
             <div className="flex items-center gap-4 mb-10 border-b border-[#0e1a34]/10 pb-6">
               <span className="material-symbols-outlined text-[#0e1a34] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>diamond</span>
@@ -152,7 +148,7 @@ const PersonalizationPage: FC = () => {
             </div>
           </section>
 
-          {/* Botón de Confirmación Final */}
+          {/* Botón Confirmar -> /details-suit */}
           <div className="mb-20">
             <button 
               onClick={handleNextStep}

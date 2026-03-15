@@ -1,4 +1,5 @@
 import { useState, type FC } from "react";
+import { useNavigate } from "react-router-dom"; // ✅ Importamos el hook
 import RoomLayout from "../components/RoomLayout";
 import RoomHeader from "../components/RoomHeader";
 import SectionTitle from "../components/SectionTitle";
@@ -14,6 +15,8 @@ interface Suite {
 }
 
 const RoomPage: FC = () => {
+  const navigate = useNavigate(); // ✅ Inicializamos la navegación
+  
   // Estado para controlar cuál está seleccionado (por índice)
   const [selectedSuiteIndex, setSelectedSuiteIndex] = useState<number | null>(null);
 
@@ -46,13 +49,13 @@ const RoomPage: FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-background-dark overflow-x-hidden">
-      {/* Navbar con fondo sólido para que no sea transparente */}
+      {/* Navbar con fondo sólido */}
       <div className="bg-[#0e1a34] w-full z-50">
         <Navbar />
       </div>
 
       <main className="flex-1 relative">
-        {/* Fondo de imagen de la cubierta del barco (Stitch) */}
+        {/* Fondo de imagen de la cubierta del barco */}
         <div className="fixed inset-0 z-0">
           <img 
             alt="Luxury cruise background" 
@@ -66,7 +69,7 @@ const RoomPage: FC = () => {
           <RoomLayout>
             <RoomHeader />
             
-            {/* Contenedor con fondo sólido Navy para evitar la transparencia */}
+            {/* Contenedor con fondo sólido Navy */}
             <div className="flex flex-col gap-10 p-6 md:p-12 relative bg-[#0e1a34] rounded-b-xl border-t border-accent/10">
               
               <SectionTitle
@@ -81,9 +84,7 @@ const RoomPage: FC = () => {
                     title={suite.title}
                     description={suite.description}
                     image={suite.imageUrl}
-                    // Selección exclusiva
                     isSelected={selectedSuiteIndex === index}
-                    // Toggle: si ya está seleccionado, lo deselecciona (null)
                     onSelect={() => setSelectedSuiteIndex(selectedSuiteIndex === index ? null : index)}
                   />
                 ))}
@@ -91,7 +92,10 @@ const RoomPage: FC = () => {
 
               {/* Botón de acción final */}
               <div className="flex justify-end pt-6">
-                <button className="flex items-center gap-4 bg-primary hover:bg-primary/90 px-10 py-4 rounded-full text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl shadow-black/50 text-[10px]">
+                <button 
+                  onClick={() => navigate('/personalization')} // ✅ Navegación a la página indicada
+                  className="flex items-center gap-4 bg-primary hover:bg-primary/90 px-10 py-4 rounded-full text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl shadow-black/50 text-[10px] active:scale-95 group"
+                >
                   <span>Proceed to Payment</span>
                   <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2 text-sm">
                     arrow_forward
@@ -103,7 +107,7 @@ const RoomPage: FC = () => {
         </div>
       </main>
 
-      {/* Footer con fondo sólido para cerrar el diseño */}
+      {/* Footer con fondo sólido */}
       <div className="bg-[#0e1a34] w-full z-20 border-t border-accent/5">
         <Footer />
       </div>

@@ -1,67 +1,242 @@
 // features/payment/presentation/components/PaymentMethodSelector.tsx
-import React from 'react';
+import React, { useState } from 'react';
 
-const PaymentMethodSelector: React.FC = () => {
+interface PaymentMethodSelectorProps {
+  onSelect: (data: any) => void;
+}
+
+const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({ onSelect }) => {
+  const [selected, setSelected] = useState<string | null>(null);
+  const [showManageModal, setShowManageModal] = useState(false);
+  const [step, setStep] = useState<'list' | 'form'>('list');
+
+  const [cardData, setCardData] = useState({ name: '', number: '', exp: '', cvv: '' });
+
+  // Solo estas tres opciones
+  const methods = [
+    { 
+      id: 'visa', 
+      name: 'Visa / Mastercard', 
+      img: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Visa_Inc._logo_%282021%E2%80%93present%29.svg',
+      type: 'card'
+    },
+    { 
+      id: 'amex', 
+      name: 'American Express', 
+      img: 'https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo.svg',
+      type: 'card'
+    }
+  ];
+
+  const formatCardNumber = (value: string) => {
+    return value.replace(/\D/g, '').replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+  };
+
+  const formatExpiry = (value: string) => {
+    return value.replace(/\D/g, '').replace(/(\d{2})(\d)/, '$1/$2').substring(0, 5);
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    let formattedValue = value;
+
+    if (name === 'number') {
+      formattedValue = formatCardNumber(value).substring(0, 19);
+    }
+    if (name === 'exp') {
+      formattedValue = formatExpiry(value);
+    }
+    if (name === 'cvv') {
+      formattedValue = value.replace(/\D/g, '').substring(0, 3);
+    }
+    if (name === 'name') {
+      formattedValue = value.toUpperCase();
+    }
+
+    setCardData(prev => ({ ...prev, [name]: formattedValue }));
+  };
+
+  const currentMethod = methods.find(m => m.id === selected);
+  const isCardMethod = currentMethod?.type === 'card';
+
+  const handleSelectMethod = (methodId: string) => {
+    setSelected(methodId);
+    setStep('form');
+  };
+
+  const handleEdit = () => {
+    setStep('form');
+    setShowManageModal(true);
+  };
+
+  const handleConfirm = () => {
+    if (isCardMethod) {
+      onSelect({
+        id: selected,
+        name: currentMethod?.name,
+        img: currentMethod?.img,
+        last4: cardData.number ? cardData.number.slice(-4) : '',
+        cardData: cardData, // enviamos todos los datos por si los necesitas después
+        type: 'card'
+      });
+      setShowManageModal(false);
+    }
+  };
+
   return (
-    <div className="bg-white rounded-[2rem] premium-shadow border border-gray-100 flex-1 flex flex-col overflow-hidden">
-      <div className="p-8">
-        <div className="flex items-center gap-3 mb-8">
+    <div className="bg-white rounded-[2rem] border border-gray-100 flex-1 flex flex-col overflow-hidden relative min-h-[300px] shadow-sm">
+      <div className="p-8 h-full flex flex-col justify-between">
+        <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-maroon-gold">payments</span>
-          <h3 className="text-xs font-bold text-night-blue uppercase tracking-[0.2em]">Forma de Pago</h3>
+          <h3 className="text-[11px] font-bold text-night-blue uppercase tracking-[0.3em]">Forma de Pago</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-          <label className="relative flex items-center p-4 border-2 border-pearl-beige bg-pearl-beige/5 rounded-2xl cursor-pointer group transition-all">
-            <div className="flex items-center gap-4 w-full">
-              <input
-                checked
-                className="w-4 h-4 text-night-blue border-pearl-beige focus:ring-night-blue"
-                name="payment"
-                type="radio"
-              />
-              <div className="w-10 h-7 bg-white border border-gray-100 rounded flex items-center justify-center p-1 shadow-sm">
-                <img
-                  alt="Visa"
-                  className="h-full object-contain"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBshoCYghOiAuKea9RzgC4WNTTM7ug0pmfN-ga5duGszawzk661wMxLtsOCEDcf52zBPtBHMCHarkZxSp9wvYIbmm5Fr2SgtyZkeyAXFYnBDuhKmjXCEmtU2G4yIrxeRneHHZInY_uGUo1I-8yIGx26w_qhVotxS3kMRyOSKazxHOL6XgLMYbYlPzTOeb8aORIZMmvUDWBM3aaDi00xezUe9w4oyFYNx0aIEUglaSxTBG2poDNxFooWZT-mVGt74_42FHrSciZVu0o"
-                />
+        <div className="flex items-center h-[85px] my-6"> 
+          {selected ? (
+            <div 
+              onClick={handleEdit}
+              className="w-full h-full flex items-center justify-between p-6 border-2 border-pearl-beige bg-pearl-beige/5 rounded-2xl cursor-pointer hover:bg-pearl-beige/10 transition-all group"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-9 flex items-center justify-center bg-white rounded-lg border border-gray-100 p-1.5 shadow-sm">
+                  <img 
+                    src={currentMethod?.img} 
+                    className="h-full w-full object-contain" 
+                    alt={`${currentMethod?.name} logo`} 
+                    loading="lazy"
+                    onError={(e) => { 
+                      e.currentTarget.src = `https://via.placeholder.com/56x36?text=${currentMethod?.name.slice(0,4)}`; 
+                    }}
+                  />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-night-blue uppercase tracking-widest opacity-60 italic">Método Seleccionado</p>
+                  <p className="text-xs font-display italic text-maroon-gold">
+                    {cardData.number ? `•••• •••• •••• ${cardData.number.slice(-4)}` : currentMethod?.name}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="text-xs font-bold">Visa •••• 4321</p>
-                <p className="text-[9px] text-gray-400 uppercase tracking-widest">Expira 12/26</p>
-              </div>
+              <span className="text-[10px] font-bold text-maroon-gold uppercase underline">Editar</span>
             </div>
-          </label>
-
-          <label className="relative flex items-center p-4 border border-gray-200 hover:border-pearl-beige rounded-2xl cursor-pointer transition-all bg-white">
-            <div className="flex items-center gap-4 w-full">
-              <input
-                className="w-4 h-4 text-night-blue border-gray-300 focus:ring-night-blue"
-                name="payment"
-                type="radio"
-              />
-              <div className="w-10 h-7 bg-white border border-gray-100 rounded flex items-center justify-center p-1 shadow-sm">
-                <img
-                  alt="Apple Pay"
-                  className="h-full object-contain"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-VnOlkx9kUVK4_h57vHmAKu2BXCQSuKCKxSKZyG4PNME8SXrxQs9HuTQjqtWbfMC1Vss40exXxsSXR4ErK6JA7ezsSv4iHEFEx3QmpPYLHgZ7Zw--SkVs3qfaf4HJJptETqpCnxn-RyouXYTzGNwIMGfQJByyWcUJZ3_RaQhYVOaowi8Jkd1E8rf73eobKJL6hhpw7GiP4FVovC4swDBm2bufm8HuTQe3Z_TFoRissDA0iXYQc8mDAybevYQMBP-llwpfV7ILYhA"
-                />
-              </div>
-              <div className="flex-1">
-                <p className="text-xs font-bold">Apple Pay</p>
-                <p className="text-[9px] text-gray-400 uppercase tracking-widest">Verificación FaceID</p>
-              </div>
-            </div>
-          </label>
+          ) : (
+            <button 
+              onClick={() => { setStep('list'); setShowManageModal(true); }}
+              className="w-full h-full border-2 border-dashed border-pearl-beige/60 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] text-maroon-gold hover:border-maroon-gold hover:bg-pearl-beige/5 transition-all flex items-center justify-center gap-4"
+            >
+              <span className="material-symbols-outlined text-xl">add_circle</span>
+              Gestionar método de pago
+            </button>
+          )}
         </div>
-
-        <div className="pt-4">
-          <button className="w-full py-4 border border-dashed border-gray-200 rounded-xl text-[9px] font-bold uppercase tracking-widest text-gray-400 hover:border-maroon-gold hover:text-maroon-gold transition-all flex items-center justify-center gap-2">
-            <span className="material-symbols-outlined text-base">add</span>
-            Gestionar métodos de pago
-          </button>
-        </div>
+        
+        <p className="text-[9px] text-gray-400 text-center italic">Pagos procesados de forma segura por LJM Sealine.</p>
       </div>
+
+      {showManageModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+          <div className="absolute inset-0 bg-night-blue/80 backdrop-blur-md" onClick={() => setShowManageModal(false)}></div>
+          
+          <div className="relative bg-white border border-pearl-beige/20 rounded-[2.5rem] p-6 sm:p-8 max-w-xs sm:max-w-sm w-full shadow-2xl animate-in zoom-in-95 duration-300">
+            <div className="flex justify-between items-center mb-6">
+              <h4 className="font-display text-2xl sm:text-3xl text-night-blue italic tracking-tight">
+                {step === 'list' ? 'Métodos de Pago' : 'Datos de Tarjeta'}
+              </h4>
+              <button onClick={() => setShowManageModal(false)} className="text-gray-400 hover:text-night-blue transition-colors">
+                <span className="material-symbols-outlined text-xl">close</span>
+              </button>
+            </div>
+
+            {step === 'list' ? (
+              <div className="space-y-3 max-h-[60vh] overflow-y-auto">
+                {methods.map((m) => (
+                  <button 
+                    key={m.id} 
+                    onClick={() => handleSelectMethod(m.id)}
+                    className="w-full flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-[1.5rem] border border-gray-50 hover:border-pearl-beige hover:bg-pearl-beige/5 transition-all text-left group"
+                  >
+                    <div className="w-12 h-8 sm:w-14 sm:h-9 flex items-center justify-center bg-white rounded-lg border border-gray-100 p-1.5 shrink-0">
+                      <img 
+                        src={m.img} 
+                        alt={`${m.name} logo`} 
+                        className="h-full w-full object-contain"
+                        loading="lazy"
+                        onError={(e) => { 
+                          e.currentTarget.src = `https://via.placeholder.com/56x36?text=${m.name.slice(0,4)}`; 
+                        }}
+                      />
+                    </div>
+                    <p className="text-xs sm:text-sm font-bold text-night-blue uppercase tracking-widest">{m.name}</p>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-5 animate-in slide-in-from-right-8 duration-300">
+                <div className="space-y-1">
+                  <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1">Titular</label>
+                  <input 
+                    name="name" 
+                    value={cardData.name} 
+                    onChange={handleInputChange} 
+                    type="text" 
+                    placeholder="NOMBRE COMPLETO" 
+                    className="w-full bg-off-white border-none rounded-xl p-3.5 sm:p-4 text-sm focus:ring-1 focus:ring-pearl-beige uppercase outline-none" 
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1">Número de Tarjeta</label>
+                  <input 
+                    name="number" 
+                    value={cardData.number} 
+                    onChange={handleInputChange} 
+                    type="text" 
+                    placeholder="0000 0000 0000 0000" 
+                    className="w-full bg-off-white border-none rounded-xl p-3.5 sm:p-4 text-sm focus:ring-1 focus:ring-pearl-beige outline-none" 
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1">Vencimiento</label>
+                    <input 
+                      name="exp" 
+                      value={cardData.exp} 
+                      onChange={handleInputChange} 
+                      type="text" 
+                      placeholder="MM/YY" 
+                      className="w-full bg-off-white border-none rounded-xl p-3.5 sm:p-4 text-sm focus:ring-1 focus:ring-pearl-beige text-center outline-none" 
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <label className="text-[9px] font-bold text-gray-400 uppercase tracking-widest ml-1">CVV</label>
+                    <input 
+                      name="cvv" 
+                      value={cardData.cvv} 
+                      onChange={handleInputChange} 
+                      type="password" 
+                      placeholder="***" 
+                      maxLength={3}
+                      className="w-full bg-off-white border-none rounded-xl p-3.5 sm:p-4 text-sm focus:ring-1 focus:ring-pearl-beige text-center outline-none" 
+                    />
+                  </div>
+                </div>
+
+                <button 
+                  onClick={handleConfirm}
+                  className="w-full bg-night-blue text-pearl-beige py-4 sm:py-5 rounded-2xl text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.2em] shadow-xl hover:brightness-125 transition-all mt-4"
+                >
+                  Confirmar y Vincular Tarjeta
+                </button>
+
+                <button 
+                  onClick={() => setStep('list')} 
+                  className="w-full text-[9px] font-bold text-gray-400 uppercase text-center tracking-widest mt-3 hover:text-night-blue transition-colors"
+                >
+                  Elegir otro método
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
