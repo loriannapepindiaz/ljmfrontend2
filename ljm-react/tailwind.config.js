@@ -5,53 +5,51 @@ export default {
   theme: {
     extend: {
       colors: {
-        // --- PALETA STITCH (Identidad) --- (todo intacto, no toqué nada)
-        primary: '#2972B6',            // Azul principal de Stitch
+        // --- PALETA STITCH (Identidad) ---
+        primary: '#2972B6',
         'stitch-blue': '#2972B6',
-        'stitch-light': '#4EBCFF',     // Cyan brillante (Highlights)
-        'stitch-dark': '#002790',      // Sombras profundas
-        'stitch-purple': '#945CB4',    // Detalle de orejas
-        'stitch-navy': '#001D4F',      // Navy de Stitch
-        'navy': '#001D4F',             // Alias para compatibilidad con componentes
+        'stitch-light': '#4EBCFF',
+        'stitch-dark': '#002790',
+        'stitch-purple': '#945CB4',
+        'stitch-navy': '#001D4F',
+        'navy': '#001D4F',
 
-        // --- ACENTOS Y FONDOS --- (todo intacto)
-        'accent': '#F5F1E8',           // Beige perlado (necesario para text-accent)
+        // --- ACENTOS Y FONDOS ---
+        'accent': '#F5F1E8',
         'pearl-beige': '#F5F1E8',
-        'accent-red': '#ED192D',       // Rojo Lilo
+        'accent-red': '#ED192D',
         'stitch-black': '#0A0A0A',
-        
-        "background-light": "#FDFCF0", // Cielo hawaiano
-        'background-dark': '#0A1224',  // Espacio profundo
+        'background-light': '#FDFCF0',
+        'background-dark': '#0A1224',
 
-        // --- COLORES PAYMENT / LJM SEALINE --- (agregados para que coincida con la segunda captura)
-        'night-blue': '#0e1a34',       // Azul profundo del sidebar y textos principales
-        'maroon-gold': '#785d32',      // Dorado oscuro para acentos premium
-        'off-white': '#f8f9fa',        // Fondo principal claro y elegante
-        'card-white': '#ffffff',       // Tarjetas y fondos blancos limpios
+        // --- LJM SEALINE ---
+        'night-blue': '#0e1a34',
+        'maroon-gold': '#785d32',
+        'off-white': '#f8f9fa',
+        'card-white': '#ffffff',
+        'text-secondary': '#4b5563',
+        'border-light': '#e5e7eb',
 
-        // Colores extras útiles para el estilo luxury (opcionales pero recomendados)
-        'text-secondary': '#4b5563',   // Gris para textos secundarios
-        'border-light': '#e5e7eb',     // Bordes suaves grises claros
+        // ✅ NUEVOS: para que funcionen las clases del diseño de reservas
+        'ljm-primary': '#0e1a34',      // bg-ljm-primary, text-ljm-primary
+        'ljm-accent': '#eacea9',       // bg-ljm-accent (gold claro)
+        'ljm-accent-dark': '#d4af37',  // text-ljm-accent-dark (gold oscuro)
+        'ljm-bg': '#f8fafc',           // bg-ljm-bg (fondo gris claro)
       },
 
       fontFamily: {
-        // 'display' para títulos (Comic Sans le da el toque divertido de Stitch)
-        display: ['"Comic Sans MS"', '"Montserrat"', 'sans-serif'],
-        // 'body' y 'sans' para lectura limpia
-        sans: ['Montserrat', 'sans-serif'],
+        display: ['Literata', '"Comic Sans MS"', 'Montserrat', 'sans-serif'], // ✅ Literata primero para LJM
+        sans: ['Public Sans', 'Montserrat', 'sans-serif'],                    // ✅ Public Sans primero para LJM
         body: ['Montserrat', 'sans-serif'],
-        playfair: ["'Playfair Display'", "serif"],
+        playfair: ["'Playfair Display'", 'serif'],
       },
 
       boxShadow: {
-        // Efecto neón tipo ojos de Stitch o tecnología alienígena (intacto)
         'stitch-glow': '0 0 15px rgba(78, 188, 255, 0.6)',
         'stitch-glow-strong': '0 0 25px rgba(41, 114, 182, 0.8)',
-        // Sombra premium suave para tarjetas y elementos LJM Sealine
         'premium': '0 10px 40px -15px rgba(14, 26, 52, 0.08)',
       },
 
-      // Mantener bordes suaves pero definidos (intacto)
       borderRadius: {
         'DEFAULT': '0.25rem',
         'lg': '0.5rem',

@@ -1,53 +1,109 @@
-// features/gestionreserva/presentation/components/ReservationTable.tsx
 import React from 'react';
+import type { Reservation } from './ReservationTableFilters';
+import { statusStyles } from './ReservationTableFilters';
 
-const ReservationTable: React.FC = () => {
+interface ReservationTableProps {
+  reservations: Reservation[];
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+  onActionClick?: (id: string) => void;
+}
+
+const ReservationTable: React.FC<ReservationTableProps> = ({
+  reservations,
+  totalCount,
+  currentPage,
+  totalPages,
+  onPageChange,
+  onActionClick,
+}) => {
+  const columns = ['ID Reserva', 'Huésped', 'Barco', 'Cabina', 'Estado', 'Total', 'Acciones'];
+
   return (
-    <div className="bg-card-white rounded-2xl border border-gray-200 shadow-premium overflow-hidden">
+    <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
       <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="bg-off-white border-b border-gray-200">
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">ID Reserva</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Hóspede</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Navio</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Cabine</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Status</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest">Total</th>
-            <th className="px-8 py-5 text-[11px] font-bold text-gray-500 uppercase tracking-widest text-center">Acções</th>
+          <tr className="bg-slate-50 border-b border-slate-200">
+            {columns.map((col) => (
+              <th
+                key={col}
+                className={`px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest ${col === 'Acciones' ? 'text-center' : ''}`}
+              >
+                {col}
+              </th>
+            ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
-          <tr className="hover:bg-off-white transition-colors">
-            <td className="px-8 py-5 font-bold text-maroon-gold">#BK-7701</td>
-            <td className="px-8 py-5 text-gray-700">Marco Aurélio</td>
-            <td className="px-8 py-5 text-gray-700">Sealine Majestic</td>
-            <td className="px-8 py-5 text-gray-700">Suíte Master</td>
-            <td className="px-8 py-5">
-              <span className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-bold bg-green-50 text-green-700 border border-green-200">
-                Confirmado
-              </span>
-            </td>
-            <td className="px-8 py-5 font-bold text-night-blue">€12.500,00</td>
-            <td className="px-8 py-5 text-center">
-              <button className="text-gray-500 hover:text-maroon-gold transition-colors">
-                <span className="material-symbols-outlined">more_vert</span>
-              </button>
-            </td>
-          </tr>
-          {/* Agrega más filas */}
+        <tbody className="divide-y divide-slate-100">
+          {reservations.length === 0 ? (
+            <tr>
+              <td colSpan={7} className="px-8 py-16 text-center text-slate-400 text-sm">
+                <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">
+                  inbox
+                </span>
+                No hay reservas registradas
+              </td>
+            </tr>
+          ) : (
+            reservations.map((r) => (
+              <tr key={r.id} className="hover:bg-slate-50/60 transition-colors">
+                <td className="px-8 py-5 font-bold text-[#d4af37]">{r.id}</td>
+                <td className="px-8 py-5 text-sm font-semibold text-slate-700">{r.guest}</td>
+                <td className="px-8 py-5 text-sm text-slate-500">{r.ship}</td>
+                <td className="px-8 py-5 text-sm text-slate-500">{r.cabin}</td>
+                <td className="px-8 py-5">
+                  <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-bold ${statusStyles[r.status]}`}>
+                    {r.status}
+                  </span>
+                </td>
+                <td className="px-8 py-5 text-sm font-bold text-[#0e1a34]">{r.total}</td>
+                <td className="px-8 py-5 text-center">
+                  <button
+                    onClick={() => onActionClick?.(r.id)}
+                    className="text-slate-300 hover:text-[#d4af37] transition-colors"
+                  >
+                    <span className="material-symbols-outlined">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
 
-      <div className="px-8 py-6 bg-off-white flex items-center justify-between border-t border-gray-200">
-        <p className="text-xs text-gray-500 font-medium">Mostrando 1 a 5 de 1.284 reservas</p>
+      <div className="px-8 py-5 bg-white flex items-center justify-between border-t border-slate-100">
+        <p className="text-xs text-slate-400 font-medium">
+          {totalCount === 0
+            ? 'Sin reservas registradas'
+            : `Mostrando ${(currentPage - 1) * 5 + 1} a ${Math.min(currentPage * 5, totalCount)} de ${totalCount.toLocaleString('es-ES')} reservas`
+          }
+        </p>
         <div className="flex items-center gap-2">
-          <button className="size-8 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:text-maroon-gold transition-colors">
+          <button
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="size-8 flex items-center justify-center rounded bg-slate-100 text-slate-400 hover:text-[#d4af37] transition-colors disabled:opacity-40"
+          >
             <span className="material-symbols-outlined text-[18px]">chevron_left</span>
           </button>
-          <button className="size-8 flex items-center justify-center rounded bg-maroon-gold text-off-white text-xs font-bold">1</button>
-          <button className="size-8 flex items-center justify-center rounded hover:bg-gray-100 text-gray-600 text-xs font-bold">2</button>
-          <button className="size-8 flex items-center justify-center rounded hover:bg-gray-100 text-gray-600 text-xs font-bold">3</button>
-          <button className="size-8 flex items-center justify-center rounded bg-gray-100 text-gray-600 hover:text-maroon-gold transition-colors">
+
+          {Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1).map((p) => {
+            const activeBtn = 'size-8 flex items-center justify-center rounded bg-[#eacea9] text-[#0e1a34] text-xs font-bold';
+            const inactiveBtn = 'size-8 flex items-center justify-center rounded hover:bg-slate-100 text-slate-400 text-xs font-bold transition-colors';
+            return (
+              <button key={p} onClick={() => onPageChange(p)} className={p === currentPage ? activeBtn : inactiveBtn}>
+                {p}
+              </button>
+            );
+          })}
+
+          <button
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="size-8 flex items-center justify-center rounded bg-slate-100 text-slate-400 hover:text-[#d4af37] transition-colors disabled:opacity-40"
+          >
             <span className="material-symbols-outlined text-[18px]">chevron_right</span>
           </button>
         </div>

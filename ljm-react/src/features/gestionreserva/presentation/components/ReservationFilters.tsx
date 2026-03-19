@@ -1,26 +1,47 @@
-// features/gestionreserva/presentation/components/ReservationTableFilters.tsx
-import React from 'react';
+import React, { useState } from 'react';
 
-const ReservationTableFilters: React.FC = () => {
+const filters = ['Todos', 'Confirmados', 'Pendientes', 'Pagados'];
+
+interface ReservationFiltersProps {
+  onFilterChange?: (filter: string) => void;
+  onSearch?: (query: string) => void;
+}
+
+const ReservationFilters: React.FC<ReservationFiltersProps> = ({ onFilterChange, onSearch }) => {
+  const [active, setActive] = useState('Todos');
+
+  const handleFilter = (f: string) => {
+    setActive(f);
+    onFilterChange?.(f);
+  };
+
   return (
-    <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-      <div className="flex items-center gap-2 flex-wrap">
-        <button className="px-5 py-2 rounded-full bg-maroon-gold text-off-white text-xs font-bold transition-all shadow-sm hover:brightness-110">Todos</button>
-        <button className="px-5 py-2 rounded-full bg-card-white text-text-secondary text-xs font-bold hover:bg-off-white transition-colors border border-border-light">Confirmados</button>
-        <button className="px-5 py-2 rounded-full bg-card-white text-text-secondary text-xs font-bold hover:bg-off-white transition-colors border border-border-light">Pendientes</button>
-        <button className="px-5 py-2 rounded-full bg-card-white text-text-secondary text-xs font-bold hover:bg-off-white transition-colors border border-border-light">Pagos</button>
+    <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center gap-2">
+        {filters.map((f) => {
+          const activeClass = 'px-5 py-2 rounded-full bg-[#eacea9] text-[#0e1a34] text-xs font-bold shadow-sm';
+          const inactiveClass = 'px-5 py-2 rounded-full bg-white text-slate-600 text-xs font-bold hover:bg-slate-50 border border-slate-200 transition-colors';
+          return (
+            <button key={f} onClick={() => handleFilter(f)} className={active === f ? activeClass : inactiveClass}>
+              {f}
+            </button>
+          );
+        })}
       </div>
 
       <div className="relative w-full max-w-md">
-        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-maroon-gold text-[20px]">search</span>
-        <input 
-          className="w-full pl-12 pr-4 py-3 bg-card-white border border-border-light rounded-full focus:ring-2 focus:ring-maroon-gold/30 text-sm placeholder-text-secondary outline-none" 
-          placeholder="Pesquisar por ID, hóspede ou navio..." 
+        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9] text-[20px]">
+          search
+        </span>
+        <input
           type="text"
+          onChange={(e) => onSearch?.(e.target.value)}
+          className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-full focus:ring-2 focus:ring-[#eacea9]/30 text-sm placeholder-slate-400 outline-none text-slate-700"
+          placeholder="Buscar por ID, huésped o barco..."
         />
       </div>
     </div>
   );
 };
 
-export default ReservationTableFilters;
+export default ReservationFilters;

@@ -75,10 +75,10 @@ const DestinationsGrid = () => {
         ))}
       </div>
       <div className="mt-20 text-center">
-        <button className="bg-[#0e1a34] text-[#eacea9] px-12 py-4 rounded-full font-bold uppercase text-sm tracking-widest hover:shadow-2xl hover:bg-gold hover:text-white transition-all flex items-center gap-3 mx-auto border border-[#0e1a34]">
-          Cargar más destinos
-          <span className="material-symbols-outlined">expand_more</span>
-        </button>
+       <button className="border-2 border-[#0e1a34] text-[#0e1a34] px-12 py-4 rounded-full font-bold uppercase text-sm tracking-widest hover:bg-[#0e1a34] hover:text-[#eacea9] transition-all flex items-center gap-3 mx-auto">
+  Cargar más destinos
+  <span className="material-symbols-outlined">expand_more</span>
+</button>
       </div>
     </section>
   );
