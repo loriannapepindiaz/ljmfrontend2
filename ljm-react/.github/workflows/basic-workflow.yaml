@@ -11,4 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Logrado
-        run: echo "Logrado!"
+        run: echo "Lo he logrado!"
+      
+      - name: An Error I made
+        run: |
+          echo "Cometí un error!"
+          exit 1
