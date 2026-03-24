@@ -138,3 +138,34 @@
 .luxury-shadow {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
 }
+
+/* index.css — agrega esto al final */
+
+/* Tema oscuro para el panel admin */
+.dark .admin-surface {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .admin-surface-header {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .admin-text-primary {
+  color: #f1f5f9 !important;
+}
+
+.dark .admin-text-secondary {
+  color: #94a3b8 !important;
+}
+
+.dark .admin-bg-main {
+  background-color: #0f172a !important;
+}
+
+.dark .admin-input {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}

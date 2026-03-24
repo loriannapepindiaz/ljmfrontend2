@@ -3,8 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>LJM SEALINE - Voyage Management</title>
+
+    <!-- ✅ Aplica tema ANTES de renderizar para evitar flash -->
+    <script>
+      try {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'oscuro') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch(e) {}
+    </script>
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -26,10 +35,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   </head>
 
-  <body class="font-sans antialiased">
+  <body class="font-sans antialiased transition-colors duration-300">
     <div id="root"></div>
-
-    <!-- React entry -->
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

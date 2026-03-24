@@ -1,10 +1,11 @@
 // App.tsx
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SigninPage from "./pages/SigninPage";
 import LoginPage from "./features/auth/presentation/components/LoginPage";
 import DestinationsView from "./features/destinations/presentation/components/DestinationsView";
 import FleetPage from "./features/fleet/presentation/pages/FleetPage";
-import PaymentPage from "./features/payment/presentation/pages/PaymentPage"; 
+import PaymentPage from "./features/payment/presentation/pages/PaymentPage";
 import ExperiencesPage from "./features/experiences/presentation/pages/ExperiencesPage";
 import RoomPage from "./features/Room/presentation/pages/RoomPage";
 import PersonalizationPage from "./features/personalization/presentation/pages/PersonalizationPage";
@@ -27,10 +28,31 @@ import PasajerosPage from "./features/pasajeros/presentation/pages/PasajerosPage
 // ✅ ADMIN - CABINAS
 import CabinasPage from "./features/gestioncabinas/presentation/pages/CabinasPage";
 
+// ✅ ADMIN - PAGOS
+import PagosPage from "./features/gestionpago/presentation/pages/PagosPage";
+
+// ✅ ADMIN - EMPLEADOS
+import EmpleadosPage from "./features/employeemanagement/presentation/pages/EmpleadosPage";
+
+// ✅ ADMIN - REPORTES
+import ReportesPage from "./features/reportes/presentation/pages/ReportesPage";
+
+// ✅ ADMIN - CONFIGURACIÓN
+import ConfiguracionPage from "./features/configuration/presentation/pages/ConfiguracionPage";
+
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 
 function App() {
+  useEffect(() => {
+    const tema = localStorage.getItem('tema');
+    if (tema === 'oscuro') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -56,6 +78,13 @@ function App() {
 
         <Route path="/admin/cabinas" element={<CabinasPage />} />
 
+        <Route path="/admin/pagos" element={<PagosPage />} />
+
+        <Route path="/admin/empleados" element={<EmpleadosPage />} />
+
+        <Route path="/admin/reportes" element={<ReportesPage />} />
+
+        <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
 
         <Route path="/offers" element={<OffersPage />} />
         <Route path="/experiences" element={<ExperiencesPage />} />
