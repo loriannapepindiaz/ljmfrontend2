@@ -1,0 +1,19 @@
+name: GitHub Actions Demo
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mostrar mensaje
+        run: echo "Workflow ejecutándose correctamente"
+
+      - name: Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: Mostrar archivos del proyecto
+        run: ls
