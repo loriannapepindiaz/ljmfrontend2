@@ -17,3 +17,6 @@ jobs:
 
       - name: Mostrar archivos del proyecto
         run: ls
+        
+      - name: Forzar error
+        run: exit 1
