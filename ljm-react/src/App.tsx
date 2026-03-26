@@ -40,6 +40,9 @@ import ReportesPage from "./features/reportes/presentation/pages/ReportesPage";
 // ✅ ADMIN - CONFIGURACIÓN
 import ConfiguracionPage from "./features/configuration/presentation/pages/ConfiguracionPage";
 
+// ✅ SEGUIMIENTO DE CRUCERO
+import SeguimientoCruceroPage from "./features/seguimientocrucero/presentation/pages/SeguimientoCruceroPage";
+
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 
@@ -85,6 +88,8 @@ function App() {
         <Route path="/admin/reportes" element={<ReportesPage />} />
 
         <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
+
+        <Route path="/seguimiento-crucero" element={<SeguimientoCruceroPage />} />
 
         <Route path="/offers" element={<OffersPage />} />
         <Route path="/experiences" element={<ExperiencesPage />} />
