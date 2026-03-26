@@ -43,6 +43,13 @@ import ConfiguracionPage from "./features/configuration/presentation/pages/Confi
 // ✅ SEGUIMIENTO DE CRUCERO
 import SeguimientoCruceroPage from "./features/seguimientocrucero/presentation/pages/SeguimientoCruceroPage";
 
+// ✅ MANAGE BOOKING
+import ManageBookingPage from "./features/manageyourbooking/presentation/pages/ManageBookingPage";
+
+// ✅ AGREGAR EMPLEADO
+import AgregarEmpleadoPage from "./features/agregarempleado/presentation/pages/AgregarEmpleadoPage";
+
+
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 
@@ -90,6 +97,10 @@ function App() {
         <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
 
         <Route path="/seguimiento-crucero" element={<SeguimientoCruceroPage />} />
+
+         <Route path="/manage-booking" element={<ManageBookingPage />} />
+
+         <Route path="/admin/empleados/agregar" element={<AgregarEmpleadoPage />} />
 
         <Route path="/offers" element={<OffersPage />} />
         <Route path="/experiences" element={<ExperiencesPage />} />

@@ -1,61 +1,37 @@
-"use client";
+import React from 'react';
+import GuestCard from './GuestCard';
 
-import { Users, PlusCircle } from "lucide-react";
-import { GuestCard, type Guest } from "./GuestCard";
-
-interface GuestListProps {
-  guests: Guest[];
-  onAddGuest?: () => void;
-  onEditGuest?: (id: string) => void;
-  onDeleteGuest?: (id: string) => void;
-}
-
-const defaultGuests: Guest[] = [
-  {
-    id: "1",
-    initials: "AR",
-    name: "Antonia Robles",
-    membershipType: "Elite Member",
-    isElite: true,
-  },
-  {
-    id: "2",
-    initials: "JD",
-    name: "Julian Delgado",
-    membershipType: "Guest",
-    isElite: false,
-  },
+const guests = [
+  { initials: 'AR', name: 'Antonia Robles', role: 'Miembro Elite', isElite: true  },
+  { initials: 'JD', name: 'Julian Delgado', role: 'Invitado',       isElite: false },
 ];
 
-export function GuestList({
-  guests = defaultGuests,
-  onAddGuest,
-  onEditGuest,
-  onDeleteGuest,
-}: GuestListProps) {
+const GuestList: React.FC = () => {
   return (
-    <div className="glass-card rounded-xl p-6 bg-white/[0.02] backdrop-blur-md border border-[#eacea9]/10">
-      <h4 className="text-xl font-serif font-bold mb-6 flex items-center gap-3 text-white">
-        <Users className="w-5 h-5 text-[#eacea9]" />
-        Guests
-        <button
-          onClick={onAddGuest}
-          className="ml-auto text-xs font-bold text-[#eacea9] hover:underline flex items-center gap-1"
-        >
-          <PlusCircle className="w-4 h-4" />
-          Add Guest
+    <div
+      className="rounded-xl p-6"
+      style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(16px)', border: '1px solid rgba(234,230,169,0.1)' }}
+    >
+      <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-white">
+        <span className="material-symbols-outlined text-[#eacea9]">group</span>
+        Huéspedes
+        <button className="ml-auto text-xs font-bold text-[#eacea9] hover:underline flex items-center gap-1">
+          <span className="material-symbols-outlined text-sm">add_circle</span>
+          Añadir Huésped
         </button>
       </h4>
       <div className="space-y-4">
-        {guests.map((guest) => (
+        {guests.map((g) => (
           <GuestCard
-            key={guest.id}
-            guest={guest}
-            onEdit={onEditGuest}
-            onDelete={onDeleteGuest}
+            key={g.initials}
+            guest={g}
+            onEdit={() => console.log('Editar', g.name)}
+            onDelete={() => console.log('Eliminar', g.name)}
           />
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default GuestList;

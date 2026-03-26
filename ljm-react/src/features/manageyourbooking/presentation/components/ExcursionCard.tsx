@@ -1,41 +1,27 @@
-"use client";
-
-export interface Excursion {
-  id: string;
-  name: string;
-  date: string;
-  location: string;
-  status: "Confirmed" | "Pending" | "Cancelled";
-  imageUrl: string;
-}
+import React from 'react';
 
 interface ExcursionCardProps {
-  excursion: Excursion;
+  imagen: string;
+  nombre: string;
+  fecha: string;
+  puerto: string;
+  estado: string;
 }
 
-export function ExcursionCard({ excursion }: ExcursionCardProps) {
-  const statusColors = {
-    Confirmed: "text-green-400",
-    Pending: "text-yellow-400",
-    Cancelled: "text-red-400",
-  };
-
+const ExcursionCard: React.FC<ExcursionCardProps> = ({ imagen, nombre, fecha, puerto, estado }) => {
   return (
     <div className="flex gap-4">
       <div
         className="w-16 h-16 rounded bg-cover bg-center shrink-0 border border-white/5"
-        style={{ backgroundImage: `url('${excursion.imageUrl}')` }}
-        title={excursion.name}
+        style={{ backgroundImage: `url('${imagen}')` }}
       />
       <div>
-        <p className="text-sm font-bold text-white">{excursion.name}</p>
-        <p className="text-[10px] text-slate-400 italic">
-          {excursion.date} • {excursion.location}
-        </p>
-        <p className={`text-xs font-bold ${statusColors[excursion.status]}`}>
-          {excursion.status}
-        </p>
+        <p className="text-sm font-bold text-white">{nombre}</p>
+        <p className="text-[10px] text-slate-400 italic">{fecha} • {puerto}</p>
+        <p className="text-xs text-green-400 font-bold">{estado}</p>
       </div>
     </div>
   );
-}
+};
+
+export default ExcursionCard;
