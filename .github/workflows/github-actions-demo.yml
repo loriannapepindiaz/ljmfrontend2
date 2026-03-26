@@ -5,12 +5,16 @@ on:
     branches: [ main ]
 
 jobs:
-  demo:
+  deploy:
     runs-on: ubuntu-latest
 
     defaults:
       run:
         working-directory: ./ljm-react
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
     steps:
       - name: 1. Clonar repositorio
@@ -19,9 +23,9 @@ jobs:
       - name: 2. Configurar Node.js
         uses: actions/setup-node@v4
         with:
-              node-version: '20'
-              cache: 'npm'
-              cache-dependency-path: ljm-react/package-lock.json
+          node-version: 20
+          cache: npm
+          cache-dependency-path: ljm-react/package-lock.json
 
       - name: 3. Instalar dependencias
         run: npm ci
@@ -29,15 +33,17 @@ jobs:
       - name: 4. Ejecutar ESLint
         run: npm run lint || true
 
-      - name: 5. Compilar proyecto
+      - name: 5. Build del proyecto (Vite)
         run: npm run build
 
-      - name: 6. Deploy a Vercel
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./ljm-react
-          vercel-args: '--prod --prebuilt'
-          
+      - name: 6. Instalar Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: 7. Sincronizar con Vercel
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 8. Build con Vercel (genera .vercel/output)
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 9. Deploy a Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
