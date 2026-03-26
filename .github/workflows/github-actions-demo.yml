@@ -1,0 +1,34 @@
+name: CI/CD – Deploy Frontend to Vercel
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./ljm-react
+
+    steps:
+      - name: 1. Clonar repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 3. Instalar dependencias
+        run: npm ci
+
+      - name: 4. Build del proyecto
+        run: npm run build
+
+      - name: 5. Pull Vercel config
+        run: npx vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: 6. Deploy a Vercel
+        run: npx vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
