@@ -8,6 +8,10 @@ jobs:
   demo:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ./ljm-react
+
     steps:
       - name: 1. Clonar repositorio
         uses: actions/checkout@v4
@@ -17,6 +21,7 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+          cache-dependency-path: ljm-react/package-lock.json
 
       - name: 3. Instalar dependencias
         run: npm install
@@ -33,4 +38,5 @@ jobs:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./ljm-react
           vercel-args: '--prod'
