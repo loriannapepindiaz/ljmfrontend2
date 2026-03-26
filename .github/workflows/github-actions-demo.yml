@@ -19,12 +19,12 @@ jobs:
       - name: 2. Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: ljm-react/package-lock.json
+              node-version: '20'
+              cache: 'npm'
+              cache-dependency-path: ljm-react/package-lock.json
 
       - name: 3. Instalar dependencias
-        run: npm install
+        run: npm ci
 
       - name: 4. Ejecutar ESLint
         run: npm run lint || true
