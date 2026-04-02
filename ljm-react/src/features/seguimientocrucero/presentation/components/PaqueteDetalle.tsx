@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const PaqueteDetalle: React.FC = () => {
+  const navigate = useNavigate();
+
   const caracteristicas = [
     { titulo: 'Veranda Privada',      sub: '200 m² de cubierta abierta' },
     { titulo: 'Concierge Personal',   sub: 'Servicio dedicado 24/7'      },
@@ -50,7 +53,11 @@ const PaqueteDetalle: React.FC = () => {
               <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">Número de Suite</p>
               <p className="text-xl font-bold text-[#eacea9]">Cubierta 12 • 1204</p>
             </div>
-            <button className="bg-[#eacea9]/5 border border-[#eacea9]/20 text-[#eacea9] hover:bg-[#eacea9]/10 transition-all text-xs font-bold py-3 px-6 rounded-xl uppercase tracking-wider">
+            
+            <button 
+              onClick={() => navigate('/manage-booking')}
+              className="bg-[#eacea9]/5 border border-[#eacea9]/20 text-[#eacea9] hover:bg-[#eacea9]/10 active:scale-95 active:bg-[#eacea9]/20 transition-all duration-150 text-xs font-bold py-3 px-6 rounded-xl uppercase tracking-wider"
+            >
               Gestionar Reserva
             </button>
           </div>

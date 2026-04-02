@@ -1,10 +1,10 @@
 import React from 'react';
 
-// IMPORTAR IMÁGENES LOCALES
-import michelinImg from '/public/fotos/michelin.jpg';
-import spaImg from '/public/fotos/spa.jpg';
-import penImg from '/public/fotos/Pen.jpg';
-import vistaImg from '/public/fotos/vista.jpeg';
+// USAR rutas públicas (public/fotos) como URL estática
+const michelinImg = '/fotos/michelin.jpg';
+const spaImg = '/fotos/spa.jpg';
+const penImg = '/fotos/Pen.jpg';
+const vistaImg = '/fotos/vista.jpeg';
 
 const Experiences: React.FC = () => {
   return (

@@ -5,22 +5,23 @@ import VesselCardSmall from './VesselCardSmall';
 
 const FleetMasterpieces: React.FC = () => {
   return (
-    <section className="py-24 bg-white relative">
+    <section className="py-24 relative" style={{ backgroundColor: '#f8f7f4' }}>
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="font-magiona text-4xl md:text-6xl text-navy mb-4">
+          <h2 className="font-magiona text-4xl md:text-6xl mb-4" style={{ color: '#001D4F' }}>
             Masterpieces of Engineering
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg">
+          <p className="max-w-2xl mx-auto text-lg" style={{ color: '#6b7280' }}>
             Each vessel in the LJM Sealine fleet is a testament to sophisticated design and technological innovation.
           </p>
         </div>
 
         <div className="space-y-12">
-          {/* Tarjetas grandes (grid de 2) - bordes circulares */}
+          {/* Tarjetas grandes (grid de 2) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="rounded-xl overflow-hidden">
               <VesselCard
+                id="serenity"
                 title="The Serenity"
                 subtitle="Premium Experience"
                 description="Our premier flagship offering the highest level of space and luxury at sea, featuring revolutionary ocean-view suites and personalized butler service."
@@ -33,6 +34,7 @@ const FleetMasterpieces: React.FC = () => {
 
             <div className="rounded-xl overflow-hidden">
               <VesselCard
+                id="azure"
                 title="The Azure"
                 subtitle="Modern Elegance"
                 description="A sleek masterpiece of nautical engineering, designed for intimate journeys to the world's most exclusive ports and hidden gems."
@@ -44,7 +46,7 @@ const FleetMasterpieces: React.FC = () => {
             </div>
           </div>
 
-          {/* Tarjetas pequeñas (grid de 3) - bordes circulares */}
+          {/* Tarjetas pequeñas (grid de 3) */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="rounded-xl overflow-hidden">
               <VesselCardSmall

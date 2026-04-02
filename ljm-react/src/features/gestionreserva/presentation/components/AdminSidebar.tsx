@@ -6,10 +6,11 @@ const AdminSidebar: React.FC = () => {
   const location = useLocation();
 
   const [openEmpleados, setOpenEmpleados] = useState(false);
+  const [openCruceros, setOpenCruceros] = useState(false);
 
-  // Detectar si estamos en alguna sección de empleados
   const isActive = (path: string) => location.pathname === path;
   const isEmpleadosSection = location.pathname.startsWith('/admin/empleados');
+  const isCrucerosSection = location.pathname.startsWith('/admin/cruceros');
 
   const base = 'flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 cursor-pointer';
   const activeStyle = base + ' bg-[#eacea9] text-[#0e1a34] font-medium';
@@ -20,16 +21,15 @@ const AdminSidebar: React.FC = () => {
       <div className="p-6">
         {/* Logo */}
         <div className="flex items-center gap-3 mb-10">
-          <div className="size-10 rounded-full bg-[#eacea9] flex items-center justify-center text-[#0e1a34]">
-            <span className="material-symbols-outlined font-bold">sailing</span>
-          </div>
+          <img src="/logo.png" alt="LJM Sealine Logo" className="size-12 object-contain" />
           <div>
-            <h1 className="font-bold text-lg text-white leading-none">LJM Sealine</h1>
+            <h1 className="font-bold text-lg text-[#eacea9] leading-none">LJM Sealine</h1>
             <p className="text-white/60 text-[10px] uppercase tracking-widest mt-1">Panel Admin</p>
           </div>
         </div>
 
         <nav className="flex flex-col gap-1">
+
           {/* Panel de Control */}
           <button
             onClick={() => navigate('/admin/dashboard')}
@@ -39,14 +39,50 @@ const AdminSidebar: React.FC = () => {
             <span className="text-sm font-medium">Panel de Control</span>
           </button>
 
-          {/* Cruceros */}
-          <button
-            onClick={() => navigate('/admin/cruceros')}
-            className={isActive('/admin/cruceros') ? activeStyle : inactiveStyle}
-          >
-            <span className="material-symbols-outlined text-[22px]">directions_boat</span>
-            <span className="text-sm font-medium">Cruceros</span>
-          </button>
+          {/* CRUCEROS - DESPLEGABLE */}
+          <div>
+            <button
+              onClick={() => setOpenCruceros(!openCruceros)}
+              className={`${isCrucerosSection ? activeStyle : inactiveStyle} group w-full`}
+            >
+              <span className="material-symbols-outlined text-[22px]">directions_boat</span>
+              <span className="text-sm font-medium flex-1 text-left">Cruceros</span>
+              <span className={`material-symbols-outlined text-[20px] transition-all duration-300 ease-in-out ${
+                openCruceros ? 'rotate-180 text-[#eacea9]' : 'group-hover:text-white/90'
+              }`}>
+                keyboard_arrow_down
+              </span>
+            </button>
+
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              openCruceros ? 'max-h-32 opacity-100 mt-1' : 'max-h-0 opacity-0'
+            }`}>
+              <div className="ml-6 border-l border-white/10 pl-4 flex flex-col gap-1 pt-1">
+                <button
+                  onClick={() => navigate('/admin/cruceros')}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
+                    isActive('/admin/cruceros')
+                      ? 'bg-[#eacea9]/20 text-[#eacea9] font-medium'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[18px]">directions_boat</span>
+                  Lista de Cruceros
+                </button>
+                <button
+                  onClick={() => navigate('/admin/cruceros/agregar')}
+                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
+                    isActive('/admin/cruceros/agregar')
+                      ? 'bg-[#eacea9]/20 text-[#eacea9] font-medium'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-[18px]">add_circle</span>
+                  Agregar Crucero
+                </button>
+              </div>
+            </div>
+          </div>
 
           {/* Reservas */}
           <button
@@ -75,32 +111,25 @@ const AdminSidebar: React.FC = () => {
             <span className="text-sm font-medium">Cabinas</span>
           </button>
 
-          {/* EMPLEADOS - SOLO DESPLEGABLE */}
+          {/* EMPLEADOS - DESPLEGABLE */}
           <div>
             <button
-              onClick={() => setOpenEmpleados(!openEmpleados)}   // ← Solo abre/cierra, NO navega
-              className={`${isEmpleadosSection ? activeStyle : inactiveStyle} group`}
+              onClick={() => setOpenEmpleados(!openEmpleados)}
+              className={`${isEmpleadosSection ? activeStyle : inactiveStyle} group w-full`}
             >
               <span className="material-symbols-outlined text-[22px]">badge</span>
               <span className="text-sm font-medium flex-1 text-left">Empleados</span>
-              
-              {/* Flecha elegante */}
-              <span 
-                className={`material-symbols-outlined text-[20px] transition-all duration-300 ease-in-out 
-                  ${openEmpleados ? 'rotate-180 text-[#eacea9]' : 'group-hover:text-white/90'}`}
-              >
+              <span className={`material-symbols-outlined text-[20px] transition-all duration-300 ease-in-out ${
+                openEmpleados ? 'rotate-180 text-[#eacea9]' : 'group-hover:text-white/90'
+              }`}>
                 keyboard_arrow_down
               </span>
             </button>
 
-            {/* Submenú con animación suave */}
-            <div 
-              className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                openEmpleados ? 'max-h-32 opacity-100 mt-1' : 'max-h-0 opacity-0'
-              }`}
-            >
+            <div className={`overflow-hidden transition-all duration-300 ease-in-out ${
+              openEmpleados ? 'max-h-32 opacity-100 mt-1' : 'max-h-0 opacity-0'
+            }`}>
               <div className="ml-6 border-l border-white/10 pl-4 flex flex-col gap-1 pt-1">
-                {/* Opción 1: Lista de Empleados */}
                 <button
                   onClick={() => navigate('/admin/empleados')}
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
@@ -112,8 +141,6 @@ const AdminSidebar: React.FC = () => {
                   <span className="material-symbols-outlined text-[18px]">group</span>
                   Lista de Empleados
                 </button>
-
-                {/* Opción 2: Agregar Empleado */}
                 <button
                   onClick={() => navigate('/admin/empleados/agregar')}
                   className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
@@ -157,10 +184,11 @@ const AdminSidebar: React.FC = () => {
             <span className="material-symbols-outlined text-[22px]">settings</span>
             <span className="text-sm font-medium">Configuración</span>
           </button>
+
         </nav>
       </div>
 
-      {/* Footer */}
+      {/* Footer Perfil */}
       <div className="mt-auto p-6">
         <div className="flex items-center gap-3 mb-4">
           <div className="size-9 rounded-full bg-[#eacea9]/20 flex items-center justify-center">

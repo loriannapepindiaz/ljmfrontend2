@@ -1,13 +1,4 @@
-// src/features/experiences/components/WhyExperiences.tsx
-import { FC } from 'react';
-
-type Variant = 'desktop' | 'mobile';
-
-interface WhyExperiencesProps {
-  variant: Variant;
-}
-
-const WhyExperiences: FC<WhyExperiencesProps> = ({ variant }) => {
+const WhyExperiences = () => {
   const items = [
     { icon: 'explore', title: 'Adventure', desc: 'Thrill seeking' },
     { icon: 'account_balance', title: 'Culture', desc: 'Local heritage' },
@@ -16,36 +7,32 @@ const WhyExperiences: FC<WhyExperiencesProps> = ({ variant }) => {
   ];
 
   return (
-    <div className="bg-accent/90 backdrop-blur-md rounded-3xl p-12 border border-pearl/30 shadow-2xl">
-      
-      {/* TÍTULO AGREGADO */}
-      <h2 className="text-3xl magiona-style text-primary text-center mb-12">
-        Why LJM Experiences?
-      </h2>
-
-      <div className="grid grid-cols-4 gap-8">
-        {items.map((item) => (
-          <div
-            key={item.title}
-            className="flex items-center space-x-4 p-6 rounded-2xl bg-white/10 border border-pearl/40 
-            transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
-          >
-            <span className="material-symbols-outlined text-primary text-4xl">
-              {item.icon}
-            </span>
-
-            <div>
-              <p className="font-bold text-sm text-primary">
-                {item.title}
-              </p>
-              <p className="text-xs text-primary/70">
-                {item.desc}
-              </p>
+    <section className="bg-[#FAF9F6] px-6" style={{ paddingTop: '0px', paddingBottom: '48px' }}>
+      <div
+        className="max-w-5xl mx-auto bg-white rounded-3xl p-8 md:p-10 shadow-xl"
+        style={{ marginTop: '-180px', position: 'relative', zIndex: 10 }}
+      >
+        <h2 className="text-2xl md:text-3xl magiona-style text-[#0A1428] text-center mb-8">
+          Why LJM Experiences?
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {items.map((item) => (
+            <div
+              key={item.title}
+              className="flex items-center space-x-3 p-4 rounded-2xl border border-gray-100 hover:border-[#c5a267]/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-md cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[#c5a267] text-3xl flex-shrink-0">
+                {item.icon}
+              </span>
+              <div>
+                <p className="font-bold text-[#0A1428] text-sm">{item.title}</p>
+                <p className="text-xs text-gray-400">{item.desc}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

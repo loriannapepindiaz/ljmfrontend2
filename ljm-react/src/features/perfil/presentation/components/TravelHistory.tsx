@@ -1,7 +1,9 @@
-// src/features/perfil/presentation/components/TravelHistory.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Importamos el hook para navegación
 
 const TravelHistory: React.FC = () => {
+  const navigate = useNavigate(); // Inicializamos la función de navegación
+
   return (
     <div className="space-y-8">
       {/* Upcoming Cruise */}
@@ -15,7 +17,7 @@ const TravelHistory: React.FC = () => {
         <div className="group relative aspect-[21/9] rounded-xl overflow-hidden border border-white/5 shadow-2xl">
           <img 
             src="https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=1200" 
-            className="w-full h-full object-cover" 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
             alt="Cruise"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0e1a34] via-[#0e1a34]/40 to-transparent"></div>
@@ -28,7 +30,12 @@ const TravelHistory: React.FC = () => {
                 <span className="text-white/70 text-xs flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full"><span className="material-symbols-outlined text-xs">location_on</span> Barcelona to Athens</span>
               </div>
             </div>
-            <button className="bg-[#eacea9] text-[#0e1a34] px-6 py-3 rounded-lg font-bold hover:bg-[#d4af37] transition-all flex items-center gap-2">
+            
+            {/* Botón actualizado con navegación */}
+            <button 
+              onClick={() => navigate('/seguimiento-crucero')}
+              className="bg-[#eacea9] text-[#0e1a34] px-6 py-3 rounded-lg font-bold hover:bg-[#d4af37] transition-all flex items-center gap-2 active:scale-95 shadow-lg"
+            >
               View Details <span className="material-symbols-outlined">chevron_right</span>
             </button>
           </div>
@@ -43,8 +50,8 @@ const TravelHistory: React.FC = () => {
             { title: "Grecian Islands Escape", ship: "LJM Royal Sapphire", date: "June 2023", img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&q=80&w=400" },
             { title: "Caribbean Azure Dreams", ship: "LJM Emerald Horizon", date: "Feb 2023", img: "https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=400" }
           ].map((trip, i) => (
-            <div key={i} className="bg-[#132345] rounded-xl p-4 border border-white/5 flex gap-4 hover:border-[#eacea9]/30 transition-all">
-              <img src={trip.img} className="size-16 rounded-lg object-cover" alt="" />
+            <div key={i} className="bg-[#132345] rounded-xl p-4 border border-white/5 flex gap-4 hover:border-[#eacea9]/30 transition-all cursor-default group/item">
+              <img src={trip.img} className="size-16 rounded-lg object-cover grayscale group-hover/item:grayscale-0 transition-all" alt="" />
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex justify-between items-start">
                   <h4 className="text-white font-bold text-sm leading-tight">{trip.title}</h4>

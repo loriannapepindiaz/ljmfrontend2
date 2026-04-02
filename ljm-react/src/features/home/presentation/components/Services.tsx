@@ -1,6 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom"; // Importamos el hook
 
 const Services: React.FC = () => {
+  const navigate = useNavigate(); // Inicializamos la navegación
+
   return (
     <section className="py-24 bg-[#FDFCF0]">
       <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center gap-16">
@@ -50,16 +53,18 @@ const Services: React.FC = () => {
             ))}
           </div>
 
-          <button className="bg-primary hover:bg-luxury-gold text-white px-8 py-4 rounded-full font-bold shadow-xl transition-all">
+          {/* Botón con la función de navegación */}
+          <button 
+            onClick={() => navigate('/fleet')}
+            className="bg-primary hover:bg-luxury-gold text-white px-8 py-4 rounded-full font-bold shadow-xl transition-all active:scale-95"
+          >
             EXPLORE THE FLEET
           </button>
         </div>
 
         {/* RIGHT IMAGE + COMMENTS */}
         <div className="lg:w-[55%] relative">
-
           <div className="relative z-10 w-full h-[520px] lg:h-[580px] lg:translate-x-16">
-
             <div className="relative w-full h-full overflow-hidden rounded-3xl shadow-2xl">
               <img
                 alt="Cruise Ship Detail"
@@ -69,44 +74,35 @@ const Services: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent" />
             </div>
 
-            {/* COMMENT TOP */}
+            {/* Comentarios flotantes */}
             <div className="absolute top-10 -left-10 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-4 animate-float">
               <div className="w-11 h-11 rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWEmkwRZ2_pYB2dOKV4NdUy9uGKo4ohstet4l_5B_LVWVWp3EdGEcGuyHLmbnjpYpmo3b1vVK-qcULDeSqhX3syck0MiR-JP8W_fxAWDpEfAwQWbwIjQw9w5bxpTUCKRE7E0-rlaoTUnQsjvw1fi7EOPJjBj4K0zbZfDEofPhEWaNHsE8OVobUu8dt36DbjyvRV0jkLVX8FdX9mJhlnLHQUhmqfnF2WZa7Um6Q4S_bYsWe7tE-vO8kPtlFFUv_KVv-FU2EqWBaryU"
+                  src="https://ui-avatars.com/api/?name=Amelia+V&background=eacea9&color=0e1a34"
+                  alt="Amelia V"
                 />
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-900">
-                  Amelia V. ⭐ 5.0
-                </p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest">
-                  Gold Member
-                </p>
+                <p className="text-sm font-semibold text-gray-900"> Amelia V. ⭐ 5.0 </p>
+                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Gold Member </p>
               </div>
             </div>
 
-            {/* COMMENT BOTTOM */}
             <div className="absolute bottom-16 -right-10 bg-white/95 backdrop-blur-md px-5 py-3 rounded-2xl shadow-xl flex items-center gap-4 animate-float [animation-delay:2.5s]">
               <div className="w-11 h-11 rounded-full overflow-hidden">
                 <img
                   className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqzHGz6UYZoR-SaHFJ806Xl3ihmfIierKGAp0dbSy3gcnrCnDpNUw3P7SwIsNANxNL-zxr0vAenvJPM2iiXNLb3y7XCtfuNO6JXPiD9f80qmLFwgpvgetYqe-JYlu8YttCAb4N7DcVU_ZRANK7kN-XZSS-TQXqK6iQKYQXTChIBgzCG1st90CTfMT_GH3_m-RaRXkw6qcEwg4pEWriQ-LH0HcmpLevc5JoCsrAstLT3LZiULiOG3eMmX_79HjejljTA49k2ODuILw"
+                  src="https://ui-avatars.com/api/?name=Julian+R&background=0e1a34&color=eacea9"
+                  alt="Julian R"
                 />
               </div>
               <div>
-                <p className="text-sm font-semibold text-gray-900">
-                  Julian R. ⭐ 5.0
-                </p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest">
-                  Elite Voyager
-                </p>
+                <p className="text-sm font-semibold text-gray-900"> Julian R. ⭐ 5.0 </p>
+                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Elite Voyager </p>
               </div>
             </div>
-
           </div>
-
           <div className="absolute -bottom-12 -left-12 w-full h-full bg-primary/10 rounded-3xl -z-10" />
         </div>
 

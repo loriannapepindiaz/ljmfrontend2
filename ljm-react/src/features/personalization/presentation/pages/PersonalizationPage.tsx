@@ -46,11 +46,6 @@ const PersonalizationPage: FC = () => {
 
   const selectedSuite = suites.find(s => s.id === selectedSuiteId);
 
-  // --- Función Única de Navegación ---
-  const handleNextStep = () => {
-    navigate("/details-suit"); // ✅ Ambos botones llevan aquí ahora
-  };
-
   return (
     <div className="flex flex-col min-h-screen bg-white font-sans antialiased text-[#0e1a34]">
       <div className="fixed top-0 w-full z-[100] bg-[#0e1a34]">
@@ -71,10 +66,10 @@ const PersonalizationPage: FC = () => {
                 </p>
               </div>
 
-              {/* Botón Omitir -> /details-suit */}
+              {/* Botón Omitir -> Redirige directamente a Payment */}
               <div className="pb-2">
                 <button 
-                  onClick={handleNextStep}
+                  onClick={() => navigate("/payment")}
                   className="flex items-center gap-2 px-8 py-2.5 bg-[#0e1a34] text-white text-[9px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#c5a059] transition-all shadow-md active:scale-95 whitespace-nowrap"
                 >
                   Omitir
@@ -148,10 +143,9 @@ const PersonalizationPage: FC = () => {
             </div>
           </section>
 
-          {/* Botón Confirmar -> /details-suit */}
           <div className="mb-20">
             <button 
-              onClick={handleNextStep}
+              onClick={() => navigate("/details-suit")}
               className="group w-full bg-[#785d32] hover:bg-[#5a4626] text-white font-bold py-7 px-12 rounded-[2.5rem] text-[10px] tracking-[0.4em] uppercase transition-all shadow-2xl flex items-center justify-center gap-4 active:scale-[0.99]"
             >
               03 CONFIRMAR RESERVA

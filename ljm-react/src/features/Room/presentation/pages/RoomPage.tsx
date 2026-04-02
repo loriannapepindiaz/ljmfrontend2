@@ -1,5 +1,5 @@
 import { useState, type FC } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Importamos el hook
+import { useNavigate } from "react-router-dom"; 
 import RoomLayout from "../components/RoomLayout";
 import RoomHeader from "../components/RoomHeader";
 import SectionTitle from "../components/SectionTitle";
@@ -15,7 +15,7 @@ interface Suite {
 }
 
 const RoomPage: FC = () => {
-  const navigate = useNavigate(); // ✅ Inicializamos la navegación
+  const navigate = useNavigate(); 
   
   // Estado para controlar cuál está seleccionado (por índice)
   const [selectedSuiteIndex, setSelectedSuiteIndex] = useState<number | null>(null);
@@ -90,13 +90,13 @@ const RoomPage: FC = () => {
                 ))}
               </div>
 
-              {/* Botón de acción final */}
+              {/* Botón de acción final actualizado */}
               <div className="flex justify-end pt-6">
                 <button 
-                  onClick={() => navigate('/personalization')} // ✅ Navegación a la página indicada
+                  onClick={() => navigate('/details-suit')} // ✅ Ruta actualizada
                   className="flex items-center gap-4 bg-primary hover:bg-primary/90 px-10 py-4 rounded-full text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl shadow-black/50 text-[10px] active:scale-95 group"
                 >
-                  <span>Proceed to Payment</span>
+                  <span>Ver detalles de la suite</span> {/* ✅ Texto actualizado */}
                   <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2 text-sm">
                     arrow_forward
                   </span>

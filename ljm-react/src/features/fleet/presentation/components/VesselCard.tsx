@@ -1,7 +1,9 @@
 // src/features/fleet/presentation/components/VesselCard.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface VesselCardProps {
+  id: string;
   title: string;
   subtitle: string;
   description: string;
@@ -13,6 +15,7 @@ interface VesselCardProps {
 }
 
 const VesselCard: React.FC<VesselCardProps> = ({
+  id,
   title,
   subtitle,
   description,
@@ -21,9 +24,10 @@ const VesselCard: React.FC<VesselCardProps> = ({
   badge,
   imageSrc,
 }) => {
+  const navigate = useNavigate();
   return (
     <div className="group bg-[#f8f9fa] rounded-5xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100 p-4">
-      <div className="aspect-[16/10] overflow-hidden relative rounded-[3rem]">
+      <div className="aspect-16/10 overflow-hidden relative rounded-[3rem]">
         <img
           alt={title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
@@ -49,8 +53,8 @@ const VesselCard: React.FC<VesselCardProps> = ({
             </div>
           </div>
           <a
-            className="text-navy font-bold text-sm underline underline-offset-8 hover:text-primary transition-colors uppercase tracking-widest"
-            href="#"
+            className="text-navy font-bold text-sm underline underline-offset-8 hover:text-primary transition-colors uppercase tracking-widest cursor-pointer"
+            onClick={() => navigate(`/cruceros/${id}`)}
           >
             Explore Vessel
           </a>

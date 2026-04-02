@@ -1,8 +1,13 @@
 // App.tsx
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+// Páginas de autenticación
 import SigninPage from "./pages/SigninPage";
 import LoginPage from "./features/auth/presentation/components/LoginPage";
+import Register from "./features/auth/presentation/components/register";
+
+// Páginas principales
 import DestinationsView from "./features/destinations/presentation/components/DestinationsView";
 import FleetPage from "./features/fleet/presentation/pages/FleetPage";
 import PaymentPage from "./features/payment/presentation/pages/PaymentPage";
@@ -49,11 +54,19 @@ import ManageBookingPage from "./features/manageyourbooking/presentation/pages/M
 // ✅ AGREGAR EMPLEADO
 import AgregarEmpleadoPage from "./features/agregarempleado/presentation/pages/AgregarEmpleadoPage";
 
+// ✅ DESCRIPCIÓN CRUCERO
+import DescripcionCruceroPage from "./features/descripcioncrucero/presentation/pages/DescripcionCruceroPage";
 
+import AdminLoginPage from './features/auth/presentation/components/AdminLoginPage';
+
+import AgregarCruceroPage from "./features/agregarcrucero/presentation/pages/AgregarCruceroPage";
+
+// Detalles
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 
 function App() {
+  // Manejo del tema oscuro/claro desde localStorage
   useEffect(() => {
     const tema = localStorage.getItem('tema');
     if (tema === 'oscuro') {
@@ -68,47 +81,66 @@ function App() {
       <Routes>
         <Route path="/" element={<SigninPage />} />
         <Route path="/home" element={<LoginPage />} />
+        
+        {/* Ruta de registro */}
+        <Route path="/register" element={<Register />} />
+
         <Route path="/destinations" element={<DestinationsView />} />
         <Route path="/fleet" element={<FleetPage />} />
         <Route path="/payment" element={<PaymentPage />} />
-
-        {/* ✅ PERFIL */}
-        <Route path="/perfil" element={<ProfilePage />} />
-
-        {/* ✅ ADMIN - RESERVAS */}
-        <Route path="/admin/reservas" element={<ReservationManagementPage />} />
-
-        {/* ✅ ADMIN - DASHBOARD */}
-        <Route path="/admin/dashboard" element={<DashboardOverviewPage />} />
-
-        {/* ✅ ADMIN - CRUCEROS */}
-        <Route path="/admin/cruceros" element={<CrucerosPage />} />
-
-        <Route path="/admin/pasajeros" element={<PasajerosPage />} />
-
-        <Route path="/admin/cabinas" element={<CabinasPage />} />
-
-        <Route path="/admin/pagos" element={<PagosPage />} />
-
-        <Route path="/admin/empleados" element={<EmpleadosPage />} />
-
-        <Route path="/admin/reportes" element={<ReportesPage />} />
-
-        <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
-
-        <Route path="/seguimiento-crucero" element={<SeguimientoCruceroPage />} />
-
-         <Route path="/manage-booking" element={<ManageBookingPage />} />
-
-         <Route path="/admin/empleados/agregar" element={<AgregarEmpleadoPage />} />
-
         <Route path="/offers" element={<OffersPage />} />
         <Route path="/experiences" element={<ExperiencesPage />} />
         <Route path="/room" element={<RoomPage />} />
         <Route path="/personalization" element={<PersonalizationPage />} />
+
+        {/* Perfil de usuario */}
+        <Route path="/perfil" element={<ProfilePage />} />
+
+        {/* Detalles */}
         <Route path="/details-suit" element={<DetailsSuitPage />} />
         <Route path="/destination-details" element={<DestinationDetails />} />
         <Route path="/details" element={<DestinationDetails />} />
+
+        {/* Seguimiento y gestión de reserva del usuario */}
+        <Route path="/seguimiento-crucero" element={<SeguimientoCruceroPage />} />
+        <Route path="/manage-booking" element={<ManageBookingPage />} />
+        <Route path="/crucero/:id" element={<DescripcionCruceroPage />} />
+
+        {/* ==================== RUTAS DE ADMINISTRADOR ==================== */}
+        
+        <Route path="/admin" element={<AdminLoginPage />} />  
+
+        <Route path="/admin/cruceros/agregar" element={<AgregarCruceroPage />} />
+
+        {/* Dashboard Admin */}
+        <Route path="/admin/dashboard" element={<DashboardOverviewPage />} />
+
+        {/* Gestión de Reservas */}
+        <Route path="/admin/reservas" element={<ReservationManagementPage />} />
+
+        {/* Gestión de Flota / Cruceros */}
+        <Route path="/admin/cruceros" element={<CrucerosPage />} />
+
+        {/* Pasajeros */}
+        <Route path="/admin/pasajeros" element={<PasajerosPage />} />
+
+        {/* Cabinas */}
+        <Route path="/admin/cabinas" element={<CabinasPage />} />
+
+        {/* Pagos */}
+        <Route path="/admin/pagos" element={<PagosPage />} />
+
+        {/* Empleados */}
+        <Route path="/admin/empleados" element={<EmpleadosPage />} />
+        <Route path="/admin/empleados/agregar" element={<AgregarEmpleadoPage />} />
+
+        {/* Reportes */}
+        <Route path="/admin/reportes" element={<ReportesPage />} />
+
+        {/* Configuración */}
+        <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
+
+        {/* Ruta por defecto (404) */}
         <Route path="*" element={<SigninPage />} />
       </Routes>
     </BrowserRouter>
