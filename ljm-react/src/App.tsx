@@ -14,6 +14,7 @@ import PaymentPage from "./features/payment/presentation/pages/PaymentPage";
 import ExperiencesPage from "./features/experiences/presentation/pages/ExperiencesPage";
 import RoomPage from "./features/Room/presentation/pages/RoomPage";
 import PersonalizationPage from "./features/personalization/presentation/pages/PersonalizationPage";
+import PersonalizarEstanciaPage from "./features/personalizar-estancia/presentation/pages/PersonalizarEstanciaPage";
 import OffersPage from "./features/offers/presentation/pages/OffersPage";
 
 // ✅ PERFIL
@@ -61,9 +62,15 @@ import AdminLoginPage from './features/auth/presentation/components/AdminLoginPa
 
 import AgregarCruceroPage from "./features/agregarcrucero/presentation/pages/AgregarCruceroPage";
 
+import VoyageHistoryPage from "./features/voyayehistory/presentation/pages/VoyageHistoryPage";
+import FacturaPage from "./features/factura/presentation/pages/FacturaPage";
+
+import AcompanantePage from "./features/acompanante/presentation/pages/AnadirAcompanantePage";
+import AnadirAcompanantePage from "./features/anadiracompanante/presentation/pages/AnadirAcompanantePage";
 // Detalles
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
+import BookingConfirmationPage from "./features/reservaconfirmada/presentation/pages/BookingConfirmationPage"
 
 function App() {
   // Manejo del tema oscuro/claro desde localStorage
@@ -92,6 +99,7 @@ function App() {
         <Route path="/experiences" element={<ExperiencesPage />} />
         <Route path="/room" element={<RoomPage />} />
         <Route path="/personalization" element={<PersonalizationPage />} />
+        <Route path="/personalizar-estancia" element={<PersonalizarEstanciaPage />} />
 
         {/* Perfil de usuario */}
         <Route path="/perfil" element={<ProfilePage />} />
@@ -140,6 +148,12 @@ function App() {
         {/* Configuración */}
         <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
 
+        <Route path="/voyage-history" element={<VoyageHistoryPage />} />
+
+        <Route path="/acompanante" element={<AcompanantePage />} />
+        <Route path="/anadiracompanante" element={<AnadirAcompanantePage />} />
+        <Route path="/factura" element={<FacturaPage />} />
+        <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
         {/* Ruta por defecto (404) */}
         <Route path="*" element={<SigninPage />} />
       </Routes>

@@ -31,11 +31,11 @@ const Navbar: React.FC = () => {
             THE FLEET
           </Link>
 
-          <a href="#" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
+          <a href="experiences" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
             EXPERIENCES
           </a>
 
-          <a href="#" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
+          <a href="offers" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
             OFFERS
           </a>
         </div>
