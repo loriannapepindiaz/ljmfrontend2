@@ -49,7 +49,7 @@ const ProfessionalProfileSection: React.FC = () => {
                     </button>
                   </td>
                 </tr>
-                <tr className="bg-slate-50/20">
+                <tr>
                   <td className="px-4 py-3"><input type="text" placeholder="Formación Básica Seguridad" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
                   <td className="px-4 py-3"><input type="text" placeholder="Entidad acreditada" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
                   <td className="px-4 py-3"><input type="date" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>

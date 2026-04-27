@@ -1,9 +1,13 @@
 import React from 'react';
+import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 
 const months = ['Ene', 'Mar', 'May', 'Jul', 'Sep', 'Nov'];
 
 const IngresosTendencia: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const { timezone } = useAdminPreferences();
+  const currentYear = Number(
+    new Intl.DateTimeFormat('en-US', { year: 'numeric', timeZone: timezone }).format(new Date()),
+  );
 
   return (
     <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-slate-100">

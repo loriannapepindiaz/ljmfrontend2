@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 
 const MONTHS = [
   'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
@@ -6,7 +7,10 @@ const MONTHS = [
 ];
 
 const ReportesHeader: React.FC = () => {
-  const currentYear = new Date().getFullYear();
+  const { timezone } = useAdminPreferences();
+  const currentYear = Number(
+    new Intl.DateTimeFormat('en-US', { year: 'numeric', timeZone: timezone }).format(new Date()),
+  );
   const [showCalendar, setShowCalendar] = useState(false);
   const [startMonth, setStartMonth] = useState(0);
   const [startYear, setStartYear] = useState(currentYear);

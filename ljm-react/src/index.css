@@ -169,3 +169,107 @@
   border-color: #334155 !important;
   color: #f1f5f9 !important;
 }
+
+/* Dark mode global para vistas admin aunque no usen clases dark: por componente */
+.dark body.admin-panel {
+  background-color: #0b1220 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel .bg-white,
+.dark body.admin-panel header.bg-white,
+.dark body.admin-panel section.bg-white,
+.dark body.admin-panel article.bg-white {
+  background-color: #0f172a !important;
+}
+
+.dark body.admin-panel .bg-white\/90,
+.dark body.admin-panel .bg-white\/80,
+.dark body.admin-panel .bg-white\/70 {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+}
+
+.dark body.admin-panel .bg-slate-50,
+.dark body.admin-panel .bg-slate-50\/50,
+.dark body.admin-panel .bg-slate-50\/20,
+.dark body.admin-panel .bg-slate-100,
+.dark body.admin-panel .bg-slate-200 {
+  background-color: #1e293b !important;
+}
+
+.dark body.admin-panel .border-slate-100,
+.dark body.admin-panel .border-slate-200,
+.dark body.admin-panel .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+.dark body.admin-panel .text-slate-400,
+.dark body.admin-panel .text-slate-500,
+.dark body.admin-panel .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel .text-slate-700,
+.dark body.admin-panel .text-slate-800,
+.dark body.admin-panel .text-slate-900 {
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel .text-\[\#0e1a34\],
+.dark body.admin-panel .text-\[\#001D4F\] {
+  color: #f8fafc !important;
+}
+
+.dark body.admin-panel .text-\[\#0e1a34\]\/40,
+.dark body.admin-panel .text-\[\#0e1a34\]\/50,
+.dark body.admin-panel .text-\[\#0e1a34\]\/60 {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel [class*="text-[#0e1a34]"] {
+  color: #f8fafc !important;
+}
+
+.dark body.admin-panel main[class*='bg-[#f'],
+.dark body.admin-panel main[class*='bg-slate'] {
+  background-color: #0b1220 !important;
+}
+
+.dark body.admin-panel .bg-\[\#f6f7f8\],
+.dark body.admin-panel .bg-\[\#f8fafc\],
+.dark body.admin-panel .bg-\[\#F8FAFC\],
+.dark body.admin-panel .bg-\[\#f5f7fb\],
+.dark body.admin-panel .bg-\[\#f3f4f6\],
+.dark body.admin-panel .bg-\[\#e5e7eb\] {
+  background-color: #0b1220 !important;
+}
+
+/* Oscuro global más agresivo para formularios admin */
+.dark body.admin-panel input,
+.dark body.admin-panel select,
+.dark body.admin-panel textarea {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel input::placeholder,
+.dark body.admin-panel textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel .bg-\[\#eacea9\]\/10 {
+  background-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+.dark body.admin-panel .border-\[\#eacea9\]\/30,
+.dark body.admin-panel .border-\[\#eacea9\]\/50 {
+  border-color: #475569 !important;
+}
+
+.dark body.admin-panel .shadow-sm,
+.dark body.admin-panel .shadow,
+.dark body.admin-panel .shadow-md,
+.dark body.admin-panel .shadow-lg {
+  box-shadow: none !important;
+}

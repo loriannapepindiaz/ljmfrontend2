@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 type Tema = 'claro' | 'oscuro';
 
@@ -14,13 +14,19 @@ const ThemeContext = createContext<ThemeContextType>({
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [tema, setTemaState] = useState<Tema>(() => {
-    return (localStorage.getItem('tema') as Tema) || 'claro';
+    const stored = localStorage.getItem('tema');
+    return stored === 'oscuro' ? 'oscuro' : 'claro';
   });
 
   const setTema = (t: Tema) => {
     localStorage.setItem('tema', t);
     setTemaState(t);
   };
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', tema === 'oscuro');
+    document.body.dataset.theme = tema;
+  }, [tema]);
 
   return (
     <ThemeContext.Provider value={{ tema, setTema }}>

@@ -1,5 +1,4 @@
 // App.tsx
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Páginas de autenticación
@@ -73,16 +72,6 @@ import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsS
 import BookingConfirmationPage from "./features/reservaconfirmada/presentation/pages/BookingConfirmationPage"
 
 function App() {
-  // Manejo del tema oscuro/claro desde localStorage
-  useEffect(() => {
-    const tema = localStorage.getItem('tema');
-    if (tema === 'oscuro') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
   return (
     <BrowserRouter>
       <Routes>
