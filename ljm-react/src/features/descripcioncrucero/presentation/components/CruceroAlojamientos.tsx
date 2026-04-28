@@ -13,51 +13,51 @@ const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => 
     // SLIDE 1 - Owner's Pavilion
     {
       mainImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBVdjZIuZySJPAAaI3_ZWHfkmdVw1BufcSoU_uXkQ3PojJS85ZLs1iER7zTAhTqyQlsKzs3z9bzBckPKszRQS7r1VpL0HZAfwsgY3P8p5oIJF4KTYhIc0f3Lkog9-NfS7uwpujOZRs5GazNrFZ_4zwoCcEXENljtiAb8SyJUlxLWN6zvVRjHBAeCBkYZfjq5mvw5XX1bt6r56btKWGvxcqsiyfjfFaKmL0Hp_wPMQ6FyFw57LS7W43iU4wuggdz2vL6OkCDyn734tKx",
-      mainTitle: "The Owner's Pavilion",
-      mainDesc: "Spanning 150 square meters with private terrace, study, and direct access to the bow helipad.",
-      mainDeck: "01 — Deck Four",
+      mainTitle: "El Pabellón del Propietario",
+      mainDesc: "Con 150 metros cuadrados, terraza privada, estudio y acceso directo al helipuerto de proa.",
+      mainDeck: "01 — Cubierta Cuatro",
       thumbs: [
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvqiAbboDG2M7vX2qwTcokADV4DKNfpyxMy8ExNHCxGvZsG-Dr62U-_MM_L6jSoF02OY_278FRfTpwhS-L9VgXhsvhcIVEIChwgEa0ykMQ_i5kS2IpXFXgiOKjJyHxkrruNtTz3U8LVr6J2ian41gR3tGm_0Tai45xrZIObDVEJzilc1QXee9YdacESnJsR8e0Uoo3eKG0tDrBn2DflJjpz5-pL5YtiGrYc06m73_9U_sI5NEE1_YCVmrS34uC4k5zLjnobAxWIfYs",
-          label: "VIP Suite Alpha"
+          label: "Suite VIP Alfa"
         },
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuD1gnTu4RFZ9ku7uxrFMeyXboUvpk1Xb6FS7gRFdd5plxxS9LD-njs6DBZiP9BQfOR8yU9NVXODGAEKe9livJfvz2G_LUZHJ2tAYFJv5bKcGmqnFpHsNnwm7A_E4kym8-ATXwgFIrhTDfVmjqR-eIRG_nMfAAOoOhFmLj2BegwJXdwAi7kmgykBN3t0OZJTzAGbjra3Pk2WORErAtUPHZNBTbET08yEWhBi6G1-YS1Qc-VYTDKa5couJc_xD3jzdRnmc6WSfBMtbTlz",
-          label: "The Azure Cabin"
+          label: "El Camarote Azure"
         }
       ]
     },
     // SLIDE 2 - VIP Suite
     {
       mainImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvqiAbboDG2M7vX2qwTcokADV4DKNfpyxMy8ExNHCxGvZsG-Dr62U-_MM_L6jSoF02OY_278FRfTpwhS-L9VgXhsvhcIVEIChwgEa0ykMQ_i5kS2IpXFXgiOKjJyHxkrruNtTz3U8LVr6J2ian41gR3tGm_0Tai45xrZIObDVEJzilc1QXee9YdacESnJsR8e0Uoo3eKG0tDrBn2DflJjpz5-pL5YtiGrYc06m73_9U_sI5NEE1_YCVmrS34uC4k5zLjnobAxWIfYs",
-      mainTitle: "VIP Suite Alpha",
-      mainDesc: "Private balcony with jacuzzi, king-size bed, and marble-clad bathroom with ocean views.",
-      mainDeck: "02 — Deck Three",
+      mainTitle: "Suite VIP Alfa",
+      mainDesc: "Balcón privado con jacuzzi, cama king-size y baño revestido de mármol con vistas al océano.",
+      mainDeck: "02 — Cubierta Tres",
       thumbs: [
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuD1gnTu4RFZ9ku7uxrFMeyXboUvpk1Xb6FS7gRFdd5plxxS9LD-njs6DBZiP9BQfOR8yU9NVXODGAEKe9livJfvz2G_LUZHJ2tAYFJv5bKcGmqnFpHsNnwm7A_E4kym8-ATXwgFIrhTDfVmjqR-eIRG_nMfAAOoOhFmLj2BegwJXdwAi7kmgykBN3t0OZJTzAGbjra3Pk2WORErAtUPHZNBTbET08yEWhBi6G1-YS1Qc-VYTDKa5couJc_xD3jzdRnmc6WSfBMtbTlz",
-          label: "The Azure Cabin"
+          label: "El Camarote Azure"
         },
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBVdjZIuZySJPAAaI3_ZWHfkmdVw1BufcSoU_uXkQ3PojJS85ZLs1iER7zTAhTqyQlsKzs3z9bzBckPKszRQS7r1VpL0HZAfwsgY3P8p5oIJF4KTYhIc0f3Lkog9-NfS7uwpujOZRs5GazNrFZ_4zwoCcEXENljtiAb8SyJUlxLWN6zvVRjHBAeCBkYZfjq5mvw5XX1bt6r56btKWGvxcqsiyfjfFaKmL0Hp_wPMQ6FyFw57LS7W43iU4wuggdz2vL6OkCDyn734tKx",
-          label: "Owner's Pavilion"
+          label: "Pabellón del Propietario"
         }
       ]
     },
     // SLIDE 3 - Azure Cabin
     {
       mainImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuD1gnTu4RFZ9ku7uxrFMeyXboUvpk1Xb6FS7gRFdd5plxxS9LD-njs6DBZiP9BQfOR8yU9NVXODGAEKe9livJfvz2G_LUZHJ2tAYFJv5bKcGmqnFpHsNnwm7A_E4kym8-ATXwgFIrhTDfVmjqR-eIRG_nMfAAOoOhFmLj2BegwJXdwAi7kmgykBN3t0OZJTzAGbjra3Pk2WORErAtUPHZNBTbET08yEWhBi6G1-YS1Qc-VYTDKa5couJc_xD3jzdRnmc6WSfBMtbTlz",
-      mainTitle: "The Azure Cabin",
-      mainDesc: "Twin configuration with convertible beds, private veranda, and bespoke entertainment system.",
-      mainDeck: "03 — Deck Two",
+      mainTitle: "El Camarote Azure",
+      mainDesc: "Configuración twin con camas convertibles, terraza privada y sistema de entretenimiento a medida.",
+      mainDeck: "03 — Cubierta Dos",
       thumbs: [
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBVdjZIuZySJPAAaI3_ZWHfkmdVw1BufcSoU_uXkQ3PojJS85ZLs1iER7zTAhTqyQlsKzs3z9bzBckPKszRQS7r1VpL0HZAfwsgY3P8p5oIJF4KTYhIc0f3Lkog9-NfS7uwpujOZRs5GazNrFZ_4zwoCcEXENljtiAb8SyJUlxLWN6zvVRjHBAeCBkYZfjq5mvw5XX1bt6r56btKWGvxcqsiyfjfFaKmL0Hp_wPMQ6FyFw57LS7W43iU4wuggdz2vL6OkCDyn734tKx",
-          label: "Owner's Pavilion"
+          label: "Pabellón del Propietario"
         },
         {
           src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBvqiAbboDG2M7vX2qwTcokADV4DKNfpyxMy8ExNHCxGvZsG-Dr62U-_MM_L6jSoF02OY_278FRfTpwhS-L9VgXhsvhcIVEIChwgEa0ykMQ_i5kS2IpXFXgiOKjJyHxkrruNtTz3U8LVr6J2ian41gR3tGm_0Tai45xrZIObDVEJzilc1QXee9YdacESnJsR8e0Uoo3eKG0tDrBn2DflJjpz5-pL5YtiGrYc06m73_9U_sI5NEE1_YCVmrS34uC4k5zLjnobAxWIfYs",
-          label: "VIP Suite Alpha"
+          label: "Suite VIP Alfa"
         }
       ]
     }
@@ -79,10 +79,10 @@ const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => 
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
           <div className="max-w-xl">
             <h2 className="font-['Newsreader'] text-5xl font-bold text-[#0e1a34] leading-tight">
-              Masterful Retreats
+              Retiros Magistrales
             </h2>
             <p className="text-[#45464d] mt-6 text-lg">
-              Every cabin on The Serenity is a bespoke environment, utilizing sustainably sourced oak, hand-stitched leather, and floor-to-ceiling panoramic glass.
+              Cada camarote del The Serenity es un ambiente a medida, con roble de origen sostenible, cuero cosido a mano y cristal panorámico de suelo a techo.
             </p>
           </div>
           <div className="flex gap-4">

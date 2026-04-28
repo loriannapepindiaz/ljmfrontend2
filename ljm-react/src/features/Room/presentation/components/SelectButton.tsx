@@ -8,7 +8,7 @@ interface SelectButtonProps {
 
 const SelectButton: FC<SelectButtonProps> = ({
   isSelected,
-  label = "SELECT",
+  label = "SELECCIONAR",
 }) => {
   return (
     <button
@@ -21,7 +21,7 @@ const SelectButton: FC<SelectButtonProps> = ({
         }
       `}
     >
-      {isSelected ? "SELECTED" : label}
+      {isSelected ? "SELECCIONADO" : label}
     </button>
   );
 };

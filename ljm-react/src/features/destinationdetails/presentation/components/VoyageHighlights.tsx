@@ -1,8 +1,8 @@
 export const VoyageHighlights = () => {
   const highlights = [
-    "Sunset dinner at the private terrace of a Santorini boutique winery.",
-    "VIP access to the Minoan ruins of Akrotiri with a professional historian.",
-    "Exclusive yacht charter to the hidden sea caves of Milos."
+    "Cena al atardecer en la terraza privada de una bodega boutique en Santorini.",
+    "Acceso VIP a las ruinas minoicas de Akrotiri con un historiador profesional.",
+    "Alquiler exclusivo de yate a las cuevas marinas ocultas de Milos."
   ];
 
   return (

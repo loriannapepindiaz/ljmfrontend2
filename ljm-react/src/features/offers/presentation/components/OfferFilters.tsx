@@ -10,11 +10,11 @@ interface OfferFiltersProps {
 const OfferFilters: React.FC<OfferFiltersProps> = ({ activeFilter, onFilterChange }) => {
   // ✅ Los nombres deben coincidir con la 'category' de tus offers
   const categories = [
-    { label: "All Voyages", value: "ALL VOYAGES" },
-    { label: "Mediterranean", value: "MEDITERRANEAN" },
-    { label: "Caribbean", value: "CARIBBEAN" },
-    { label: "Nordic Fjords", value: "NORDIC FJORDS" },
-    { label: "Expeditions", value: "EXPEDITIONS" }
+    { label: "Todos los Viajes", value: "TODOS LOS VIAJES" },
+    { label: "Mediterráneo", value: "MEDITERRANEAN" },
+    { label: "Caribe", value: "CARIBBEAN" },
+    { label: "Fiordos Nórdicos", value: "NORDIC FJORDS" },
+    { label: "Expediciones", value: "EXPEDITIONS" }
   ];
 
   return (

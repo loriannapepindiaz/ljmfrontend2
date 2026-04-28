@@ -24,14 +24,14 @@ const FleetHero: React.FC = () => {
         {/* Columna izquierda */}
         <div className="w-full md:w-3/5 lg:w-2/3 text-center md:text-left">
           <h1 className="font-magiona text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white mb-6 md:mb-8 leading-none tracking-tight drop-shadow-lg">
-            OUR ELITE
+            NUESTRA
             <br />
-            <span className="block mt-2 md:mt-4" style={{ color: '#F5F1E8' }}>FLEET</span>
+            <span className="block mt-2 md:mt-4" style={{ color: '#F5F1E8' }}>ÉLITE FLOTA</span>
           </h1>
 
           <p className="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto md:mx-0 mb-10 md:mb-12 leading-relaxed font-light drop-shadow-md"
             style={{ color: 'rgba(245,241,232,0.9)' }}>
-            Experience the pinnacle of maritime luxury. Our exclusive fleet is designed to provide an unparalleled journey across the world's most breathtaking horizons.
+            Experimente la cúspide del lujo marítimo. Nuestra flota exclusiva está diseñada para brindar un viaje incomparable por los horizontes más impresionantes del mundo.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
@@ -47,7 +47,7 @@ const FleetHero: React.FC = () => {
               onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#b8894e')}
               onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#a07840')}
             >
-              EXPLORE NOW
+              EXPLORAR AHORA
             </button>
 
             {/* Botón secundario — borde blanco perla */}
@@ -76,7 +76,7 @@ const FleetHero: React.FC = () => {
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0">
                 <path d="M8 5v14l11-7z" />
               </svg>
-              WATCH FILM
+              VER PELÍCULA
             </a>
           </div>
         </div>
@@ -99,7 +99,7 @@ const FleetHero: React.FC = () => {
                 style={{ border: '4px solid rgba(0,29,79,0.8)' }}
                 src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150" />
             </div>
-            <span className="text-white text-sm uppercase tracking-widest font-medium">Guest Reviews</span>
+            <span className="text-white text-sm uppercase tracking-widest font-medium">Reseñas de Huéspedes</span>
           </div>
 
           <div className="flex items-baseline space-x-3 mb-3">
@@ -117,9 +117,9 @@ const FleetHero: React.FC = () => {
             </span>
           </div>
 
-          <p className="text-base font-medium mb-2" style={{ color: '#F5F1E8' }}>Excellence Award 2024</p>
+          <p className="text-base font-medium mb-2" style={{ color: '#F5F1E8' }}>Premio a la Excelencia 2024</p>
           <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
-            Trusted by world travelers for exceptional maritime experiences.
+            Elegido por viajeros del mundo por experiencias marítimas excepcionales.
           </p>
         </div>
       </div>

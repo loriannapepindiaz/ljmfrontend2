@@ -16,8 +16,8 @@ const SeguimientoHeader: React.FC = () => {
         <div className="p-8 md:p-12 rounded-3xl flex flex-col items-center text-center space-y-6">
           <div className="space-y-2">
             <span className="text-[#785d32] uppercase tracking-[0.4em] text-xs font-bold">LJM Elite Voyage</span>
-            <h1 className="text-5xl md:text-8xl font-medium text-white tracking-tight mb-2">The Majestic Pearl</h1>
-            <p className="text-lg md:text-xl text-[#eacea9]/80 font-light italic">Mediterranean Odyssey</p>
+            <h1 className="text-5xl md:text-8xl font-medium text-white tracking-tight mb-2">La Perla Majestuosa</h1>
+            <p className="text-lg md:text-xl text-[#eacea9]/80 font-light italic">Odisea Mediterránea</p>
           </div>
 
           {/* Countdown */}
@@ -36,7 +36,7 @@ const SeguimientoHeader: React.FC = () => {
           <div className="flex flex-wrap justify-center gap-4 mt-4">
             <div className="px-5 py-2 rounded-full border border-[#785d32]/20 bg-[#785d32]/5 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#785d32] text-base">calendar_month</span>
-              <span className="text-xs text-white font-medium">Sept 12 - Sept 24, 2024</span>
+              <span className="text-xs text-white font-medium">12 Sep - 24 Sep, 2024</span>
             </div>
             <div className="px-5 py-2 rounded-full border border-[#eacea9]/20 bg-[#eacea9]/5 flex items-center gap-2">
               <span className="material-symbols-outlined text-[#eacea9] text-base">nights_stay</span>

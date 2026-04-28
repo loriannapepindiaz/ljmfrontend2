@@ -7,7 +7,7 @@ export default function InvoiceSidebar() {
     <aside className="w-full space-y-8 border-b border-slate-100 pb-8 md:w-1/4 md:border-b-0 md:border-r md:pb-0 md:pr-8">
       <div>
         <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#eacea9]">
-          Address
+          Dirección
         </h3>
         <div className="space-y-0.5 text-[11px] leading-relaxed text-slate-600">
           <p>Residence 402, Quai Jean-Charles Rey</p>
@@ -17,7 +17,7 @@ export default function InvoiceSidebar() {
 
       <div>
         <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#eacea9]">
-          Acompanantes
+          Acompañantes
         </h3>
         <div className="space-y-1 text-[11px] leading-relaxed text-slate-600">
           {companions.map((name) => (
@@ -31,11 +31,11 @@ export default function InvoiceSidebar() {
 
       <div>
         <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#eacea9]">
-          Voyage
+          Travesía
         </h3>
         <div className="text-[11px] leading-relaxed text-slate-600">
           <p className="text-[10px] font-bold uppercase text-[#0e1a34]">Suite Imperial Atlantis</p>
-          <p>07 Nights • Premium Deck</p>
+          <p>07 Noches • Cubierta Premium</p>
         </div>
       </div>
 
@@ -50,7 +50,7 @@ export default function InvoiceSidebar() {
             className="absolute inset-0 flex items-start justify-center text-center text-[6px] font-bold uppercase tracking-[0.35em] text-[#0e1a34]"
             style={{ fontFamily: "'Public Sans', sans-serif" }}
           >
-            <span className="mt-3 block w-20">LJM Sealine Official Registry</span>
+            <span className="mt-3 block w-20">Registro Oficial LJM Sealine</span>
           </div>
         </div>
       </div>

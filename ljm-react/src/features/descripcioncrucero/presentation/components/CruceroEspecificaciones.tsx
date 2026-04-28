@@ -14,10 +14,10 @@ const CruceroEspecificaciones: React.FC<CruceroEspecificacionesProps> = ({ vesse
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <span className="text-[#5a5e6b] uppercase tracking-widest text-xs font-bold">
-            Engineering Excellence
+            Excelencia en Ingeniería
           </span>
           <h2 className="font-['Newsreader'] text-4xl font-bold mt-2 text-[#0e1a34]">
-            Technical Integrity
+            Integridad Técnica
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-[#e2e8f0]/30 border border-[#e2e8f0]/30">
@@ -26,13 +26,13 @@ const CruceroEspecificaciones: React.FC<CruceroEspecificacionesProps> = ({ vesse
               straighten
             </span>
             <h4 className="text-[#45464d] uppercase text-[10px] tracking-widest mb-2 group-hover:text-[#eacea9]">
-              Overall Length
+              Eslora Total
             </h4>
             <p className="font-['Newsreader'] text-4xl font-bold text-[#0e1a34] group-hover:text-white">
               {specs?.length || '82.5m'}
             </p>
             <p className="text-slate-400 text-xs mt-2 group-hover:text-slate-200">
-              270 Feet of Precision
+              270 Pies de Precisión
             </p>
           </div>
           <div className="bg-white p-12 text-center group hover:bg-[#0e1a34] transition-all duration-500">
@@ -40,13 +40,13 @@ const CruceroEspecificaciones: React.FC<CruceroEspecificacionesProps> = ({ vesse
               weight
             </span>
             <h4 className="text-[#45464d] uppercase text-[10px] tracking-widest mb-2 group-hover:text-[#eacea9]">
-              Gross Tonnage
+              Arqueo Bruto
             </h4>
             <p className="font-['Newsreader'] text-4xl font-bold text-[#0e1a34] group-hover:text-white">
               {specs?.tonnage || '2,250t'}
             </p>
             <p className="text-slate-400 text-xs mt-2 group-hover:text-slate-200">
-              Voluminous Steel Hull
+              Voluminoso Casco de Acero
             </p>
           </div>
           <div className="bg-white p-12 text-center group hover:bg-[#0e1a34] transition-all duration-500">
@@ -54,13 +54,13 @@ const CruceroEspecificaciones: React.FC<CruceroEspecificacionesProps> = ({ vesse
               groups
             </span>
             <h4 className="text-[#45464d] uppercase text-[10px] tracking-widest mb-2 group-hover:text-[#eacea9]">
-              Guest Capacity
+              Capacidad de Huéspedes
             </h4>
             <p className="font-['Newsreader'] text-4xl font-bold text-[#0e1a34] group-hover:text-white">
               {specs?.guests || '12'}
             </p>
             <p className="text-slate-400 text-xs mt-2 group-hover:text-slate-200">
-              Luxury Master Suites
+              Suites Master de Lujo
             </p>
           </div>
           <div className="bg-white p-12 text-center group hover:bg-[#0e1a34] transition-all duration-500">
@@ -68,13 +68,13 @@ const CruceroEspecificaciones: React.FC<CruceroEspecificacionesProps> = ({ vesse
               layers
             </span>
             <h4 className="text-[#45464d] uppercase text-[10px] tracking-widest mb-2 group-hover:text-[#eacea9]">
-              Number of Decks
+              Número de Cubiertas
             </h4>
             <p className="font-['Newsreader'] text-4xl font-bold text-[#0e1a34] group-hover:text-white">
               {specs?.decks || '5'}
             </p>
             <p className="text-slate-400 text-xs mt-2 group-hover:text-slate-200">
-              Connected by Elevator
+              Conectadas por Ascensor
             </p>
           </div>
         </div>

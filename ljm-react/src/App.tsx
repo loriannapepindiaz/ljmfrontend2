@@ -70,6 +70,7 @@ import AnadirAcompanantePage from "./features/anadiracompanante/presentation/pag
 import { DestinationDetails } from "./features/destinationdetails/presentation/pages/DestinationDetails";
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 import BookingConfirmationPage from "./features/reservaconfirmada/presentation/pages/BookingConfirmationPage"
+import VoyageReviewsPage from "./features/reviews/presentation/pages/VoyageReviewsPage"
 
 function App() {
   return (
@@ -143,6 +144,7 @@ function App() {
         <Route path="/anadiracompanante" element={<AnadirAcompanantePage />} />
         <Route path="/factura" element={<FacturaPage />} />
         <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
+        <Route path="/reviews" element={<VoyageReviewsPage />} />
         {/* Ruta por defecto (404) */}
         <Route path="*" element={<SigninPage />} />
       </Routes>

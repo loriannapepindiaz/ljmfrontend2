@@ -1,9 +1,9 @@
 const WhyExperiences = () => {
   const items = [
-    { icon: 'explore', title: 'Adventure', desc: 'Thrill seeking' },
-    { icon: 'account_balance', title: 'Culture', desc: 'Local heritage' },
-    { icon: 'spa', title: 'Relaxation', desc: 'Pure tranquility' },
-    { icon: 'surfing', title: 'Water Sports', desc: 'Ocean play' },
+    { icon: 'explore', title: 'Aventura', desc: 'Emoción y adrenalina' },
+    { icon: 'account_balance', title: 'Cultura', desc: 'Patrimonio local' },
+    { icon: 'spa', title: 'Relajación', desc: 'Tranquilidad absoluta' },
+    { icon: 'surfing', title: 'Deportes Acuáticos', desc: 'Diversión oceánica' },
   ];
 
   return (
@@ -13,7 +13,7 @@ const WhyExperiences = () => {
         style={{ marginTop: '-180px', position: 'relative', zIndex: 10 }}
       >
         <h2 className="text-2xl md:text-3xl magiona-style text-[#0A1428] text-center mb-8">
-          Why LJM Experiences?
+          ¿Por qué LJM Experiences?
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {items.map((item) => (

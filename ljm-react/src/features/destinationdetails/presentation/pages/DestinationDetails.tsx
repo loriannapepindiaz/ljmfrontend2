@@ -45,7 +45,7 @@ export const DestinationDetails = () => {
                     onClick={() => navigate('/Room')}
                     className="bg-primary hover:bg-luxury-gold text-midnight-blue px-14 py-5 rounded-full text-sm font-extrabold tracking-[0.3em] transition-all w-full md:w-auto uppercase shadow-lg active:scale-95"
                   >
-                    Book This Voyage
+                    Reservar Este Viaje
                   </button>
                 </div>
               </div>

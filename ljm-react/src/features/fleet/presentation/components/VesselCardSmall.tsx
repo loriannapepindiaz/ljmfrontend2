@@ -26,7 +26,7 @@ const VesselCardSmall: React.FC<VesselCardSmallProps> = ({ title, className, des
           className="text-navy font-bold text-xs underline underline-offset-4 hover:text-primary transition-colors uppercase tracking-widest"
           href="#"
         >
-          View Specs
+          Ver Especificaciones
         </a>
       </div>
     </div>

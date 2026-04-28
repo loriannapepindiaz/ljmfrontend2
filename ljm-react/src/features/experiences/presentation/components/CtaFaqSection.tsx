@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const faqs = [
-  { q: 'When is the best time to book a tour?', a: 'We recommend booking at least 3 months in advance for peak season.' },
-  { q: 'Do I need a visa for off-shore experiences?', a: 'Requirements vary by destination. Our team will guide you through the process.' },
-  { q: 'What currency is used for payments?', a: 'We accept USD, EUR, and major credit cards for all bookings.' },
+  { q: '¿Cuál es el mejor momento para reservar un tour?', a: 'Recomendamos reservar con al menos 3 meses de anticipación para la temporada alta.' },
+  { q: '¿Necesito visa para experiencias en alta mar?', a: 'Los requisitos varían según el destino. Nuestro equipo te guiará a través del proceso.' },
+  { q: '¿Qué moneda se usa para los pagos?', a: 'Aceptamos USD, EUR y las principales tarjetas de crédito para todas las reservas.' },
 ];
 
 const CtaFaqSection = () => {
@@ -28,28 +28,28 @@ const CtaFaqSection = () => {
         {/* CTA izquierda */}
         <div className="text-white">
           <h2 className="text-5xl md:text-6xl magiona-style mb-10 leading-tight">
-            Plan Your<br />
-            <span className="text-[#c5a267]">Sealine Adventure Today!</span>
+            Planifica Tu<br />
+            <span className="text-[#c5a267]">Aventura Sealine Hoy</span>
           </h2>
           <div className="space-y-6 mb-10">
             <div className="flex items-start gap-4">
               <span className="material-symbols-outlined text-[#c5a267]" style={{ fontSize: '20px' }}>mail</span>
               <div>
-                <p className="text-white font-semibold text-sm mb-0.5">Contact Us at:</p>
+                <p className="text-white font-semibold text-sm mb-0.5">Contáctanos:</p>
                 <p className="text-white/60 text-sm">reservas@ljmsealine.com</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="material-symbols-outlined text-[#c5a267]" style={{ fontSize: '20px' }}>call</span>
               <div>
-                <p className="text-white font-semibold text-sm mb-0.5">Call Us:</p>
+                <p className="text-white font-semibold text-sm mb-0.5">Llámanos:</p>
                 <p className="text-white/60 text-sm">+1 800-SEA-LINE (732-5463)</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <span className="material-symbols-outlined text-[#c5a267]" style={{ fontSize: '20px' }}>share</span>
               <div>
-                <p className="text-white font-semibold text-sm mb-0.5">Follow us on social media:</p>
+                <p className="text-white font-semibold text-sm mb-0.5">Síguenos en redes sociales:</p>
                 <p className="text-white/60 text-sm">@ljmsealine</p>
               </div>
             </div>
@@ -58,7 +58,7 @@ const CtaFaqSection = () => {
             onClick={() => navigate('/destinations')}
             className="bg-[#c5a267] hover:bg-[#b38e53] text-white font-bold py-4 px-10 rounded-full text-sm tracking-wide transition-all hover:scale-105"
           >
-            Book Your Trip Now!
+            ¡Reserva Tu Viaje Ahora!
           </button>
         </div>
 
@@ -68,7 +68,7 @@ const CtaFaqSection = () => {
           style={{ backgroundColor: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.12)' }}
         >
           <div className="flex items-center justify-between mb-10">
-            <h3 className="magiona-style text-white text-4xl">Frequently Asked Questions</h3>
+            <h3 className="magiona-style text-white text-4xl">Preguntas Frecuentes</h3>
             <div className="w-10 h-10 rounded-full bg-[#c5a267] flex items-center justify-center flex-shrink-0 ml-4">
               <span className="material-symbols-outlined text-white" style={{ fontSize: '18px' }}>help</span>
             </div>
@@ -81,7 +81,7 @@ const CtaFaqSection = () => {
                   style={{ background: 'transparent' }}
                   onClick={() => setOpen(open === i ? null : i)}
                 >
-                  <span className="text-[#c5a267]">Q: {faq.q}</span>
+                  <span className="text-[#c5a267]">P: {faq.q}</span>
                   <span className="material-symbols-outlined text-white/60 flex-shrink-0 ml-2" style={{ fontSize: '20px' }}>
                     {open === i ? 'expand_less' : 'expand_more'}
                   </span>
@@ -97,7 +97,7 @@ const CtaFaqSection = () => {
           </div>
           <div className="mt-8 text-right">
            <a href="https://instagram.com/ljmsealine" target="_blank" rel="noopener noreferrer" className="text-[#00c2cb] text-sm hover:underline">
-            Contact Us for More Info →
+            Contáctanos para más información →
            </a>
           </div>
         </div>

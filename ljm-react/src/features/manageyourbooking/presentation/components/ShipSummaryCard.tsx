@@ -11,7 +11,7 @@ const ShipSummaryCard: React.FC = () => {
         style={{ backgroundImage: `url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEve-Gj66wSMxndLIsP24trTnHOBzz4uptOmtrCWlYE8aK0VVuFeE4NqNcfpBJoUOqY3q72-XfSBBCkoRblcnjd1XH25rZQV2BuuaKYxak36ArI03UznYm_gHuHueKiEeMbO169J6o1x33jbuG0pef4t3JLXsz9xPxf0o2HWnHm3ROkVZyuF1zu71RzKiXPdcn1GfdH5ILDTVrqKgaDiwZb0XLhHyywDNrW2xIauj3yTF6sWzagzDjvjVgBZLwnpbLVQ-gSbvARUlc')` }}
       />
       <div className="p-8 flex-1 flex flex-col justify-center">
-        <h3 className="text-2xl font-bold text-white mb-2">The Majestic Pearl</h3>
+        <h3 className="text-2xl font-bold text-white mb-2">La Perla Majestuosa</h3>
         <p className="text-slate-400 mb-6 flex items-center gap-2">
           <span className="material-symbols-outlined text-[#eacea9]">location_on</span>
           Grandeza Mediterránea • 14 Noches
@@ -19,7 +19,7 @@ const ShipSummaryCard: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { label: 'Embarque',     value: 'Barcelona, España' },
-            { label: 'Fecha',        value: 'Oct 12, 2024'      },
+            { label: 'Fecha',        value: '12 Oct, 2024'      },
             { label: 'Desembarque', value: 'Venecia, Italia'    },
             { label: 'Estado',       value: 'Listo para Zarpar', green: true },
           ].map((item) => (

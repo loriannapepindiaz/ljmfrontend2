@@ -6,7 +6,7 @@ const ItinerarioBanner: React.FC = () => {
       <img
         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[3s]"
         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZOffDGU4-pRcSRi7KJBoqI4u7NZGF4T1gk8t3yI13hyedOO8gak5TJGjtWA8RuwkAqVvTrt58DhFIwSy5vGtOoxgAL5-j8lYJjUQxzyJn-eck3CSfY2nTfJ5AmfLF8M0Qtn_Zgk4x9W5Fp3TyBGya59vqw2JB7ddGDL0FdVHB0EPoodeQaLEic2N18qMGiBEUzgsjJGMrUs2k0u0y2MdNhJ-jOM3XNekQZ5nVVWS3XU56d4YWGPshZGRDB1NvU4sGsHT7s8PXGBfr"
-        alt="Greek Isles"
+        alt="Islas Griegas"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#0e1a34] via-[#0e1a34]/40 to-transparent flex items-center p-8 md:p-12">
         <div className="space-y-2 max-w-md">

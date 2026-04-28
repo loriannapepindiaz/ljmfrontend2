@@ -20,42 +20,42 @@ const Navbar: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex flex-1 justify-center items-center gap-6">
           <Link to="/" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
-            HOME
+            INICIO
           </Link>
 
           <Link to="/destinations" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
-            DESTINATIONS
+            DESTINOS
           </Link>
 
           <Link to="/fleet" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
-            THE FLEET
+            LA FLOTA
           </Link>
 
           <a href="experiences" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
-            EXPERIENCES
+            EXPERIENCIAS
           </a>
 
           <a href="offers" className="text-pearl-beige hover:text-primary transition-colors font-medium tracking-wide text-sm">
-            OFFERS
+            OFERTAS
           </a>
         </div>
 
         {/* Right Section */}
         <div className="hidden md:flex items-center gap-6 ml-auto">
-          {/* SIGN IN → HOME */}
+          {/* INICIAR SESIÓN → INICIO */}
           <Link
             to="/home"
             className="text-sm font-medium tracking-widest text-pearl-beige hover:text-primary transition-colors"
           >
-            SIGN IN
+            INICIAR SESIÓN
           </Link>
 
-          {/* RESERVE NOW */}
+          {/* RESERVAR AHORA */}
           <Link
             to="/details-suit"
             className="bg-primary hover:bg-luxury-gold text-white px-7 py-2.5 rounded-full text-sm font-bold tracking-widest shadow-lg transition-all"
           >
-            RESERVE NOW
+            RESERVAR AHORA
           </Link>
         </div>
 
@@ -72,38 +72,38 @@ const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-background-dark border-t border-pearl-beige/10 p-4 space-y-4">
           <Link to="/" className="block text-pearl-beige hover:text-primary transition-colors">
-            HOME
+            INICIO
           </Link>
 
           <Link to="/destinations" className="block text-pearl-beige hover:text-primary transition-colors">
-            DESTINATIONS
+            DESTINOS
           </Link>
 
           <Link to="/fleet" className="block text-pearl-beige hover:text-primary transition-colors">
-            THE FLEET
+            LA FLOTA
           </Link>
 
           <a href="#" className="block text-pearl-beige hover:text-primary transition-colors">
-            EXPERIENCES
+            EXPERIENCIAS
           </a>
 
           <a href="#" className="block text-pearl-beige hover:text-primary transition-colors">
-            OFFERS
+            OFERTAS
           </a>
 
-          {/* SIGN IN MOBILE → HOME */}
+          {/* INICIAR SESIÓN MOBILE → INICIO */}
           <Link
             to="/home"
             className="block w-full text-center text-pearl-beige hover:text-primary transition-colors text-sm font-medium tracking-widest pt-2"
           >
-            SIGN IN
+            INICIAR SESIÓN
           </Link>
 
           <Link
             to="/details-suit"
             className="block w-full bg-primary hover:bg-luxury-gold text-white px-6 py-3 rounded-full text-sm font-bold tracking-widest transition-all text-center"
           >
-            RESERVE NOW
+            RESERVAR AHORA
           </Link>
         </div>
       )}

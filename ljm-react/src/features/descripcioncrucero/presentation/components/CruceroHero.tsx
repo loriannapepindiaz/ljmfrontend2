@@ -8,7 +8,7 @@ interface CruceroHeroProps {
 
 const CruceroHero: React.FC<CruceroHeroProps> = ({ vessel }) => {
   const title = vessel?.title || 'The Serenity';
-  const description = vessel?.description || 'A masterpiece of naval architecture, blending architectural stillness with the rhythm of the tides.';
+  const description = vessel?.description || 'Una obra maestra de arquitectura naval, que combina la serenidad arquitectónica con el ritmo de las mareas.';
   const heroImage = vessel?.heroImage || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtNJgtd1USMUa5nZZumatCZ05sKe2au3FQlBVMsKD8LOQJyKFPUX0fSRWAeM_KA3pYqStmKmLvcfSyjFSGF-qSOKUKsP0HeN-tVz8t94nZareXttPswLsDJt6QjZmuXPQigHwHOtxnovgIguemQNVdHWHp2RcRa34hYyoF0TBBmrWAXOU9qcRbS275yu6rzIrjHujh73E4dt8vEkVOVc_jv1YJaNWRLk1SGFWzvATmDqDJRWlTR_bUtJ5IYBkYIDj5w7IFg_4SLlpk';
 
   return (
@@ -23,7 +23,7 @@ const CruceroHero: React.FC<CruceroHeroProps> = ({ vessel }) => {
       </div>
       <div className="relative z-10 text-center px-4 max-w-5xl pt-32">
         <span className="text-[#eacea9] uppercase tracking-[0.4em] text-xs mb-6 block font-medium">
-          Behold the Horizon
+          Contempla el Horizonte
         </span>
         <h1 className="font-['Newsreader'] text-7xl md:text-9xl text-white font-extrabold italic leading-tight drop-shadow-2xl">
           {title}

@@ -16,12 +16,11 @@ const ExperiencesHero = () => {
 
       <div className="relative text-center px-4 max-w-5xl mx-auto w-full" style={{ zIndex: 2 }}>
         <h1 className="magiona-style text-6xl md:text-7xl lg:text-8xl text-white mb-6 leading-tight">
-          Discover the Ultimate <br />
-          <span className="text-pearl">Sealine Experiences</span>
+          Descubre las Experiencias <br />
+          <span className="text-pearl">Definitivas de Sealine</span>
         </h1>
         <p className="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light tracking-wide">
-          Indulge in curated moments of luxury, where every detail is crafted
-          for your absolute pleasure across the world's most beautiful horizons.
+          Disfruta de momentos de lujo cuidadosamente seleccionados, donde cada detalle está diseñado para tu absoluto placer a través de los horizontes más hermosos del mundo.
         </p>
         <button
           onClick={() => window.location.href = '/destinations'}
@@ -36,7 +35,7 @@ const ExperiencesHero = () => {
             (e.currentTarget as HTMLButtonElement).style.color = 'white';
           }}
         >
-          Plan Your Adventure Now
+          Planifica Tu Aventura Ahora
         </button>
       </div>
     </header>

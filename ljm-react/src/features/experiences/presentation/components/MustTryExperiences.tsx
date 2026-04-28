@@ -84,8 +84,8 @@ const MustTryExperiences = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="mb-12">
-          <h2 className="text-4xl font-serif italic mb-3 text-amber-950">Must-Try Experiences</h2>
-          <p className="text-amber-900/70 text-sm">Our most popular curated adventures.</p>
+          <h2 className="text-4xl font-serif italic mb-3 text-amber-950">Experiencias Imprescindibles</h2>
+          <p className="text-amber-900/70 text-sm">Nuestras aventuras curadas más populares.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -124,12 +124,12 @@ const MustTryExperiences = () => {
               onClick={() => setShowAll(true)}
               className="border border-amber-900/20 hover:border-[#c5a267] text-amber-900/50 hover:text-[#c5a267] px-10 py-3 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 hover:scale-105"
             >
-              Cargar más experiences
+              Cargar más experiencias
             </button>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div className="w-16 h-px bg-amber-900/20" />
-              <p className="text-amber-900/30 text-xs tracking-widest uppercase">No hay más experiences destacadas</p>
+              <p className="text-amber-900/30 text-xs tracking-widest uppercase">No hay más experiencias destacadas</p>
               <div className="w-16 h-px bg-amber-900/20" />
             </div>
           )}

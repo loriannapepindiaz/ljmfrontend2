@@ -12,10 +12,10 @@ const Services: React.FC = () => {
         <div className="lg:w-[45%] space-y-8">
           <div className="space-y-4">
             <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase">
-              Unrivaled Service
+              Servicio Sin Igual
             </span>
             <h2 className="text-4xl md:text-5xl font-display leading-tight text-gray-900">
-              Travel to make sweet <br /> everlasting memories
+              Viaja y crea recuerdos <br /> que duren para siempre
             </h2>
           </div>
 
@@ -23,18 +23,18 @@ const Services: React.FC = () => {
             {[
               {
                 id: "01",
-                title: "Concierge at your beck and call",
-                text: "Personalized service that anticipates your needs before you even realize them.",
+                title: "Conserjería a tu disposición",
+                text: "Servicio personalizado que anticipa tus necesidades antes de que las percibas.",
               },
               {
                 id: "02",
-                title: "Immersion in Nature's Beauty",
-                text: "Our itineraries are designed to bring you closer to the world's most pristine environments.",
+                title: "Inmersión en la Belleza Natural",
+                text: "Nuestros itinerarios están diseñados para acercarte a los entornos más prístinos del mundo.",
               },
               {
                 id: "03",
-                title: "Culinary Masterpieces",
-                text: "A sensory journey through the world's finest flavors, paired with rare vintages.",
+                title: "Obras Maestras Culinarias",
+                text: "Un viaje sensorial por los sabores más refinados del mundo, maridados con añadas raras.",
               },
             ].map((item) => (
               <div key={item.id} className="flex gap-6 group">
@@ -58,7 +58,7 @@ const Services: React.FC = () => {
             onClick={() => navigate('/fleet')}
             className="bg-primary hover:bg-luxury-gold text-white px-8 py-4 rounded-full font-bold shadow-xl transition-all active:scale-95"
           >
-            EXPLORE THE FLEET
+            EXPLORAR LA FLOTA
           </button>
         </div>
 
@@ -85,7 +85,7 @@ const Services: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900"> Amelia V. ⭐ 5.0 </p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Gold Member </p>
+                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Miembro Oro </p>
               </div>
             </div>
 
@@ -99,7 +99,7 @@ const Services: React.FC = () => {
               </div>
               <div>
                 <p className="text-sm font-semibold text-gray-900"> Julian R. ⭐ 5.0 </p>
-                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Elite Voyager </p>
+                <p className="text-[11px] text-gray-500 uppercase tracking-widest"> Viajero Elite </p>
               </div>
             </div>
           </div>

@@ -34,8 +34,8 @@ const AgregarEmpleadoPage: React.FC = () => {
             </div>
             <div className="flex items-center gap-3 border-l border-slate-100 pl-6">
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-tighter text-[#0e1a34]">Admiral Henderson</p>
-                <p className="text-[9px] text-slate-400 uppercase">Fleet Commander</p>
+                <p className="text-[10px] font-bold uppercase tracking-tighter text-[#0e1a34]">Almirante Henderson</p>
+                <p className="text-[9px] text-slate-400 uppercase">Comandante de Flota</p>
               </div>
               <img
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw9Qh6s9PhGxCHucuiIXuLx78cVvfQRGtcCJFstlELaLxcmIJfXfzjp4Rrht7-yeE_n-8MK8fkDotu1LbX9sih8NjnZS7VCLjZxMXZstywemsYnYqvEPV-UQcBWze5NNwRKh1ODlYDvqavBF1O1AwpKcN7_o3Sg-zz7dc7IsyoWhur6ZVd1O3NBCa3OTlGnbKaK3_QUcabqUj7qDA45WS-Esg2qvLXolQOYfxI22GtYt5zjYPPTGQNRyYJtaP_umCtl_rXEbs5GVEM"

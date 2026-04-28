@@ -52,7 +52,7 @@ const AdminLoginPage: React.FC = () => {
         </div>
         <div className="hidden md:block">
           <span className="text-[10px] uppercase tracking-[0.3em] text-[#eacea9]/70 font-semibold">
-            SECURITY PROTOCOL 4.0
+            PROTOCOLO DE SEGURIDAD 4.0
           </span>
         </div>
       </header>
@@ -62,10 +62,10 @@ const AdminLoginPage: React.FC = () => {
         <div className="text-center mb-10">
           <p className="text-[#eacea9]/80 text-[10px] uppercase tracking-[0.4em] font-medium mb-3">LJM SEALINE</p>
           <h1 className="font-['Playfair_Display'] text-5xl md:text-6xl text-white mb-4 font-normal tracking-tight">
-            Admin Portal
+            Portal Administrativo
           </h1>
           <p className="text-slate-400 text-xs md:text-sm font-light uppercase tracking-[0.2em]">
-            LUXURY FLEET MANAGEMENT
+            GESTIÓN DE FLOTA DE LUJO
           </p>
         </div>
 
@@ -76,7 +76,7 @@ const AdminLoginPage: React.FC = () => {
             {/* Username Field */}
             <div className="flex flex-col gap-2">
               <label className="text-[#eacea9]/90 text-xs font-semibold uppercase tracking-wider pl-1">
-                ADMIN IDENTITY
+                IDENTIDAD DE ADMINISTRADOR
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#eacea9]/50">
@@ -85,7 +85,7 @@ const AdminLoginPage: React.FC = () => {
                 <input 
                   type="text"
                   className="w-full bg-slate-900/40 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#eacea9]/40 focus:border-[#eacea9]/40 transition-all placeholder:text-slate-600" 
-                  placeholder="Username or ID" 
+                  placeholder="Usuario o ID"
                 />
               </div>
             </div>
@@ -94,7 +94,7 @@ const AdminLoginPage: React.FC = () => {
             <div className="flex flex-col gap-2">
               <div className="flex justify-between items-center px-1">
                 <label className="text-[#eacea9]/90 text-xs font-semibold uppercase tracking-wider">
-                  ACCESS KEY
+                  CLAVE DE ACCESO
                 </label>
                 {/* Se eliminó el botón de REQUEST RESET aquí */}
               </div>
@@ -128,7 +128,7 @@ const AdminLoginPage: React.FC = () => {
                 className="w-4 h-4 rounded bg-slate-900 border-white/10 text-[#eacea9] focus:ring-[#eacea9]/40 focus:ring-offset-0 cursor-pointer" 
               />
               <label htmlFor="remember" className="text-xs text-slate-400 cursor-pointer select-none font-light">
-                Secure session for 8 hours
+                Sesión segura por 8 horas
               </label>
             </div>
 
@@ -137,16 +137,16 @@ const AdminLoginPage: React.FC = () => {
               type="submit"
               className="w-full bg-[#eacea9] hover:bg-[#f2dfc5] text-[#0e1a34] font-bold py-4 rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-black/20 text-sm uppercase tracking-widest mt-4"
             >
-              SIGN IN TO CONSOLE
+              ACCEDER A LA CONSOLA
             </button>
           </form>
         </div>
 
         {/* Footer Links */}
         <div className="mt-12 flex justify-center gap-8 text-[10px] text-slate-500 uppercase tracking-[0.2em] font-medium">
-          <button className="hover:text-[#eacea9] transition-colors">SUPPORT</button>
-          <button className="hover:text-[#eacea9] transition-colors">DOCUMENTATION</button>
-          <button className="hover:text-[#eacea9] transition-colors">STATUS</button>
+          <button className="hover:text-[#eacea9] transition-colors">SOPORTE</button>
+          <button className="hover:text-[#eacea9] transition-colors">DOCUMENTACIÓN</button>
+          <button className="hover:text-[#eacea9] transition-colors">ESTADO</button>
         </div>
       </main>
     </div>

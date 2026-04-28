@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -19,63 +20,44 @@ const Footer: React.FC = () => {
                 LJM SEALINE
               </span>
             </div>
-
             <p className="text-[#f5f5dc] opacity-80 max-w-sm mb-8 leading-relaxed font-light">
               Redefiniendo el viaje de lujo a través de una artesanía excepcional,
               servicio personalizado y un compromiso con los océanos del mundo.
             </p>
-
             <div className="flex gap-4">
-
-              <a
-                href="https://instagram.com/ljmsealine"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all"
-              >
+              <a href="https://instagram.com/ljmsealine" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
               </a>
-
-              <a
-                href="https://x.com/ljmsealine"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all"
-              >
+              <a href="https://x.com/ljmsealine" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.6l-5.17-6.763-5.91 6.763H3.84l7.73-8.835L2.56 2.25h6.772l4.681 6.15L17.595 2.25h.649z" />
                 </svg>
               </a>
-
-              <a
-                href="https://wa.me/1234567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all"
-              >
+              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-[#f5f5dc]/30 flex items-center justify-center text-[#f5f5dc] hover:bg-[#eacea9] hover:text-[#0e1a34] hover:border-[#eacea9] transition-all">
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 32 32">
                   <path d="M16 2.667C8.64 2.667 2.667 8.64 2.667 16c0 2.56.746 5.04 2.16 7.173L2.667 29.333l6.4-2.107A13.21 13.21 0 0016 29.333c7.36 0 13.333-5.973 13.333-13.333S23.36 2.667 16 2.667z" />
                 </svg>
               </a>
-
             </div>
           </div>
 
-          {/* Nuestro Mundo */}
+          {/* Nuestro Mundo — ✅ todos con Link apuntando a las mismas rutas del Navbar */}
           <div>
             <h6 className="font-bold text-xs tracking-[0.2em] uppercase mb-8 text-[#f5f5dc]">
               Nuestro Mundo
             </h6>
             <ul className="space-y-4 text-sm text-[#f5f5dc]/70">
-              {['Nuestra Flota', 'Destinos', 'Experiencias', 'Ofertas'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-[#eacea9] transition-colors">{item}</a>
-                </li>
-              ))}
+              <li><Link to="/fleet" className="hover:text-[#eacea9] transition-colors">Nuestra Flota</Link></li>
+              <li><Link to="/destinations" className="hover:text-[#eacea9] transition-colors">Destinos</Link></li>
+              <li><Link to="/experiences" className="hover:text-[#eacea9] transition-colors">Experiencias</Link></li>
+              <li><Link to="/offers" className="hover:text-[#eacea9] transition-colors">Ofertas</Link></li>
             </ul>
           </div>
 
@@ -85,11 +67,8 @@ const Footer: React.FC = () => {
               Servicio
             </h6>
             <ul className="space-y-4 text-sm text-[#f5f5dc]/70">
-              {['Gestionar Reserva', 'Preguntas Frecuentes'].map((item) => (
-                <li key={item}>
-                  <a href="#" className="hover:text-[#eacea9] transition-colors">{item}</a>
-                </li>
-              ))}
+              <li><Link to="/booking" className="hover:text-[#eacea9] transition-colors">Gestionar Reserva</Link></li>
+              <li><Link to="/faq" className="hover:text-[#eacea9] transition-colors">Preguntas Frecuentes</Link></li>
             </ul>
           </div>
 
@@ -119,9 +98,9 @@ const Footer: React.FC = () => {
         <div className="pt-10 border-t border-[#f5f5dc]/10 flex flex-col md:flex-row justify-between items-center text-[10px] text-[#f5f5dc]/40 tracking-widest uppercase">
           <p>©️ {new Date().getFullYear()} LJM SEALINE. Todos los derechos reservados.</p>
           <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-[#eacea9] transition-colors">Política de Privacidad</a>
-            <a href="#" className="hover:text-[#eacea9] transition-colors">Términos de Servicio</a>
-            <a href="#" className="hover:text-[#eacea9] transition-colors">Cookies</a>
+            <Link to="/privacy" className="hover:text-[#eacea9] transition-colors">Política de Privacidad</Link>
+            <Link to="/terms" className="hover:text-[#eacea9] transition-colors">Términos de Servicio</Link>
+            <Link to="/cookies" className="hover:text-[#eacea9] transition-colors">Cookies</Link>
           </div>
         </div>
 

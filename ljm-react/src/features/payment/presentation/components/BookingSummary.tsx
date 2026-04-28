@@ -37,7 +37,7 @@ const BookingSummary: React.FC = () => {
             </div>
             <div>
               <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Alojamiento Premium</p>
-              <p className="text-base font-semibold leading-tight">Grand Horizon Penthouse Suite</p>
+              <p className="text-base font-semibold leading-tight">Suite Penthouse Grand Horizon</p>
             </div>
           </div>
 

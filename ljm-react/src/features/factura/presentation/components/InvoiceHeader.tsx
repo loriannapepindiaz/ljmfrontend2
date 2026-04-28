@@ -12,13 +12,13 @@ export default function InvoiceHeader() {
 
       <nav className="hidden items-center gap-10 md:flex">
         <a className="text-[10px] uppercase tracking-[0.2em] text-slate-400 transition-colors hover:text-[#eacea9]" href="#">
-          Voyages
+          Travesías
         </a>
         <a className="border-b border-[#eacea9]/30 pb-0.5 text-[10px] uppercase tracking-[0.2em] text-[#eacea9]" href="#">
-          Reservations
+          Reservaciones
         </a>
         <a className="text-[10px] uppercase tracking-[0.2em] text-slate-400 transition-colors hover:text-[#eacea9]" href="#">
-          Concierge
+          Conserjería
         </a>
       </nav>
 
@@ -59,14 +59,14 @@ export function InvoiceSheetHeader() {
       <div className="space-y-6 text-left md:text-right">
         <div className="inline-block bg-[#eacea9]/10 px-4 py-1">
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0e1a34]">
-            Maritime Meridian Registry
+            Registro Meridiano Marítimo
           </p>
         </div>
 
         <div className="flex items-center gap-4 md:justify-end">
           <div className="text-left md:text-right">
             <span className="mb-1 block text-[9px] uppercase tracking-widest text-slate-400">
-              Document No.
+              N.° de Documento
             </span>
             <span
               className="text-xl font-bold"
@@ -92,7 +92,7 @@ export function InvoiceSheetHeader() {
           <div className="flex items-center gap-2 rounded-full border border-[#0e1a34]/10 px-3 py-2">
             <ShipWheel size={16} className="text-[#0e1a34]" />
             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-500">
-              Validated Registry
+              Registro Validado
             </span>
           </div>
         </div>

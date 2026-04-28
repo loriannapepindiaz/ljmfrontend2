@@ -45,7 +45,7 @@ const ExperienceCard: FC<ExperienceProps> = ({ title, description, image, isSele
               : "border-primary text-primary hover:bg-primary hover:text-white"
           }`}
         >
-          {isSelected ? "SELECTED" : "SELECT"}
+          {isSelected ? "SELECCIONADO" : "SELECCIONAR"}
         </button>
       </div>
     </div>

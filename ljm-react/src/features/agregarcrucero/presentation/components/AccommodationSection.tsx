@@ -8,8 +8,8 @@ interface Suite {
 }
 
 const initialSuites: Suite[] = [
-  { tipo: 'Royal Admiral Suite',  desc: 'Balcón Privado & Jacuzzi', cantidad: 12,  capacidad: 2 },
-  { tipo: 'Deluxe Balcony Room',  desc: 'Vistas al Mar',            cantidad: 150, capacidad: 4 },
+  { tipo: 'Suite Real del Almirante', desc: 'Balcón Privado & Jacuzzi', cantidad: 12,  capacidad: 2 },
+  { tipo: 'Habitación Deluxe Balcón', desc: 'Vistas al Mar',            cantidad: 150, capacidad: 4 },
 ];
 
 const AccommodationSection: React.FC = () => {

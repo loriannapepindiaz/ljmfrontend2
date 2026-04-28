@@ -13,7 +13,7 @@ const ProfessionalProfileSection: React.FC = () => {
         <div className="grid grid-cols-2 gap-x-8 gap-y-6">
           <div className="space-y-1">
             <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Cargo / Puesto</label>
-            <input type="text" placeholder="e.g. First Mate" className={inputClass} />
+            <input type="text" placeholder="ej. Primer Oficial" className={inputClass} />
           </div>
           <div className="space-y-1">
             <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Departamento</label>

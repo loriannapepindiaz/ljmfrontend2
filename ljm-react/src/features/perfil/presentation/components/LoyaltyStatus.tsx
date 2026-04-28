@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 const LoyaltyStatus: React.FC = () => {
   // 1. Opciones de preferencias premium
   const availablePreferences = [
-    "Ocean View", "Gourmet Dining", "Spa Lover", "Suite Butler", 
-    "Wine Tasting", "Private Balcony", "Shore Excursions", 
-    "Midnight Buffet", "Fitness Center", "Live Jazz"
+    "Vista al Mar", "Gastronomía Gourmet", "Amante del Spa", "Mayordomo de Suite",
+    "Cata de Vinos", "Balcón Privado", "Excursiones en Tierra",
+    "Bufé de Medianoche", "Centro Fitness", "Jazz en Vivo"
   ];
 
   // 2. Estados para la edición y persistencia
@@ -14,7 +14,7 @@ const LoyaltyStatus: React.FC = () => {
   const [email, setEmail] = useState("a.robles@elite-travel.com");
   const [tempEmail, setTempEmail] = useState(email);
   
-  const [selectedPrefs, setSelectedPrefs] = useState(["Ocean View", "Gourmet Dining", "Spa Lover"]);
+  const [selectedPrefs, setSelectedPrefs] = useState(["Vista al Mar", "Gastronomía Gourmet", "Amante del Spa"]);
   const [tempPrefs, setTempPrefs] = useState([...selectedPrefs]);
   
   const [showModal, setShowModal] = useState(false);
@@ -54,10 +54,10 @@ const LoyaltyStatus: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-white font-bold text-sm flex items-center gap-2 font-serif">
             <span className="material-symbols-outlined text-[#d4af37] text-xl">workspace_premium</span>
-            Loyalty Program
+            Programa de Lealtad
           </h3>
           <span className="text-[#d4af37] text-[9px] font-bold px-2 py-1 rounded bg-[#d4af37]/10 border border-[#d4af37]/20 uppercase tracking-widest">
-            Diamond Progress
+            Progreso Diamante
           </span>
         </div>
 
@@ -65,7 +65,7 @@ const LoyaltyStatus: React.FC = () => {
           {/* Barra de Progreso */}
           <div className="space-y-2">
             <div className="flex justify-between text-[10px] uppercase tracking-tighter">
-              <span className="text-slate-400 font-medium">Status: Platinum Elite</span>
+              <span className="text-slate-400 font-medium">Estado: Platinum Elite</span>
               <span className="text-[#eacea9] font-bold">75%</span>
             </div>
             <div className="h-1.5 w-full bg-[#0e1a34] rounded-full overflow-hidden border border-white/5">
@@ -91,7 +91,7 @@ const LoyaltyStatus: React.FC = () => {
       {/* --- SECCIÓN PERSONAL DETAILS --- */}
       <div className="bg-[#132345] rounded-xl p-6 border border-white/5 shadow-xl">
         <div className="flex items-center justify-between mb-6">
-           <h3 className="text-white font-bold text-sm font-serif italic">Personal Details</h3>
+           <h3 className="text-white font-bold text-sm font-serif italic">Datos Personales</h3>
            {!isEditing && (
              <span 
               onClick={handleEditClick}
@@ -103,7 +103,7 @@ const LoyaltyStatus: React.FC = () => {
         <form onSubmit={handleSaveAttempt} className="space-y-6">
           {/* Email */}
           <div>
-            <p className="text-[9px] text-slate-500 uppercase font-bold tracking-widest mb-2">Email Address</p>
+            <p className="text-[9px] text-slate-500 uppercase font-bold tracking-widest mb-2">Correo Electrónico</p>
             {isEditing ? (
               <input 
                 type="email"
@@ -118,7 +118,7 @@ const LoyaltyStatus: React.FC = () => {
 
           {/* My Preferences */}
           <div>
-            <p className="text-[9px] text-slate-500 uppercase font-bold tracking-widest mb-3">My Preferences</p>
+            <p className="text-[9px] text-slate-500 uppercase font-bold tracking-widest mb-3">Mis Preferencias</p>
             
             {isEditing ? (
               <div className="bg-[#0e1a34] p-4 rounded-xl border border-[#eacea9]/10 grid grid-cols-2 gap-2 animate-in fade-in zoom-in-95 duration-300">
@@ -154,14 +154,14 @@ const LoyaltyStatus: React.FC = () => {
                 type="submit" 
                 className="flex-1 bg-[#d4af37] text-[#0e1a34] text-[10px] font-bold py-2.5 rounded-lg hover:brightness-110 uppercase tracking-widest transition-all"
               >
-                Update Profile
+                Actualizar Perfil
               </button>
               <button 
                 type="button" 
                 onClick={() => setIsEditing(false)} 
                 className="flex-1 bg-white/5 text-white text-[10px] font-bold py-2.5 rounded-lg hover:bg-white/10 border border-white/10 uppercase tracking-widest transition-all"
               >
-                Cancel
+                Cancelar
               </button>
             </div>
           )}
@@ -176,7 +176,7 @@ const LoyaltyStatus: React.FC = () => {
             <div className="size-16 bg-[#eacea9]/10 rounded-full flex items-center justify-center mb-6 mx-auto border border-[#eacea9]/20">
               <span className="material-symbols-outlined text-[#eacea9] text-3xl">verified_user</span>
             </div>
-            <h4 className="text-xl font-bold text-white mb-2 font-serif uppercase tracking-tight">Confirm Update</h4>
+            <h4 className="text-xl font-bold text-white mb-2 font-serif uppercase tracking-tight">Confirmar Actualización</h4>
             <p className="text-slate-400 text-sm mb-8 leading-relaxed">
               ¿Estás seguro de que deseas actualizar la información de tu perfil de miembro Elite?
             </p>

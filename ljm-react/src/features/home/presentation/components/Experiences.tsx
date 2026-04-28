@@ -14,14 +14,14 @@ const Experiences: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-end mb-16">
           <div>
             <span className="text-primary font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
-              Curated Selection
+              Selección Curada
             </span>
             <h2 className="text-4xl md:text-5xl font-display text-gray-900">
-              Elite On-Board Experiences
+              Experiencias Elite a Bordo
             </h2>
           </div>
           <p className="max-w-md text-gray-600 mt-4 md:mt-0 font-light italic">
-            Every detail is designed to offer you an unparalleled level of comfort and sophistication.
+            Cada detalle está diseñado para ofrecerte un nivel incomparable de comodidad y sofisticación.
           </p>
         </div>
 
@@ -37,14 +37,14 @@ const Experiences: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-widest">
-                Premium
+                Premium exclusivo
               </div>
             </div>
             <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
-              Michelin Star Dining
+              Cena con Estrella Michelin
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Cuisine crafted by world-renowned chefs in intimate settings.
+              Gastronomía elaborada por chefs de renombre mundial en ambientes íntimos.
             </p>
           </div>
 
@@ -58,14 +58,14 @@ const Experiences: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute top-4 right-4 bg-primary px-3 py-1 rounded text-[10px] font-bold text-white uppercase tracking-widest">
-                Included
+                Incluido
               </div>
             </div>
             <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
-              Zenith Wellness Spa
+              Spa Zenith Bienestar
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Holistic treatments inspired by the ancient rituals of the sea.
+              Tratamientos holísticos inspirados en los antiguos rituales del mar.
             </p>
           </div>
 
@@ -80,10 +80,10 @@ const Experiences: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
             <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
-              Royal Penthouse Suites
+              Suites Penthouse Reales
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Spacious private sanctuaries with panoramic ocean views.
+              Espaciosos santuarios privados con vistas panorámicas al océano.
             </p>
           </div>
 
@@ -98,10 +98,10 @@ const Experiences: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             </div>
             <h3 className="text-xl font-display mb-2 group-hover:text-primary transition-colors text-gray-900">
-              Panoramic Ocean Views
+              Vistas Panorámicas al Océano
             </h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Endless horizons from exclusive vantage points onboard.
+              Horizontes infinitos desde puntos de vista exclusivos a bordo.
             </p>
           </div>
 

@@ -14,8 +14,8 @@ const ExpeditionHero: React.FC = () => {
           </div>
           <h1 className="text-6xl md:text-7xl text-[#0E1A34] leading-tight mb-8 -tracking-[0.02em]"
             style={{ fontFamily: 'Noto Serif, serif' }}>
-            Grecian Islands <br />
-            <span className="italic font-normal">Escape</span>
+            Islas Griegas <br />
+            <span className="italic font-normal">Escapada</span>
           </h1>
 
           <div className="max-w-xl border-l border-[#0E1A34]/10 pl-8">
@@ -30,7 +30,7 @@ const ExpeditionHero: React.FC = () => {
               {[
                 { label: 'Salida',  value: '12 Ago, 2023'         },
                 { label: 'Llegada', value: '26 Ago, 2023'         },
-                { label: 'Barco',   value: 'The Azure Curator'    },
+                { label: 'Barco',   value: 'El Curador Azul'       },
               ].map((item) => (
                 <div key={item.label}>
                   <span className="block text-[9px] uppercase tracking-widest text-[#0E1A34]/40 mb-1">

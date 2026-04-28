@@ -42,7 +42,7 @@ export default function LoginPage() {
             LJM SEALINE
           </p>
           <h1 className="welcome-cursive italic whitespace-nowrap text-4xl md:text-5xl mb-2">
-            Welcome Aboard
+            Bienvenido a Bordo
           </h1>
 
           <h2 className="text-xs md:text-sm tracking-[0.35em] text-[#eacea9]/70 italic font-subtitle">
@@ -57,13 +57,13 @@ export default function LoginPage() {
             {/* USERNAME */}
             <div>
               <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                Username
+                Usuario
               </label>
               <div className="relative">
                 <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
                 <input
                   className="h-14 w-full rounded-xl border border-white/10 bg-black/30 p-4 pl-12 text-white placeholder:text-white/20 focus:border-[#eacea9]/40 focus:outline-none"
-                  placeholder="Enter your username"
+                  placeholder="Ingrese su usuario"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -73,14 +73,14 @@ export default function LoginPage() {
             {/* PASSWORD */}
             <div>
               <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                Password
+                Contraseña
               </label>
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   className="h-14 w-full rounded-xl border border-white/10 bg-black/30 p-4 pl-12 pr-12 text-white placeholder:text-white/20 focus:border-[#eacea9]/40 focus:outline-none"
-                  placeholder="Enter your password"
+                  placeholder="Ingrese su contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -111,7 +111,7 @@ export default function LoginPage() {
                          active:translate-y-px
                          active:scale-[0.99]"
             >
-              SIGN IN
+              INICIAR SESIÓN
             </button>
 
           </div>

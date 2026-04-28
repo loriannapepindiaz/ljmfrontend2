@@ -28,11 +28,10 @@ const CtaBanner: React.FC = () => {
             className="text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-tight"
             style={{ fontFamily: "'Georgia', serif", fontWeight: 400 }}
           >
-            Unlock Your Next Adventure
+            Descubre Tu Próxima Aventura
           </h2>
           <p className="text-white/75 text-base sm:text-lg font-light max-w-xl mx-auto md:mx-0">
-            Join us for a journey beyond imagination. Your dream luxury cruise
-            awaits in the world's most breathtaking horizons.
+            Únete a nosotros para un viaje más allá de la imaginación. Tu crucero de lujo soñado te espera en los horizontes más impresionantes del mundo.
           </p>
         </div>
 
@@ -41,7 +40,7 @@ const CtaBanner: React.FC = () => {
             className="text-white border border-white/40 hover:bg-white hover:text-[#0f1932] px-10 py-4 rounded-full font-semibold uppercase text-sm tracking-[0.2em] transition-all duration-300 whitespace-nowrap"
             style={{ backgroundColor: 'rgba(15, 25, 50, 0.6)' }}
           >
-            START YOUR JOURNEY
+            COMIENZA TU TRAVESÍA
           </button>
         </div>
       </div>

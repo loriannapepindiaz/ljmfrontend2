@@ -5,7 +5,7 @@ export default function InvoiceSheetFooter() {
         <div className="flex items-center gap-4">
           <div className="space-y-0.5">
             <p className="text-[8px] font-bold uppercase tracking-widest text-slate-400">
-              Digital Trace Integrity
+              Integridad de Traza Digital
             </p>
             <p className="font-mono text-[7px] text-slate-300">LM-2024-X49-SECURE-ID</p>
           </div>
@@ -13,7 +13,7 @@ export default function InvoiceSheetFooter() {
 
         <div className="text-center">
           <p className="text-[8px] uppercase tracking-[0.5em] text-slate-300">
-            Vessels Registered in Monaco
+            Embarcaciones Registradas en Mónaco
           </p>
         </div>
 
@@ -29,13 +29,13 @@ export default function InvoiceSheetFooter() {
             Capt. Alistair Vance
           </p>
           <p className="text-[7px] uppercase tracking-[0.2em] text-slate-400">
-            Commanding Officer, LJM Sealine
+            Oficial al Mando, LJM Sealine
           </p>
         </div>
       </div>
 
       <div className="absolute bottom-4 left-0 right-0 hidden items-center justify-between px-8 text-[7px] uppercase tracking-[0.5em] text-slate-300 opacity-40 md:flex lg:px-20">
-        <span>London • Monaco • Dubai • Singapore</span>
+        <span>Londres • Mónaco • Dubái • Singapur</span>
         <span>Ref: LJM-REG-2024-PRM</span>
       </div>
     </>

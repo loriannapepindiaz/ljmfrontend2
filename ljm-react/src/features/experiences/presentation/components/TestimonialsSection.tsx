@@ -4,49 +4,49 @@ const allTestimonials = [
   {
     name: 'Sarah, USA',
     rating: 5,
-    review: "LJM Sealine is a dream experience! The excursions, the crew, and the attention to detail were amazing. Can't wait to return!",
+    review: "¡LJM Sealine es una experiencia de ensueño! Las excursiones, la tripulación y la atención al detalle fueron increíbles. ¡No puedo esperar para volver!",
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
   },
   {
     name: 'David, UK',
     rating: 5,
-    review: "The Jet Ski tour in the Maldives was the highlight of my year. Highly recommend visiting the hidden lagoons.",
+    review: "El tour en moto acuática en las Maldivas fue el punto culminante de mi año. Muy recomendable visitar las lagunas escondidas.",
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
   },
   {
     name: 'John, Australia',
     rating: 5,
-    review: "From the lush greenery to the warm hospitality, LJM Sealine exceeded all my expectations for luxury travel.",
+    review: "Desde la exuberante naturaleza hasta la cálida hospitalidad, LJM Sealine superó todas mis expectativas de viaje de lujo.",
     avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
   },
   {
     name: 'Maria, Spain',
     rating: 5,
-    review: "The combination of culture, adventure, and relaxation in LJM Sealine is unmatched. Truly unforgettable!",
+    review: "La combinación de cultura, aventura y relajación en LJM Sealine no tiene igual. ¡Verdaderamente inolvidable!",
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
   },
   {
     name: 'Lucas, France',
     rating: 5,
-    review: "Sailing through Monaco was a dream. The crew was attentive, the food was exquisite, and the views were breathtaking.",
+    review: "Navegar por Mónaco fue un sueño. La tripulación fue atenta, la comida exquisita y las vistas impresionantes.",
     avatar: 'https://randomuser.me/api/portraits/men/11.jpg',
   },
   {
     name: 'Emma, Canada',
     rating: 5,
-    review: "The zip-line over the turquoise waters of the Caribbean was the most thrilling experience of my life. Absolutely worth it!",
+    review: "El tirolesa sobre las aguas turquesas del Caribe fue la experiencia más emocionante de mi vida. ¡Absolutamente vale la pena!",
     avatar: 'https://randomuser.me/api/portraits/women/21.jpg',
   },
   {
     name: 'Carlos, Mexico',
     rating: 5,
-    review: "Every detail was perfect. From the private tours to the sunset dinners on deck, LJM Sealine defines luxury.",
+    review: "Cada detalle fue perfecto. Desde los tours privados hasta las cenas al atardecer en cubierta, LJM Sealine define el lujo.",
     avatar: 'https://randomuser.me/api/portraits/men/54.jpg',
   },
   {
     name: 'Yuki, Japan',
     rating: 5,
-    review: "An extraordinary journey across Polynesia. The snorkeling experience was unlike anything I had ever seen before.",
+    review: "Un viaje extraordinario por la Polinesia. La experiencia de esnórquel fue como nada que hubiera visto antes.",
     avatar: 'https://randomuser.me/api/portraits/women/56.jpg',
   },
 ];
@@ -82,12 +82,12 @@ const TestimonialsSection = () => {
 
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-16">
-          <h2 className="magiona-style text-white text-4xl">Hear from Our Guests</h2>
+          <h2 className="magiona-style text-white text-4xl">Lo que dicen nuestros huéspedes</h2>
           <button
-            onClick={() => window.location.href = '/destinations'}
+            onClick={() => window.location.href = '/reviews'}
             className="bg-[#c5a267] hover:bg-[#b38e53] text-white px-8 py-3 rounded-full text-xs font-bold tracking-widest uppercase transition-all hover:scale-105"
           >
-            See More Voyages
+            Ver más comentarios
           </button>
         </div>
 

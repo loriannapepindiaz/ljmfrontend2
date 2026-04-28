@@ -19,8 +19,8 @@ const ProfileCard: React.FC = () => {
         </div>
         
         <div>
-          <h1 className="text-2xl font-bold text-white">Welcome back,<br/>Antonia Robles</h1>
-          <p className="text-[#d4af37] font-semibold uppercase tracking-widest text-[10px] mt-2">Elite Member Status</p>
+          <h1 className="text-2xl font-bold text-white">Bienvenida de vuelta,<br/>Antonia Robles</h1>
+          <p className="text-[#d4af37] font-semibold uppercase tracking-widest text-[10px] mt-2">Estado Miembro Elite</p>
           <p className="text-slate-500 text-xs mt-1 font-mono">ID: #LJM-882910</p>
         </div>
       </div>

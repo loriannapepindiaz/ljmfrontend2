@@ -38,7 +38,7 @@ const ExperienceCard = ({
         </p>
 
         <button className="text-secondary font-semibold text-sm hover:underline">
-          Learn More →
+          Saber más →
         </button>
       </div>
     </div>

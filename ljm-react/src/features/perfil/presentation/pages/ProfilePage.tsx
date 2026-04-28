@@ -29,10 +29,10 @@ const ProfilePage: React.FC = () => {
             {/* Curated Recommendation */}
             <div className="mt-8 bg-[#132345] rounded-xl p-8 border border-[#eacea9]/10 flex flex-col md:flex-row items-center gap-8 shadow-inner">
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-[#eacea9] mb-2 font-serif">Curated for Your Next Adventure</h3>
-                <p className="text-slate-400 text-sm">Based on your love for Mediterranean culture, we recommend the 'Adriatic Gems' voyage.</p>
+                <h3 className="text-xl font-bold text-[#eacea9] mb-2 font-serif">Seleccionado para Tu Próxima Aventura</h3>
+                <p className="text-slate-400 text-sm">Basado en tu amor por la cultura mediterránea, te recomendamos el viaje 'Joyas del Adriático'.</p>
                 <button className="mt-6 text-[#d4af37] border-b border-[#d4af37]/40 pb-1 text-sm font-bold hover:border-[#d4af37] transition-all">
-                  Explore Recommendation
+                  Explorar Recomendación
                 </button>
               </div>
               <div className="size-32 rounded-lg rotate-3 overflow-hidden shadow-2xl border-4 border-white/10 shrink-0">

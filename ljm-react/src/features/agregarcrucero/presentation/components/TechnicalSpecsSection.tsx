@@ -29,7 +29,7 @@ const TechnicalSpecsSection: React.FC = () => {
               className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 pr-16 text-slate-900 bg-white outline-none text-sm transition-all"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs uppercase">
-              knots
+              nudos
             </span>
           </div>
         </div>

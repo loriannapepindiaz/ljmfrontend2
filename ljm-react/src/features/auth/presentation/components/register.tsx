@@ -21,21 +21,21 @@ export default function Register() {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    if (!formData.fullName.trim()) newErrors.fullName = 'Full name is required';
+    if (!formData.fullName.trim()) newErrors.fullName = 'El nombre completo es requerido';
     if (!formData.email) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'El correo electrónico es requerido';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = 'Por favor ingrese un correo válido';
     }
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'La contraseña es requerida';
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = 'La contraseña debe tener al menos 8 caracteres';
     }
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Please confirm your password';
+      newErrors.confirmPassword = 'Por favor confirme su contraseña';
     } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = 'Las contraseñas no coinciden';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -57,7 +57,7 @@ export default function Register() {
       setShowToast(true);
       setTimeout(() => navigate('/'), 2800);
     } catch {
-      setErrors({ general: 'Something went wrong. Please try again.' });
+      setErrors({ general: 'Algo salió mal. Por favor inténtelo de nuevo.' });
     } finally {
       setIsLoading(false);
     }
@@ -109,14 +109,14 @@ export default function Register() {
             color: '#cbb07a',
             marginBottom: '0.1rem',
           }}>
-            Registration Successful!
+            ¡Registro Exitoso!
           </p>
           <p style={{
             fontSize: '0.72rem',
             color: 'rgba(255,255,255,0.5)',
             letterSpacing: '0.05em',
           }}>
-            Welcome aboard. Redirecting...
+            Bienvenido a bordo. Redirigiendo...
           </p>
         </div>
         {/* Barra de progreso */}
@@ -154,7 +154,7 @@ export default function Register() {
               LJM SEALINE
             </p>
             <h1 className="welcome-cursive italic whitespace-nowrap text-4xl md:text-5xl mb-2">
-              Create Your Account
+              Crea Tu Cuenta
             </h1>
             <h2 className="text-xs md:text-sm tracking-[0.35em] text-[#eacea9]/70 italic font-subtitle">
               Inicia tu travesía exclusiva
@@ -174,14 +174,14 @@ export default function Register() {
               {/* FULL NAME */}
               <div>
                 <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                  Full Name
+                  Nombre Completo
                 </label>
                 <div className="relative">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
                   <input
                     name="fullName"
                     type="text"
-                    placeholder="Enter your full name"
+                    placeholder="Ingrese su nombre completo"
                     value={formData.fullName}
                     onChange={handleChange}
                     className={`h-14 w-full rounded-xl border ${
@@ -197,7 +197,7 @@ export default function Register() {
               {/* EMAIL */}
               <div>
                 <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                  Email
+                  Correo Electrónico
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
@@ -221,7 +221,7 @@ export default function Register() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                    Password
+                    Contraseña
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
@@ -250,7 +250,7 @@ export default function Register() {
 
                 <div>
                   <label className="pb-2 block text-[11px] tracking-[0.2em] text-[#eacea9]/80 font-subtitle">
-                    Confirm Password
+                    Confirmar Contraseña
                   </label>
                   <div className="relative">
                     <Shield className="absolute left-4 top-1/2 -translate-y-1/2 text-[#eacea9]/50 w-5 h-5" />
@@ -294,10 +294,10 @@ export default function Register() {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
                     </svg>
-                    PROCESSING...
+                    PROCESANDO...
                   </>
                 ) : (
-                  'COMPLETE REGISTRATION'
+                  'COMPLETAR REGISTRO'
                 )}
               </button>
 
@@ -306,7 +306,7 @@ export default function Register() {
 
           {/* FOOTER */}
           <div className="mt-8 flex flex-col items-center gap-2 text-[11px] tracking-[0.3em] text-[#eacea9]/60 font-subtitle">
-            <span>Already have an account?</span>
+            <span>¿Ya tienes una cuenta?</span>
             <Link
               to="/home"
               className="text-[#eacea9]/60 hover:text-[#eacea9] transition-colors relative pb-1
@@ -315,7 +315,7 @@ export default function Register() {
                          after:transition-all after:duration-300 after:ease-out
                          hover:after:w-full"
             >
-              SIGN IN
+              INICIAR SESIÓN
             </Link>
           </div>
 

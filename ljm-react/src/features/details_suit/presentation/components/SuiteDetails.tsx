@@ -9,16 +9,16 @@ const SuiteDetails: React.FC = () => {
         <span className="text-xs font-bold text-maroon-gold uppercase tracking-[0.3em]">Resumen y Descripción</span>
       </div>
 
-      <h2 className="text-4xl magiona-title text-night-blue mb-4 leading-tight">The Majestic Pearl</h2>
+      <h2 className="text-4xl magiona-title text-night-blue mb-4 leading-tight">La Perla Majestuosa</h2>
 
       <div className="flex gap-8 mb-8 border-y border-gray-200 py-6">
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Nombre Barco</span>
-          <span className="font-semibold text-night-blue">The Majestic Pearl</span>
+          <span className="font-semibold text-night-blue">La Perla Majestuosa</span>
         </div>
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Tamaño Suite</span>
-          <span className="font-semibold text-night-blue">850 sq ft</span>
+          <span className="font-semibold text-night-blue">79 m²</span>
         </div>
         <div className="flex flex-col">
           <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Capacidad</span>

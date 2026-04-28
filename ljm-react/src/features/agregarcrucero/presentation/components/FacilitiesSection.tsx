@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
 const instalaciones = [
-  'SPA & Wellness',
-  'Gym',
+  'SPA & Bienestar',
+  'Gimnasio',
   'Casino',
   'Helipuerto',
   'Teatro',
-  'Infinity Pool',
+  'Piscina Infinita',
   'Rest. Michelin',
   'Cine Privado',
 ];

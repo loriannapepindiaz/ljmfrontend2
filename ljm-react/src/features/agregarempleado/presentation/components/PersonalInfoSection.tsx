@@ -214,7 +214,7 @@ const PersonalInfoSection: React.FC = () => {
 
               </label>
 
-              <input type="text" placeholder="ID Number / Pasaporte" className={inputClass} />
+              <input type="text" placeholder="Número de ID / Pasaporte" className={inputClass} />
 
             </div>
 

@@ -16,11 +16,11 @@ export const VESSELS: VesselData[] = [
   {
     id: "serenity",
     title: "The Serenity",
-    subtitle: "Premium Experience",
-    description: "Our premier flagship offering the highest level of space and luxury at sea, featuring revolutionary ocean-view suites and personalized butler service.",
+    subtitle: "Experiencia Premium",
+    description: "Nuestro buque insignia premier que ofrece el más alto nivel de espacio y lujo en el mar, con suites revolucionarias con vista al océano y servicio de mayordomo personalizado.",
     length: "362m",
     guests: "5,400",
-    badge: "Flagship",
+    badge: "Buque Insignia",
     imageSrc: "https://lh3.googleusercontent.com/aida-public/AB6AXuDtNJgtd1USMUa5nZZumatCZ05sKe2au3FQlBVMsKD8LOQJyKFPUX0fSRWAeM_KA3pYqStmKmLvcfSyjFSGF-qSOKUKsP0HeN-tVz8t94nZareXttPswLsDJt6QjZmuXPQigHwHOtxnovgIguemQNVdHWHp2RcRa34hYyoF0TBBmrWAXOU9qcRbS275yu6rzIrjHujh73E4dt8vEkVOVc_jv1YJaNWRLk1SGFWzvATmDqDJRWlTR_bUtJ5IYBkYIDj5w7IFg_4SLlpk",
     heroImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuDtNJgtd1USMUa5nZZumatCZ05sKe2au3FQlBVMsKD8LOQJyKFPUX0fSRWAeM_KA3pYqStmKmLvcfSyjFSGF-qSOKUKsP0HeN-tVz8t94nZareXttPswLsDJt6QjZmuXPQigHwHOtxnovgIguemQNVdHWHp2RcRa34hYyoF0TBBmrWAXOU9qcRbS275yu6rzIrjHujh73E4dt8vEkVOVc_jv1YJaNWRLk1SGFWzvATmDqDJRWlTR_bUtJ5IYBkYIDj5w7IFg_4SLlpk",
     specs: { length: "82.5m", tonnage: "2,250t", guests: "12", decks: "5" }

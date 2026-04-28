@@ -8,7 +8,7 @@ const AssignmentContractSidebar: React.FC = () => {
       <section className="bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="p-8 border-b border-slate-50 bg-[#0e1a34]">
           <h2 className="text-sm font-bold text-[#eacea9] uppercase tracking-widest">Asignación y Contrato</h2>
-          <p className="text-[10px] text-slate-400 mt-1">Voyage & Legal Assignment</p>
+          <p className="text-[10px] text-slate-400 mt-1">Asignación de Travesía y Legal</p>
         </div>
         <div className="p-8 space-y-6">
 

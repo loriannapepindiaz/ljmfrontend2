@@ -24,7 +24,7 @@ const ResidenceSpecs: React.FC = () => {
         </span>
         <h2 className="text-4xl text-[#0E1A34] mt-3 mb-4"
           style={{ fontFamily: 'Noto Serif, serif' }}>
-          Imperial Atlantis Suite
+          Suite Imperial Atlántida
         </h2>
         <p className="text-[#1E2944]/70 font-light leading-relaxed text-lg mb-8">
           Posicionada en la proa del barco, la Imperial Atlantis ofrece un panorama de 270° del horizonte. Incluye acabados de nogal a medida y acceso a terraza privada.

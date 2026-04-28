@@ -17,11 +17,11 @@ const HeroSection: React.FC = () => {
       {/* texto */}
       <div className="relative z-10 text-center px-6 mt-16">
         <h1 className="font-serif text-5xl md:text-8xl mb-6 tracking-tight text-white leading-tight">
-          Exclusive Seasonal <span className="italic text-[#C5A059]">Offers</span>
+          Ofertas <span className="italic text-[#C5A059]">Exclusivas de Temporada</span>
         </h1>
 
         <p className="max-w-2xl mx-auto text-white/90 text-xl font-light tracking-wide leading-relaxed">
-          Indulge in the extraordinary with our curated selection of limited-time seasonal privileges.
+          Disfruta de lo extraordinario con nuestra selección curada de privilegios de temporada por tiempo limitado.
         </p>
       </div>
     </header>
