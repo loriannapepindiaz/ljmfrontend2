@@ -1,5 +1,5 @@
-// src/features/fleet/presentation/components/CtaBanner.tsx
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CtaBanner: React.FC = () => {
   return (
@@ -26,7 +26,7 @@ const CtaBanner: React.FC = () => {
         <div className="flex-1 max-w-2xl text-center md:text-left">
           <h2
             className="text-4xl sm:text-5xl md:text-6xl text-white mb-4 leading-tight"
-            style={{ fontFamily: "'Georgia', serif", fontWeight: 400 }}
+            style={{ fontFamily: "'Carena', 'Georgia', serif", fontWeight: 400 }}
           >
             Descubre Tu Próxima Aventura
           </h2>
@@ -36,12 +36,13 @@ const CtaBanner: React.FC = () => {
         </div>
 
         <div className="shrink-0">
-          <button
-            className="text-white border border-white/40 hover:bg-white hover:text-[#0f1932] px-10 py-4 rounded-full font-semibold uppercase text-sm tracking-[0.2em] transition-all duration-300 whitespace-nowrap"
+          <Link
+            to="/destinations"
+            className="inline-block text-white border border-white/40 hover:bg-[#eacea9]/20 hover:border-[#eacea9] px-10 py-4 rounded-full font-semibold uppercase text-sm tracking-[0.2em] transition-all duration-300 whitespace-nowrap"
             style={{ backgroundColor: 'rgba(15, 25, 50, 0.6)' }}
           >
             COMIENZA TU TRAVESÍA
-          </button>
+          </Link>
         </div>
       </div>
     </div>

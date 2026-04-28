@@ -45,11 +45,22 @@ const BookingConfirmationPage = () => {
         <div className="max-w-3xl w-full flex flex-col items-center text-center space-y-12">
           <BookingHeader />
           <ConfirmationHero />
-          <BookingDetailsCard details={bookingDetails} />
+          <BookingDetailsCard
+            details={bookingDetails}
+            actions={
+              <BookingActions
+                onViewInvoice={handleViewInvoice}
+                onManageBooking={handleManageBooking}
+                showGoHome={false}
+              />
+            }
+          />
           <BookingActions
             onViewInvoice={handleViewInvoice}
             onManageBooking={handleManageBooking}
             onGoHome={handleGoHome}
+            showGoHome
+            showPrimaryActions={false}
           />
 
           <div className="pt-8">

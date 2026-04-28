@@ -48,7 +48,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Nuestro Mundo — ✅ todos con Link apuntando a las mismas rutas del Navbar */}
+          {/* Nuestro Mundo */}
           <div>
             <h6 className="font-bold text-xs tracking-[0.2em] uppercase mb-8 text-[#f5f5dc]">
               Nuestro Mundo
@@ -62,15 +62,25 @@ const Footer: React.FC = () => {
           </div>
 
           {/* Servicio */}
-          <div>
-            <h6 className="font-bold text-xs tracking-[0.2em] uppercase mb-8 text-[#f5f5dc]">
-              Servicio
-            </h6>
-            <ul className="space-y-4 text-sm text-[#f5f5dc]/70">
-              <li><Link to="/booking" className="hover:text-[#eacea9] transition-colors">Gestionar Reserva</Link></li>
-              <li><Link to="/faq" className="hover:text-[#eacea9] transition-colors">Preguntas Frecuentes</Link></li>
-            </ul>
-          </div>
+          {/* Servicio */}
+<div>
+  <h6 className="font-bold text-xs tracking-[0.2em] uppercase mb-8 text-[#f5f5dc]">
+    Servicio
+  </h6>
+  <ul className="space-y-4 text-sm text-[#f5f5dc]/70">
+    {/* Cambiado de Gestionar Reserva a Comentarios */}
+    <li>
+      <Link to="/reviews" className="hover:text-[#eacea9] transition-colors">
+        Comentarios
+      </Link>
+    </li>
+    <li>
+      <Link to="/experiences#faq" className="hover:text-[#eacea9] transition-colors">
+        Preguntas Frecuentes
+      </Link>
+    </li>
+  </ul>
+</div>
 
           {/* Boletín */}
           <div>
@@ -96,7 +106,7 @@ const Footer: React.FC = () => {
 
         {/* Pie de página */}
         <div className="pt-10 border-t border-[#f5f5dc]/10 flex flex-col md:flex-row justify-between items-center text-[10px] text-[#f5f5dc]/40 tracking-widest uppercase">
-          <p>©️ {new Date().getFullYear()} LJM SEALINE. Todos los derechos reservados.</p>
+          <p>© {new Date().getFullYear()} LJM SEALINE. Todos los derechos reservados.</p>
           <div className="flex gap-8 mt-4 md:mt-0">
             <Link to="/privacy" className="hover:text-[#eacea9] transition-colors">Política de Privacidad</Link>
             <Link to="/terms" className="hover:text-[#eacea9] transition-colors">Términos de Servicio</Link>

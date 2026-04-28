@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 interface BookingDetails {
   reference: string;
   passengers: string;
@@ -10,9 +12,10 @@ interface BookingDetails {
 
 interface BookingDetailsCardProps {
   details: BookingDetails;
+  actions?: ReactNode;
 }
 
-const BookingDetailsCard = ({ details }: BookingDetailsCardProps) => (
+const BookingDetailsCard = ({ details, actions }: BookingDetailsCardProps) => (
   <div className="w-full bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-8 md:p-10 overflow-hidden relative">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left relative z-10">
       {/* Left */}
@@ -63,15 +66,18 @@ const BookingDetailsCard = ({ details }: BookingDetailsCardProps) => (
     </div>
 
     {/* Footer */}
-    <div className="mt-10 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-      <div className="flex items-center space-x-3 bg-white/5 px-4 py-2 rounded-lg">
-        <span className="material-symbols-outlined text-[#c8a96e]">verified_user</span>
-        <span className="text-white/80 text-xs font-medium">Pago procesado y verificado</span>
+    <div className="mt-10 pt-8 border-t border-white/10 flex flex-col gap-6">
+      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center space-x-3 bg-white/5 px-4 py-2 rounded-lg">
+          <span className="material-symbols-outlined text-[#c8a96e]">verified_user</span>
+          <span className="text-white/80 text-xs font-medium">Pago procesado y verificado</span>
+        </div>
+        <div className="text-right">
+          <p className="text-white/50 text-[10px] uppercase tracking-widest">Total Reservado</p>
+          <p className="text-[#c8a96e] text-xl font-bold font-headline">{details.total}</p>
+        </div>
       </div>
-      <div className="text-right">
-        <p className="text-white/50 text-[10px] uppercase tracking-widest">Total Reservado</p>
-        <p className="text-[#c8a96e] text-xl font-bold font-headline">{details.total}</p>
-      </div>
+      {actions ? <div className="w-full max-w-[520px] self-center">{actions}</div> : null}
     </div>
   </div>
 );

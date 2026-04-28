@@ -1,10 +1,7 @@
 // features/details_suit/presentation/components/DetailsSuitHeader.tsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const DetailsSuitHeader: React.FC = () => {
-  const navigate = useNavigate();
-
   return (
     <>
       <header className="bg-night-blue pt-6 pb-6 px-6 sm:px-10 lg:px-20 text-pearl-beige relative overflow-hidden">
@@ -35,13 +32,6 @@ const DetailsSuitHeader: React.FC = () => {
               <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">Seguridad Garantizada</span>
               <span className="text-xs font-semibold">SSL Encriptado</span>
             </div>
-            <button 
-              onClick={() => navigate('/')}
-              className="bg-white/10 p-2 rounded-full border border-white/10 hover:bg-white/20 transition-colors"
-              title="Volver al inicio"
-            >
-              <span className="material-symbols-outlined text-lg">close</span>
-            </button>
           </div>
         </div>
       </header>

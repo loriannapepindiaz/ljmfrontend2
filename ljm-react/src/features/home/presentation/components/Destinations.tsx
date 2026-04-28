@@ -206,7 +206,7 @@ const Destinations: React.FC = () => {
         </div>
         <div key={activeTab} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 animate-fade-in">
           {currentDestinations.map((dest, index) => (
-            <div key={index} className="bg-white rounded-2xl overflow-hidden group shadow-xl hover:shadow-2xl transition-all">
+            <div key={index} className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-xl transition-all hover:shadow-2xl">
               <div className="relative h-64 overflow-hidden">
                 <img
                   alt={dest.alt}
@@ -217,7 +217,7 @@ const Destinations: React.FC = () => {
                   <span className="material-symbols-outlined text-sm">star</span> {dest.rating}
                 </div>
               </div>
-              <div className="p-8">
+              <div className="flex flex-1 flex-col p-8">
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h4 className="text-2xl font-bold mb-1 text-gray-900 leading-tight">
@@ -236,7 +236,7 @@ const Destinations: React.FC = () => {
                   {dest.description}
                 </p>
                 <button 
-                  className="w-full border-2 border-[#C5A059]/50 py-3 rounded-xl text-xs font-bold tracking-wide hover:bg-[#C5A059] hover:text-white transition-all duration-300 text-[#C5A059]"
+                  className="mt-auto w-full border-2 border-[#C5A059]/50 py-3 rounded-xl text-xs font-bold tracking-wide hover:bg-[#C5A059] hover:text-white transition-all duration-300 text-[#C5A059]"
                   onClick={handleViewDetails}
                 >
                   VER DETALLES
