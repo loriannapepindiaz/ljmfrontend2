@@ -80,7 +80,7 @@ const PersonalizarEstanciaPage: FC = () => {
 
             <button
               className="rounded-full bg-gradient-to-r from-[#eacea9] to-[#dec29e] px-10 py-5 text-xs font-black uppercase tracking-[0.28em] text-[#0e1a34] shadow-[0_18px_45px_rgba(234,206,169,0.28)] transition hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(234,206,169,0.36)]"
-              onClick={() => navigate("/payment")}
+              onClick={() => navigate("/acompanante")}
               type="button"
             >
               Continuar con la reserva

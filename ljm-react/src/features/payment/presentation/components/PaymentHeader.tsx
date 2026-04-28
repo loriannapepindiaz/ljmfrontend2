@@ -1,10 +1,7 @@
 // features/payment/presentation/components/PaymentHeader.tsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const PaymentHeader: React.FC = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="bg-night-blue pt-6 pb-20 px-6 sm:px-10 lg:px-20 text-pearl-beige relative overflow-hidden">
       {/* Círculos decorativos */}
@@ -22,13 +19,6 @@ const PaymentHeader: React.FC = () => {
             <span className="text-[10px] uppercase tracking-[0.2em] opacity-60">Seguridad Garantizada</span>
             <span className="text-xs font-semibold">SSL Encriptado</span>
           </div>
-          <button 
-            onClick={() => navigate('/details-suit')}
-            className="bg-white/10 p-2 rounded-full border border-white/10 hover:bg-white/20 transition-colors"
-            title="Volver atrás"
-          >
-            <span className="material-symbols-outlined text-lg">arrow_back</span>
-          </button>
         </div>
       </header>
 

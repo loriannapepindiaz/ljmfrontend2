@@ -59,7 +59,7 @@ const PersonalizationPage: FC = () => {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#0e1a34] mb-4 leading-tight tracking-tight uppercase tracking-[0.2em]">
-                  Personalice su Experiencia
+                  Enriquezca su travesía
                 </h1>
                 <p className="text-lg text-[#0e1a34]/50 font-light leading-relaxed max-w-2xl">
                   Diseñe cada detalle de su odisea por el Mediterráneo. Seleccione su refugio privado y añada experiencias exclusivas.
@@ -145,10 +145,10 @@ const PersonalizationPage: FC = () => {
 
           <div className="mb-20">
             <button 
-              onClick={() => navigate("/details-suit")}
+              onClick={() => navigate("/payment")}
               className="group w-full bg-[#785d32] hover:bg-[#5a4626] text-white font-bold py-7 px-12 rounded-[2.5rem] text-[10px] tracking-[0.4em] uppercase transition-all shadow-2xl flex items-center justify-center gap-4 active:scale-[0.99]"
             >
-              03 CONFIRMAR RESERVA
+              Gestionar los detalles de su pago
               <span className="material-symbols-outlined text-xl group-hover:translate-x-3 transition-transform">
                 arrow_forward
               </span>

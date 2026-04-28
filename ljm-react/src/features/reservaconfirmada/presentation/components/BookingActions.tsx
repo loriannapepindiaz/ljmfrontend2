@@ -1,20 +1,26 @@
 interface BookingActionsProps {
-  onDownload: () => void;
+  onViewInvoice: () => void;
+  onManageBooking: () => void;
   onGoHome: () => void;
 }
 
-const BookingActions = ({ onDownload, onGoHome }: BookingActionsProps) => (
-  <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center">
+const BookingActions = ({ onViewInvoice, onManageBooking, onGoHome }: BookingActionsProps) => (
+  <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-3">
     <button
-      onClick={onDownload}
-      className="w-full sm:w-auto min-w-[200px] px-8 h-12 bg-[#c8a96e] text-[#0a1628] font-body font-bold text-sm rounded-lg hover:brightness-110 transition-all flex items-center justify-center space-x-2"
+      onClick={onViewInvoice}
+      className="w-full px-8 h-12 bg-[#c8a96e] text-[#0a1628] font-body font-bold text-sm rounded-lg hover:brightness-110 transition-all flex items-center justify-center"
     >
-      <span className="material-symbols-outlined text-lg">download</span>
-      <span>Descargar Itinerario</span>
+      <span>Visualizar Factura</span>
+    </button>
+    <button
+      onClick={onManageBooking}
+      className="w-full px-8 h-12 bg-transparent border border-white/20 text-white font-body font-medium text-sm rounded-lg hover:bg-white/5 transition-all flex items-center justify-center"
+    >
+      Ajustes de reserva
     </button>
     <button
       onClick={onGoHome}
-      className="w-full sm:w-auto min-w-[200px] px-8 h-12 bg-transparent border border-white/20 text-white font-body font-medium text-sm rounded-lg hover:bg-white/5 transition-all flex items-center justify-center"
+      className="w-full px-8 h-12 bg-[#c8a96e] text-[#0a1628] font-body font-bold text-sm rounded-lg hover:brightness-110 transition-all flex items-center justify-center"
     >
       Volver al Inicio
     </button>

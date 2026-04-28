@@ -7,7 +7,7 @@ const meta = [
 
 export default function InvoiceMetaGrid() {
   return (
-    <div className="relative z-10 mb-12 grid grid-cols-1 gap-4 border-y border-slate-200 py-6 md:grid-cols-4">
+    <div className="invoice-meta-grid relative z-10 mb-12 grid grid-cols-1 gap-4 border-y border-slate-200 py-6 md:grid-cols-4">
       {meta.map((item) => (
         <div key={item.label}>
           <span className="mb-1 block text-[9px] uppercase tracking-widest text-slate-400">

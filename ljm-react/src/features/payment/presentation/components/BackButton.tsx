@@ -6,7 +6,7 @@ const BackButton: React.FC = () => {
   const navigate = useNavigate(); // ✅ Inicializamos la navegación
 
   const handleBack = () => {
-    navigate('/details-suit'); // ✅ Redirige a la página de detalles
+    navigate('/personalization'); // ✅ Redirige a la página de personalización
   };
 
   return (
@@ -18,7 +18,7 @@ const BackButton: React.FC = () => {
         west
       </span>
       <span className="text-xs font-bold uppercase tracking-[0.3em]">
-        Volver a configurar itinerario
+        Volver a personalization
       </span>
     </button>
   );

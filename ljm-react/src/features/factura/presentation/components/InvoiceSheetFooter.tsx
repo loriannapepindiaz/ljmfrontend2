@@ -1,7 +1,7 @@
 export default function InvoiceSheetFooter() {
   return (
     <>
-      <div className="relative z-10 mt-auto grid grid-cols-1 items-end gap-8 pb-4 pt-16 md:grid-cols-3">
+      <div className="invoice-sheet-footer relative z-10 mt-auto grid grid-cols-1 items-end gap-8 pb-4 pt-16 md:grid-cols-3">
         <div className="flex items-center gap-4">
           <div className="space-y-0.5">
             <p className="text-[8px] font-bold uppercase tracking-widest text-slate-400">

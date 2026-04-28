@@ -4,7 +4,7 @@ const companions = ["Maria Vascotto", "Lucia Vascotto"];
 
 export default function InvoiceSidebar() {
   return (
-    <aside className="w-full space-y-8 border-b border-slate-100 pb-8 md:w-1/4 md:border-b-0 md:border-r md:pb-0 md:pr-8">
+    <aside className="invoice-sidebar w-full space-y-8 border-b border-slate-100 pb-8 md:w-1/4 md:border-b-0 md:border-r md:pb-0 md:pr-8">
       <div>
         <h3 className="mb-3 text-[10px] font-bold uppercase tracking-widest text-[#eacea9]">
           Dirección

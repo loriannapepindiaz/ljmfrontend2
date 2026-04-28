@@ -1,5 +1,6 @@
 // features/payment/presentation/components/PriceBreakdown.tsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface PriceBreakdownProps {
   selectedMethod?: any;
@@ -8,6 +9,7 @@ interface PriceBreakdownProps {
 type PaymentStatus = 'idle' | 'processing' | 'success';
 
 const PriceBreakdown: React.FC<PriceBreakdownProps> = ({ selectedMethod }) => {
+  const navigate = useNavigate();
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState<PaymentStatus>('idle');
 
@@ -74,7 +76,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({ selectedMethod }) => {
             selectedMethod ? 'bg-night-blue text-pearl-beige shadow-xl hover:scale-[1.01]' : 'bg-gray-100 text-gray-400 cursor-not-allowed'
           }`}
         >
-          {selectedMethod ? 'Pagar Ahora' : 'Falta Método de Pago'}
+          {selectedMethod ? 'Pagar Ahora' : 'Realizar pago'}
           <span className="material-symbols-outlined">arrow_forward</span>
         </button>
       </div>
@@ -145,7 +147,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({ selectedMethod }) => {
                 <p className="text-[10px] text-gray-500 mb-8 leading-relaxed">Su reserva en LJM Sealine ha sido confirmada. En breve recibirá los detalles en su correo.</p>
                 
                 <button 
-                  onClick={closePortal}
+                  onClick={() => navigate('/booking-confirmation')}
                   className="w-full bg-night-blue text-pearl-beige py-4 rounded-xl text-[10px] font-bold uppercase tracking-[0.2em]"
                 >
                   Finalizar

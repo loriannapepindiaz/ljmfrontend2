@@ -3,6 +3,7 @@ import ConfirmationHero from "../components/ConfirmationHero";
 import BookingDetailsCard from "../components/BookingDetailsCard";
 import BookingActions from "../components/BookingActions";
 import type { BookingDetails } from "../components/BookingDetailsCard";
+import { useNavigate } from "react-router-dom";
 
 const bookingDetails: BookingDetails = {
   reference: "LJM-7742-XQ",
@@ -15,12 +16,18 @@ const bookingDetails: BookingDetails = {
 };
 
 const BookingConfirmationPage = () => {
-  const handleDownload = () => {
-    console.log("Downloading itinerary...");
+  const navigate = useNavigate();
+
+  const handleViewInvoice = () => {
+    navigate("/factura");
+  };
+
+  const handleManageBooking = () => {
+    navigate("/manage-booking");
   };
 
   const handleGoHome = () => {
-    console.log("Going home...");
+    navigate("/login");
   };
 
   return (
@@ -39,7 +46,11 @@ const BookingConfirmationPage = () => {
           <BookingHeader />
           <ConfirmationHero />
           <BookingDetailsCard details={bookingDetails} />
-          <BookingActions onDownload={handleDownload} onGoHome={handleGoHome} />
+          <BookingActions
+            onViewInvoice={handleViewInvoice}
+            onManageBooking={handleManageBooking}
+            onGoHome={handleGoHome}
+          />
 
           <div className="pt-8">
             <p className="text-white/30 text-xs max-w-sm font-light leading-relaxed">

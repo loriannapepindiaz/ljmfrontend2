@@ -31,15 +31,15 @@ const items = [
 
 export default function InvoiceItemsTable() {
   return (
-    <div className="w-full md:w-3/4">
-      <div className="mb-4 grid grid-cols-12 bg-[#0e1a34] px-4 py-3 text-white">
+    <div className="invoice-items-table w-full md:w-3/4">
+      <div className="invoice-items-head mb-4 grid grid-cols-12 bg-[#0e1a34] px-4 py-3 text-white">
         <div className="col-span-2 text-[9px] uppercase tracking-widest md:col-span-1">SL.</div>
         <div className="col-span-6 text-[9px] uppercase tracking-widest md:col-span-7">Description</div>
         <div className="col-span-2 text-center text-[9px] uppercase tracking-widest">Qty</div>
         <div className="col-span-2 text-right text-[9px] uppercase tracking-widest">Price</div>
       </div>
 
-      <div className="space-y-6">
+      <div className="invoice-items-list space-y-6">
         {items.map((item) => (
           <div key={item.code}>
             <div className="grid grid-cols-12 items-center gap-y-2 px-4">
@@ -73,7 +73,7 @@ export default function InvoiceItemsTable() {
         ))}
       </div>
 
-      <div className="mt-12 space-y-3">
+      <div className="invoice-items-total mt-12 space-y-3">
         <div className="flex justify-end gap-8 px-4 md:gap-12">
           <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
             Subtotal:

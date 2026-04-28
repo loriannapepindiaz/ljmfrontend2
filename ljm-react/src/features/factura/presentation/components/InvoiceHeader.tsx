@@ -32,7 +32,7 @@ export default function InvoiceHeader() {
 
 export function InvoiceSheetHeader() {
   return (
-    <div className="relative z-10 mb-12 flex flex-col justify-between gap-10 md:mb-16 md:flex-row md:items-start">
+    <div className="invoice-sheet-header relative z-10 mb-12 flex flex-col justify-between gap-10 md:mb-16 md:flex-row md:items-start">
       <div className="space-y-1">
         <h1
           className="text-5xl font-bold leading-[0.85] tracking-tight text-[#0e1a34] md:text-7xl"

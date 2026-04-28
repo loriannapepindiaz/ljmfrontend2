@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 const fields = [
   { label: "Nombre", placeholder: "Ej. Isabella", type: "text" },
   { label: "Apellidos", placeholder: "Ej. Valderrama", type: "text" },
@@ -6,6 +8,8 @@ const fields = [
 ];
 
 export default function GuestRegistrationForm() {
+  const navigate = useNavigate();
+
   return (
     <section className="space-y-10 rounded-xl border border-white/5 bg-[#1e2944]/20 p-8 md:p-12">
       <h3 className="text-3xl text-[#d9e2ff]" style={{ fontFamily: "'Noto Serif', serif" }}>
@@ -26,13 +30,22 @@ export default function GuestRegistrationForm() {
           </div>
         ))}
 
-        <div className="flex items-center justify-between pt-6 md:col-span-2">
+        <div className="flex flex-col gap-4 pt-6 md:col-span-2 md:flex-row md:items-center md:justify-between">
           <button
             className="flex min-w-[200px] items-center justify-center rounded-md bg-[#dec29e] px-10 py-4 text-[11px] uppercase tracking-[0.2em] text-[#3e2d14] shadow-lg transition-all hover:brightness-110"
             style={{ fontFamily: "'Noto Serif', serif" }}
             type="button"
           >
             Agregar a la lista
+          </button>
+
+          <button
+            className="flex min-w-[260px] items-center justify-center self-start rounded-md border border-[#dec29e]/35 bg-[#dec29e]/12 px-8 py-4 text-[11px] uppercase tracking-[0.2em] text-[#f5e2bd] shadow-lg transition-all hover:bg-[#dec29e]/18 md:self-auto"
+            onClick={() => navigate("/personalizar-estancia")}
+            type="button"
+            style={{ fontFamily: "'Noto Serif', serif" }}
+          >
+            Personaliza tu estancia
           </button>
         </div>
       </form>
