@@ -30,13 +30,15 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ title, onAddClick }) => {
       <h2 className="font-bold text-2xl text-[#0e1a34] dark:text-white transition-colors">{title}</h2>
 
       <div className="flex items-center gap-6">
-        <button
-          onClick={onAddClick}
-          className="bg-[#eacea9] hover:bg-[#d4af37] text-[#0e1a34] font-bold px-6 py-2.5 rounded-lg flex items-center gap-2 transition-all shadow-sm text-sm"
-        >
-          <span className="material-symbols-outlined text-[20px]">add</span>
-          {t('adminHeader.addReservation')}
-        </button>
+        {onAddClick ? (
+          <button
+            onClick={onAddClick}
+            className="bg-[#eacea9] hover:bg-[#d4af37] text-[#0e1a34] font-bold px-6 py-2.5 rounded-lg flex items-center gap-2 transition-all shadow-sm text-sm"
+          >
+            <span className="material-symbols-outlined text-[20px]">add</span>
+            {t('adminHeader.addReservation')}
+          </button>
+        ) : null}
 
         <div className="flex items-center gap-3">
           <div className="text-right">
