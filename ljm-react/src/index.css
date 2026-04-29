@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 /* Leaflet tooltip custom style */
 .leaflet-label-custom {
@@ -40,9 +43,6 @@
 .sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(234,206,169,0.8); }
 
 /* 1. IMPORTACIÓN DE FUENTES */
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 /* 2. DEFINICIÓN DEL TEMA Y COLORES */
 @theme {
@@ -96,6 +96,25 @@
 .welcome-cursive {
   font-family: 'Dancing Script', cursive;
   font-weight: 600;
+}
+
+.auth-user-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.75rem, 5vw, 3.35rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 0.95;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+.login-user-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.05rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
 }
 
 .font-action {

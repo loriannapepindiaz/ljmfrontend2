@@ -3,17 +3,17 @@ export default function VoyageSpecs() {
   return (
     <div className="grid grid-cols-2 gap-8 py-8 border-y border-white/10">
       <div>
-        <p className="text-[11px] font-bold text-primary tracking-widest uppercase mb-2">Duración</p>
+        <p className="text-[11px] font-bold text-primary tracking-widest uppercase mb-2">Duracion</p>
         <p className="text-xl font-medium text-white flex items-center gap-3">
           <span className="material-symbols-outlined text-pearl-beige">schedule</span>
-          8 Días / 7 Noches
+          Sin datos
         </p>
       </div>
       <div>
         <p className="text-[11px] font-bold text-primary tracking-widest uppercase mb-2">Puerto de Salida</p>
         <p className="text-xl font-medium text-white flex items-center gap-3">
           <span className="material-symbols-outlined text-pearl-beige">anchor</span>
-          Atenas (El Pireo)
+          Sin datos
         </p>
       </div>
     </div>

@@ -1,9 +1,6 @@
 import React from 'react';
 
-const reservas = [
-  { label: 'Restaurante Confirmado',  nombre: 'The Pearl Oyster',       detalle: 'Oct 14 • 8:30 PM'        },
-  { label: 'Preferencias Dietéticas', nombre: 'Vegano / Sin Gluten',    detalle: 'Anotado en todos los locales' },
-];
+const reservas: Array<{ label: string; nombre: string; detalle: string }> = [];
 
 const DiningRequests: React.FC = () => {
   return (
@@ -14,12 +11,12 @@ const DiningRequests: React.FC = () => {
       <div className="flex items-center justify-between mb-6">
         <h4 className="text-xl font-bold flex items-center gap-3 text-white">
           <span className="material-symbols-outlined text-[#eacea9]">restaurant</span>
-          Restauración y Solicitudes
+          Restauracion y Solicitudes
         </h4>
         <div className="flex gap-3">
           <button className="px-3 py-1.5 rounded border border-[#eacea9]/30 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/10 transition-all uppercase tracking-widest flex items-center gap-1">
             <span className="material-symbols-outlined text-xs">add</span>
-            Añadir Solicitud
+            Anadir Solicitud
           </button>
           <button className="px-3 py-1.5 rounded bg-[#eacea9]/10 border border-[#eacea9]/20 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/20 transition-all uppercase tracking-widest">
             Reservar Mesa
@@ -28,7 +25,12 @@ const DiningRequests: React.FC = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">
-        {reservas.map((r) => (
+        {reservas.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-white/10 bg-white/[0.03] px-4 py-8 text-center md:col-span-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin solicitudes de restauracion</p>
+            <p className="mt-2 text-xs text-slate-500">Las solicitudes apareceran cuando se registren preferencias o reservas de mesa.</p>
+          </div>
+        ) : reservas.map((r) => (
           <div key={r.label} className="p-4 rounded-lg border border-white/5 bg-white/[0.03] flex justify-between items-start">
             <div>
               <p className="text-xs text-slate-400 font-bold uppercase mb-1">{r.label}</p>

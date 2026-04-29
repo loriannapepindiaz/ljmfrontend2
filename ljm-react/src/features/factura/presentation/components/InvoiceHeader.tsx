@@ -73,13 +73,13 @@ export function InvoiceSheetHeader() {
               className="text-xl font-bold"
               style={{ fontFamily: "'Noto Serif', serif" }}
             >
-              INV-2024-0850
+              Sin documento
             </span>
           </div>
 
           <div className="flex h-16 w-16 items-center justify-center border border-slate-200 bg-white p-1">
             <QRCodeSVG
-              value="INV-2024-0850"
+              value="Sin documento"
               size={56}
               bgColor="#ffffff"
               fgColor="#0e1a34"
@@ -92,7 +92,7 @@ export function InvoiceSheetHeader() {
           <div className="flex items-center gap-2 rounded-full border border-[#0e1a34]/10 px-3 py-2">
             <ShipWheel size={16} className="text-[#0e1a34]" />
             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-500">
-              Registro Validado
+              Pendiente de reserva
             </span>
           </div>
         </div>

@@ -1,8 +1,66 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { authApi, type AuthUser } from "../../../../lib/api";
+
+const getCachedUser = (): AuthUser | null => {
+  try {
+    const rawUser = localStorage.getItem("ljm_auth_user");
+    return rawUser ? (JSON.parse(rawUser) as AuthUser) : null;
+  } catch {
+    return null;
+  }
+};
+
+const getStoredToken = () => localStorage.getItem("ljm_auth_token");
+
+const getInitials = (user: AuthUser | null) => {
+  if (!user) return "";
+
+  const firstName = user.cliente?.nombre?.trim();
+  const lastName = user.cliente?.apellido?.trim();
+
+  if (firstName || lastName) {
+    return `${firstName?.[0] ?? ""}${lastName?.[0] ?? ""}`.toUpperCase();
+  }
+
+  const fallback = user.email ?? user.username ?? "";
+  return fallback.slice(0, 2).toUpperCase();
+};
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCachedUser());
+  const userInitials = getInitials(currentUser);
+  const isLoggedIn = Boolean(userInitials);
+
+  useEffect(() => {
+    const token = getStoredToken();
+
+    if (!token) {
+      setCurrentUser(null);
+      return;
+    }
+
+    let isMounted = true;
+
+    authApi
+      .me(token)
+      .then(({ user }) => {
+        if (!isMounted) return;
+        localStorage.setItem("ljm_auth_user", JSON.stringify(user));
+        setCurrentUser(user);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        localStorage.removeItem("ljm_auth_token");
+        localStorage.removeItem("ljm_auth_user");
+        setCurrentUser(null);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const closeMenu = () => setIsOpen(false);
   const toggleMenu = () => setIsOpen((current) => !current);
@@ -57,18 +115,28 @@ const Navbar: React.FC = () => {
 
         <div className="ml-auto hidden items-center gap-6 md:flex">
           <Link
-            to="/home"
-            className="text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
-          >
-            INICIAR SESION
-          </Link>
-
-          <Link
-            to="/details-suit"
+            to="/destinations"
             className="rounded-full bg-primary px-7 py-2.5 text-sm font-bold tracking-widest text-white shadow-lg transition-all hover:bg-luxury-gold"
           >
             RESERVAR AHORA
           </Link>
+
+          {isLoggedIn ? (
+            <Link
+              to="/perfil"
+              aria-label="Abrir perfil"
+              className="flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige shadow-lg transition-all hover:border-primary hover:text-primary"
+            >
+              {userInitials}
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
+            >
+              INICIAR SESION
+            </Link>
+          )}
         </div>
 
         <button
@@ -125,20 +193,30 @@ const Navbar: React.FC = () => {
             </Link>
 
             <Link
-              to="/home"
-              onClick={closeMenu}
-              className="block w-full rounded-lg px-2 pt-4 text-center text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
-            >
-              INICIAR SESION
-            </Link>
-
-            <Link
-              to="/details-suit"
+              to="/destinations"
               onClick={closeMenu}
               className="mt-2 block w-full rounded-full bg-primary px-6 py-3 text-center text-sm font-bold tracking-widest text-white transition-all hover:bg-luxury-gold"
             >
               RESERVAR AHORA
             </Link>
+
+            {isLoggedIn ? (
+              <Link
+                to="/perfil"
+                onClick={closeMenu}
+                className="mx-auto mt-3 flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige transition-all hover:border-primary hover:text-primary"
+              >
+                {userInitials}
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="block w-full rounded-lg px-2 pt-4 text-center text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
+              >
+                INICIAR SESION
+              </Link>
+            )}
           </div>
         </div>
       )}

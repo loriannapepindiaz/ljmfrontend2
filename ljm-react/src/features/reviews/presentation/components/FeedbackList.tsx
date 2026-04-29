@@ -1,24 +1,14 @@
 import React from 'react';
 import FeedbackCard from './FeedbackCard';
 
-const feedbacks = [
-  {
-    initials: 'JV',
-    name: 'Julian Vanhoutte',
-    registryId: '8821-ATL',
-    stars: 5,
-    text: 'La precisión de la sección del Diario Náutico no tiene igual. Como marino veterano, encuentro la curación editorial aquí muy superior a cualquier servicio de ruta automatizada. Se siente como leer un diario clásico manteniendo la integridad de datos modernos.',
-    timeAgo: '4 días',
-  },
-  {
-    initials: 'ER',
-    name: 'Elena S. Rossi',
-    registryId: '4402-MED',
-    stars: 4,
-    text: 'Un triunfo estético. Navegar por el archivo de "Expediciones" se siente como recorrer una galería física. La interfaz no interfiere, permitiendo que el patrimonio marítimo respire. La respuesta de los curadores también fue sumamente eficiente.',
-    timeAgo: '1 semana',
-  },
-];
+const feedbacks: Array<{
+  initials: string;
+  name: string;
+  registryId: string;
+  stars: number;
+  text: string;
+  timeAgo: string;
+}> = [];
 
 const FeedbackList: React.FC = () => {
   return (
@@ -26,7 +16,12 @@ const FeedbackList: React.FC = () => {
       <h3 className="font-serif text-2xl text-[#D9E2FF] border-l-4 border-[#DEC29E] pl-4">
         Comentarios Recientes
       </h3>
-      {feedbacks.map((fb) => (
+      {feedbacks.length === 0 ? (
+        <div className="rounded-xl border border-dashed border-white/10 bg-white/[0.03] px-6 py-10 text-center">
+          <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin comentarios registrados</p>
+          <p className="mt-2 text-xs text-slate-500">Los comentarios apareceran cuando existan opiniones reales.</p>
+        </div>
+      ) : feedbacks.map((fb) => (
         <FeedbackCard key={fb.registryId} {...fb} />
       ))}
     </div>

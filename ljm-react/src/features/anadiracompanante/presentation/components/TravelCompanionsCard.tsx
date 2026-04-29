@@ -1,28 +1,6 @@
 import { X } from "lucide-react";
 
-const companions = [
-  {
-    name: "Adriana L.",
-    role: "Socia Elite",
-    id: "ID 9821",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDPSbIQnesEqaGKUzjwuxu1c-tCku-cvrxKkw0h3m93y0eu5HM-GXf0Dxrof66zBqk5hQUKwlwxBmWMCg1AMsNfdZpIKbGS2ux7s3egyQOBiS17SQj_oVmAK8KP9p_8ZBI95yWNhbzelVURRx8uolParyAElcW0pRlNljukLfaI2j4GaAzWqfCsXpveOO6CLse6jp__Gs5JTwfpa2U5n61Qaaea5beWng-IZh_K8TKNpBwVeTJgyy7oa8N5MSFfFTlre3xJO7q7CxEY",
-  },
-  {
-    name: "Marco Castelli",
-    role: "Invitado",
-    id: "ID 5520",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD6V4tp49tia7qEE9-uCRSjnDJGkIWGL00B-2bG5i0RiT93HWO75eEUBet4U-eYJf_fYhd1LYSQruY66MW4Zm9Nz5r5STNn1lQFrv4reTYJhItkeElksbGuRoo5wbY6wtWPEkJ-nRY30YQCCaL3mqQYod2ZJtoN0xa6XFCKnk63dL9NzIvX4QI6z4KzbBnIeA9pqPwlPLI8YVKWFZa5uuWDJRFWdUhbxezbm5VNpisMp9VjyYNq-uLX6lZ6uD3Q9H0Fx5dKpQ58Y-kL",
-  },
-  {
-    name: "Sofia Rossi",
-    role: "Socia",
-    id: "ID 2211",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDWRu5-G3aG9Rn1XPnuzIcWhLtX9tuT0Pk3dj-YC1dx9IToHhsOGzC4oqaMN8MWoZNQd3deFBlFQDq9qe2CCt9Re0KNDjVW-4YBS8oFDCCIhJy4afgJZpfJmwWRYmjU2X2DlbHBmqTUCF0KsREUe6Do-kRGSLYnJGpH67z062T_rqI4gE4CN12y9cBVBv7VI13cKSDf1fOXc3v9MRgE1pYQfxmK0J7_8CjnXqhHN259TuaWU_BJq1Cp3pveEPhdubJDZxyai8IE59ff",
-  },
-];
+const companions: Array<{ name: string; role: string; id: string; image?: string }> = [];
 
 export default function TravelCompanionsCard() {
   return (
@@ -37,18 +15,27 @@ export default function TravelCompanionsCard() {
       </div>
 
       <div className="mb-16 space-y-8">
-        {companions.map((companion) => (
+        {companions.length === 0 ? (
+          <div className="rounded-xl border border-dashed border-white/10 bg-white/[0.03] px-5 py-10 text-center">
+            <p className="text-sm font-semibold text-[#d9e2ff]">No hay acompanantes agregados</p>
+            <p className="mt-2 text-xs leading-relaxed text-[#8f9098]">
+              Los acompanantes apareceran aqui cuando se registren en esta reserva.
+            </p>
+          </div>
+        ) : companions.map((companion) => (
           <div key={companion.id} className="group flex items-center justify-between">
             <div className="flex items-center gap-5">
-              <img
-                alt={companion.name}
-                className="h-14 w-14 rounded-full object-cover grayscale"
-                src={companion.image}
-              />
+              {companion.image ? (
+                <img
+                  alt={companion.name}
+                  className="h-14 w-14 rounded-full object-cover grayscale"
+                  src={companion.image}
+                />
+              ) : null}
               <div>
                 <p className="text-base font-semibold text-[#d9e2ff]">{companion.name}</p>
                 <p className="mt-0.5 text-[10px] uppercase tracking-widest text-[#8f9098]">
-                  {companion.role} • {companion.id}
+                  {companion.role} - {companion.id}
                 </p>
               </div>
             </div>

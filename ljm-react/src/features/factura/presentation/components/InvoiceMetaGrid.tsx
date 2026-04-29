@@ -1,8 +1,8 @@
 const meta = [
-  { label: "Client Name", value: "Julian Vascotto" },
-  { label: "Member ID", value: "PE-MC-98000-850" },
-  { label: "Issue Date", value: "01 Dec 2024" },
-  { label: "Boarding", value: "12 Dec 2024" },
+  { label: "Client Name", value: "Sin cliente" },
+  { label: "Member ID", value: "Sin ID" },
+  { label: "Issue Date", value: "Sin fecha" },
+  { label: "Boarding", value: "Sin embarque" },
 ];
 
 export default function InvoiceMetaGrid() {

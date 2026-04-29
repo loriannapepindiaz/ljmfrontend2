@@ -10,46 +10,12 @@ const BookingSummary: React.FC = () => {
           <h3 className="text-xs font-bold text-night-blue uppercase tracking-[0.2em]">Detalles de su Odisea</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-8">
-          <div className="flex gap-4 items-start">
-            <div className="mt-1 w-10 h-10 rounded-xl bg-maroon-gold/5 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-maroon-gold text-2xl">sailing</span>
-            </div>
-            <div>
-              <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Crucero Seleccionado</p>
-              <p className="text-base font-semibold font-magiona leading-tight">Mediterráneo Imperial: Odisea Clásica</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 items-start">
-            <div className="mt-1 w-10 h-10 rounded-xl bg-maroon-gold/5 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-maroon-gold text-2xl">calendar_month</span>
-            </div>
-            <div>
-              <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Periodo de Viaje</p>
-              <p className="text-base font-semibold leading-tight">15 Oct — 25 Oct, 2024</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 items-start">
-            <div className="mt-1 w-10 h-10 rounded-xl bg-maroon-gold/5 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-maroon-gold text-2xl">king_bed</span>
-            </div>
-            <div>
-              <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Alojamiento Premium</p>
-              <p className="text-base font-semibold leading-tight">Suite Penthouse Grand Horizon</p>
-            </div>
-          </div>
-
-          <div className="flex gap-4 items-start">
-            <div className="mt-1 w-10 h-10 rounded-xl bg-maroon-gold/5 flex items-center justify-center shrink-0">
-              <span className="material-symbols-outlined text-maroon-gold text-2xl">group</span>
-            </div>
-            <div>
-              <p className="text-[9px] text-gray-400 uppercase font-bold tracking-widest mb-1.5">Pasajeros</p>
-              <p className="text-base font-semibold leading-tight">2 Adultos (Ocupación Suite)</p>
-            </div>
-          </div>
+        <div className="rounded-2xl border border-dashed border-gray-200 bg-off-white/50 px-6 py-12 text-center">
+          <span className="material-symbols-outlined mb-3 text-5xl text-gray-300">event_busy</span>
+          <p className="text-sm font-bold uppercase tracking-widest text-night-blue">Sin reserva seleccionada</p>
+          <p className="mx-auto mt-2 max-w-md text-sm text-gray-500">
+            El crucero, periodo, alojamiento y pasajeros se mostraran cuando el usuario seleccione una reserva real.
+          </p>
         </div>
       </div>
     </div>

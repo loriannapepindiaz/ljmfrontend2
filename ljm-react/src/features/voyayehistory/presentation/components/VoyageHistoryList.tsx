@@ -1,32 +1,4 @@
 import React from 'react';
-import VoyageHistoryItem from './VoyageHistoryItem';
-
-const voyages = [
-  {
-    imagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDRaOgq4rG-lufVDOj5G8mPci0lDWmqdV5iIRJAOwYdmw9xZ_tbntqi5dlhUsTZtRfQTrV3oVb70PBZmjp-lb0aHgR5-PKJSFC31Z7qO8BudTi6sPtuZd4qZAjaodUjbGymbCpLSitq6TtNN9fc6C7ZjVvhRgPopyT6EuSdYU9_-WOy8oAPb4BQ3-JuRNhWqsGvmFJpMF07Spv82-rJNxAYicZZltdIT4cGkpQm863aawVRjquLX46XTN7GgyhnjQyEz1uKHDLbCW9z',
-    titulo: 'Escapada a las Islas Griegas',
-    barco: 'M.V. Athena Majesty',
-    fechas: '12 Ago - 26 Ago, 2023',
-    monto: '$12,450.00',
-    estado: 'Completado',
-  },
-  {
-    imagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDpCBQvFwm-tWZ-sbMqr-JS3ioJfuoJlvKIstEzbEdCG0WQRxQEz9DnDW29099WzaRTtvgdOUoPpzpWaCCpDZlEdc2RqLJOV4xwh9d1E_WUcQL0CsI2u2WAUfaGb49xAsxatK6sRz41fJJiIpdyBMSQ8FiUBDP9WHGjxM5pvRJF_2qpvimjEuDjF8sUQzBAKRlgn0_iTQW4VzANXqxhbWTL8uIJifnQde0x7vaVy5vEgYTy7WTPvg9AISjI4k3ERxNx9OyvLGMzIgQs',
-    titulo: 'Sueños Azules del Caribe',
-    barco: 'M.S. Azure Wave',
-    fechas: '05 Ene - 18 Ene, 2023',
-    monto: '$8,900.00',
-    estado: 'Completado',
-  },
-  {
-    imagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAH-Xp2a3WdM4dM_5t66cDJr6hjBYhwVH2WxNtAuMaOXtxn-L_B3aSxarJ0vA_bl--LnAYPNM_Vll0SJRW8VBzY3dfwSQxZfIwHmDfcQGQ5mu6yDXpbM-UVZ-VPgVuEO_BsJXUfU1w36S5MbnDeg4OyHXrfENu16OotbSKvgMnABh8qwKIMf9SDitpyRDJBVg0Al-PES5YGuAHnO4K9zTwPERr3t2CEgItQzCPRsQI-KAvo7PLIydd_TAiY5QFbzKTtjJ9WIL3lIuGr',
-    titulo: 'Patrimonio de los Fiordos Noruegos',
-    barco: 'M.V. Nordic Spirit',
-    fechas: '22 Oct - 04 Nov, 2022',
-    monto: '$15,200.00',
-    estado: 'Completado',
-  },
-];
 
 const VoyageHistoryList: React.FC = () => {
   return (
@@ -45,16 +17,12 @@ const VoyageHistoryList: React.FC = () => {
         </div>
       </div>
 
-      <div className="space-y-4">
-        {voyages.map((v) => (
-          <VoyageHistoryItem key={v.titulo} {...v} />
-        ))}
-      </div>
-
-      <div className="mt-8 flex justify-center">
-        <button className="px-8 py-3 border border-[#0e1a34] text-[#0e1a34] font-bold text-xs uppercase tracking-widest hover:bg-[#0e1a34] hover:text-white transition-all">
-          Cargar Más Viajes
-        </button>
+      <div className="rounded-2xl border border-dashed border-slate-200 bg-white/70 px-6 py-12 text-center">
+        <span className="material-symbols-outlined mb-3 text-4xl text-slate-300">travel_explore</span>
+        <p className="text-sm font-bold uppercase tracking-widest text-[#0e1a34]">No hay viajes completados</p>
+        <p className="mx-auto mt-2 max-w-md text-sm text-slate-500">
+          El historial se mostrara cuando existan reservas finalizadas para esta cuenta.
+        </p>
       </div>
     </section>
   );

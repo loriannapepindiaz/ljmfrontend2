@@ -12,7 +12,7 @@ const BookingSummary: React.FC = () => {
 
       <div className="space-y-1">
         <h3 className="text-[#785d32] uppercase tracking-[0.2em] text-[10px] font-bold">Referencia de Reserva</h3>
-        <p className="text-2xl font-bold text-white">#SV-8831</p>
+        <p className="text-2xl font-bold text-white">Sin referencia</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 py-6 border-y border-[#eacea9]/10">
@@ -22,25 +22,14 @@ const BookingSummary: React.FC = () => {
           </div>
           <div>
             <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold leading-none mb-1">Cabina Seleccionada</p>
-            <p className="text-sm font-bold text-white">Cubierta 12 • Suite Royal Ocean</p>
+            <p className="text-sm font-bold text-white">Sin cabina asignada</p>
           </div>
         </div>
       </div>
 
-      <div className="space-y-4">
-        <h4 className="text-xs font-bold text-[#eacea9] uppercase tracking-widest flex items-center gap-2">
-          <span className="size-1 bg-[#785d32] rounded-full" />
-          Incluido
-        </h4>
-        <ul className="space-y-3">
-          {['Gastronomía Todo Incluido', 'Embarque Prioritario', 'Acceso a Veranda Privada'].map((item) => (
-            <li key={item} className="flex items-center gap-3">
-              <span className="material-symbols-outlined text-[#785d32] text-lg">check_circle</span>
-              <span className="text-sm text-slate-300">{item}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <p className="text-sm text-slate-400">
+        El resumen se completara con los datos reales cuando exista una reserva activa.
+      </p>
     </div>
   );
 };

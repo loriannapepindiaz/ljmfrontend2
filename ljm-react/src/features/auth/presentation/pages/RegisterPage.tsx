@@ -1,7 +1,8 @@
-// src/pages/Register.tsx
+// src/features/auth/presentation/pages/RegisterPage.tsx
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Mail, Lock, Shield } from 'lucide-react';
+import { authApi, persistAuthSession } from '../../../../lib/api';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -53,11 +54,14 @@ export default function Register() {
     if (!validateForm()) return;
     setIsLoading(true);
     try {
-      await new Promise(resolve => setTimeout(resolve, 1800));
+      const session = await authApi.register(formData);
+      persistAuthSession(session);
       setShowToast(true);
-      setTimeout(() => navigate('/'), 2800);
-    } catch {
-      setErrors({ general: 'Algo salió mal. Por favor inténtelo de nuevo.' });
+      setTimeout(() => navigate('/home'), 1400);
+    } catch (err) {
+      setErrors({
+        general: err instanceof Error ? err.message : 'Algo salió mal. Por favor inténtelo de nuevo.',
+      });
     } finally {
       setIsLoading(false);
     }
@@ -153,7 +157,7 @@ export default function Register() {
             <p className="mb-1 text-[10px] tracking-[0.4em] text-[#eacea9]/80 font-subtitle">
               LJM SEALINE
             </p>
-            <h1 className="welcome-cursive italic whitespace-nowrap text-4xl md:text-5xl mb-2">
+            <h1 className="login-user-title whitespace-nowrap mb-2">
               Crea Tu Cuenta
             </h1>
             <h2 className="text-xs md:text-sm tracking-[0.35em] text-[#eacea9]/70 italic font-subtitle">
@@ -308,7 +312,7 @@ export default function Register() {
           <div className="mt-8 flex flex-col items-center gap-2 text-[11px] tracking-[0.3em] text-[#eacea9]/60 font-subtitle">
             <span>¿Ya tienes una cuenta?</span>
             <Link
-              to="/home"
+              to="/login"
               className="text-[#eacea9]/60 hover:text-[#eacea9] transition-colors relative pb-1
                          after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2
                          after:w-0 after:h-[1px] after:bg-[#eacea9]

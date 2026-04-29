@@ -2,12 +2,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // Páginas de autenticación
-import SigninPage from "./pages/SigninPage";
-import LoginPage from "./features/auth/presentation/components/LoginPage";
-import Register from "./features/auth/presentation/components/register";
+import LoginPage from "./features/auth/presentation/pages/LoginPage";
+import RegisterPage from "./features/auth/presentation/pages/RegisterPage";
+import AdminLoginPage from './features/auth/presentation/pages/AdminLoginPage';
 
 // Páginas principales
-import DestinationsView from "./features/destinations/presentation/components/DestinationsView";
+import HomePage from "./features/home/presentation/pages/HomePage";
+import DestinationsPage from "./features/destinations/presentation/pages/DestinationsPage";
 import FleetPage from "./features/fleet/presentation/pages/FleetPage";
 import PaymentPage from "./features/payment/presentation/pages/PaymentPage";
 import ExperiencesPage from "./features/experiences/presentation/pages/ExperiencesPage";
@@ -57,8 +58,6 @@ import AgregarEmpleadoPage from "./features/agregarempleado/presentation/pages/A
 // ✅ DESCRIPCIÓN CRUCERO
 import DescripcionCruceroPage from "./features/descripcioncrucero/presentation/pages/DescripcionCruceroPage";
 
-import AdminLoginPage from './features/auth/presentation/components/AdminLoginPage';
-
 import AgregarCruceroPage from "./features/agregarcrucero/presentation/pages/AgregarCruceroPage";
 
 import VoyageHistoryPage from "./features/voyayehistory/presentation/pages/VoyageHistoryPage";
@@ -76,13 +75,14 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SigninPage />} />
-        <Route path="/home" element={<LoginPage />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
         
         {/* Ruta de registro */}
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<RegisterPage />} />
 
-        <Route path="/destinations" element={<DestinationsView />} />
+        <Route path="/destinations" element={<DestinationsPage />} />
         <Route path="/fleet" element={<FleetPage />} />
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/offers" element={<OffersPage />} />
@@ -146,7 +146,7 @@ function App() {
         <Route path="/booking-confirmation" element={<BookingConfirmationPage />} />
         <Route path="/reviews" element={<VoyageReviewsPage />} />
         {/* Ruta por defecto (404) */}
-        <Route path="*" element={<SigninPage />} />
+        <Route path="*" element={<HomePage />} />
       </Routes>
     </BrowserRouter>
   );

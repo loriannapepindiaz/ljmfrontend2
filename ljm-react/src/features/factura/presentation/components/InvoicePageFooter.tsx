@@ -3,14 +3,11 @@ export default function InvoicePageFooter() {
     <footer className="border-t border-white/5 bg-[#06122c] px-6 py-16 text-[#eacea9] md:px-12">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-12 md:flex-row">
         <div className="text-center md:text-left">
-          <p
-            className="mb-4 text-xl italic opacity-90"
-            style={{ fontFamily: "'Noto Serif', serif" }}
-          >
-            "The sea, once it casts its spell, holds one in its net of wonder forever."
+          <p className="mb-4 text-xl italic opacity-90" style={{ fontFamily: "'Noto Serif', serif" }}>
+            Factura generada a partir de datos reales de reserva.
           </p>
           <p className="text-[9px] uppercase tracking-[0.3em] text-slate-500">
-            © 2024 The Nautical Curator | Maritime Excellence Worldwide
+            LJM Sealine
           </p>
         </div>
 
@@ -22,7 +19,7 @@ export default function InvoicePageFooter() {
             Privacy Policy
           </a>
           <a className="transition-colors hover:text-[#eacea9]" href="#">
-            Global Concierge
+            Soporte
           </a>
         </div>
       </div>

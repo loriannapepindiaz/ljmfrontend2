@@ -1,5 +1,7 @@
 import React from 'react';
 
+const payments: Array<{ label: string; value: string; color: string }> = [];
+
 const PaymentDetails: React.FC = () => {
   return (
     <div
@@ -12,25 +14,17 @@ const PaymentDetails: React.FC = () => {
       </h4>
 
       <div className="space-y-3 mb-6">
-        {[
-          { label: 'Costo Total del Viaje',     value: '$12,450.00',  color: 'text-white'     },
-          { label: 'Excursiones y Restauración', value: '$1,280.00',  color: 'text-white'     },
-          { label: 'Saldo Pagado',               value: '-$13,730.00', color: 'text-green-400' },
-        ].map((item) => (
+        {payments.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-white/10 bg-white/[0.03] px-4 py-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin movimientos de pago</p>
+            <p className="mt-2 text-xs text-slate-500">Los pagos apareceran cuando exista una reserva activa.</p>
+          </div>
+        ) : payments.map((item) => (
           <div key={item.label} className="flex justify-between text-sm">
             <span className="text-slate-400">{item.label}</span>
             <span className={`font-bold ${item.color}`}>{item.value}</span>
           </div>
         ))}
-        <div className="h-px bg-white/5 my-2" />
-        <div className="flex justify-between items-center">
-          <span className="font-bold text-slate-300">Saldo Total Pendiente</span>
-          <span className="text-2xl font-bold text-[#eacea9]">$0.00</span>
-        </div>
-      </div>
-
-      <div className="p-3 bg-green-500/10 rounded-lg border border-green-500/20 text-center">
-        <p className="text-xs text-green-400 font-bold uppercase tracking-widest">Reserva Totalmente Pagada</p>
       </div>
     </div>
   );

@@ -2,11 +2,11 @@ import React from 'react';
 import Navbar from '../../../home/presentation/components/Navbar';
 import DestinationsHeader from '../components/DestinationsHeader';
 import Carousel from '../components/Carousel';
-import IntroSection from './IntroSection';
+import IntroSection from '../components/IntroSection';
 import DestinationsGrid from '../components/DestinationsGrid';
 import Footer from '../../../home/presentation/components/Footer';
 
-const DestinationsView = () => {
+const DestinationsPage = () => {
   return (
     <div className="bg-background-luxury text-night min-h-screen">
       <style>{`
@@ -51,4 +51,4 @@ const DestinationsView = () => {
   );
 };
 
-export default DestinationsView;
+export default DestinationsPage;

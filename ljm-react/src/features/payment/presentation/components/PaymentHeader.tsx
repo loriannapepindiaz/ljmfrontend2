@@ -4,14 +4,13 @@ import React from 'react';
 const PaymentHeader: React.FC = () => {
   return (
     <div className="bg-night-blue pt-20 pb-16 px-6 sm:px-10 lg:px-20 text-pearl-beige relative overflow-hidden">
-      {/* Círculos decorativos */}
       <div className="absolute right-0 top-0 w-64 h-64 border border-white/5 rounded-full translate-x-1/2 -translate-y-1/2" />
       <div className="absolute left-0 bottom-0 w-48 h-48 border border-white/5 rounded-full -translate-x-1/2 translate-y-1/2" />
 
       <div className="max-w-6xl mx-auto relative z-10 text-center">
         <h1 className="text-4xl sm:text-5xl font-magiona mb-8 tracking-tight">Confirmar Reserva</h1>
         <div className="flex items-center justify-center max-w-md mx-auto gap-4">
-          <span className="text-[10px] font-bold tracking-[0.3em] text-pearl-beige/80 uppercase">Barcelona</span>
+          <span className="text-[10px] font-bold tracking-[0.3em] text-pearl-beige/80 uppercase">Origen pendiente</span>
           <div className="flex-1 flex items-center relative h-4">
             <div className="h-[1px] w-full bg-pearl-beige/30" />
             <div className="absolute left-1/2 -translate-x-1/2 bg-night-blue px-2">
@@ -20,7 +19,7 @@ const PaymentHeader: React.FC = () => {
               </span>
             </div>
           </div>
-          <span className="text-[10px] font-bold tracking-[0.3em] text-pearl-beige/80 uppercase">Venecia</span>
+          <span className="text-[10px] font-bold tracking-[0.3em] text-pearl-beige/80 uppercase">Destino pendiente</span>
         </div>
       </div>
     </div>

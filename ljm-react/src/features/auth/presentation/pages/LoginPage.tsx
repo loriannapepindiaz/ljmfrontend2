@@ -2,16 +2,34 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Lock } from 'lucide-react';
+import { authApi, persistAuthSession } from '../../../../lib/api';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    if (username && password) {
+  const handleSignIn = async () => {
+    setError('');
+
+    if (!username.trim() || !password) {
+      setError('Ingrese su usuario y contraseña.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const session = await authApi.login({ username, password });
+      persistAuthSession(session);
       navigate('/home');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'No se pudo iniciar sesión.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -41,7 +59,7 @@ export default function LoginPage() {
           <p className="mb-1 text-[10px] tracking-[0.4em] text-[#eacea9]/80 font-subtitle">
             LJM SEALINE
           </p>
-          <h1 className="welcome-cursive italic whitespace-nowrap text-4xl md:text-5xl mb-2">
+          <h1 className="login-user-title whitespace-nowrap mb-2">
             Bienvenido a Bordo
           </h1>
 
@@ -53,6 +71,11 @@ export default function LoginPage() {
         {/* FORM */}
         <div className="w-full rounded-3xl bg-[#0a1224]/80 p-10 backdrop-blur-xl border border-white/5 shadow-2xl shadow-black/60">
           <div className="flex flex-col gap-6">
+            {error && (
+              <div className="rounded-xl bg-red-500/20 p-3 text-center text-xs text-red-300 tracking-wide font-subtitle">
+                {error}
+              </div>
+            )}
 
             {/* USERNAME */}
             <div>
@@ -100,6 +123,7 @@ export default function LoginPage() {
             {/* BOTÓN SIGN IN */}
             <button
               onClick={handleSignIn}
+              disabled={isLoading}
               className="mt-4 h-14 rounded-xl
                          bg-[#cbb07a]
                          text-[#0a1224]
@@ -109,9 +133,10 @@ export default function LoginPage() {
                          transition-transform duration-150 ease-in-out
                          hover:-translate-y-px
                          active:translate-y-px
-                         active:scale-[0.99]"
+                         active:scale-[0.99]
+                         disabled:cursor-not-allowed disabled:opacity-70"
             >
-              INICIAR SESIÓN
+              {isLoading ? 'PROCESANDO...' : 'INICIAR SESIÓN'}
             </button>
 
           </div>
@@ -119,11 +144,6 @@ export default function LoginPage() {
 
         {/* LINKS INFERIORES */}
         <div className="mt-8 flex flex-col items-center gap-3 text-[11px] tracking-[0.3em] font-subtitle">
-
-          {/* Olvidaste tu contraseña */}
-          <button className="text-[#eacea9]/60 hover:text-[#eacea9] transition-colors">
-            ¿Olvidaste tu contraseña?
-          </button>
 
           {/* Nuevo: ¿No tienes cuenta? Regístrate */}
           <button 

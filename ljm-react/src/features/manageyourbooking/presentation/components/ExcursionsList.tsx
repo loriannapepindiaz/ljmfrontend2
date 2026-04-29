@@ -1,22 +1,7 @@
 import React from 'react';
 import ExcursionCard from './ExcursionCard';
 
-const excursiones = [
-  {
-    imagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTE5sjPeTwikbzNnIUnFLZCn3DpRfconZUQ4EY10TnJEjyPYpm15aWyUfHJ5DTKQrOYTb65phw1c8AisRGbePpIL49mT9P2emeYGzy5BEYPVAWrWULLDtZujUgyofM1cnLDq-VlhOYlbQJVQqb5fjNTBj6QilPQh4d3v3bxyrFmHDNZJgQXtImCWjGrBYBWlteuaAFWn_xv9JqVHsUZXusUI8pbg9-cW1690kOhqjHLgLTBTbB54ooNvMqVzEF-YOO_OLZnp-zdZoy',
-    nombre: 'Cinque Terre — Yate Privado',
-    fecha: 'Oct 15',
-    puerto: 'La Spezia',
-    estado: 'Confirmado',
-  },
-  {
-    imagen: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBpq-n1XQ8fh9001PkPc50lh71MLaWhuoxJkKdbT7N6HkMAshGAawvNeoECwZ_J74kVZGxS2wTV-v2981FfM1_YwB8av68hGkGSdOa4Jj9RAMtdNpAoggyX0pha3qF11HFsusiFI0VFqun1y9rEEREhJizE6pzCEu0lagARtibju6j5NWt6ELCQXZLwpXsVaBqOfDZDCfZezl26HYJSsb_ANiV9yMlTflDSk_kNUfJs74e2nCF25bcwydQcixH-uXV9s2F-b9x7OKj4',
-    nombre: 'Roma Eterna: Acceso VIP',
-    fecha: 'Oct 18',
-    puerto: 'Civitavecchia',
-    estado: 'Confirmado',
-  },
-];
+const excursiones: Array<{ imagen: string; nombre: string; fecha: string; puerto: string; estado: string }> = [];
 
 const ExcursionsList: React.FC = () => {
   return (
@@ -31,12 +16,17 @@ const ExcursionsList: React.FC = () => {
         </h4>
       </div>
       <div className="space-y-4 mb-6">
-        {excursiones.map((e) => (
+        {excursiones.length === 0 ? (
+          <div className="rounded-lg border border-dashed border-white/10 bg-white/[0.03] px-4 py-8 text-center">
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin excursiones agregadas</p>
+            <p className="mt-2 text-xs text-slate-500">Las excursiones apareceran cuando se seleccionen para esta reserva.</p>
+          </div>
+        ) : excursiones.map((e) => (
           <ExcursionCard key={e.nombre} {...e} />
         ))}
       </div>
       <button className="w-full py-3 rounded-lg border border-[#eacea9]/30 text-[#eacea9] text-xs font-bold hover:bg-[#eacea9]/10 transition-all uppercase tracking-widest">
-        Añadir Más Excursiones
+        Anadir Mas Excursiones
       </button>
     </div>
   );
