@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ConfigSeguridad: React.FC = () => {
+  const { t } = useTranslation();
   const [twoFactor, setTwoFactor] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
@@ -14,25 +16,25 @@ const ConfigSeguridad: React.FC = () => {
     <section className="bg-white rounded-xl shadow-sm border border-slate-200">
       <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
         <span className="material-symbols-outlined text-[#0e1a34]">shield_person</span>
-        <h2 className="text-xl font-bold text-[#0e1a34]">Seguridad</h2>
+        <h2 className="text-xl font-bold text-[#0e1a34]">{t('config.security.title')}</h2>
       </div>
       <div className="p-6 space-y-6">
 
         <div>
-          <h3 className="text-sm font-bold text-slate-800 mb-3">Contraseña</h3>
+          <h3 className="text-sm font-bold text-slate-800 mb-3">{t('config.security.password')}</h3>
           <button
             onClick={() => setShowModal(true)}
             className="w-full py-2.5 px-4 border border-[#0e1a34] text-[#0e1a34] font-bold rounded-lg hover:bg-[#0e1a34] hover:text-white transition-all text-sm"
           >
-            Cambiar Contraseña
+            {t('config.security.changePassword')}
           </button>
-          <p className="text-xs text-slate-400 mt-2 italic">Último cambio hace 3 meses</p>
+          <p className="text-xs text-slate-400 mt-2 italic">{t('config.security.lastChanged')}</p>
         </div>
 
         <div className="flex items-center justify-between p-4 bg-slate-50 rounded-lg">
           <div>
-            <p className="font-bold text-sm text-slate-800">Autenticación de dos factores (2FA)</p>
-            <p className="text-xs text-slate-500">Añade una capa extra de seguridad</p>
+            <p className="font-bold text-sm text-slate-800">{t('config.security.twoFactor')}</p>
+            <p className="text-xs text-slate-500">{t('config.security.twoFactorDesc')}</p>
           </div>
           <button
             onClick={() => setTwoFactor(!twoFactor)}
@@ -60,8 +62,8 @@ const ConfigSeguridad: React.FC = () => {
                   <span className="material-symbols-outlined text-[20px] text-[#0e1a34]">lock</span>
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-[#0e1a34]">Cambiar Contraseña</h4>
-                  <p className="text-[11px] text-[#0e1a34]/40">Ingrese sus credenciales</p>
+                  <h4 className="text-base font-bold text-[#0e1a34]">{t('config.security.modalTitle')}</h4>
+                  <p className="text-[11px] text-[#0e1a34]/40">{t('config.security.modalSubtitle')}</p>
                 </div>
               </div>
               <button
@@ -81,7 +83,7 @@ const ConfigSeguridad: React.FC = () => {
               {/* Contraseña actual */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
-                  Contraseña actual
+                  {t('config.security.currentPassword')}
                 </label>
                 <input
                   type="text"
@@ -91,7 +93,7 @@ const ConfigSeguridad: React.FC = () => {
                   data-form-type="other"
                   readOnly
                   onFocus={(e) => e.target.removeAttribute('readonly')}
-                  placeholder="Ingrese su contraseña actual"
+                  placeholder={t('config.security.currentPasswordPlaceholder')}
                   className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
                   style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                 />
@@ -100,7 +102,7 @@ const ConfigSeguridad: React.FC = () => {
               {/* Nueva contraseña */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
-                  Nueva contraseña
+                  {t('config.security.newPassword')}
                 </label>
                 <div className="relative">
                   <input
@@ -111,7 +113,7 @@ const ConfigSeguridad: React.FC = () => {
                     data-form-type="other"
                     readOnly
                     onFocus={(e) => e.target.removeAttribute('readonly')}
-                    placeholder="Ingrese su nueva contraseña"
+                    placeholder={t('config.security.newPasswordPlaceholder')}
                     className="w-full border border-slate-200 rounded-xl px-4 py-2.5 pr-12 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
                     style={{
                       WebkitTextSecurity: showNewPass ? 'none' : 'disc',
@@ -132,7 +134,7 @@ const ConfigSeguridad: React.FC = () => {
               {/* Confirmar contraseña */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
-                  Confirmar contraseña
+                  {t('config.security.confirmPassword')}
                 </label>
                 <input
                   type="text"
@@ -142,7 +144,7 @@ const ConfigSeguridad: React.FC = () => {
                   data-form-type="other"
                   readOnly
                   onFocus={(e) => e.target.removeAttribute('readonly')}
-                  placeholder="Confirme su nueva contraseña"
+                  placeholder={t('config.security.confirmPasswordPlaceholder')}
                   className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
                   style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                 />
@@ -155,14 +157,14 @@ const ConfigSeguridad: React.FC = () => {
                 onClick={handleClose}
                 className="flex-1 py-3 rounded-xl border border-slate-200 text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all"
               >
-                Cancelar
+                {t('config.security.cancelBtn')}
               </button>
               <button
                 onClick={handleClose}
                 className="flex-1 py-3 rounded-xl bg-[#0e1a34] text-white text-xs font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-[16px]">check</span>
-                Confirmar
+                {t('config.security.confirmBtn')}
               </button>
             </div>
           </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../../home/presentation/components/Navbar';
 import Footer from '../../../home/presentation/components/Footer';
+import BackButton from '../../../../components/BackButton';
+
 import ExpeditionHero from '../components/ExpeditionHero';
 import ResidenceSpecs from '../components/ResidenceSpecs';
 import GastronomyPanel from '../components/GastronomyPanel';
@@ -14,6 +16,7 @@ const AnadirAcompanantePage: React.FC = () => {
   return (
     <div className="bg-[#F6F7F8] text-[#1E2944] min-h-screen">
       <Navbar />
+      <BackButton />
       <main className="pt-32 pb-40 max-w-7xl mx-auto px-6 md:px-12">
         <ExpeditionHero />
 

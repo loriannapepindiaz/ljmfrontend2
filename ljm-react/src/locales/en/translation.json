@@ -1,0 +1,480 @@
+{
+  "sidebar": {
+    "panel": "Admin Panel",
+    "dashboard": "Dashboard",
+    "cruises": "Cruises",
+    "cruises_list": "Cruise List",
+    "cruises_add": "Add Cruise",
+    "reservations": "Reservations",
+    "passengers": "Passengers",
+    "cabins": "Cabins",
+    "employees": "Employees",
+    "employees_list": "Employee List",
+    "employees_add": "Add Employee",
+    "payments": "Payments",
+    "reports": "Reports",
+    "settings": "Settings",
+    "superAdmin": "Super Administrator",
+    "currentTime": "Time",
+    "logout": "Log Out"
+  },
+  "adminHeader": {
+    "addReservation": "Add Reservation",
+    "userAdmin": "Admin User",
+    "superAdmin": "Super Administrator"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "search": "Search reservations, ships...",
+    "stats": {
+      "totalReservations": "Total Reservations",
+      "income": "Income",
+      "activeCruises": "Active Cruises",
+      "newPassengers": "New Passengers"
+    },
+    "quickActions": {
+      "title": "Quick Actions",
+      "newReservation": "New Reservation",
+      "addShip": "Add Ship",
+      "generateReport": "Generate Report",
+      "contactPassenger": "Contact Passenger"
+    },
+    "recentActivity": {
+      "title": "Recent Activity",
+      "filter": "Filter",
+      "filterByDate": "Filter by date",
+      "selectParams": "Select parameters",
+      "day": "Day",
+      "month": "Month",
+      "year": "Year",
+      "dayPlaceholder": "E.g.: 15",
+      "selectMonth": "Select month",
+      "selectYear": "Select year",
+      "clear": "Clear",
+      "applyFilter": "Apply filter",
+      "allMonths": "All months",
+      "allYears": "All years",
+      "colId": "ID",
+      "colPassenger": "Passenger",
+      "colCruise": "Cruise",
+      "colStatus": "Status",
+      "colAmount": "Amount",
+      "empty": "No recent activity",
+      "viewAll": "View all activity"
+    },
+    "upcomingDepartures": {
+      "title": "Upcoming Departures",
+      "empty": "No departures scheduled"
+    }
+  },
+  "reservations": {
+    "title": "Reservation Management",
+    "metrics": {
+      "total": "Total Reservations",
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "totalIncome": "Total Income",
+      "vsLastMonth": "0% vs last month"
+    },
+    "filters": {
+      "all": "All",
+      "confirmed": "Confirmed",
+      "pending": "Pending",
+      "paid": "Paid",
+      "search": "Search by ID, guest or ship..."
+    },
+    "table": {
+      "colId": "Reservation ID",
+      "colGuest": "Guest",
+      "colShip": "Ship",
+      "colCabin": "Cabin",
+      "colStatus": "Status",
+      "colTotal": "Total",
+      "colActions": "Actions",
+      "empty": "No reservations registered",
+      "showing": "Showing {{from}} to {{to}} of {{total}} reservations"
+    }
+  },
+  "fleet": {
+    "title": "Fleet Management",
+    "add": {
+      "breadcrumb": "Fleet Management",
+      "breadcrumbSub": "Add Cruise",
+      "title": "New Luxury Cruise",
+      "subtitle": "Enter the specifications and features of the new vessel.",
+      "basic": {
+        "title": "Basic Information",
+        "cruiseName": "Cruise Name",
+        "fleetId": "Fleet ID / Registration",
+        "verified": "VERIFIED",
+        "capacity": "Capacity (Passengers)",
+        "route": "Assigned Route",
+        "selectRoute": "Select route",
+        "routes": {
+          "mediterranean": "Eastern Mediterranean",
+          "caribbean": "Premium Caribbean",
+          "nordic": "Nordics & Fjords",
+          "none": "No route assigned"
+        }
+      },
+      "tech": {
+        "title": "Technical Specifications",
+        "year": "Year of Construction / Refit",
+        "speed": "Cruise Speed",
+        "knots": "knots",
+        "decks": "Number of Decks"
+      },
+      "facilities": {
+        "title": "Facilities & Gastronomy",
+        "restaurants": "Number of Restaurants",
+        "bars": "Number of Bars / Lounges",
+        "items": {
+          "spa": "SPA & Wellness",
+          "gym": "Gym",
+          "casino": "Casino",
+          "helipad": "Helipad",
+          "theater": "Theater",
+          "pool": "Infinity Pool",
+          "restaurant": "Michelin Rest.",
+          "cinema": "Private Cinema"
+        }
+      },
+      "accommodation": {
+        "title": "Accommodation Configuration",
+        "addType": "Add Type",
+        "colType": "Suite / Room Type",
+        "colQty": "Quantity",
+        "colCapacity": "Max Cap.",
+        "colActions": "Actions"
+      },
+      "sidebar": {
+        "fleetStatus": "Fleet Status",
+        "online": "Online",
+        "configVisibility": "Configure Visibility",
+        "activeNote": "When marked as \"Active\", the cruise will instantly appear in the passenger search engine.",
+        "vis": {
+          "active": "Active for Reservations",
+          "maintenance": "In Maintenance",
+          "inactive": "Inactive / Port"
+        },
+        "multimedia": "Media Gallery",
+        "shipImages": "Ship Images",
+        "dragPhotos": "Drag photos here",
+        "clickSelect": "Or click to select (Max 10 photos)",
+        "promoVideo": "Promotional Video (URL)",
+        "catalogDesc": "Catalog Description",
+        "descPlaceholder": "Describe the elegance and comfort of the vessel..."
+      },
+      "cancelEdit": "Cancel Edit",
+      "saveDraft": "Save Draft",
+      "publish": "Publish to Fleet"
+    },
+    "subtitle": "Monitor and manage the LJM Sealine luxury cruise fleet.",
+    "search": "Search cruise...",
+    "addCruise": "Add Cruise",
+    "tabs": {
+      "allShips": "All Ships",
+      "active": "Active",
+      "maintenance": "In Maintenance",
+      "upcoming": "Upcoming Launches"
+    },
+    "featured": {
+      "title": "Featured Ships",
+      "empty": "No featured ships",
+      "connectDB": "Ships will appear here once the database is connected"
+    },
+    "table": {
+      "title": "Complete Fleet Listing",
+      "viewAll": "View all",
+      "colName": "Ship Name",
+      "colStatus": "Status",
+      "colCapacity": "Capacity",
+      "colInspection": "Last Inspection",
+      "colActions": "Actions",
+      "empty": "No ships registered"
+    }
+  },
+  "cabins": {
+    "title": "Cabin Management",
+    "search": "Search cabin or passenger...",
+    "filters": {
+      "filterBy": "Filter by:",
+      "allShips": "All Ships",
+      "allDecks": "All Decks",
+      "all": "All",
+      "suite": "Suite",
+      "balcony": "Balcony",
+      "seaView": "Sea View",
+      "clear": "Clear"
+    },
+    "metrics": {
+      "total": "Total Cabins",
+      "occupied": "Occupied",
+      "available": "Available",
+      "maintenance": "Maintenance"
+    },
+    "table": {
+      "colNumber": "Cabin No.",
+      "colCategory": "Category",
+      "colStatus": "Status",
+      "colGuest": "Guest Information",
+      "colActions": "Actions",
+      "empty": "No cabins registered",
+      "prev": "Previous",
+      "next": "Next"
+    }
+  },
+  "payments": {
+    "title": "Payment Management",
+    "subtitle": "Monitor and manage all financial transactions of the fleet.",
+    "filters": {
+      "search": "Search by ID, passenger or trip...",
+      "all": "All",
+      "paid": "Paid",
+      "pending": "Pending",
+      "last30Days": "Last 30 days"
+    },
+    "metrics": {
+      "totalIncome": "Total Income",
+      "pending": "Pending Payments",
+      "refunds": "Refunds",
+      "monthlyGrowth": "Monthly Growth"
+    },
+    "table": {
+      "colId": "Payment ID",
+      "colPassenger": "Passenger",
+      "colRoute": "Trip / Route",
+      "colDate": "Date",
+      "colAmount": "Amount",
+      "colStatus": "Status",
+      "colActions": "Actions",
+      "empty": "No transactions registered"
+    }
+  },
+  "passengers": {
+    "title": "Passengers",
+    "subtitle": "Manage elite members and the guest directory",
+    "addPassenger": "Add Passenger",
+    "filters": {
+      "search": "Search by name, ID or trip...",
+      "all": "All",
+      "elite": "Elite Platinum",
+      "gold": "Gold Member",
+      "silver": "Silver",
+      "diamond": "Diamond"
+    },
+    "metrics": {
+      "total": "Total Passengers",
+      "platinum": "Elite Platinum",
+      "gold": "Gold Members",
+      "recent": "Recent Travelers"
+    },
+    "table": {
+      "colDetails": "Passenger Details",
+      "colLoyalty": "Loyalty Status",
+      "colLastTrip": "Last Trip",
+      "colActions": "Actions",
+      "empty": "No passengers registered"
+    }
+  },
+  "employees": {
+    "title": "Employee Management",
+    "add": {
+      "breadcrumb": "Employees",
+      "breadcrumbSub": "Add New Employee",
+      "title": "Add New Employee",
+      "subtitle": "Start the hiring process by entering the required credentials for the elite fleet.",
+      "cancel": "Cancel",
+      "register": "Register Crew Member",
+      "personal": {
+        "title": "Personal Information",
+        "section": "Section 1 of 4",
+        "uploadPhoto": "Upload Photo",
+        "fullName": "Full Name",
+        "birthDate": "Date of Birth",
+        "nationality": "Nationality",
+        "selectCountry": "Select country",
+        "idNumber": "Identification Number",
+        "idPlaceholder": "ID Number / Passport",
+        "phone": "Contact Phone",
+        "emergency": "Emergency Contact",
+        "address": "Residential Address",
+        "addressPlaceholder": "Street, Number, City, ZIP"
+      },
+      "professional": {
+        "title": "Professional Profile & Experience",
+        "role": "Role / Position",
+        "department": "Department",
+        "deptDeck": "Deck",
+        "deptEngine": "Machinery",
+        "deptService": "Service",
+        "certifications": "Certifications & Qualifications",
+        "colCert": "Certificate",
+        "colIssuer": "Issuing Authority",
+        "colExpiry": "Expiration",
+        "addCert": "Add Certification",
+        "experience": "Previous Experience / Notes",
+        "experiencePlaceholder": "Briefly describe the relevant work history or additional recruitment notes..."
+      },
+      "docs": {
+        "title": "Document Repository",
+        "required": "Required Documents",
+        "manager": "Document Upload Manager",
+        "dragFiles": "Drag files or click to browse",
+        "passport": "Valid Passport",
+        "maritime": "Maritime License (COC)",
+        "medical": "Medical Certificate (ENG1)",
+        "logbook": "Seafarer's Record Book",
+        "background": "Criminal Background Check"
+      },
+      "contract": {
+        "title": "Assignment & Contract",
+        "subtitle": "Voyage & Legal Assignment",
+        "ship": "Assigned Vessel",
+        "contractType": "Contract Type",
+        "indefinite": "Indefinite",
+        "campaign": "Campaign",
+        "startDate": "Start Date",
+        "endDate": "End Date (Est.)",
+        "shift": "Shift / Rotation",
+        "homePort": "Home Port",
+        "insurance": "Medical Insurance Details",
+        "insurancePlaceholder": "Policy No. / Coverage",
+        "legalNote": "By saving this profile, you confirm that all maritime credentials have been verified according to international STCW standards and company policy."
+      },
+      "status": {
+        "title": "Record Status",
+        "completed": "Completed",
+        "pending": "Mandatory fields are still pending in the Professional Profile and Documentation sections."
+      }
+    },
+    "subtitle": "Monitor and manage your maritime workforce across all vessels.",
+    "addEmployee": "Add Employee",
+    "metrics": {
+      "total": "Total Employees",
+      "active": "Active Crew",
+      "onLeave": "Staff on Leave",
+      "vacant": "Vacant Positions"
+    },
+    "table": {
+      "title": "Employee Directory",
+      "search": "Search name, role or ship...",
+      "filterTitle": "Filter employees",
+      "filterParams": "Select parameters",
+      "statusLabel": "Status",
+      "departmentLabel": "Department",
+      "clear": "Clear",
+      "applyFilter": "Apply filter",
+      "statusActive": "Active",
+      "statusOnLeave": "On Leave",
+      "statusTraining": "In Training",
+      "statusOffDuty": "Off Duty",
+      "deptDeck": "Deck",
+      "deptEntertainment": "Entertainment",
+      "deptCulinary": "Culinary",
+      "deptEngineering": "Engineering",
+      "deptHospitality": "Hospitality",
+      "colEmployee": "Employee",
+      "colDepartment": "Department / Ship",
+      "colStatus": "Status",
+      "colPerformance": "Performance",
+      "colActions": "Actions",
+      "empty": "No employees registered"
+    }
+  },
+  "reports": {
+    "title": "Reports & Analytics",
+    "subtitle": "Detailed performance summary and operational metrics.",
+    "selectStartMonth": "Select start month",
+    "selectEndMonth": "Select end month",
+    "resetYear": "Reset to current year",
+    "months": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    "monthsShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "charts": {
+      "incomeByService": {
+        "title": "Income by Service",
+        "noData": "No data",
+        "cruises": "Cruises",
+        "dining": "Dining",
+        "excursions": "Excursions",
+        "spa": "Spa & Wellness"
+      },
+      "occupancy": {
+        "title": "Occupancy by Cruise",
+        "last6months": "Last 6 months",
+        "fullYear": "Full year",
+        "empty": "No cruises registered",
+        "connectDB": "Data will appear here once the DB is connected"
+      },
+      "trend": {
+        "title": "Annual Revenue Trend",
+        "current": "Current",
+        "noData": "No data available",
+        "connectDB": "Revenue will appear here once the DB is connected"
+      }
+    },
+    "kpis": {
+      "monthlyIncome": "Monthly Income",
+      "occupancyRate": "Occupancy Rate",
+      "satisfaction": "Customer Satisfaction",
+      "reservationGrowth": "Reservation Growth"
+    }
+  },
+  "config": {
+    "title": "Settings",
+    "subtitle": "Manage your profile, security and system preferences for a personalized experience.",
+    "cancel": "Cancel",
+    "applyAll": "Apply All",
+    "profile": {
+      "title": "User Profile",
+      "fullName": "Full Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email Address",
+      "emailPlaceholder": "email@ljmsealine.com",
+      "systemRole": "System Role",
+      "superAdmin": "Super Administrator",
+      "saveChanges": "Save Changes"
+    },
+    "security": {
+      "title": "Security",
+      "password": "Password",
+      "changePassword": "Change Password",
+      "lastChanged": "Last changed 3 months ago",
+      "twoFactor": "Two-factor authentication (2FA)",
+      "twoFactorDesc": "Adds an extra layer of security",
+      "modalTitle": "Change Password",
+      "modalSubtitle": "Enter your credentials",
+      "currentPassword": "Current password",
+      "currentPasswordPlaceholder": "Enter your current password",
+      "newPassword": "New password",
+      "newPasswordPlaceholder": "Enter your new password",
+      "confirmPassword": "Confirm password",
+      "confirmPasswordPlaceholder": "Confirm your new password",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Confirm"
+    },
+    "notifications": {
+      "title": "Notifications",
+      "newReservations": "New Reservations",
+      "newReservationsDesc": "Email and Push",
+      "shipStatus": "Ship Status",
+      "shipStatusDesc": "Maintenance alerts",
+      "weeklyReports": "Weekly Reports",
+      "weeklyReportsDesc": "Income summary",
+      "email": "Email",
+      "push": "Push"
+    },
+    "preferences": {
+      "title": "System Preferences",
+      "language": "Language",
+      "timezone": "Time Zone",
+      "theme": "Visual Theme",
+      "light": "Light",
+      "dark": "Dark",
+      "save": "Save preferences",
+      "saved": "Saved",
+      "currentTime": "Current time",
+      "appliesImmediately": "Applied immediately"
+    }
+  }
+}

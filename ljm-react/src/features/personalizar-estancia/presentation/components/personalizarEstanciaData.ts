@@ -55,7 +55,7 @@ export const stayOptions: Option[] = [
 export const cardImages = {
   hero: "https://lh3.googleusercontent.com/aida-public/AB6AXuDrwxxCsENEJyhmwmeZc6kF5z5L9icIM1ZyctBwGkk3mZK2m4DueO1lKx47Apm8tM8gfAf-H2vEWmRc_f5gq6UnF1whZUfGsSaZCV-j88-s5HqxV_Xtqu_-vMamjhdAuq5BAuQFJ-OT75BRM7PTNU12Fj24Be3PgokBqZ87UlGAZ2t92VdABCp4e_H3C71kRMRpiv7UC6QtOPGBtXj4nmPlp0OhWbnALWs0k-bp-7k6tPLnttks-pW3jE1q_pNghzNIfWvlyv_663Nw",
   pets:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1200&q=80",
   petsFallback:
     "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=1200&q=80",
   welcome:

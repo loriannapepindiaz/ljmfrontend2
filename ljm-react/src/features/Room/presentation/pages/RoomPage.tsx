@@ -1,7 +1,7 @@
 import { useState, type FC } from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import RoomLayout from "../components/RoomLayout";
-import RoomHeader from "../components/RoomHeader";
+import BackButton from '../../../../components/BackButton';
 import SectionTitle from "../components/SectionTitle";
 import ExperienceCard from "../components/ExperienceCard";
 import Navbar from "../../../home/presentation/components/Navbar";
@@ -53,25 +53,24 @@ const suites: Suite[] = [
 
   return (
     <div className="flex flex-col min-h-screen bg-background-dark overflow-x-hidden">
-      {/* Navbar con fondo sólido */}
       <div className="bg-[#0e1a34] w-full z-50">
         <Navbar />
       </div>
 
+      <BackButton />
+
       <main className="flex-1 relative">
-        {/* Fondo de imagen de la cubierta del barco */}
         <div className="fixed inset-0 z-0">
-          <img 
-            alt="Luxury cruise background" 
-            className="w-full h-full object-cover" 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC452Pu70ahp8xhmTebKdEz4fs6mG964FtpeFL1U5001s3JZbsgQgZJVGyxS1lxnHqyqvGMSl8olisyBSMjccvpKAqRApqM3ocCqvxYXcSRN9dUlQl-Sn4yzlddCpdnFYs1bq3LTCujhiT3oAer_G2-YVueQcf4g4_tYvnNfe0b9ziLSYO_NJgvU6nIMqsoziJcpyekFhl3t4UdTuJWGl5P_ekT8K1XdTkU_2tZ3JDs9IchuSSxccleZeP-qQ2QP4bvoHAjxxVUx80" 
+          <img
+            alt="Luxury cruise background"
+            className="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC452Pu70ahp8xhmTebKdEz4fs6mG964FtpeFL1U5001s3JZbsgQgZJVGyxS1lxnHqyqvGMSl8olisyBSMjccvpKAqRApqM3ocCqvxYXcSRN9dUlQl-Sn4yzlddCpdnFYs1bq3LTCujhiT3oAer_G2-YVueQcf4g4_tYvnNfe0b9ziLSYO_NJgvU6nIMqsoziJcpyekFhl3t4UdTuJWGl5P_ekT8K1XdTkU_2tZ3JDs9IchuSSxccleZeP-qQ2QP4bvoHAjxxVUx80"
           />
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
 
         <div className="relative z-10 py-12 px-4 md:px-8 max-w-7xl mx-auto w-full flex justify-center">
           <RoomLayout>
-            <RoomHeader />
             
             {/* Contenedor con fondo sólido Navy */}
             <div className="flex flex-col gap-10 p-6 md:p-12 relative bg-[#0e1a34] rounded-b-xl border-t border-accent/10">

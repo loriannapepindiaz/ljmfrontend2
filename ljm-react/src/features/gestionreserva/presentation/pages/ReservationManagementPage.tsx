@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import AdminSidebar from '../components/AdminSidebar';
 import AdminHeader from '../components/AdminHeader';
 import MetricsGrid from '../components/MetricsGrid';
@@ -8,23 +9,24 @@ import type { Reservation } from '../components/ReservationTableFilters';
 
 const MOCK_RESERVATIONS: Reservation[] = [];
 
-const METRICS = [
-  { label: 'Total Reservas',   value: '0'    },
-  { label: 'Confirmadas',      value: '0'    },
-  { label: 'Pendientes',       value: '0'    },
-  { label: 'Ingresos Totales', value: 'R$ 0' },
-];
-
 const ReservationManagementPage: React.FC = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
+
+  const METRICS = [
+    { label: t('reservations.metrics.total'),       value: '0',    icon: 'calendar_month',  trend: '0%', trendUp: true,  trendText: t('reservations.metrics.vsLastMonth') },
+    { label: t('reservations.metrics.confirmed'),   value: '0',    icon: 'check_circle',    trend: '0%', trendUp: true,  trendText: '0%' },
+    { label: t('reservations.metrics.pending'),     value: '0',    icon: 'hourglass_empty', trend: '0%', trendUp: false, trendText: '0%' },
+    { label: t('reservations.metrics.totalIncome'), value: 'R$ 0', icon: 'attach_money',    trend: '0%', trendUp: true,  trendText: '0%' },
+  ];
 
   return (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
       <main className="flex-1 flex flex-col overflow-hidden bg-[#f8fafc]">
         <AdminHeader
-          title="Gestión de Reservas"
-          onAddClick={() => alert('Añadir reserva')}
+          title={t('reservations.title')}
+          onAddClick={() => alert(t('adminHeader.addReservation'))}
         />
         <div className="flex-1 overflow-auto p-8">
           <MetricsGrid metrics={METRICS} />

@@ -1,7 +1,8 @@
 import { useState, type FC } from "react";
 import { useNavigate } from "react-router-dom";
-import Navbar from "../../../home/presentation/components/Navbar"; 
-import Footer from "../../../home/presentation/components/Footer"; 
+import Navbar from "../../../home/presentation/components/Navbar";
+import Footer from "../../../home/presentation/components/Footer";
+import BackButton from '../../../../components/BackButton';
 import AccommodationCard from "../components/AccommodationCard";
 import ExperienceRow from "../components/ExperienceRow";
 import SummaryBar from "../components/SummaryBar";
@@ -51,6 +52,8 @@ const PersonalizationPage: FC = () => {
       <div className="fixed top-0 w-full z-[100] bg-[#0e1a34]">
         <Navbar />
       </div>
+
+      <BackButton />
 
       <main className="flex-1 bg-white pt-24 md:pt-32 pb-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-20">

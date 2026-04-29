@@ -1,34 +1,81 @@
+import React from 'react';
+import { MapContainer, TileLayer, Polyline, CircleMarker, Tooltip } from 'react-leaflet';
+
+const stops = [
+  { name: 'Athens',    position: [37.9838, 23.7275] as [number, number] },
+  { name: 'Santorini', position: [36.3932, 25.4615] as [number, number] },
+  { name: 'Mykonos',   position: [37.4467, 25.3289] as [number, number] },
+];
+
+const routePositions = stops.map((s) => s.position);
+
 export const VoyageRouteMap = () => {
   return (
-    <div className="lg:w-1/2 flex flex-col h-full bg-midnight-blue/40 rounded-[2.5rem] border border-white/10 p-10 relative overflow-hidden">
-      <div className="relative z-10 h-full flex flex-col">
-        <div className="flex justify-between items-center mb-10">
+    <div className="lg:w-1/2 flex flex-col bg-midnight-blue/40 rounded-[2.5rem] border border-white/10 p-10 relative overflow-hidden">
+      <div className="flex flex-col flex-1 relative z-10">
+
+        <div className="flex justify-between items-center mb-6 flex-shrink-0">
           <h4 className="text-xs font-bold tracking-widest uppercase text-pearl-beige">Ruta del Viaje</h4>
-          <span className="text-[10px] text-primary bg-primary/10 px-4 py-1.5 rounded-full border border-primary/30 uppercase tracking-[0.2em] font-bold">Mapa Interactivo</span>
-        </div>
-        
-        <div className="flex-grow relative min-h-[340px] flex items-center justify-center">
-          <svg className="w-full h-full drop-shadow-2xl" fill="none" viewBox="0 0 500 400">
-            <path className="map-line" d="M50 350C100 300 200 320 250 200C300 80 400 120 450 50" stroke="#C5A059" strokeWidth="2.5" strokeDasharray="8" />
-            <circle cx="50" cy="350" fill="#C5A059" r="7" />
-            <circle cx="250" cy="200" fill="#C5A059" r="8" />
-            <circle cx="450" cy="50" fill="#C5A059" r="7" />
-            <text fill="white" x="68" y="355" className="text-[12px] font-bold">ATHENS</text>
-            <text fill="#eacea9" x="268" y="205" className="text-[12px] font-bold">SANTORINI</text>
-          </svg>
+          <span className="text-[10px] text-primary bg-primary/10 px-4 py-1.5 rounded-full border border-primary/30 uppercase tracking-[0.2em] font-bold">
+            Mapa Interactivo
+          </span>
         </div>
 
-        <div className="mt-8 space-y-4">
+        <div className="flex-1 rounded-2xl overflow-hidden isolate" style={{ minHeight: '360px', pointerEvents: 'none' }}>
+          <MapContainer
+            center={[37.2, 24.5]}
+            zoom={7}
+            style={{ height: '100%', width: '100%', minHeight: '360px' }}
+            zoomControl={false}
+            scrollWheelZoom={false}
+            dragging={false}
+            touchZoom={false}
+            doubleClickZoom={false}
+            keyboard={false}
+            attributionControl={false}
+          >
+            <TileLayer
+              url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+              attribution='&copy; <a href="https://carto.com/">CARTO</a>'
+            />
+
+            <Polyline
+              positions={routePositions}
+              pathOptions={{ color: '#C5A059', weight: 2, dashArray: '8 5', opacity: 0.9 }}
+            />
+
+            {stops.map((stop, i) => (
+              <CircleMarker
+                key={stop.name}
+                center={stop.position}
+                radius={i === 0 || i === stops.length - 1 ? 7 : 5}
+                pathOptions={{ color: '#C5A059', fillColor: '#C5A059', fillOpacity: 1, weight: 2 }}
+              >
+                <Tooltip
+                  permanent
+                  direction="top"
+                  offset={[0, -10]}
+                  className="leaflet-label-custom"
+                >
+                  {stop.name}
+                </Tooltip>
+              </CircleMarker>
+            ))}
+          </MapContainer>
+        </div>
+
+        <div className="mt-6 space-y-4 flex-shrink-0">
           <div className="flex justify-between text-[11px] text-pearl-beige/80 font-bold uppercase tracking-widest">
             <span>Días 1-2: Golfo Sarónico</span>
             <span className="text-primary">En Tránsito</span>
           </div>
           <div className="w-full h-[3px] bg-white/10 rounded-full overflow-hidden">
-            <div className="bg-primary w-2/3 h-full shadow-[0_0_10px_rgba(197,160,89,0.5)]"></div>
+            <div className="bg-primary w-2/3 h-full shadow-[0_0_10px_rgba(197,160,89,0.5)]" />
           </div>
         </div>
+
       </div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/10 rounded-full blur-[100px]"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-primary/10 rounded-full blur-[100px]" />
     </div>
   );
 };

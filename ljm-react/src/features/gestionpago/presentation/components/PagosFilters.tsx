@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+const FILTER_KEYS = ['all', 'paid', 'pending'] as const;
+type FilterKey = typeof FILTER_KEYS[number];
 
 const PagosFilters: React.FC = () => {
-  const [activeFilter, setActiveFilter] = useState('Todos');
-  const filters = ['Todos', 'Pagados', 'Pendientes'];
+  const { t } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
 
   return (
     <div className="p-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-4">
@@ -14,13 +18,13 @@ const PagosFilters: React.FC = () => {
           <input
             type="text"
             className="w-full pl-10 pr-4 py-2 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-[#eacea9] outline-none transition-all"
-            placeholder="Buscar por ID, pasajero o viaje..."
+            placeholder={t('payments.filters.search')}
           />
         </div>
 
         {/* Filtros de estado */}
         <div className="flex items-center bg-slate-50 rounded-xl p-1 border border-slate-100">
-          {filters.map((f) => (
+          {FILTER_KEYS.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
@@ -30,7 +34,7 @@ const PagosFilters: React.FC = () => {
                   : 'text-slate-500 hover:text-[#0e1a34]'
               }`}
             >
-              {f}
+              {t(`payments.filters.${f}`)}
             </button>
           ))}
         </div>
@@ -39,7 +43,7 @@ const PagosFilters: React.FC = () => {
       {/* Rango de fechas */}
       <button className="flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-medium hover:bg-slate-50 transition-colors">
         <span className="material-symbols-outlined text-lg text-slate-400">calendar_today</span>
-        <span>Últimos 30 días</span>
+        <span>{t('payments.filters.last30Days')}</span>
       </button>
     </div>
   );

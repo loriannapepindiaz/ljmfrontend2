@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const categories = ['Todas', 'Suite', 'Balcón', 'Vista al Mar'];
+const CATEGORY_KEYS = ['all', 'suite', 'balcony', 'seaView'] as const;
+type CategoryKey = typeof CATEGORY_KEYS[number];
 
 const CabinasFilters: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('Todas');
+  const { t } = useTranslation();
+  const [activeCategory, setActiveCategory] = useState<CategoryKey>('all');
   const [ship, setShip] = useState('');
   const [deck, setDeck] = useState('');
   const [openDropdown, setOpenDropdown] = useState<'ship' | 'deck' | null>(null);
 
   const handleClear = () => {
-    setActiveCategory('Todas');
+    setActiveCategory('all');
     setShip('');
     setDeck('');
     setOpenDropdown(null);
@@ -19,7 +22,7 @@ const CabinasFilters: React.FC = () => {
     <div className="bg-white px-4 py-3 rounded-xl border border-[#0e1a34]/10 mb-8 shadow-sm flex items-center gap-2">
 
       <span className="text-sm font-bold text-[#0e1a34]/50 whitespace-nowrap shrink-0">
-        Filtrar por:
+        {t('cabins.filters.filterBy')}
       </span>
 
       {/* Dropdown Barco */}
@@ -32,7 +35,7 @@ const CabinasFilters: React.FC = () => {
               : 'bg-white text-[#0e1a34]/60 border-slate-200 hover:border-[#eacea9]'
           }`}
         >
-          {ship || 'Todos los Barcos'}
+          {ship || t('cabins.filters.allShips')}
           <span className="material-symbols-outlined text-[16px]">
             {openDropdown === 'ship' ? 'expand_less' : 'expand_more'}
           </span>
@@ -47,7 +50,7 @@ const CabinasFilters: React.FC = () => {
                   !ship ? 'bg-[#eacea9] text-[#0e1a34] font-bold' : 'text-[#0e1a34]/50 hover:bg-[#eacea9]/10'
                 }`}
               >
-                Todos los Barcos
+                {t('cabins.filters.allShips')}
               </button>
             </div>
           </>
@@ -64,7 +67,7 @@ const CabinasFilters: React.FC = () => {
               : 'bg-white text-[#0e1a34]/60 border-slate-200 hover:border-[#eacea9]'
           }`}
         >
-          {deck || 'Todas las Cubiertas'}
+          {deck || t('cabins.filters.allDecks')}
           <span className="material-symbols-outlined text-[16px]">
             {openDropdown === 'deck' ? 'expand_less' : 'expand_more'}
           </span>
@@ -79,7 +82,7 @@ const CabinasFilters: React.FC = () => {
                   !deck ? 'bg-[#eacea9] text-[#0e1a34] font-bold' : 'text-[#0e1a34]/50 hover:bg-[#eacea9]/10'
                 }`}
               >
-                Todas las Cubiertas
+                {t('cabins.filters.allDecks')}
               </button>
             </div>
           </>
@@ -87,7 +90,7 @@ const CabinasFilters: React.FC = () => {
       </div>
 
       {/* Categorías */}
-      {categories.map((c) => (
+      {CATEGORY_KEYS.map((c) => (
         <button
           key={c}
           onClick={() => setActiveCategory(c)}
@@ -97,7 +100,7 @@ const CabinasFilters: React.FC = () => {
               : 'bg-white border border-slate-200 text-[#0e1a34]/60 hover:border-[#eacea9]'
           }`}
         >
-          {c}
+          {t(`cabins.filters.${c}`)}
         </button>
       ))}
 
@@ -107,7 +110,7 @@ const CabinasFilters: React.FC = () => {
         className="ml-auto flex items-center gap-1 text-sm font-bold text-[#0e1a34]/50 hover:text-[#0e1a34] transition-colors whitespace-nowrap shrink-0"
       >
         <span className="material-symbols-outlined text-[16px]">filter_list</span>
-        Limpiar
+        {t('cabins.filters.clear')}
       </button>
 
     </div>

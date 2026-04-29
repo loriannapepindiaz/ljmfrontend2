@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PagosTable: React.FC = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -10,20 +12,20 @@ const PagosTable: React.FC = () => {
         <table className="w-full text-left">
           <thead className="bg-slate-50/50 border-b border-slate-100">
             <tr>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">ID Pago</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Pasajero</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Viaje / Ruta</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Fecha</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Monto</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">Estado</th>
-              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Acciones</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('payments.table.colId')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('payments.table.colPassenger')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('payments.table.colRoute')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('payments.table.colDate')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">{t('payments.table.colAmount')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-center">{t('payments.table.colStatus')}</th>
+              <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('payments.table.colActions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-50">
             <tr>
               <td colSpan={7} className="px-6 py-16 text-center text-slate-400 text-sm">
                 <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">payments</span>
-                No hay transacciones registradas
+                {t('payments.table.empty')}
               </td>
             </tr>
           </tbody>
@@ -32,7 +34,7 @@ const PagosTable: React.FC = () => {
 
       <div className="p-6 border-t border-slate-100 flex items-center justify-between">
         <p className="text-sm text-slate-500 font-medium">
-          Sin transacciones registradas
+          {t('payments.table.empty')}
         </p>
         <div className="flex gap-2">
           <button

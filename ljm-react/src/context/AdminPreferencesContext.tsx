@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import i18n from '../i18next';
 import {
   LANGUAGE_OPTIONS,
   TIMEZONE_OPTIONS,
@@ -327,6 +328,7 @@ export const AdminPreferencesProvider: React.FC<{ children: React.ReactNode }> =
 
   const setLanguage = (lang: Language) => {
     localStorage.setItem('idioma', lang);
+    i18n.changeLanguage(lang);
     setLanguageState(lang);
   };
 

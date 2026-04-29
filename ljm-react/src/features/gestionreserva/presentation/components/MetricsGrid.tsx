@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Metric {
   label: string;
@@ -13,41 +14,6 @@ interface MetricsGridProps {
   metrics?: Metric[];
 }
 
-const DEFAULT_METRICS: Metric[] = [
-  {
-    label: 'Total Reservas',
-    value: '0',
-    icon: 'calendar_month',
-    trend: '0%',
-    trendUp: true,
-    trendText: '0% vs mes anterior',
-  },
-  {
-    label: 'Confirmadas',
-    value: '0',
-    icon: 'check_circle',
-    trend: '0%',
-    trendUp: true,
-    trendText: '0%',
-  },
-  {
-    label: 'Pendientes',
-    value: '0',
-    icon: 'hourglass_empty',
-    trend: '0%',
-    trendUp: false,
-    trendText: '0%',
-  },
-  {
-    label: 'Ingresos Totales',
-    value: 'R$ 0',
-    icon: 'attach_money',
-    trend: '0%',
-    trendUp: true,
-    trendText: '0%',
-  },
-];
-
 const iconColors: Record<string, string> = {
   calendar_month:  'text-slate-500',
   check_circle:    'text-green-500',
@@ -55,10 +21,49 @@ const iconColors: Record<string, string> = {
   attach_money:    'text-blue-500',
 };
 
-const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics = DEFAULT_METRICS }) => {
+const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics }) => {
+  const { t } = useTranslation();
+
+  const DEFAULT_METRICS: Metric[] = [
+    {
+      label: t('reservations.metrics.total'),
+      value: '0',
+      icon: 'calendar_month',
+      trend: '0%',
+      trendUp: true,
+      trendText: '0% vs mes anterior',
+    },
+    {
+      label: t('reservations.metrics.confirmed'),
+      value: '0',
+      icon: 'check_circle',
+      trend: '0%',
+      trendUp: true,
+      trendText: '0%',
+    },
+    {
+      label: t('reservations.metrics.pending'),
+      value: '0',
+      icon: 'hourglass_empty',
+      trend: '0%',
+      trendUp: false,
+      trendText: '0%',
+    },
+    {
+      label: t('reservations.metrics.totalIncome'),
+      value: 'R$ 0',
+      icon: 'attach_money',
+      trend: '0%',
+      trendUp: true,
+      trendText: '0%',
+    },
+  ];
+
+  const resolvedMetrics = metrics ?? DEFAULT_METRICS;
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-      {metrics.map((metric) => (
+      {resolvedMetrics.map((metric) => (
         <div
           key={metric.label}
           className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import AdminSidebar from '../../../gestionreserva/presentation/components/AdminSidebar';
 import FormHeader from '../components/FormHeader';
 import PersonalInfoSection from '../components/PersonalInfoSection';
@@ -7,17 +8,18 @@ import DocumentRepository from '../components/DocumentRepository';
 import AssignmentContractSidebar from '../components/AssignmentContractSidebar';
 
 const AgregarEmpleadoPage: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="flex h-screen overflow-hidden bg-[#f6f7f8]">
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto">
 
-        {/* Top bar */}
         <header className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-100 flex justify-between items-center h-16 px-8">
           <nav className="flex text-[10px] font-bold uppercase tracking-widest text-slate-500">
-            <span>Empleados</span>
+            <span>{t('employees.add.breadcrumb')}</span>
             <span className="mx-2">/</span>
-            <span className="text-[#0e1a34]">Añadir Nuevo Empleado</span>
+            <span className="text-[#0e1a34]">{t('employees.add.breadcrumbSub')}</span>
           </nav>
           <div className="flex items-center gap-6">
             <div className="relative">
@@ -25,7 +27,7 @@ const AgregarEmpleadoPage: React.FC = () => {
               <input
                 type="text"
                 className="bg-slate-100 border-none text-xs rounded-full pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-[#eacea9] outline-none"
-                placeholder="Buscar en el manifiesto..."
+                placeholder={t('employees.table.search')}
               />
             </div>
             <div className="flex items-center gap-4 text-slate-400">
@@ -46,7 +48,6 @@ const AgregarEmpleadoPage: React.FC = () => {
           </div>
         </header>
 
-        {/* Contenido */}
         <div className="p-8 max-w-[1500px] mx-auto">
           <FormHeader />
           <div className="grid grid-cols-12 gap-8">

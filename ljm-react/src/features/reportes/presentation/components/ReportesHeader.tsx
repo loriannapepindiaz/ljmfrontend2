@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 
-const MONTHS = [
-  'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-  'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-];
-
 const ReportesHeader: React.FC = () => {
+  const { t } = useTranslation();
   const { timezone } = useAdminPreferences();
   const currentYear = Number(
     new Intl.DateTimeFormat('en-US', { year: 'numeric', timeZone: timezone }).format(new Date()),
@@ -18,6 +15,8 @@ const ReportesHeader: React.FC = () => {
   const [endYear, setEndYear] = useState(currentYear);
   const [selecting, setSelecting] = useState<'start' | 'end'>('start');
   const [viewYear, setViewYear] = useState(currentYear);
+
+  const MONTHS = t('reports.months', { returnObjects: true }) as string[];
 
   const formatDate = (month: number, year: number) => {
     return `01 ${MONTHS[month].slice(0, 3)}, ${year}`;
@@ -52,8 +51,8 @@ const ReportesHeader: React.FC = () => {
   return (
     <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
       <div>
-        <h2 className="text-3xl font-bold text-[#0e1a34]">Informes y Análisis</h2>
-        <p className="text-slate-500 mt-1">Resumen detallado de rendimiento y métricas operativas.</p>
+        <h2 className="text-3xl font-bold text-[#0e1a34]">{t('reports.title')}</h2>
+        <p className="text-slate-500 mt-1">{t('reports.subtitle')}</p>
       </div>
 
       <div className="relative">
@@ -95,7 +94,7 @@ const ReportesHeader: React.FC = () => {
 
               {/* Indicador de selección */}
               <p className="text-[11px] font-bold text-[#0e1a34]/40 uppercase tracking-wider text-center mb-3">
-                {selecting === 'start' ? 'Selecciona mes de inicio' : 'Selecciona mes de fin'}
+                {selecting === 'start' ? t('reports.selectStartMonth') : t('reports.selectEndMonth')}
               </p>
 
               {/* Grid de meses */}
@@ -136,7 +135,7 @@ const ReportesHeader: React.FC = () => {
                 }}
                 className="mt-3 w-full py-2 rounded-xl border border-slate-200 text-xs font-bold text-[#0e1a34]/50 hover:bg-slate-50 transition-all"
               >
-                Restablecer al año actual
+                {t('reports.resetYear')}
               </button>
 
             </div>

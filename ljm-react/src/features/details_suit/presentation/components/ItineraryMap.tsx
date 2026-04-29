@@ -1,5 +1,14 @@
 // features/details_suit/presentation/components/ItineraryMap.tsx
 import React from 'react';
+import { MapContainer, TileLayer, Polyline, CircleMarker, Tooltip } from 'react-leaflet';
+
+const stops = [
+  { name: 'Barcelona', position: [41.3851, 2.1734] as [number, number] },
+  { name: 'Roma',      position: [41.9028, 12.4964] as [number, number] },
+  { name: 'Venecia',   position: [45.4408, 12.3155] as [number, number] },
+];
+
+const routePositions = stops.map((s) => s.position);
 
 const ItineraryMap: React.FC = () => {
   return (
@@ -16,59 +25,47 @@ const ItineraryMap: React.FC = () => {
         </span>
       </div>
 
-      <div className="map-container relative h-[380px] rounded-[2rem] overflow-hidden bg-night-blue shadow-xl">
-        {/* Fondo degradado oscuro */}
-        <div className="absolute inset-0 bg-gradient-to-b from-night-blue via-[#0D1B2A] to-[#0a0f18]" />
-
-        {/* Línea de ruta SVG */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#C5A059" stopOpacity="0.8" />
-              <stop offset="50%" stopColor="#C5A059" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="#C5A059" stopOpacity="0.8" />
-            </linearGradient>
-          </defs>
-          <path
-            className="route-path"
-            d="M100,280 Q250,240 350,200 T700,120"
-            fill="none"
-            stroke="url(#routeGradient)"
-            strokeDasharray="6,4"
-            strokeWidth="2"
-            opacity="0.6"
+      <div className="rounded-[2rem] overflow-hidden shadow-xl h-[380px] isolate" style={{ pointerEvents: 'none' }}>
+        <MapContainer
+          center={[43.5, 7.5]}
+          zoom={5}
+          style={{ height: '100%', width: '100%' }}
+          zoomControl={false}
+          scrollWheelZoom={false}
+          dragging={false}
+          touchZoom={false}
+          doubleClickZoom={false}
+          keyboard={false}
+          attributionControl={false}
+        >
+          <TileLayer
+            url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://carto.com/">CARTO</a>'
           />
-        </svg>
 
-        {/* Punto Barcelona (Inicio) */}
-        <div className="absolute bottom-[30%] left-[12%] flex flex-col items-center z-10">
-          <div className="bg-night-blue border border-pearl-beige/40 px-3 py-1.5 rounded-full mb-3">
-            <p className="text-[8px] text-pearl-beige font-bold uppercase tracking-wider">
-              Barcelona
-            </p>
-          </div>
-          <div className="w-2.5 h-2.5 bg-pearl-beige rounded-full shadow-lg shadow-pearl-beige/40" />
-        </div>
+          <Polyline
+            positions={routePositions}
+            pathOptions={{ color: '#C5A059', weight: 2, dashArray: '8 5', opacity: 0.9 }}
+          />
 
-        {/* Punto Roma (Centro) */}
-        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 flex flex-col items-center z-10">
-          <div className="bg-night-blue border border-pearl-beige/40 px-3 py-1.5 rounded-full mb-3">
-            <p className="text-[8px] text-pearl-beige font-bold uppercase tracking-wider">
-              Roma
-            </p>
-          </div>
-          <div className="w-1.5 h-1.5 bg-maroon-gold rounded-full shadow-lg shadow-maroon-gold/40" />
-        </div>
-
-        {/* Punto Venecia (Final) */}
-        <div className="absolute top-[25%] right-[12%] flex flex-col items-center z-10">
-          <div className="bg-night-blue border border-pearl-beige/40 px-3 py-1.5 rounded-full mb-3">
-            <p className="text-[8px] text-pearl-beige font-bold uppercase tracking-wider">
-              Venecia
-            </p>
-          </div>
-          <div className="w-2.5 h-2.5 bg-pearl-beige rounded-full shadow-lg shadow-pearl-beige/40" />
-        </div>
+          {stops.map((stop, i) => (
+            <CircleMarker
+              key={stop.name}
+              center={stop.position}
+              radius={i === 0 || i === stops.length - 1 ? 7 : 5}
+              pathOptions={{ color: '#C5A059', fillColor: '#C5A059', fillOpacity: 1, weight: 2 }}
+            >
+              <Tooltip
+                permanent
+                direction="top"
+                offset={[0, -10]}
+                className="leaflet-label-custom"
+              >
+                {stop.name}
+              </Tooltip>
+            </CircleMarker>
+          ))}
+        </MapContainer>
       </div>
     </div>
   );

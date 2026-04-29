@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface NotifItem {
-  label: string;
-  desc: string;
+  labelKey: string;
+  descKey: string;
   email: boolean;
   push: boolean;
 }
 
 const ConfigNotificaciones: React.FC = () => {
+  const { t } = useTranslation();
+
   const [notifs, setNotifs] = useState<NotifItem[]>([
-    { label: 'Nuevas Reservas',      desc: 'Email y Push',             email: false, push: true  },
-    { label: 'Estado de los Barcos', desc: 'Alertas de mantenimiento', email: true,  push: true  },
-    { label: 'Reportes Semanales',   desc: 'Resumen de ingresos',      email: true,  push: false },
+    { labelKey: 'config.notifications.newReservations', descKey: 'config.notifications.newReservationsDesc', email: false, push: true  },
+    { labelKey: 'config.notifications.shipStatus',      descKey: 'config.notifications.shipStatusDesc',      email: true,  push: true  },
+    { labelKey: 'config.notifications.weeklyReports',   descKey: 'config.notifications.weeklyReportsDesc',   email: true,  push: false },
   ]);
 
   const toggle = (index: number, type: 'email' | 'push') => {
@@ -24,14 +27,14 @@ const ConfigNotificaciones: React.FC = () => {
     <section className="bg-white rounded-xl shadow-sm border border-slate-200">
       <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
         <span className="material-symbols-outlined text-[#0e1a34]">notifications_active</span>
-        <h2 className="text-xl font-bold text-[#0e1a34]">Notificaciones</h2>
+        <h2 className="text-xl font-bold text-[#0e1a34]">{t('config.notifications.title')}</h2>
       </div>
       <div className="p-6 space-y-5">
         {notifs.map((n, i) => (
-          <div key={n.label} className="flex items-center justify-between">
+          <div key={n.labelKey} className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-semibold text-slate-700">{n.label}</p>
-              <p className="text-xs text-slate-400">{n.desc}</p>
+              <p className="text-sm font-semibold text-slate-700">{t(n.labelKey)}</p>
+              <p className="text-xs text-slate-400">{t(n.descKey)}</p>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -43,7 +46,7 @@ const ConfigNotificaciones: React.FC = () => {
                 }`}
               >
                 <span className="material-symbols-outlined text-[14px]">mail</span>
-                Email
+                {t('config.notifications.email')}
               </button>
               <button
                 onClick={() => toggle(i, 'push')}
@@ -54,7 +57,7 @@ const ConfigNotificaciones: React.FC = () => {
                 }`}
               >
                 <span className="material-symbols-outlined text-[14px]">phone_iphone</span>
-                Push
+                {t('config.notifications.push')}
               </button>
             </div>
           </div>

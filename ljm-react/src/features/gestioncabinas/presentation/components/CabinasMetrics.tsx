@@ -1,18 +1,21 @@
 import React from 'react';
-
-const metrics = [
-  { label: 'Total Cabinas',   value: '0', icon: 'hotel',        accent: null,      trend: true  },
-  { label: 'Ocupadas',        value: '0', icon: 'person_check', accent: 'blue',    trend: false },
-  { label: 'Disponibles',     value: '0', icon: 'check_circle', accent: 'green',   trend: false },
-  { label: 'Mantenimiento',   value: '0', icon: 'handyman',     accent: 'red',     trend: false },
-];
+import { useTranslation } from 'react-i18next';
 
 const CabinasMetrics: React.FC = () => {
+  const { t } = useTranslation();
+
+  const metrics = [
+    { labelKey: 'cabins.metrics.total',       value: '0', icon: 'hotel',        accent: null,    trend: true  },
+    { labelKey: 'cabins.metrics.occupied',    value: '0', icon: 'person_check', accent: 'blue',  trend: false },
+    { labelKey: 'cabins.metrics.available',   value: '0', icon: 'check_circle', accent: 'green', trend: false },
+    { labelKey: 'cabins.metrics.maintenance', value: '0', icon: 'handyman',     accent: 'red',   trend: false },
+  ];
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
       {metrics.map((m) => (
         <div
-          key={m.label}
+          key={m.labelKey}
           className={`bg-white border border-[#0e1a34]/10 p-6 rounded-xl shadow-sm hover:border-[#eacea9]/50 transition-all flex flex-col gap-2 ${
             m.accent ? `border-l-4 border-l-${m.accent}-500` : ''
           }`}
@@ -27,7 +30,7 @@ const CabinasMetrics: React.FC = () => {
               </span>
             )}
           </div>
-          <p className="text-[#0e1a34]/60 text-sm font-medium uppercase tracking-wider">{m.label}</p>
+          <p className="text-[#0e1a34]/60 text-sm font-medium uppercase tracking-wider">{t(m.labelKey)}</p>
           <h3 className="text-3xl font-bold text-[#0e1a34]">{m.value}</h3>
         </div>
       ))}

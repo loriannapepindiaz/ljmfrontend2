@@ -29,7 +29,7 @@ const AdminLoginPage: React.FC = () => {
       <div className="absolute inset-0 z-0 scale-110">
         <div className="absolute inset-0 bg-gradient-to-b from-[#050a14]/60 to-[#050a14]/90 z-10"></div>
         <img 
-          alt="Luxury cruise background" 
+          alt="Fondo de crucero de lujo"
           className="w-full h-full object-cover filter blur-sm grayscale-[20%] brightness-[0.3]" 
           src="https://images.unsplash.com/photo-1548574505-5e239809ee19?q=80&w=2070&auto=format&fit=crop" 
         />

@@ -1,4 +1,5 @@
 import { Anchor, Bell, User, ShipWheel } from "lucide-react";
+import { QRCodeSVG } from "qrcode.react";
 
 export default function InvoiceHeader() {
   return (
@@ -77,14 +78,13 @@ export function InvoiceSheetHeader() {
           </div>
 
           <div className="flex h-16 w-16 items-center justify-center border border-slate-200 bg-white p-1">
-            <div className="grid h-full w-full grid-cols-3 gap-[2px]">
-              {Array.from({ length: 9 }).map((_, index) => (
-                <div
-                  key={index}
-                  className={index % 2 === 0 ? "bg-[#0e1a34]" : "bg-transparent"}
-                />
-              ))}
-            </div>
+            <QRCodeSVG
+              value="INV-2024-0850"
+              size={56}
+              bgColor="#ffffff"
+              fgColor="#0e1a34"
+              level="M"
+            />
           </div>
         </div>
 

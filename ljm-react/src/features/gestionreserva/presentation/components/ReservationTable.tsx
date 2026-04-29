@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import type { Reservation } from './ReservationTableFilters';
 import { statusStyles } from './ReservationTableFilters';
 
@@ -19,7 +20,17 @@ const ReservationTable: React.FC<ReservationTableProps> = ({
   onPageChange,
   onActionClick,
 }) => {
-  const columns = ['ID Reserva', 'Huésped', 'Barco', 'Cabina', 'Estado', 'Total', 'Acciones'];
+  const { t } = useTranslation();
+
+  const columns = [
+    { key: 'colId',      label: t('reservations.table.colId')      },
+    { key: 'colGuest',   label: t('reservations.table.colGuest')   },
+    { key: 'colShip',    label: t('reservations.table.colShip')    },
+    { key: 'colCabin',   label: t('reservations.table.colCabin')   },
+    { key: 'colStatus',  label: t('reservations.table.colStatus')  },
+    { key: 'colTotal',   label: t('reservations.table.colTotal')   },
+    { key: 'colActions', label: t('reservations.table.colActions') },
+  ];
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
@@ -28,10 +39,10 @@ const ReservationTable: React.FC<ReservationTableProps> = ({
           <tr className="bg-slate-50 border-b border-slate-200">
             {columns.map((col) => (
               <th
-                key={col}
-                className={`px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest ${col === 'Acciones' ? 'text-center' : ''}`}
+                key={col.key}
+                className={`px-8 py-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest ${col.key === 'colActions' ? 'text-center' : ''}`}
               >
-                {col}
+                {col.label}
               </th>
             ))}
           </tr>
@@ -43,7 +54,7 @@ const ReservationTable: React.FC<ReservationTableProps> = ({
                 <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">
                   inbox
                 </span>
-                No hay reservas registradas
+                {t('reservations.table.empty')}
               </td>
             </tr>
           ) : (
@@ -76,8 +87,12 @@ const ReservationTable: React.FC<ReservationTableProps> = ({
       <div className="px-8 py-5 bg-white flex items-center justify-between border-t border-slate-100">
         <p className="text-xs text-slate-400 font-medium">
           {totalCount === 0
-            ? 'Sin reservas registradas'
-            : `Mostrando ${(currentPage - 1) * 5 + 1} a ${Math.min(currentPage * 5, totalCount)} de ${totalCount.toLocaleString('es-ES')} reservas`
+            ? t('reservations.table.empty')
+            : t('reservations.table.showing', {
+                from: (currentPage - 1) * 5 + 1,
+                to: Math.min(currentPage * 5, totalCount),
+                total: totalCount.toLocaleString('es-ES'),
+              })
           }
         </p>
         <div className="flex items-center gap-2">

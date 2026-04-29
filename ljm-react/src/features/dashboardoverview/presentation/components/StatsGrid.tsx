@@ -1,26 +1,28 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Stat {
   icon: string;
-  label: string;
+  labelKey: string;
   value: string;
   trend: string;
   trendUp: boolean | null;
 }
 
-const stats: Stat[] = [
-  { icon: 'confirmation_number', label: 'Total Reservas',      value: '0', trend: '0%',     trendUp: null  },
-  { icon: 'payments',            label: 'Ingresos',            value: '$0', trend: '0%',    trendUp: null  },
-  { icon: 'sailing',             label: 'Cruceros Activos',    value: '0', trend: '0%',     trendUp: null  },
-  { icon: 'person_add',          label: 'Nuevos Pasajeros',    value: '0', trend: '0%',     trendUp: null  },
+const STATS_CONFIG: Omit<Stat, 'labelKey'>[] & { labelKey: string }[] = [
+  { icon: 'confirmation_number', labelKey: 'dashboard.stats.totalReservations', value: '0', trend: '0%', trendUp: null },
+  { icon: 'payments',            labelKey: 'dashboard.stats.income',            value: '$0', trend: '0%', trendUp: null },
+  { icon: 'sailing',             labelKey: 'dashboard.stats.activeCruises',     value: '0', trend: '0%', trendUp: null },
+  { icon: 'person_add',          labelKey: 'dashboard.stats.newPassengers',     value: '0', trend: '0%', trendUp: null },
 ];
 
 const StatsGrid: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {stats.map((stat) => (
+      {STATS_CONFIG.map((stat) => (
         <div
-          key={stat.label}
+          key={stat.labelKey}
           className="bg-white border border-[#0e1a34]/10 rounded-xl p-6 shadow-sm flex flex-col gap-2 hover:border-[#eacea9]/50 transition-all"
         >
           <div className="flex justify-between items-start">
@@ -34,7 +36,7 @@ const StatsGrid: React.FC = () => {
               {stat.trend}
             </span>
           </div>
-          <p className="text-[#0e1a34]/60 text-sm font-medium">{stat.label}</p>
+          <p className="text-[#0e1a34]/60 text-sm font-medium">{t(stat.labelKey)}</p>
           <p className="text-3xl font-bold text-[#0e1a34]">{stat.value}</p>
         </div>
       ))}

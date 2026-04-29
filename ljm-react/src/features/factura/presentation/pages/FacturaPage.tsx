@@ -1,4 +1,6 @@
-import { Printer } from "lucide-react";
+import { Printer, Home } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import BackButton from "../../../../components/BackButton";
 import { InvoiceSheetHeader } from "../components/InvoiceHeader";
 import InvoiceMetaGrid from "../components/InvoiceMetaGrid";
 import InvoiceSidebar from "../components/InvoiceSidebar";
@@ -7,6 +9,8 @@ import InvoiceSheetFooter from "../components/InvoiceSheetFooter";
 import InvoicePageFooter from "../components/InvoicePageFooter";
 
 export default function FacturaPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="bg-[#06122c] font-sans text-[#0e1a34] selection:bg-[#eacea9] selection:text-[#0e1a34] factura-print-page">
       <style>
@@ -182,6 +186,7 @@ export default function FacturaPage() {
         `}
       </style>
 
+      <BackButton topClass="top-6" />
       <main className="factura-print-main px-4 pb-24 pt-10 md:pt-16">
         <div
           className="factura-print-sheet relative mx-auto flex min-h-[297mm] w-full max-w-[210mm] flex-col overflow-hidden bg-[#fdfcf9] p-6 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] md:p-[20mm]"
@@ -204,7 +209,15 @@ export default function FacturaPage() {
           <InvoiceSheetFooter />
         </div>
 
-        <div className="factura-print-hide mt-12 flex justify-center">
+        <div className="factura-print-hide mt-12 flex justify-center gap-4">
+          <button
+            className="group flex items-center gap-4 bg-[#0e1a34]/60 border border-[#eacea9]/20 px-8 py-4 text-xs font-bold uppercase tracking-[0.3em] text-[#eacea9]/80 shadow-lg transition-all hover:-translate-y-0.5 hover:bg-[#0e1a34] hover:text-[#eacea9] hover:shadow-xl md:px-10"
+            onClick={() => navigate("/")}
+            type="button"
+          >
+            <Home size={18} />
+            Volver al Inicio
+          </button>
           <button
             className="group flex items-center gap-4 bg-[#eacea9] px-8 py-4 text-xs font-bold uppercase tracking-[0.3em] text-[#0e1a34] shadow-2xl transition-all hover:-translate-y-0.5 hover:bg-white hover:shadow-xl md:px-12"
             onClick={() => window.print()}

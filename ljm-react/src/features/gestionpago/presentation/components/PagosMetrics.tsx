@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PagosMetrics: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
@@ -11,7 +13,7 @@ const PagosMetrics: React.FC = () => {
           </div>
           <span className="text-xs font-bold text-green-600 bg-green-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium">Ingresos Totales</p>
+        <p className="text-slate-500 text-sm font-medium">{t('payments.metrics.totalIncome')}</p>
         <h3 className="text-2xl font-bold text-[#0e1a34] mt-1">$0.00</h3>
       </div>
 
@@ -22,7 +24,7 @@ const PagosMetrics: React.FC = () => {
           </div>
           <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium">Pagos Pendientes</p>
+        <p className="text-slate-500 text-sm font-medium">{t('payments.metrics.pending')}</p>
         <h3 className="text-2xl font-bold text-[#0e1a34] mt-1">$0.00</h3>
       </div>
 
@@ -33,7 +35,7 @@ const PagosMetrics: React.FC = () => {
           </div>
           <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium">Reembolsos</p>
+        <p className="text-slate-500 text-sm font-medium">{t('payments.metrics.refunds')}</p>
         <h3 className="text-2xl font-bold text-[#0e1a34] mt-1">$0.00</h3>
       </div>
 
@@ -48,7 +50,7 @@ const PagosMetrics: React.FC = () => {
             </svg>
           </div>
         </div>
-        <p className="text-slate-500 text-sm font-medium">Crecimiento Mensual</p>
+        <p className="text-slate-500 text-sm font-medium">{t('payments.metrics.monthlyGrowth')}</p>
         <h3 className="text-2xl font-bold text-[#0e1a34] mt-1">0%</h3>
       </div>
 

@@ -1,19 +1,25 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const AssignmentContractSidebar: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-8">
 
-      {/* Asignación y Contrato */}
       <section className="bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="p-8 border-b border-slate-50 bg-[#0e1a34]">
-          <h2 className="text-sm font-bold text-[#eacea9] uppercase tracking-widest">Asignación y Contrato</h2>
-          <p className="text-[10px] text-slate-400 mt-1">Asignación de Travesía y Legal</p>
+          <h2 className="text-sm font-bold text-[#eacea9] uppercase tracking-widest">
+            {t('employees.add.contract.title')}
+          </h2>
+          <p className="text-[10px] text-slate-400 mt-1">{t('employees.add.contract.subtitle')}</p>
         </div>
         <div className="p-8 space-y-6">
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Buque Asignado</label>
+            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+              {t('employees.add.contract.ship')}
+            </label>
             <div className="relative">
               <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none">
                 <option>SS Meridian Explorer</option>
@@ -25,32 +31,40 @@ const AssignmentContractSidebar: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Tipo de Contrato</label>
+            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+              {t('employees.add.contract.contractType')}
+            </label>
             <div className="grid grid-cols-2 gap-2">
               <label className="flex items-center justify-center gap-2 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
                 <input type="radio" name="contract" defaultChecked className="text-[#0e1a34]" />
-                <span className="text-xs font-medium text-slate-600">Indefinido</span>
+                <span className="text-xs font-medium text-slate-600">{t('employees.add.contract.indefinite')}</span>
               </label>
               <label className="flex items-center justify-center gap-2 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
                 <input type="radio" name="contract" className="text-[#0e1a34]" />
-                <span className="text-xs font-medium text-slate-600">Campaña</span>
+                <span className="text-xs font-medium text-slate-600">{t('employees.add.contract.campaign')}</span>
               </label>
             </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Fecha de Inicio</label>
+              <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+                {t('employees.add.contract.startDate')}
+              </label>
               <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
             </div>
             <div className="space-y-2">
-              <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Fecha Fin (Est.)</label>
+              <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+                {t('employees.add.contract.endDate')}
+              </label>
               <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Turno / Rotación</label>
+            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+              {t('employees.add.contract.shift')}
+            </label>
             <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none">
               <option>3 Meses ON / 1 Mes OFF</option>
               <option>4 Meses ON / 2 Mes OFF</option>
@@ -59,7 +73,9 @@ const AssignmentContractSidebar: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Puerto Base</label>
+            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+              {t('employees.add.contract.homePort')}
+            </label>
             <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-lg px-4 py-3">
               <span className="material-symbols-outlined text-slate-300 text-sm">location_on</span>
               <input type="text" placeholder="e.g. Puerto Banús" className="bg-transparent border-none p-0 w-full text-sm focus:ring-0 outline-none" />
@@ -67,34 +83,39 @@ const AssignmentContractSidebar: React.FC = () => {
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">Detalles de Seguro Médico</label>
-            <input type="text" placeholder="Nº Póliza / Cobertura" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
+            <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
+              {t('employees.add.contract.insurance')}
+            </label>
+            <input
+              type="text"
+              placeholder={t('employees.add.contract.insurancePlaceholder')}
+              className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none"
+            />
           </div>
         </div>
 
         <div className="p-8 bg-slate-50/50 border-t border-slate-100">
           <div className="flex items-start gap-3 text-slate-400">
             <span className="material-symbols-outlined text-lg mt-0.5">verified_user</span>
-            <p className="text-[10px] leading-relaxed">
-              Al guardar este perfil, confirma que todas las credenciales marítimas han sido verificadas según los estándares STCW internacionales y la política de la empresa.
-            </p>
+            <p className="text-[10px] leading-relaxed">{t('employees.add.contract.legalNote')}</p>
           </div>
         </div>
       </section>
 
-      {/* Estado del Registro */}
       <section className="bg-[#eacea9]/10 rounded-xl border border-[#eacea9]/30 p-8">
-        <h3 className="text-xs font-bold uppercase tracking-widest text-[#0e1a34] mb-4">Estado del Registro</h3>
+        <h3 className="text-xs font-bold uppercase tracking-widest text-[#0e1a34] mb-4">
+          {t('employees.add.status.title')}
+        </h3>
         <div className="space-y-4">
           <div className="flex justify-between items-center text-[10px] font-bold">
-            <span className="text-slate-500 uppercase">Completado</span>
+            <span className="text-slate-500 uppercase">{t('employees.add.status.completed')}</span>
             <span className="text-[#0e1a34]">45%</span>
           </div>
           <div className="w-full bg-white h-1.5 rounded-full overflow-hidden">
             <div className="bg-[#0e1a34] h-full w-[45%]" />
           </div>
           <p className="text-[10px] text-slate-500 italic leading-relaxed">
-            Quedan campos obligatorios pendientes en las secciones de Perfil Profesional y Documentación.
+            {t('employees.add.status.pending')}
           </p>
         </div>
       </section>

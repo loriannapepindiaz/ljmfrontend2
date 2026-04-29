@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const tabs = ['Todos los Barcos', 'Activos', 'En Mantenimiento', 'Próximos Lanzamientos'];
+const TAB_KEYS = ['allShips', 'active', 'maintenance', 'upcoming'] as const;
+type TabKey = typeof TAB_KEYS[number];
 
 interface CrucerosTabsProps {
-  onTabChange?: (tab: string) => void;
+  onTabChange?: (tab: TabKey) => void;
 }
 
 const CrucerosTabs: React.FC<CrucerosTabsProps> = ({ onTabChange }) => {
-  const [active, setActive] = useState('Todos los Barcos');
+  const { t } = useTranslation();
+  const [active, setActive] = useState<TabKey>('allShips');
 
-  const handleTab = (tab: string) => {
+  const handleTab = (tab: TabKey) => {
     setActive(tab);
     onTabChange?.(tab);
   };
 
   return (
     <div className="flex border-b border-slate-200 mb-8 overflow-x-auto">
-      {tabs.map((tab) => (
+      {TAB_KEYS.map((tab) => (
         <button
           key={tab}
           onClick={() => handleTab(tab)}
@@ -26,7 +29,7 @@ const CrucerosTabs: React.FC<CrucerosTabsProps> = ({ onTabChange }) => {
               : 'text-slate-500 hover:text-[#0e1a34]'
           }`}
         >
-          {tab}
+          {t(`fleet.tabs.${tab}`)}
         </button>
       ))}
     </div>

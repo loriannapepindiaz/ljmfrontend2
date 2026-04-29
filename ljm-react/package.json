@@ -10,15 +10,19 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/leaflet": "^1.9.21",
     "html2canvas": "^1.4.1",
     "i18next": "^26.0.8",
     "jspdf": "^4.2.1",
+    "leaflet": "^1.9.4",
     "lucide-react": "^0.575.0",
     "next": "^16.2.2",
     "node-nlp": "^5.0.0-alpha.5",
+    "qrcode.react": "^4.2.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "react-i18next": "^17.0.5",
+    "react-leaflet": "^5.0.0",
     "react-router-dom": "^7.13.2"
   },
   "devDependencies": {

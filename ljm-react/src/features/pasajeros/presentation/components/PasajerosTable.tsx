@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PasajerosTable: React.FC = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
 
   return (
@@ -8,24 +10,24 @@ const PasajerosTable: React.FC = () => {
       <table className="w-full text-left">
         <thead className="bg-slate-50 border-b border-slate-200">
           <tr>
-            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Detalles del Pasajero</th>
-            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Estado de Lealtad</th>
-            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Último Viaje</th>
-            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Acciones</th>
+            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('passengers.table.colDetails')}</th>
+            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('passengers.table.colLoyalty')}</th>
+            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('passengers.table.colLastTrip')}</th>
+            <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">{t('passengers.table.colActions')}</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100">
           <tr>
             <td colSpan={4} className="px-6 py-16 text-center text-slate-400 text-sm">
               <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">group</span>
-              No hay pasajeros registrados
+              {t('passengers.table.empty')}
             </td>
           </tr>
         </tbody>
       </table>
 
       <div className="px-6 py-4 bg-slate-50 flex justify-between items-center border-t border-slate-200">
-        <p className="text-xs text-slate-500 font-medium">Sin pasajeros registrados</p>
+        <p className="text-xs text-slate-500 font-medium">{t('passengers.table.empty')}</p>
         <div className="flex gap-2">
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}

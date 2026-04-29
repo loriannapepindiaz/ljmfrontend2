@@ -6,7 +6,7 @@ const HeroSection: React.FC = () => {
     <header className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
       {/* imagen de fondo */}
       <img
-        alt="Luxury Cruise Ship"
+        alt="Crucero de Lujo"
         className="absolute inset-0 w-full h-full object-cover"
         src="https://images.unsplash.com/photo-1599640842225-85d111c60e6b?auto=format&fit=crop&q=80&w=2000"
       />

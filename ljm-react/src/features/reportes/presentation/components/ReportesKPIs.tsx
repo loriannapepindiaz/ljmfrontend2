@@ -1,6 +1,8 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ReportesKPIs: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
@@ -11,7 +13,7 @@ const ReportesKPIs: React.FC = () => {
           </div>
           <span className="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium mb-1">Ingresos Mensuales</p>
+        <p className="text-slate-500 text-sm font-medium mb-1">{t('reports.kpis.monthlyIncome')}</p>
         <p className="text-2xl font-bold text-[#0e1a34]">$0</p>
       </div>
 
@@ -22,7 +24,7 @@ const ReportesKPIs: React.FC = () => {
           </div>
           <span className="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium mb-1">Tasa de Ocupación</p>
+        <p className="text-slate-500 text-sm font-medium mb-1">{t('reports.kpis.occupancyRate')}</p>
         <p className="text-2xl font-bold text-[#0e1a34]">0%</p>
       </div>
 
@@ -33,7 +35,7 @@ const ReportesKPIs: React.FC = () => {
           </div>
           <span className="text-emerald-500 text-xs font-bold bg-emerald-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium mb-1">Satisfacción Cliente</p>
+        <p className="text-slate-500 text-sm font-medium mb-1">{t('reports.kpis.satisfaction')}</p>
         <p className="text-2xl font-bold text-[#0e1a34]">0/5</p>
       </div>
 
@@ -44,7 +46,7 @@ const ReportesKPIs: React.FC = () => {
           </div>
           <span className="text-rose-500 text-xs font-bold bg-rose-50 px-2 py-1 rounded-full">0%</span>
         </div>
-        <p className="text-slate-500 text-sm font-medium mb-1">Crecimiento Reservas</p>
+        <p className="text-slate-500 text-sm font-medium mb-1">{t('reports.kpis.reservationGrowth')}</p>
         <p className="text-2xl font-bold text-[#0e1a34]">0%</p>
       </div>
 

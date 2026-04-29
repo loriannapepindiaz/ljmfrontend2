@@ -1,11 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const PagosHeader: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <header className="flex items-center justify-between mb-8">
       <div>
-        <h2 className="text-4xl font-bold text-[#0e1a34]">Gestión de Pagos</h2>
-        <p className="text-slate-500 mt-1">Supervise y gestione todas las transacciones financieras de la flota.</p>
+        <h2 className="text-4xl font-bold text-[#0e1a34]">{t('payments.title')}</h2>
+        <p className="text-slate-500 mt-1">{t('payments.subtitle')}</p>
       </div>
       <div className="flex items-center gap-4">
         <div className="flex items-center gap-3 pl-4 border-l border-slate-200">

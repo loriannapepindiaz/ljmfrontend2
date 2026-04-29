@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const RecentActivityTable: React.FC = () => {
+  const { t } = useTranslation();
   const [showFilter, setShowFilter] = useState(false);
   const [filterDay, setFilterDay] = useState('');
   const [filterMonth, setFilterMonth] = useState('');
@@ -13,15 +15,8 @@ const RecentActivityTable: React.FC = () => {
     setFilterYear('');
   };
 
-  const months = [
-    'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-    'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic',
-  ];
-
-  const monthsFull = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
-  ];
+  const months = t('reports.monthsShort', { returnObjects: true }) as string[];
+  const monthsFull = t('reports.months', { returnObjects: true }) as string[];
 
   const years = ['2025', '2026', '2027', '2028', '2029', '2030'];
 
@@ -29,7 +24,7 @@ const RecentActivityTable: React.FC = () => {
     <div className="xl:col-span-2 bg-white border border-[#0e1a34]/10 rounded-xl shadow-sm flex flex-col">
 
       <div className="p-6 border-b border-[#0e1a34]/10 flex items-center justify-between">
-        <h3 className="text-lg font-bold text-[#0e1a34]">Actividad Reciente</h3>
+        <h3 className="text-lg font-bold text-[#0e1a34]">{t('dashboard.recentActivity.title')}</h3>
         <button
           onClick={() => { setShowFilter(!showFilter); setView('main'); }}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all border ${
@@ -39,7 +34,7 @@ const RecentActivityTable: React.FC = () => {
           }`}
         >
           <span className="material-symbols-outlined text-[18px]">tune</span>
-          Filtrar
+          {t('dashboard.recentActivity.filter')}
         </button>
       </div>
 
@@ -58,8 +53,8 @@ const RecentActivityTable: React.FC = () => {
                   <span className="material-symbols-outlined text-[20px] text-[#0e1a34]">calendar_month</span>
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-[#0e1a34]">Filtrar por fecha</h4>
-                  <p className="text-[11px] text-[#0e1a34]/40">Selecciona los parámetros</p>
+                  <h4 className="text-base font-bold text-[#0e1a34]">{t('dashboard.recentActivity.filterByDate')}</h4>
+                  <p className="text-[11px] text-[#0e1a34]/40">{t('dashboard.recentActivity.selectParams')}</p>
                 </div>
               </div>
               <button
@@ -76,27 +71,27 @@ const RecentActivityTable: React.FC = () => {
 
                 {/* Día */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">Día</label>
+                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.day')}</label>
                   <input
                     type="number"
                     min={1}
                     max={31}
                     value={filterDay}
                     onChange={(e) => setFilterDay(e.target.value)}
-                    placeholder="Ej: 15"
+                    placeholder={t('dashboard.recentActivity.dayPlaceholder')}
                     className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-[#0e1a34] placeholder-[#0e1a34]/30 focus:ring-2 focus:ring-[#eacea9]/50 outline-none bg-slate-50/50"
                   />
                 </div>
 
                 {/* Mes */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">Mes</label>
+                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.month')}</label>
                   <button
                     onClick={() => setView('month')}
                     className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-left flex items-center justify-between bg-slate-50/50 hover:border-[#eacea9] transition-all"
                   >
                     <span className={filterMonth ? 'text-[#0e1a34] font-medium' : 'text-[#0e1a34]/30'}>
-                      {filterMonth ? monthsFull[parseInt(filterMonth) - 1] : 'Seleccionar mes'}
+                      {filterMonth ? monthsFull[parseInt(filterMonth) - 1] : t('dashboard.recentActivity.selectMonth')}
                     </span>
                     <span className="material-symbols-outlined text-[18px] text-[#0e1a34]/40">chevron_right</span>
                   </button>
@@ -104,13 +99,13 @@ const RecentActivityTable: React.FC = () => {
 
                 {/* Año */}
                 <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">Año</label>
+                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.year')}</label>
                   <button
                     onClick={() => setView('year')}
                     className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-left flex items-center justify-between bg-slate-50/50 hover:border-[#eacea9] transition-all"
                   >
                     <span className={filterYear ? 'text-[#0e1a34] font-medium' : 'text-[#0e1a34]/30'}>
-                      {filterYear || 'Seleccionar año'}
+                      {filterYear || t('dashboard.recentActivity.selectYear')}
                     </span>
                     <span className="material-symbols-outlined text-[18px] text-[#0e1a34]/40">chevron_right</span>
                   </button>
@@ -131,14 +126,14 @@ const RecentActivityTable: React.FC = () => {
                     onClick={handleClear}
                     className="flex-1 py-3 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/60 hover:bg-slate-50 transition-all"
                   >
-                    Limpiar
+                    {t('dashboard.recentActivity.clear')}
                   </button>
                   <button
                     onClick={() => { console.log({ filterDay, filterMonth, filterYear }); setShowFilter(false); }}
                     className="flex-1 py-3 rounded-xl bg-[#eacea9] text-[#0e1a34] text-xs font-bold hover:bg-[#d4af37] transition-all flex items-center justify-center gap-2"
                   >
                     <span className="material-symbols-outlined text-[16px]">check</span>
-                    Aplicar filtro
+                    {t('dashboard.recentActivity.applyFilter')}
                   </button>
                 </div>
               </div>
@@ -152,7 +147,7 @@ const RecentActivityTable: React.FC = () => {
                   className="flex items-center gap-2 text-sm font-bold text-[#0e1a34]/60 hover:text-[#0e1a34] mb-4 transition-colors"
                 >
                   <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-                  Selecciona un mes
+                  {t('dashboard.recentActivity.selectMonth')}
                 </button>
                 <div className="grid grid-cols-3 gap-2">
                   {months.map((m, i) => (
@@ -173,7 +168,7 @@ const RecentActivityTable: React.FC = () => {
                   onClick={() => { setFilterMonth(''); setView('main'); }}
                   className="mt-4 w-full py-2.5 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/50 hover:bg-slate-50 transition-all"
                 >
-                  Todos los meses
+                  {t('dashboard.recentActivity.allMonths')}
                 </button>
               </div>
             )}
@@ -186,7 +181,7 @@ const RecentActivityTable: React.FC = () => {
                   className="flex items-center gap-2 text-sm font-bold text-[#0e1a34]/60 hover:text-[#0e1a34] mb-4 transition-colors"
                 >
                   <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-                  Selecciona un año
+                  {t('dashboard.recentActivity.selectYear')}
                 </button>
                 <div className="grid grid-cols-3 gap-2">
                   {years.map((y) => (
@@ -207,7 +202,7 @@ const RecentActivityTable: React.FC = () => {
                   onClick={() => { setFilterYear(''); setView('main'); }}
                   className="mt-4 w-full py-2.5 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/50 hover:bg-slate-50 transition-all"
                 >
-                  Todos los años
+                  {t('dashboard.recentActivity.allYears')}
                 </button>
               </div>
             )}
@@ -219,18 +214,18 @@ const RecentActivityTable: React.FC = () => {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-[#0e1a34]/5 text-[#0e1a34]/60 text-xs uppercase tracking-wider font-semibold">
-              <th className="px-6 py-4">ID</th>
-              <th className="px-6 py-4">Pasajero</th>
-              <th className="px-6 py-4">Crucero</th>
-              <th className="px-6 py-4">Estado</th>
-              <th className="px-6 py-4">Monto</th>
+              <th className="px-6 py-4">{t('dashboard.recentActivity.colId')}</th>
+              <th className="px-6 py-4">{t('dashboard.recentActivity.colPassenger')}</th>
+              <th className="px-6 py-4">{t('dashboard.recentActivity.colCruise')}</th>
+              <th className="px-6 py-4">{t('dashboard.recentActivity.colStatus')}</th>
+              <th className="px-6 py-4">{t('dashboard.recentActivity.colAmount')}</th>
             </tr>
           </thead>
           <tbody className="text-sm text-[#0e1a34]/80 divide-y divide-[#0e1a34]/5">
             <tr>
               <td colSpan={5} className="px-6 py-16 text-center text-slate-400 text-sm">
                 <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">inbox</span>
-                No hay actividad reciente
+                {t('dashboard.recentActivity.empty')}
               </td>
             </tr>
           </tbody>
@@ -239,7 +234,7 @@ const RecentActivityTable: React.FC = () => {
 
       <div className="p-6 bg-white border-t border-[#0e1a34]/10 flex justify-center">
         <button className="bg-[#0e1a34] text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-[#1a2a4a] transition-all shadow-md flex items-center gap-2">
-          Ver toda la actividad
+          {t('dashboard.recentActivity.viewAll')}
           <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </button>
       </div>

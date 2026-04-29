@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { allergyOptions, cardImages } from "./personalizarEstanciaData";
 import type { SummaryData } from "./types";
+import BackButton from "../../../../components/BackButton";
 
 type Props = {
   summary: SummaryData;
@@ -21,14 +21,9 @@ const PersonalizarEstanciaHero = ({ summary }: Props) => {
       <div className="absolute inset-0 bg-gradient-to-r from-[#0e1a34] via-[#0e1a34]/70 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0e1a34]" />
 
+      <BackButton />
+
       <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 md:px-10 lg:px-16">
-        <Link
-          className="mb-10 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.35em] text-[#eacea9]/70 transition hover:text-[#eacea9]"
-          to="/details-suit"
-        >
-          <span className="material-symbols-outlined text-sm">arrow_back</span>
-          Volver a detalles de viaje
-        </Link>
 
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12">
           <div className="lg:col-span-8">

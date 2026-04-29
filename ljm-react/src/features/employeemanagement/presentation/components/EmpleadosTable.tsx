@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const EmpleadosTable: React.FC = () => {
+  const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [showFilter, setShowFilter] = useState(false);
   const [filterStatus, setFilterStatus] = useState('');
@@ -11,21 +13,33 @@ const EmpleadosTable: React.FC = () => {
     setFilterDept('');
   };
 
-  const statuses = ['Activo', 'De Licencia', 'En Entrenamiento', 'Fuera de Servicio'];
-  const departments = ['Cubierta', 'Entretenimiento', 'Culinario', 'Ingeniería', 'Hospitalidad'];
+  const statuses = [
+    t('employees.table.statusActive'),
+    t('employees.table.statusOnLeave'),
+    t('employees.table.statusTraining'),
+    t('employees.table.statusOffDuty'),
+  ];
+
+  const departments = [
+    t('employees.table.deptDeck'),
+    t('employees.table.deptEntertainment'),
+    t('employees.table.deptCulinary'),
+    t('employees.table.deptEngineering'),
+    t('employees.table.deptHospitality'),
+  ];
 
   return (
     <div className="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
 
       <div className="p-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-4">
-        <h3 className="text-xl font-bold text-[#0e1a34]">Directorio de Empleados</h3>
+        <h3 className="text-xl font-bold text-[#0e1a34]">{t('employees.table.title')}</h3>
         <div className="flex items-center gap-3">
           <div className="relative min-w-[300px]">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
             <input
               type="text"
               className="w-full pl-10 pr-4 py-2 bg-[#f6f7f8] border-none rounded-lg text-sm focus:ring-2 focus:ring-[#0e1a34]/20 outline-none"
-              placeholder="Buscar nombre, rol o barco..."
+              placeholder={t('employees.table.search')}
             />
           </div>
 
@@ -57,8 +71,8 @@ const EmpleadosTable: React.FC = () => {
                   <span className="material-symbols-outlined text-[20px] text-[#0e1a34]">filter_list</span>
                 </div>
                 <div>
-                  <h4 className="text-base font-bold text-[#0e1a34]">Filtrar empleados</h4>
-                  <p className="text-[11px] text-[#0e1a34]/40">Selecciona los parámetros</p>
+                  <h4 className="text-base font-bold text-[#0e1a34]">{t('employees.table.filterTitle')}</h4>
+                  <p className="text-[11px] text-[#0e1a34]/40">{t('employees.table.filterParams')}</p>
                 </div>
               </div>
               <button
@@ -71,7 +85,7 @@ const EmpleadosTable: React.FC = () => {
 
             {/* Estado */}
             <div className="mb-5">
-              <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-2">Estado</label>
+              <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-2">{t('employees.table.statusLabel')}</label>
               <div className="flex flex-wrap gap-2">
                 {statuses.map((s) => (
                   <button
@@ -91,7 +105,7 @@ const EmpleadosTable: React.FC = () => {
 
             {/* Departamento */}
             <div className="mb-5">
-              <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-2">Departamento</label>
+              <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-2">{t('employees.table.departmentLabel')}</label>
               <div className="flex flex-wrap gap-2">
                 {departments.map((d) => (
                   <button
@@ -124,7 +138,7 @@ const EmpleadosTable: React.FC = () => {
                 onClick={handleClear}
                 className="flex-1 py-3 rounded-xl border border-slate-200 text-xs font-bold text-slate-500 hover:bg-slate-50 transition-all"
               >
-                Limpiar
+                {t('employees.table.clear')}
               </button>
               <button
                 onClick={() => {
@@ -134,7 +148,7 @@ const EmpleadosTable: React.FC = () => {
                 className="flex-1 py-3 rounded-xl bg-[#eacea9] text-[#0e1a34] text-xs font-bold hover:bg-[#d4af37] transition-all flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-[16px]">check</span>
-                Aplicar filtro
+                {t('employees.table.applyFilter')}
               </button>
             </div>
           </div>
@@ -145,18 +159,18 @@ const EmpleadosTable: React.FC = () => {
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider font-semibold">
-              <th className="px-6 py-4">Empleado</th>
-              <th className="px-6 py-4">Departamento / Barco</th>
-              <th className="px-6 py-4">Estado</th>
-              <th className="px-6 py-4">Rendimiento</th>
-              <th className="px-6 py-4 text-right">Acciones</th>
+              <th className="px-6 py-4">{t('employees.table.colEmployee')}</th>
+              <th className="px-6 py-4">{t('employees.table.colDepartment')}</th>
+              <th className="px-6 py-4">{t('employees.table.colStatus')}</th>
+              <th className="px-6 py-4">{t('employees.table.colPerformance')}</th>
+              <th className="px-6 py-4 text-right">{t('employees.table.colActions')}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
             <tr>
               <td colSpan={5} className="px-6 py-16 text-center text-slate-400 text-sm">
                 <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">groups</span>
-                No hay empleados registrados
+                {t('employees.table.empty')}
               </td>
             </tr>
           </tbody>
@@ -164,7 +178,7 @@ const EmpleadosTable: React.FC = () => {
       </div>
 
       <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between">
-        <p className="text-xs text-slate-500">Sin empleados registrados</p>
+        <p className="text-xs text-slate-500">{t('employees.table.empty')}</p>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setCurrentPage(p => Math.max(1, p - 1))}

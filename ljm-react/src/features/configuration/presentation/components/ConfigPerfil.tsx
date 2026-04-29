@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const ConfigPerfil: React.FC = () => {
+  const { t } = useTranslation();
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
 
   return (
     <section className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
       <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50">
-        <h2 className="text-xl font-bold text-[#0e1a34]">Perfil de Usuario</h2>
+        <h2 className="text-xl font-bold text-[#0e1a34]">{t('config.profile.title')}</h2>
       </div>
       <div className="p-6">
         <div className="flex flex-col md:flex-row gap-8 items-start">
@@ -25,37 +27,37 @@ const ConfigPerfil: React.FC = () => {
           {/* Campos */}
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Nombre Completo</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">{t('config.profile.fullName')}</label>
               <input
                 type="text"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ingrese su nombre"
+                placeholder={t('config.profile.namePlaceholder')}
                 className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none px-4 py-2.5 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Correo Electrónico</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">{t('config.profile.email')}</label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="correo@ljmsealine.com"
+                placeholder={t('config.profile.emailPlaceholder')}
                 className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none px-4 py-2.5 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-semibold text-slate-700 mb-2">Rol del Sistema</label>
+              <label className="block text-sm font-semibold text-slate-700 mb-2">{t('config.profile.systemRole')}</label>
               <input
                 type="text"
-                value="Super Administrador"
+                value={t('config.profile.superAdmin')}
                 disabled
                 className="w-full rounded-lg border border-slate-200 bg-slate-50 text-slate-400 px-4 py-2.5 text-sm cursor-not-allowed"
               />
             </div>
             <div className="flex items-end">
               <button className="bg-[#0e1a34] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-slate-800 transition-all shadow-md text-sm">
-                Guardar Cambios
+                {t('config.profile.saveChanges')}
               </button>
             </div>
           </div>

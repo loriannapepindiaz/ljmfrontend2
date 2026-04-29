@@ -96,6 +96,7 @@ const ConfigPreferencias: React.FC = () => {
                       key={option.code}
                       onClick={() => {
                         setDraftLanguage(option.code);
+                        setLanguage(option.code);
                         setOpenDropdown(null);
                       }}
                       className={`w-full px-4 py-2.5 text-sm text-left transition-colors ${
@@ -188,7 +189,7 @@ const ConfigPreferencias: React.FC = () => {
               {t('config.preferences.dark')}
             </button>
           </div>
-          <p className="text-xs text-slate-400 mt-1.5">Se aplica inmediatamente</p>
+          <p className="text-xs text-slate-400 mt-1.5">{t('config.preferences.appliesImmediately')}</p>
         </div>
       </div>
 

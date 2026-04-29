@@ -1,4 +1,26 @@
 @import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+/* Leaflet tooltip custom style */
+.leaflet-label-custom {
+  background: #0e1a34 !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  border-radius: 20px !important;
+  color: #eacea9 !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  padding: 3px 10px !important;
+  box-shadow: none !important;
+  white-space: nowrap !important;
+}
+.leaflet-label-custom::before { display: none !important; }
+
+/* Static maps — no grab/crosshair cursor */
+.leaflet-container,
+.leaflet-grab,
+.leaflet-crosshair { cursor: default !important; }
 
 /* 1. IMPORTACIÓN DE FUENTES */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');

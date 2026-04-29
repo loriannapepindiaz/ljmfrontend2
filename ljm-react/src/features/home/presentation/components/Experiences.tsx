@@ -32,7 +32,7 @@ const Experiences: React.FC = () => {
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6">
               <img
                 src={michelinImg}
-                alt="Michelin Star Dining"
+                alt="Cena con Estrella Michelin"
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -53,7 +53,7 @@ const Experiences: React.FC = () => {
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6">
               <img
                 src={spaImg}
-                alt="Zenith Wellness Spa"
+                alt="Spa Zenith Bienestar"
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -74,7 +74,7 @@ const Experiences: React.FC = () => {
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6">
               <img
                 src={penImg}
-                alt="Royal Penthouse Suites"
+                alt="Suites Penthouse Reales"
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -92,7 +92,7 @@ const Experiences: React.FC = () => {
             <div className="relative overflow-hidden rounded-2xl aspect-[4/5] mb-6">
               <img
                 src={vistaImg}
-                alt="Ocean View Lounge"
+                alt="Salón con Vista al Océano"
                 className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
