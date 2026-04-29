@@ -17,7 +17,7 @@ const BasicInfoSection: React.FC = () => {
         <h3 className="text-xl font-bold text-[#0e1a34]">{t('fleet.add.basic.title')}</h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
 
         <div className="flex flex-col gap-2">
           <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">

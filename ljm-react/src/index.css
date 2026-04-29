@@ -22,6 +22,23 @@
 .leaflet-grab,
 .leaflet-crosshair { cursor: default !important; }
 
+/* Admin sidebar — left-side scrollbar spanning full height */
+.sidebar-nav {
+  direction: rtl;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(234,206,169,0.5) rgba(255,255,255,0.06);
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(234,206,169,0.5);
+  border-radius: 2px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(234,206,169,0.8); }
+
 /* 1. IMPORTACIÓN DE FUENTES */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
@@ -294,4 +311,46 @@
 .dark body.admin-panel .shadow-md,
 .dark body.admin-panel .shadow-lg {
   box-shadow: none !important;
+}
+
+/* Luxury date/calendar inputs — admin forms */
+body.admin-panel input[type="date"],
+body.admin-panel input[type="datetime-local"] {
+  color-scheme: light;
+  cursor: pointer;
+  color: #334155;
+}
+
+body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator,
+body.admin-panel input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 2px;
+  filter: invert(20%) sepia(60%) saturate(500%) hue-rotate(185deg) brightness(0.75);
+  opacity: 0.65;
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator:hover,
+body.admin-panel input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  filter: invert(75%) sepia(30%) saturate(500%) hue-rotate(10deg) brightness(1.05);
+}
+
+body.admin-panel input[type="date"]:focus,
+body.admin-panel input[type="datetime-local"]:focus {
+  border-color: #eacea9 !important;
+}
+
+/* Dark mode date inputs */
+.dark body.admin-panel input[type="date"],
+.dark body.admin-panel input[type="datetime-local"] {
+  color-scheme: dark;
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator,
+.dark body.admin-panel input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  filter: invert(87%) sepia(20%) saturate(350%) hue-rotate(12deg) brightness(1.15) !important;
+  opacity: 0.85;
 }

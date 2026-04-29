@@ -14,7 +14,7 @@ const ConfiguracionPage: React.FC = () => {
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto bg-[#f6f7f8] dark:bg-slate-900 transition-colors">
-        <div className="p-10 max-w-5xl">
+        <div className="p-10 max-w-5xl mx-auto">
           <ConfigHeader />
           <div className="space-y-8">
             <ConfigPerfil />

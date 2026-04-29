@@ -16,8 +16,8 @@ const AgregarCruceroPage: React.FC = () => {
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto">
 
-        <div className="p-8 pb-4">
-          <nav className="flex text-sm font-medium text-slate-500 mb-4">
+        <div className="px-8 pt-6 pb-0">
+          <nav className="flex text-sm font-medium text-slate-500 mb-3">
             <a href="#" className="hover:text-[#0e1a34]">{t('fleet.add.breadcrumb')}</a>
             <span className="mx-2 text-slate-400">/</span>
             <span className="text-[#0e1a34] font-bold">{t('fleet.add.breadcrumbSub')}</span>

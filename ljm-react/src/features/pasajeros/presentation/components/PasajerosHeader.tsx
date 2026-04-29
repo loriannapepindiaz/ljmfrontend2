@@ -14,13 +14,6 @@ const PasajerosHeader: React.FC<PasajerosHeaderProps> = ({ onAddClick }) => {
           <h2 className="text-4xl font-bold text-[#0e1a34]">{t('passengers.title')}</h2>
           <p className="text-slate-500 mt-1">{t('passengers.subtitle')}</p>
         </div>
-        <button
-          onClick={onAddClick}
-          className="bg-[#0e1a34] text-white px-6 py-2.5 rounded-lg flex items-center gap-2 text-sm font-bold shadow-lg"
-        >
-          <span className="material-symbols-outlined">person_add</span>
-          {t('passengers.addPassenger')}
-        </button>
       </div>
     </header>
   );

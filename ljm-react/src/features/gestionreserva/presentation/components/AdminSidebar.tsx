@@ -42,17 +42,24 @@ const AdminSidebar: React.FC = () => {
   const inactiveStyle = base + ' text-white/70 hover:bg-white/10 hover:text-white';
 
   return (
-    <aside className="w-64 bg-[#0e1a34] flex flex-col h-full shrink-0">
-      <div className="p-6">
-        <div className="flex items-center gap-3 mb-10">
-          <img src="/logo.png" alt="LJM Sealine Logo" className="size-12 object-contain" />
-          <div>
-            <h1 className="font-bold text-lg text-[#eacea9] leading-none">LJM Sealine</h1>
-            <p className="text-white/60 text-[10px] uppercase tracking-widest mt-1">{t('sidebar.panel')}</p>
+    <aside className="sidebar-nav w-64 bg-[#0e1a34] flex flex-col h-full shrink-0 overflow-y-auto">
+      {/* inner wrapper restores LTR direction */}
+      <div className="flex flex-col flex-1 min-w-0" style={{ direction: 'ltr' }}>
+
+        {/* Header — sticky so it stays visible while nav scrolls */}
+        <div className="sticky top-0 z-10 bg-[#0e1a34] p-6 pb-4">
+          <div className="flex items-center gap-3">
+            <img src="/logo.png" alt="LJM Sealine Logo" className="size-12 object-contain" />
+            <div>
+              <h1 className="font-bold text-lg text-[#eacea9] leading-none">LJM Sealine</h1>
+              <p className="text-white/60 text-[10px] uppercase tracking-widest mt-1">{t('sidebar.panel')}</p>
+            </div>
           </div>
         </div>
 
-        <nav className="flex flex-col gap-1">
+        {/* Nav — flows naturally, no separate scroll container */}
+        <div className="px-6 flex-1">
+        <nav className="flex flex-col gap-1 pb-6">
           <button
             onClick={() => navigate('/admin/dashboard')}
             className={isActive('/admin/dashboard') ? activeStyle : inactiveStyle}
@@ -206,27 +213,29 @@ const AdminSidebar: React.FC = () => {
             <span className="material-symbols-outlined text-[22px]">settings</span>
             <span className="text-sm font-medium">{t('sidebar.settings')}</span>
           </button>
-        </nav>
-      </div>
 
-      <div className="mt-auto p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="size-9 rounded-full bg-[#eacea9]/20 flex items-center justify-center">
-            <span className="material-symbols-outlined text-[18px] text-[#eacea9]">person</span>
+          <div className="my-3 border-t border-white/10" />
+
+          <div className="flex items-center gap-3 px-2 py-2">
+            <div className="size-9 rounded-full bg-[#eacea9]/20 flex items-center justify-center shrink-0">
+              <span className="material-symbols-outlined text-[18px] text-[#eacea9]">person</span>
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white leading-none">Capitan Morgan</p>
+              <p className="text-[10px] text-white/50 mt-0.5">{t('sidebar.superAdmin')}</p>
+              <p className="text-[10px] text-white/50 mt-1">
+                {t('sidebar.currentTime')}: {zonedTime}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-sm font-bold text-white leading-none">Capitan Morgan</p>
-            <p className="text-[10px] text-white/50 mt-0.5">{t('sidebar.superAdmin')}</p>
-            <p className="text-[10px] text-white/50 mt-1">
-              {t('sidebar.currentTime')}: {zonedTime}
-            </p>
-          </div>
-        </div>
-        <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/5 py-3 px-4 text-sm font-bold text-white hover:bg-white/10 transition-all border border-white/10">
-          <span className="material-symbols-outlined text-sm">logout</span>
-          {t('sidebar.logout')}
-        </button>
-      </div>
+
+          <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/5 py-3 px-4 text-sm font-bold text-white hover:bg-white/10 transition-all border border-white/10 mb-2">
+            <span className="material-symbols-outlined text-sm">logout</span>
+            {t('sidebar.logout')}
+          </button>
+        </nav>
+        </div>{/* /px-6 */}
+      </div>{/* /ltr wrapper */}
     </aside>
   );
 };

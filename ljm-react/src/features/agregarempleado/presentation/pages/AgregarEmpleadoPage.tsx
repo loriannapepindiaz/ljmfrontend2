@@ -22,18 +22,6 @@ const AgregarEmpleadoPage: React.FC = () => {
             <span className="text-[#0e1a34]">{t('employees.add.breadcrumbSub')}</span>
           </nav>
           <div className="flex items-center gap-6">
-            <div className="relative">
-              <span className="material-symbols-outlined text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm">search</span>
-              <input
-                type="text"
-                className="bg-slate-100 border-none text-xs rounded-full pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-[#eacea9] outline-none"
-                placeholder={t('employees.table.search')}
-              />
-            </div>
-            <div className="flex items-center gap-4 text-slate-400">
-              <span className="material-symbols-outlined hover:text-[#0e1a34] cursor-pointer">notifications</span>
-              <span className="material-symbols-outlined hover:text-[#0e1a34] cursor-pointer">help_outline</span>
-            </div>
             <div className="flex items-center gap-3 border-l border-slate-100 pl-6">
               <div className="text-right">
                 <p className="text-[10px] font-bold uppercase tracking-tighter text-[#0e1a34]">Almirante Henderson</p>
