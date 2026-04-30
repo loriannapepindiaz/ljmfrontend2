@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getStoredAdminSession } from '../../../../lib/api';
 
 const ConfigPerfil: React.FC = () => {
   const { t } = useTranslation();
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
+  const adminUser = getStoredAdminSession()?.user;
+  const [nombre, setNombre] = useState(adminUser?.username ?? '');
+  const [email, setEmail] = useState(adminUser?.email ?? '');
 
   return (
     <section className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -50,7 +52,7 @@ const ConfigPerfil: React.FC = () => {
               <label className="block text-sm font-semibold text-slate-700 mb-2">{t('config.profile.systemRole')}</label>
               <input
                 type="text"
-                value={t('config.profile.superAdmin')}
+                value={adminUser?.rol ?? t('config.profile.superAdmin')}
                 disabled
                 className="w-full rounded-lg border border-slate-200 bg-slate-50 text-slate-400 px-4 py-2.5 text-sm cursor-not-allowed"
               />

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
+import { clearAdminSession, getStoredAdminSession } from '../../../../lib/api';
 
 const AdminSidebar: React.FC = () => {
   const navigate = useNavigate();
@@ -10,6 +11,14 @@ const AdminSidebar: React.FC = () => {
   const [openEmpleados, setOpenEmpleados] = useState(false);
   const [openCruceros, setOpenCruceros] = useState(false);
   const [now, setNow] = useState(() => new Date());
+  const adminSession = getStoredAdminSession();
+  const adminName = adminSession?.user.username ?? adminSession?.user.email ?? 'Administrador';
+  const adminRole = adminSession?.user.rol ?? t('sidebar.superAdmin');
+
+  const handleLogout = () => {
+    clearAdminSession();
+    navigate('/admin');
+  };
 
   useEffect(() => {
     document.body.classList.add('admin-panel');
@@ -221,15 +230,18 @@ const AdminSidebar: React.FC = () => {
               <span className="material-symbols-outlined text-[18px] text-[#eacea9]">person</span>
             </div>
             <div>
-              <p className="text-sm font-bold text-white leading-none">Capitan Morgan</p>
-              <p className="text-[10px] text-white/50 mt-0.5">{t('sidebar.superAdmin')}</p>
+              <p className="text-sm font-bold text-white leading-none">{adminName}</p>
+              <p className="text-[10px] text-white/50 mt-0.5">{adminRole}</p>
               <p className="text-[10px] text-white/50 mt-1">
                 {t('sidebar.currentTime')}: {zonedTime}
               </p>
             </div>
           </div>
 
-          <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/5 py-3 px-4 text-sm font-bold text-white hover:bg-white/10 transition-all border border-white/10 mb-2">
+          <button
+            onClick={handleLogout}
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-white/5 py-3 px-4 text-sm font-bold text-white hover:bg-white/10 transition-all border border-white/10 mb-2"
+          >
             <span className="material-symbols-outlined text-sm">logout</span>
             {t('sidebar.logout')}
           </button>

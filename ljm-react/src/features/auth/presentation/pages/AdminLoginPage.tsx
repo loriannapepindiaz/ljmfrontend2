@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { authApi, persistAdminSession } from '../../../../lib/api';
 
 const AdminLoginPage: React.FC = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Lógica de acceso al portal de administración de LJM SEALINE
-    console.log("Accediendo al panel administrativo de LJM SEALINE...");
-    navigate('/dashboard'); 
+    setError('');
+
+    if (!username.trim() || !password) {
+      setError('Ingrese su identidad de administrador y clave de acceso.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const session = await authApi.adminLogin({ username, password });
+      persistAdminSession(session);
+      navigate('/admin/dashboard');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'No se pudo acceder a la consola administrativa.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -72,7 +92,12 @@ const AdminLoginPage: React.FC = () => {
         {/* Login Card */}
         <div className="bg-[#0f1a34]/40 backdrop-blur-[20px] border border-white/10 w-full max-w-lg p-8 md:p-12 rounded-2xl shadow-2xl">
           <form className="space-y-6" onSubmit={handleSubmit}>
-            
+            {error && (
+              <div className="rounded-xl border border-red-400/20 bg-red-500/15 px-4 py-3 text-center text-xs font-semibold tracking-wide text-red-200">
+                {error}
+              </div>
+            )}
+
             {/* Username Field */}
             <div className="flex flex-col gap-2">
               <label className="text-[#eacea9]/90 text-xs font-semibold uppercase tracking-wider pl-1">
@@ -86,6 +111,9 @@ const AdminLoginPage: React.FC = () => {
                   type="text"
                   className="w-full bg-slate-900/40 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#eacea9]/40 focus:border-[#eacea9]/40 transition-all placeholder:text-slate-600" 
                   placeholder="Usuario o ID"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  autoComplete="username"
                 />
               </div>
             </div>
@@ -105,7 +133,10 @@ const AdminLoginPage: React.FC = () => {
                 <input 
                   type={showPassword ? "text" : "password"}
                   className="w-full bg-slate-900/40 border border-white/10 rounded-xl py-4 pl-12 pr-12 text-slate-100 focus:outline-none focus:ring-1 focus:ring-[#eacea9]/40 focus:border-[#eacea9]/40 transition-all placeholder:text-slate-600" 
-                  placeholder="••••••••" 
+                  placeholder="Clave de acceso"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
                 />
                 {/* Botón de visibilidad Dorado funcional */}
                 <button 
@@ -135,9 +166,10 @@ const AdminLoginPage: React.FC = () => {
             {/* Sign In Button */}
             <button 
               type="submit"
-              className="w-full bg-[#eacea9] hover:bg-[#f2dfc5] text-[#0e1a34] font-bold py-4 rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-black/20 text-sm uppercase tracking-widest mt-4"
+              disabled={isLoading}
+              className="w-full bg-[#eacea9] hover:bg-[#f2dfc5] text-[#0e1a34] font-bold py-4 rounded-xl transition-all transform active:scale-[0.99] shadow-lg shadow-black/20 text-sm uppercase tracking-widest mt-4 disabled:cursor-not-allowed disabled:opacity-70"
             >
-              ACCEDER A LA CONSOLA
+              {isLoading ? 'VALIDANDO...' : 'ACCEDER A LA CONSOLA'}
             </button>
           </form>
         </div>

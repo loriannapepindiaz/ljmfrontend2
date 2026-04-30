@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
+  id?: string | number;
   title: string;
   location: string;
   rating: string;
@@ -8,18 +9,27 @@ interface Props {
   description: string;
 }
 
-const ExperienceCard = ({ title, location, rating, image, description }: Props) => {
+const ExperienceCard = ({ id, title, location, rating, image, description }: Props) => {
   const navigate = useNavigate();
 
+  const slugify = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
   const handleDetails = () => {
-    navigate('/destination-details', {
+    navigate(`/experiences/${slugify(title)}`, {
       state: {
-        destination: {
-          titulo: title,
-          pais: location,
-          descripcion: description,
-          imagen_url: image,
-          rating_promedio: rating,
+        experience: {
+          id,
+          title,
+          location,
+          rating,
+          image,
+          description,
         },
       },
     });

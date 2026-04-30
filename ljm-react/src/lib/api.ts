@@ -30,6 +30,27 @@ type MeResponse = {
   user: AuthUser;
 };
 
+export type Experience = {
+  id: string;
+  nombre: string;
+  descripcion: string | null;
+  unidad_cobro: string;
+  precio_base: string | number;
+  categoria: string;
+  imagen_url: string | null;
+  activa: boolean;
+};
+
+type ExperiencesResponse = {
+  ok: boolean;
+  data: Experience[];
+};
+
+type ExperienceResponse = {
+  ok: boolean;
+  data: Experience;
+};
+
 type ApiErrorResponse = {
   ok: false;
   message?: string;
@@ -60,6 +81,12 @@ export const authApi = {
       body: JSON.stringify(payload),
     }),
 
+  adminLogin: (payload: { username: string; password: string }) =>
+    request<AuthResponse>('/auth/admin/login', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
   register: (payload: { fullName: string; email: string; password: string; confirmPassword: string }) =>
     request<AuthResponse>('/auth/register', {
       method: 'POST',
@@ -75,7 +102,52 @@ export const authApi = {
     }),
 };
 
+export const experienceApi = {
+  list: (payload?: { nombre?: string }) => {
+    const params = payload?.nombre ? `?nombre=${encodeURIComponent(payload.nombre)}` : '';
+
+    return request<ExperiencesResponse>(`/experiences${params}`, {
+      method: 'GET',
+    });
+  },
+
+  getById: (id: string | number) =>
+    request<ExperienceResponse>(`/experiences/${id}`, {
+      method: 'GET',
+    }),
+};
+
 export const persistAuthSession = ({ token, user }: AuthResponse) => {
   localStorage.setItem('ljm_auth_token', token);
   localStorage.setItem('ljm_auth_user', JSON.stringify(user));
+};
+
+export const persistAdminSession = ({ token, user }: AuthResponse) => {
+  localStorage.setItem('ljm_admin_token', token);
+  localStorage.setItem('ljm_admin_user', JSON.stringify(user));
+};
+
+export const getStoredAdminSession = () => {
+  const token = localStorage.getItem('ljm_admin_token');
+  const user = localStorage.getItem('ljm_admin_user');
+
+  if (!token || !user) {
+    return null;
+  }
+
+  try {
+    return {
+      token,
+      user: JSON.parse(user) as AuthUser,
+    };
+  } catch {
+    localStorage.removeItem('ljm_admin_token');
+    localStorage.removeItem('ljm_admin_user');
+    return null;
+  }
+};
+
+export const clearAdminSession = () => {
+  localStorage.removeItem('ljm_admin_token');
+  localStorage.removeItem('ljm_admin_user');
 };
