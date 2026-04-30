@@ -1,15 +1,23 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 const ACTION_KEYS = [
-  { icon: 'add_circle',      labelKey: 'dashboard.quickActions.newReservation'  },
-  { icon: 'directions_boat', labelKey: 'dashboard.quickActions.addShip'         },
-  { icon: 'description',     labelKey: 'dashboard.quickActions.generateReport'  },
-  { icon: 'mail',            labelKey: 'dashboard.quickActions.contactPassenger' },
+  { icon: 'directions_boat', labelKey: 'dashboard.quickActions.addShip', path: '/admin/cruceros/agregar' },
+  { icon: 'description',     labelKey: 'dashboard.quickActions.generateReport', path: '/admin/dashboard/report' },
 ];
 
 const QuickActions: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleAction = (action: typeof ACTION_KEYS[0]) => {
+    if (action.path) {
+      navigate(action.path);
+    }
+  };
+
+
   return (
     <div className="bg-[#eacea9] text-[#0e1a34] rounded-xl p-6 shadow-sm relative overflow-hidden border border-[#0e1a34]/5">
       <div className="absolute -right-8 -bottom-8 size-32 bg-white/20 rounded-full blur-2xl"></div>
@@ -18,7 +26,8 @@ const QuickActions: React.FC = () => {
         {ACTION_KEYS.map((action) => (
           <button
             key={action.labelKey}
-            className="flex flex-col items-center gap-2 p-4 bg-[#0e1a34]/5 hover:bg-[#0e1a34]/10 rounded-xl transition-all border border-[#0e1a34]/10"
+            onClick={() => handleAction(action)}
+            className="flex flex-col items-center gap-2 p-4 bg-[#0e1a34]/5 hover:bg-[#0e1a34]/10 rounded-xl transition-all border border-[#0e1a34]/10 w-full"
           >
             <span className="material-symbols-outlined">{action.icon}</span>
             <span className="text-xs font-bold text-center">{t(action.labelKey)}</span>
@@ -30,3 +39,4 @@ const QuickActions: React.FC = () => {
 };
 
 export default QuickActions;
+

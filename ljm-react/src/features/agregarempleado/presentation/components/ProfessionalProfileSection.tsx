@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import CalendarPicker from '../../../../components/CalendarPicker';
 
 const inputClass = "w-full bg-slate-100/50 border-none px-4 py-2.5 rounded-lg focus:ring-1 focus:ring-[#eacea9] outline-none text-sm";
 
 const ProfessionalProfileSection: React.FC = () => {
   const { t } = useTranslation();
+  const [expiryDates, setExpiryDates] = useState<Array<Date | null>>([null, null]);
+
+  const updateExpiryDate = (index: number, date: Date) => {
+    setExpiryDates((current) => current.map((item, itemIndex) => (itemIndex === index ? date : item)));
+  };
 
   return (
     <section className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -57,7 +63,14 @@ const ProfessionalProfileSection: React.FC = () => {
                 <tr>
                   <td className="px-4 py-3"><input type="text" placeholder="STCW II/2" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
                   <td className="px-4 py-3"><input type="text" placeholder="Autoridad Marítima" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
-                  <td className="px-4 py-3"><input type="date" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
+                  <td className="px-4 py-3">
+                    <CalendarPicker
+                      value={expiryDates[0]}
+                      onChange={(date) => updateExpiryDate(0, date)}
+                      placeholder="dd/mm/aaaa"
+                      className="min-w-[140px]"
+                    />
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <button className="text-slate-300 hover:text-red-400 transition-colors">
                       <span className="material-symbols-outlined text-sm">delete</span>
@@ -67,7 +80,14 @@ const ProfessionalProfileSection: React.FC = () => {
                 <tr>
                   <td className="px-4 py-3"><input type="text" placeholder="Formación Básica Seguridad" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
                   <td className="px-4 py-3"><input type="text" placeholder="Entidad acreditada" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
-                  <td className="px-4 py-3"><input type="date" className="w-full bg-transparent border-none p-0 text-xs focus:ring-0 outline-none" /></td>
+                  <td className="px-4 py-3">
+                    <CalendarPicker
+                      value={expiryDates[1]}
+                      onChange={(date) => updateExpiryDate(1, date)}
+                      placeholder="dd/mm/aaaa"
+                      className="min-w-[140px]"
+                    />
+                  </td>
                   <td className="px-4 py-3 text-right">
                     <button className="text-slate-300 hover:text-red-400 transition-colors">
                       <span className="material-symbols-outlined text-sm">delete</span>

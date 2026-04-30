@@ -57,11 +57,6 @@ const ConfigPerfil: React.FC = () => {
                 className="w-full rounded-lg border border-slate-200 bg-slate-50 text-slate-400 px-4 py-2.5 text-sm cursor-not-allowed"
               />
             </div>
-            <div className="flex items-end">
-              <button className="bg-[#0e1a34] text-white px-6 py-2.5 rounded-lg font-bold hover:bg-slate-800 transition-all shadow-md text-sm">
-                {t('config.profile.saveChanges')}
-              </button>
-            </div>
           </div>
         </div>
       </div>

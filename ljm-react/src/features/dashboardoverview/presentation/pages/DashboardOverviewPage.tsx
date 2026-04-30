@@ -11,7 +11,6 @@ const DashboardOverviewPage: React.FC = () => {
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
       <main className="flex-1 overflow-y-auto bg-white relative">
-
         <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-[#0e1a34]/5 to-transparent pointer-events-none"></div>
 
         <DashboardHeader />
@@ -27,10 +26,10 @@ const DashboardOverviewPage: React.FC = () => {
             </div>
           </div>
         </div>
-
       </main>
     </div>
   );
 };
 
 export default DashboardOverviewPage;
+

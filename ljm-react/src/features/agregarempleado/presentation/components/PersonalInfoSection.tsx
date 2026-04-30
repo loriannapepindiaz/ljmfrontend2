@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import CalendarPicker from '../../../../components/CalendarPicker';
 
 const inputClass = "w-full bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none text-sm transition-all";
 
@@ -9,9 +10,10 @@ const PersonalInfoSection: React.FC = () => {
   const { t } = useTranslation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [nacionalidad, setNacionalidad] = useState('');
+  const [birthDate, setBirthDate] = useState<Date | null>(null);
 
   return (
-    <section className="bg-white rounded-xl shadow-sm overflow-hidden">
+    <section className="bg-white rounded-xl shadow-sm relative">
       <div className="bg-slate-50 px-8 py-4 border-b border-slate-100 flex justify-between items-center">
         <h2 className="text-xl font-bold text-[#0e1a34]">{t('employees.add.personal.title')}</h2>
         <span className="text-[9px] uppercase tracking-widest text-slate-400 font-bold">
@@ -43,15 +45,20 @@ const PersonalInfoSection: React.FC = () => {
                 <span className="material-symbols-outlined text-[14px]">person</span>
                 {t('employees.add.personal.fullName')}
               </label>
-              <input type="text" placeholder="Julian Vane" className={inputClass} />
+              <input type="text" placeholder="ej. Juan Pérez" className={inputClass} />
             </div>
+
 
             <div className="space-y-1.5">
               <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[14px]">cake</span>
                 {t('employees.add.personal.birthDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none text-sm transition-all text-slate-700" />
+              <CalendarPicker 
+                value={birthDate} 
+                onChange={setBirthDate} 
+                placeholder="Selecciona fecha de nacimiento"
+              />
             </div>
 
             {/* Nacionalidad */}

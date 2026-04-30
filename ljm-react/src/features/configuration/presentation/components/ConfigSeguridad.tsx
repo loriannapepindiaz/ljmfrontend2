@@ -3,13 +3,21 @@ import { useTranslation } from 'react-i18next';
 
 const ConfigSeguridad: React.FC = () => {
   const { t } = useTranslation();
-  const [twoFactor, setTwoFactor] = useState(true);
+  const [twoFactor, setTwoFactor] = useState(() => {
+    return localStorage.getItem('admin_2fa') === 'true';
+  });
   const [showModal, setShowModal] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
 
   const handleClose = () => {
     setShowModal(false);
     setShowNewPass(false);
+  };
+
+  const toggle2FA = () => {
+    const newState = !twoFactor;
+    setTwoFactor(newState);
+    localStorage.setItem('admin_2fa', String(newState));
   };
 
   return (
@@ -37,7 +45,7 @@ const ConfigSeguridad: React.FC = () => {
             <p className="text-xs text-slate-500">{t('config.security.twoFactorDesc')}</p>
           </div>
           <button
-            onClick={() => setTwoFactor(!twoFactor)}
+            onClick={toggle2FA}
             className={`relative inline-flex items-center w-11 h-6 rounded-full transition-colors ${
               twoFactor ? 'bg-[#0e1a34]' : 'bg-slate-300'
             }`}
@@ -74,50 +82,27 @@ const ConfigSeguridad: React.FC = () => {
               </button>
             </div>
 
-            {/* Trampa autocompletado */}
-            <input type="text" style={{ display: 'none' }} readOnly />
-            <input type="password" style={{ display: 'none' }} readOnly />
-
             <div className="flex flex-col gap-4">
-
-              {/* Contraseña actual */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
                   {t('config.security.currentPassword')}
                 </label>
                 <input
-                  type="text"
-                  autoComplete="off"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                  readOnly
-                  onFocus={(e) => e.target.removeAttribute('readonly')}
+                  type="password"
                   placeholder={t('config.security.currentPasswordPlaceholder')}
                   className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
-                  style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                 />
               </div>
 
-              {/* Nueva contraseña */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
                   {t('config.security.newPassword')}
                 </label>
                 <div className="relative">
                   <input
-                    type="text"
-                    autoComplete="new-password"
-                    data-lpignore="true"
-                    data-1p-ignore="true"
-                    data-form-type="other"
-                    readOnly
-                    onFocus={(e) => e.target.removeAttribute('readonly')}
+                    type={showNewPass ? 'text' : 'password'}
                     placeholder={t('config.security.newPasswordPlaceholder')}
                     className="w-full border border-slate-200 rounded-xl px-4 py-2.5 pr-12 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
-                    style={{
-                      WebkitTextSecurity: showNewPass ? 'none' : 'disc',
-                    } as React.CSSProperties}
                   />
                   <button
                     type="button"
@@ -131,25 +116,16 @@ const ConfigSeguridad: React.FC = () => {
                 </div>
               </div>
 
-              {/* Confirmar contraseña */}
               <div>
                 <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider block mb-1.5">
                   {t('config.security.confirmPassword')}
                 </label>
                 <input
-                  type="text"
-                  autoComplete="new-password"
-                  data-lpignore="true"
-                  data-1p-ignore="true"
-                  data-form-type="other"
-                  readOnly
-                  onFocus={(e) => e.target.removeAttribute('readonly')}
+                  type="password"
                   placeholder={t('config.security.confirmPasswordPlaceholder')}
                   className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
-                  style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                 />
               </div>
-
             </div>
 
             <div className="border-t border-slate-100 mt-5 pt-4 flex gap-3">

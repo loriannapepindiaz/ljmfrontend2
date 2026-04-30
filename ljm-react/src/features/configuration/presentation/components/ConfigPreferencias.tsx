@@ -16,7 +16,6 @@ const ConfigPreferencias: React.FC = () => {
     getTimezoneLabel,
   } = useAdminPreferences();
   const [openDropdown, setOpenDropdown] = useState<'idioma' | 'zona' | null>(null);
-  const [saved, setSaved] = useState(false);
   const [now, setNow] = useState(() => new Date());
   const [draftLanguage, setDraftLanguage] = useState(language);
   const [draftTimezone, setDraftTimezone] = useState(timezone);
@@ -44,23 +43,6 @@ const ConfigPreferencias: React.FC = () => {
       }).format(now),
     [locale, draftTimezone, now],
   );
-
-  const applyPreferences = () => {
-    setLanguage(draftLanguage);
-    setTimezone(draftTimezone);
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
-  };
-
-  const handleApply = () => {
-    applyPreferences();
-  };
-
-  useEffect(() => {
-    const onApplyAll = () => applyPreferences();
-    window.addEventListener('admin-preferences-apply', onApplyAll);
-    return () => window.removeEventListener('admin-preferences-apply', onApplyAll);
-  }, [draftLanguage, draftTimezone]);
 
   return (
     <section className="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 transition-colors duration-300">
@@ -141,6 +123,7 @@ const ConfigPreferencias: React.FC = () => {
                       key={option.value}
                       onClick={() => {
                         setDraftTimezone(option.value);
+                        setTimezone(option.value);
                         setOpenDropdown(null);
                       }}
                       className={`w-full px-4 py-2.5 text-sm text-left transition-colors ${
@@ -192,18 +175,7 @@ const ConfigPreferencias: React.FC = () => {
           <p className="text-xs text-slate-400 mt-1.5">{t('config.preferences.appliesImmediately')}</p>
         </div>
       </div>
-
-      <div className="px-6 pb-6">
-        <button
-          onClick={handleApply}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-bold transition-all ${
-            saved ? 'bg-green-500 text-white' : 'bg-[#eacea9] text-[#0e1a34] hover:bg-[#d4af37]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-[16px]">{saved ? 'check_circle' : 'save'}</span>
-          {saved ? t('config.preferences.saved') : t('config.preferences.save')}
-        </button>
-      </div>
+      <div className="pb-6" />
     </section>
   );
 };

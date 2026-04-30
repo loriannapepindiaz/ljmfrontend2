@@ -27,6 +27,7 @@ import ReservationManagementPage from "./features/gestionreserva/presentation/pa
 
 // ✅ ADMIN - DASHBOARD OVERVIEW
 import DashboardOverviewPage from "./features/dashboardoverview/presentation/pages/DashboardOverviewPage";
+import ExecutiveReportPage from "./features/dashboardoverview/presentation/pages/ExecutiveReportPage";
 
 // ✅ ADMIN - CRUCEROS
 import CrucerosPage from "./features/gestionflota/presentation/pages/CrucerosPage";
@@ -123,6 +124,7 @@ function App() {
 
         {/* Dashboard Admin */}
         <Route path="/admin/dashboard" element={<AdminRoute><DashboardOverviewPage /></AdminRoute>} />
+        <Route path="/admin/dashboard/report" element={<AdminRoute><ExecutiveReportPage /></AdminRoute>} />
 
         {/* Gestión de Reservas */}
         <Route path="/admin/reservas" element={<AdminRoute><ReservationManagementPage /></AdminRoute>} />

@@ -5,11 +5,8 @@ import ConfigPerfil from '../components/ConfigPerfil';
 import ConfigSeguridad from '../components/ConfigSeguridad';
 import ConfigNotificaciones from '../components/ConfigNotificaciones';
 import ConfigPreferencias from '../components/ConfigPreferencias';
-import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 
 const ConfiguracionPage: React.FC = () => {
-  const { t } = useAdminPreferences();
-
   return (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
@@ -23,17 +20,7 @@ const ConfiguracionPage: React.FC = () => {
               <ConfigNotificaciones />
             </div>
             <ConfigPreferencias />
-            <div className="flex justify-end gap-4 pt-4 pb-10">
-              <button className="px-8 py-3 text-slate-500 dark:text-slate-300 font-bold hover:text-slate-700 dark:hover:text-white transition-colors">
-                {t('config.cancel')}
-              </button>
-              <button
-                onClick={() => window.dispatchEvent(new Event('admin-preferences-apply'))}
-                className="bg-[#0e1a34] text-white px-10 py-3 rounded-lg font-bold shadow-xl hover:bg-slate-800 transition-all"
-              >
-                {t('config.applyAll')}
-              </button>
-            </div>
+            <div className="pb-10" />
           </div>
         </div>
       </main>

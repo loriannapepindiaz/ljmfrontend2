@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import CalendarPicker from '../../../../components/CalendarPicker';
 
 const AssignmentContractSidebar: React.FC = () => {
   const { t } = useTranslation();
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   return (
     <div className="space-y-8">
 
-      <section className="bg-white rounded-xl shadow-sm overflow-hidden">
+      <section className="bg-white rounded-xl shadow-sm overflow-hidden border border-slate-100">
         <div className="p-8 border-b border-slate-50 bg-[#0e1a34]">
           <h2 className="text-sm font-bold text-[#eacea9] uppercase tracking-widest">
             {t('employees.add.contract.title')}
@@ -21,7 +24,8 @@ const AssignmentContractSidebar: React.FC = () => {
               {t('employees.add.contract.ship')}
             </label>
             <div className="relative">
-              <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none">
+              <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none text-slate-400">
+                <option value="">Seleccionar barco...</option>
                 <option>SS Meridian Explorer</option>
                 <option>MV Golden Horizon</option>
                 <option>The Azure Sovereign</option>
@@ -36,7 +40,7 @@ const AssignmentContractSidebar: React.FC = () => {
             </label>
             <div className="grid grid-cols-2 gap-2">
               <label className="flex items-center justify-center gap-2 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
-                <input type="radio" name="contract" defaultChecked className="text-[#0e1a34]" />
+                <input type="radio" name="contract" className="text-[#0e1a34]" />
                 <span className="text-xs font-medium text-slate-600">{t('employees.add.contract.indefinite')}</span>
               </label>
               <label className="flex items-center justify-center gap-2 p-3 rounded-lg border border-slate-100 hover:bg-slate-50 cursor-pointer transition-colors">
@@ -46,18 +50,18 @@ const AssignmentContractSidebar: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
                 {t('employees.add.contract.startDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
+              <CalendarPicker value={startDate} onChange={setStartDate} placeholder="Fecha Inicio" />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
                 {t('employees.add.contract.endDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
+              <CalendarPicker value={endDate} onChange={setEndDate} placeholder="Fecha Fin" />
             </div>
           </div>
 
@@ -65,7 +69,8 @@ const AssignmentContractSidebar: React.FC = () => {
             <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
               {t('employees.add.contract.shift')}
             </label>
-            <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none">
+            <select className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm appearance-none focus:ring-1 focus:ring-[#eacea9] outline-none text-slate-400">
+              <option value="">Seleccionar turno...</option>
               <option>3 Meses ON / 1 Mes OFF</option>
               <option>4 Meses ON / 2 Mes OFF</option>
               <option>6 Semanas ON / 6 Semanas OFF</option>
@@ -78,7 +83,7 @@ const AssignmentContractSidebar: React.FC = () => {
             </label>
             <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-lg px-4 py-3">
               <span className="material-symbols-outlined text-slate-300 text-sm">location_on</span>
-              <input type="text" placeholder="e.g. Puerto Banús" className="bg-transparent border-none p-0 w-full text-sm focus:ring-0 outline-none" />
+              <input type="text" placeholder="Puerto Base" className="bg-transparent border-none p-0 w-full text-sm focus:ring-0 outline-none" />
             </div>
           </div>
 
@@ -88,7 +93,7 @@ const AssignmentContractSidebar: React.FC = () => {
             </label>
             <input
               type="text"
-              placeholder={t('employees.add.contract.insurancePlaceholder')}
+              placeholder="Nº Póliza / Cobertura"
               className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none"
             />
           </div>
@@ -109,13 +114,13 @@ const AssignmentContractSidebar: React.FC = () => {
         <div className="space-y-4">
           <div className="flex justify-between items-center text-[10px] font-bold">
             <span className="text-slate-500 uppercase">{t('employees.add.status.completed')}</span>
-            <span className="text-[#0e1a34]">45%</span>
+            <span className="text-[#0e1a34]">0%</span>
           </div>
           <div className="w-full bg-white h-1.5 rounded-full overflow-hidden">
-            <div className="bg-[#0e1a34] h-full w-[45%]" />
+            <div className="bg-[#0e1a34] h-full w-[0%]" />
           </div>
           <p className="text-[10px] text-slate-500 italic leading-relaxed">
-            {t('employees.add.status.pending')}
+            Configure la información para ver el progreso.
           </p>
         </div>
       </section>
