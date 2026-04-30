@@ -121,6 +121,7 @@ const MustTryExperiences = () => {
                           descripcion: exp.description,
                           imagen_url: exp.image,
                           rating_promedio: exp.rating,
+                          localOnly: true,
                         },
                       },
                     });

@@ -12,6 +12,13 @@ interface Destino {
   rating: number
   descripcion: string
   precio?: number
+  duracion_tipica?: string
+  puerto_principal?: string
+  clima?: string
+  idioma?: string
+  highlights?: string[]
+  incluye?: string[]
+  galeria_urls?: string[]
 }
 
 interface DestinationCardProps {
@@ -26,12 +33,20 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destino, variant = 'g
     navigate('/destination-details', {
       state: {
         destination: {
-          id: destino.id,
           titulo: destino.titulo,
           pais: destino.pais,
           descripcion: destino.descripcion,
           imagen_url: destino.img,
           rating_promedio: destino.rating,
+          precio_desde: destino.precio,
+          duracion_tipica: destino.duracion_tipica,
+          puerto_principal: destino.puerto_principal,
+          clima: destino.clima,
+          idioma: destino.idioma,
+          highlights: destino.highlights,
+          incluye: destino.incluye,
+          galeria_urls: destino.galeria_urls,
+          localOnly: true,
         },
       },
     })

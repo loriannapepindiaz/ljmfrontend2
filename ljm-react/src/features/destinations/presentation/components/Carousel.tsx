@@ -2,48 +2,90 @@
 
 import React, { useState, useEffect, useCallback } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const destinosDestacados = [
-  { 
-    id: 0, 
+  {
+    id: 0,
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAs8AJnlXBrdROZM-BvFrz9gtoxh2DmZfwv_Bb75xHZYOqCnczsgWoTd1h1xhVC8_ZZxLWJtH2XNSRGKFryl4c58zQxlub0CodBQX69ULPtIopvVTTO6qy0XUDB97av89916F-ZoBGGMSX4YVUcrX5XViMuH6251cXi2ByyW-x-9V2LuevL8fail6Rbfr-s4nQkw560tiiFNNvXmLZU3h-d5GM4tkMg0kahgzVben14bTrLIVs3dxp5yIDLXZLhjANcB4WZpYLO3ro",
-    titulo: "Santorini", 
+    titulo: "Santorini",
     subtitulo: "Grecia",
-    descripcion: "Puestas de sol espectaculares en las islas volcánicas de Grecia.",
+    descripcion: "Puestas de sol espectaculares en las islas volcanicas de Grecia.",
+    rating: 4.9,
+    precio: 4850,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Puerto de Santorini",
+    clima: "Mediterraneo",
+    idioma: "Griego",
+    highlights: ["Oia", "Caldera", "Atardeceres"],
+    incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
   },
-  { 
-    id: 1, 
+  {
+    id: 1,
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBkYPP2yj0hgJBnq9KHhhFzrLa8cw2eoJRIKLTTkNeev4mjhGm24fTSUQihf3nbGzq0qWtW6t8aPwZ6eDr0NQmsrq7EiLlOtahySW7KHkDp22sTOQgeuQX_CXktsqoyU2it2REGyS6ytaeZyr_BjBDgB-b0fkFih2azZczPhfBY8IjbuAjuQx_uTKWK07-rKL5uksSo9MSvVvOnHdS-YGnLJ_yl-MUu9SVMVBU_-L8mLd7UgKbFpG9iJheNpwgach44mDQOE9n6tkA",
-    titulo: "Costa Amalfitana", 
+    titulo: "Costa Amalfitana",
     subtitulo: "Italia",
-    descripcion: "Acantilados dramáticos y pueblos coloridos en la costa italiana.",
+    descripcion: "Acantilados dramaticos y pueblos coloridos en la costa italiana.",
+    rating: 4.8,
+    precio: 5200,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Napoles",
+    clima: "Mediterraneo",
+    idioma: "Italiano",
+    highlights: ["Positano", "Amalfi", "Napoles"],
+    incluye: ["Tour costero", "Cena italiana", "Traslados"],
   },
-  { 
-    id: 2, 
+  {
+    id: 2,
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBblcdXtDz6k0sqnSBdwTK8AlLvUim3ZI1y9MKqz4u_HrT0AR5y1B4Tu-mreo6U8MbeRiUPi2qf6eMdrBsHbYNkbPU6K2Qt7wppJiOXFP332PQkatVIWTFtywGkAH7w3h8DYWTRcsN76eNO_VOm95Zw3XIBlYCKMEEllswbjptcZMQaiyXbeRWETlK4TusldUlLTs4NB9FZcwk8CUk78qrXU98zj6paLPfxt2TFo7klKWrI7YZkIvn-3fSiWD0pjZHJ7ERnebel20M",
-    titulo: "Islas Maldivas", 
-    subtitulo: "Maldivas", 
-    descripcion: "Privacidad absoluta y aguas cristalinas en el corazón del Océano Índico.",
+    titulo: "Islas Maldivas",
+    subtitulo: "Maldivas",
+    descripcion: "Privacidad absoluta y aguas cristalinas en el corazon del Oceano Indico.",
+    rating: 5.0,
+    precio: 6200,
+    duracion_tipica: "8 noches",
+    puerto_principal: "Male",
+    clima: "Ecuatorial",
+    idioma: "Dhivehi",
+    highlights: ["Lagunas", "Buceo", "Playas privadas"],
+    incluye: ["Snorkel", "Excursion marina", "Traslados"],
   },
-  { 
-    id: 3, 
+  {
+    id: 3,
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA_w8KL05KnzVo64Lhd8JqIPwltnM4jk1p_oTIWpZ_Z_E-6NUB-hFWT9Q2WLNw2HjA2bMZEcdwMy7DUdrPR9SSc1WSwSnHm6A5Umj2CCCwnrEOlr64CRPkKw7svflZWaHeIGFQVCZB39Ez0FsnA2KcZAHW9iSgYcnAl-_f0pddwKnzpggVizGXodDZvC4stQ9j4wJKC2XhMxVCuvUJj2MwtvNJ108FXG0_hwt-HCkmFGvUEK3YDo7fHFPKbOnMcnrX1DeSh6MUPelE",
-    titulo: "Dubái Marina", 
+    titulo: "Dubai Marina",
     subtitulo: "EAU",
-    descripcion: "Rascacielos futuristas y lujo moderno en el desierto árabe.",
+    descripcion: "Rascacielos futuristas y lujo moderno en el desierto arabe.",
+    rating: 4.9,
+    precio: 5500,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Port Rashid",
+    clima: "Arido",
+    idioma: "Arabe / Ingles",
+    highlights: ["Dubai Marina", "Burj Al Arab", "Safari en dunas"],
+    incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
   },
-  { 
-    id: 4, 
+  {
+    id: 4,
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA9f2ltuR0r10x_SFdyVGXzZlLoRoVSHewy6wrLVs1g_GJOAju6ujPctF4FsHK0DnSWzLPzI3bqS6iYwZRQnHO7TlDGOvRVyX-hQCNOUoPN6T0RUt7YJLs8gEiiOLyqMGgL-oJvzz_x0TuHlw3aqc-lRixDVYH6bLjyy44L8Z5JdhOEDekSdp4Fx0bhMQPnyFw48ndZN1THMQVLtnWip-O6yyWwawBpYTt9ahwTmOECxBfMnqbcmpwvTuJx5fgn3indbX6L5F4gz8E",
-    titulo: "Riviera Francesa", 
+    titulo: "Riviera Francesa",
     subtitulo: "Francia",
-    descripcion: "Playas glamorosas y vida cosmopolita en la costa mediterránea.",
+    descripcion: "Playas glamorosas y vida cosmopolita en la costa mediterranea.",
+    rating: 4.8,
+    precio: 5300,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Niza",
+    clima: "Mediterraneo",
+    idioma: "Frances",
+    highlights: ["Niza", "Cannes", "Monaco"],
+    incluye: ["Tour privado", "Cena costera", "Traslados"],
   }
 ]
 
 export default function DestinationsCarousel() {
   const [activeIndex, setActiveIndex] = useState(2)
   const [isAnimating, setIsAnimating] = useState(false)
+  const routerNavigate = useNavigate()
 
   const getIndex = useCallback((offset: number) => {
     return (activeIndex + offset + destinosDestacados.length) % destinosDestacados.length
@@ -52,13 +94,37 @@ export default function DestinationsCarousel() {
   const navigate = useCallback((direction: 'prev' | 'next') => {
     if (isAnimating) return
     setIsAnimating(true)
-    setActiveIndex(prev => 
-      direction === 'prev' 
+    setActiveIndex(prev =>
+      direction === 'prev'
         ? (prev === 0 ? destinosDestacados.length - 1 : prev - 1)
         : (prev + 1) % destinosDestacados.length
     )
     setTimeout(() => setIsAnimating(false), 700)
   }, [isAnimating])
+
+  const openDetails = (destino: typeof destinosDestacados[number]) => {
+    routerNavigate('/destination-details', {
+      state: {
+        destination: {
+          titulo: destino.titulo,
+          pais: destino.subtitulo,
+          descripcion: destino.descripcion,
+          imagen_url: destino.img,
+          rating_promedio: destino.rating,
+          precio_desde: destino.precio,
+          duracion_tipica: destino.duracion_tipica,
+          puerto_principal: destino.puerto_principal,
+          clima: destino.clima,
+          idioma: destino.idioma,
+          highlights: destino.highlights,
+          incluye: destino.incluye,
+          galeria_urls: [destino.img],
+          localOnly: true,
+        },
+      },
+    })
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
 
   useEffect(() => {
     const interval = setInterval(() => navigate('next'), 5000)
@@ -67,45 +133,18 @@ export default function DestinationsCarousel() {
 
   const getCardStyle = (position: number) => {
     const styles: Record<number, { transform: string; zIndex: number; opacity: number; scale: string }> = {
-      [-2]: { 
-        transform: 'translateX(-145%) rotateY(25deg)', 
-        zIndex: 1, 
-        opacity: 0.6,
-        scale: '0.7'
-      },
-      [-1]: { 
-        transform: 'translateX(-72%) rotateY(12deg)', 
-        zIndex: 2, 
-        opacity: 0.9,
-        scale: '0.85'
-      },
-      [0]: { 
-        transform: 'translateX(0) rotateY(0deg)', 
-        zIndex: 10, 
-        opacity: 1,
-        scale: '1'
-      },
-      [1]: { 
-        transform: 'translateX(72%) rotateY(-12deg)', 
-        zIndex: 2, 
-        opacity: 0.9,
-        scale: '0.85'
-      },
-      [2]: { 
-        transform: 'translateX(145%) rotateY(-25deg)', 
-        zIndex: 1, 
-        opacity: 0.6,
-        scale: '0.7'
-      },
+      [-2]: { transform: 'translateX(-145%) rotateY(25deg)', zIndex: 1, opacity: 0.6, scale: '0.7' },
+      [-1]: { transform: 'translateX(-72%) rotateY(12deg)', zIndex: 2, opacity: 0.9, scale: '0.85' },
+      [0]: { transform: 'translateX(0) rotateY(0deg)', zIndex: 10, opacity: 1, scale: '1' },
+      [1]: { transform: 'translateX(72%) rotateY(-12deg)', zIndex: 2, opacity: 0.9, scale: '0.85' },
+      [2]: { transform: 'translateX(145%) rotateY(-25deg)', zIndex: 1, opacity: 0.6, scale: '0.7' },
     }
     return styles[position] || { transform: 'translateX(250%)', zIndex: 0, opacity: 0, scale: '0.5' }
   }
 
   return (
     <section className="bg-[#0e1a34] pb-20 overflow-hidden">
-      {/* Carousel Container */}
       <div className="relative h-[550px] md:h-[700px]" style={{ perspective: '1200px' }}>
-        {/* Navigation Buttons */}
         <button
           onClick={() => navigate('prev')}
           disabled={isAnimating}
@@ -124,7 +163,6 @@ export default function DestinationsCarousel() {
           <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
         </button>
 
-        {/* Cards Container */}
         <div className="relative w-full h-full flex items-center justify-center" style={{ transformStyle: 'preserve-3d' }}>
           {[-2, -1, 0, 1, 2].map((position) => {
             const destino = destinosDestacados[getIndex(position)]
@@ -144,44 +182,43 @@ export default function DestinationsCarousel() {
                 onClick={() => {
                   if (position < 0) navigate('prev')
                   if (position > 0) navigate('next')
+                  if (position === 0) openDetails(destino)
                 }}
               >
-                <div 
+                <div
                   className={`
                     relative overflow-hidden rounded-2xl
-                    ${isActive 
-                      ? 'w-[320px] md:w-[420px] h-[450px] md:h-[560px] ring-2 ring-[#4a9ec8]/50 shadow-2xl shadow-[#4a9ec8]/20' 
+                    ${isActive
+                      ? 'w-[320px] md:w-[420px] h-[450px] md:h-[560px] ring-2 ring-[#4a9ec8]/50 shadow-2xl shadow-[#4a9ec8]/20'
                       : 'w-[260px] md:w-[340px] h-[380px] md:h-[480px]'
                     }
                     transition-all duration-500
                   `}
                 >
-                  {/* Image */}
-                  <img
-                    src={destino.img}
-                    alt={destino.titulo}
-                    className="w-full h-full object-cover"
-                  />
+                  <img src={destino.img} alt={destino.titulo} className="w-full h-full object-cover" />
 
-                  {/* Gradient Overlay */}
-                  <div className={`absolute inset-0 ${isActive 
-                    ? 'bg-gradient-to-t from-[#0a1628] via-[#0a1628]/40 to-transparent' 
+                  <div className={`absolute inset-0 ${isActive
+                    ? 'bg-gradient-to-t from-[#0a1628] via-[#0a1628]/40 to-transparent'
                     : 'bg-gradient-to-t from-[#0a1628]/90 via-[#0a1628]/30 to-transparent'
                   }`} />
 
-                  {/* Title at bottom for side cards */}
                   {!isActive && (
                     <div className="absolute bottom-4 left-0 right-0 text-center px-4">
                       <h3 className="text-white font-serif text-lg md:text-xl">{destino.titulo}</h3>
                     </div>
                   )}
 
-                  {/* Content for active card */}
                   {isActive && (
                     <div className="absolute bottom-0 left-0 right-0 p-6 text-center">
                       <h3 className="text-white font-serif text-2xl md:text-3xl mb-2">{destino.titulo}</h3>
                       <p className="text-[#8a9bb3] text-sm mb-6 line-clamp-2">{destino.descripcion}</p>
-                      <button className="px-6 py-2.5 rounded-full border border-[#c9a962] text-[#c9a962] text-xs font-semibold uppercase tracking-widest hover:bg-[#c9a962] hover:text-[#0a1628] transition-all duration-300">
+                      <button
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          openDetails(destino)
+                        }}
+                        className="px-6 py-2.5 rounded-full border border-[#c9a962] text-[#c9a962] text-xs font-semibold uppercase tracking-widest hover:bg-[#c9a962] hover:text-[#0a1628] transition-all duration-300"
+                      >
                         Explorar Ahora
                       </button>
                     </div>
@@ -193,7 +230,6 @@ export default function DestinationsCarousel() {
         </div>
       </div>
 
-      {/* Indicators */}
       <div className="flex justify-center gap-2 mt-8">
         {destinosDestacados.map((_, index) => (
           <button

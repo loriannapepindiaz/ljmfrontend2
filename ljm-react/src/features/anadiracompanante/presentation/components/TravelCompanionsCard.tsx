@@ -15,7 +15,10 @@ interface Props {
   setGuests?: React.Dispatch<React.SetStateAction<Guest[]>>;
 }
 
-export default function TravelCompanionsCard({ guests }: Props) {
+export default function TravelCompanionsCard({ guests, setGuests }: Props) {
+  const removeGuest = (index: number) => {
+    setGuests?.(current => current.filter((_, i) => i !== index));
+  };
 
   return (
     <div className="h-fit rounded-xl border border-white/5 bg-[#0f1b35] p-8 shadow-[0_40px_80px_rgba(2,13,39,0.5)] md:p-10">
@@ -50,7 +53,17 @@ export default function TravelCompanionsCard({ guests }: Props) {
         ) : (
           guests.map((g, i) => (
             <div key={i}
-              className="rounded-lg border border-[#dec29e]/10 bg-[#dec29e]/5 px-4 py-3">
+              className="relative rounded-lg border border-[#dec29e]/10 bg-[#dec29e]/5 px-4 py-3 pr-11">
+              {setGuests && (
+                <button
+                  type="button"
+                  onClick={() => removeGuest(i)}
+                  aria-label={`Quitar a ${g.nombre} ${g.apellidos}`}
+                  className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full border border-[#dec29e]/20 text-[#dec29e]/75 transition-colors hover:border-[#dec29e]/60 hover:bg-[#dec29e]/10 hover:text-[#f5e2bd] focus:outline-none focus:ring-2 focus:ring-[#dec29e]/40"
+                >
+                  <span className="material-symbols-outlined text-[14px] leading-none">delete</span>
+                </button>
+              )}
               <p className="text-sm font-semibold text-[#d9e2ff] truncate"
                 style={{ fontFamily: "'Noto Serif', serif" }}>
                 {g.nombre} {g.apellidos}

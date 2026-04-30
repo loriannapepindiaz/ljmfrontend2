@@ -59,9 +59,9 @@ function CalendarPicker({ value, onChange }: {
     return t.getDate() === d && t.getMonth() === month && t.getFullYear() === year;
   };
 
-  const label = value
+  const selectedLabel = value
     ? `${String(value.getDate()).padStart(2,"0")} de ${MONTHS_ES[value.getMonth()]} de ${value.getFullYear()}`
-    : "Selecciona una fecha";
+    : "";
 
   return (
     <div ref={wrapRef} className="relative">
@@ -69,13 +69,13 @@ function CalendarPicker({ value, onChange }: {
         ref={triggerRef}
         type="button"
         onClick={handleOpen}
-        className="flex w-full items-center justify-between border-b border-[#45464d]/40 bg-transparent px-4 py-3 text-left transition-colors hover:border-[#dec29e] focus:outline-none"
+        className="flex min-h-[48px] w-full items-center justify-between border-b border-[#45464d]/40 bg-transparent px-4 py-3 text-left transition-colors hover:border-[#dec29e] focus:outline-none"
       >
         <span
-          className={value != null ? "text-sm text-[#d9e2ff]" : "text-sm text-[#8f9098]/50"}
+          className={value != null ? "block text-sm font-semibold text-[#f5e2bd]" : "block text-sm text-[#8f9098]/70"}
           style={{ fontFamily: "'Noto Serif', serif" }}
         >
-          {label}
+          {selectedLabel || "Selecciona una fecha"}
         </span>
         <span className="material-symbols-outlined text-[#dec29e]/70 text-lg select-none">
           calendar_month

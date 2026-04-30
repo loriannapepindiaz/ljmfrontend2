@@ -14,7 +14,7 @@ const BookingConfirmationPage = () => {
   };
 
   const handleGoHome = () => {
-    navigate("/login");
+    navigate("/");
   };
 
   return (
