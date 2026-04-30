@@ -23,6 +23,7 @@ const RoomPage: FC = () => {
   
   // Estado para controlar cuál está seleccionado (por índice)
   const [selectedSuiteIndex, setSelectedSuiteIndex] = useState<number | null>(null);
+  const [showError, setShowError] = useState(false);
 
 const suites: Suite[] = [
   {
@@ -88,18 +89,37 @@ const suites: Suite[] = [
                     description={suite.description}
                     image={suite.imageUrl}
                     isSelected={selectedSuiteIndex === index}
-                    onSelect={() => setSelectedSuiteIndex(selectedSuiteIndex === index ? null : index)}
+                    onSelect={() => {
+                      setSelectedSuiteIndex(selectedSuiteIndex === index ? null : index);
+                      setShowError(false);
+                    }}
                   />
                 ))}
               </div>
 
-              {/* Botón de acción final actualizado */}
-              <div className="flex justify-end pt-6">
-                <button 
-                  onClick={() => navigate('/details-suit')} // ✅ Ruta actualizada
-                  className="flex items-center gap-4 bg-primary hover:bg-primary/90 px-10 py-4 rounded-full text-white font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl shadow-black/50 text-[10px] active:scale-95 group"
+              {/* Botón de acción final */}
+              <div className="flex flex-col items-end gap-2 pt-6">
+                {showError && (
+                  <p className="text-xs font-semibold text-red-400 tracking-wide animate-pulse">
+                    Por favor selecciona una suite para continuar.
+                  </p>
+                )}
+                <button
+                  onClick={() => {
+                    if (selectedSuiteIndex === null) {
+                      setShowError(true);
+                      return;
+                    }
+                    setShowError(false);
+                    navigate('/details-suit');
+                  }}
+                  className={`flex items-center gap-4 px-10 py-4 rounded-full font-bold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl shadow-black/50 text-[10px] group ${
+                    selectedSuiteIndex !== null
+                      ? 'bg-primary hover:bg-primary/90 text-white active:scale-95'
+                      : 'bg-white/10 text-white/30 cursor-not-allowed'
+                  }`}
                 >
-                  <span>Ver detalles de la suite</span> {/* ✅ Texto actualizado */}
+                  <span>Ver detalles de la suite</span>
                   <span className="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2 text-sm">
                     arrow_forward
                   </span>

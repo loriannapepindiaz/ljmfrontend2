@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 interface Props {
   title: string;
   location: string;
@@ -6,13 +8,24 @@ interface Props {
   description: string;
 }
 
-const ExperienceCard = ({
-  title,
-  location,
-  rating,
-  image,
-  description,
-}: Props) => {
+const ExperienceCard = ({ title, location, rating, image, description }: Props) => {
+  const navigate = useNavigate();
+
+  const handleDetails = () => {
+    navigate('/destination-details', {
+      state: {
+        destination: {
+          titulo: title,
+          pais: location,
+          descripcion: description,
+          imagen_url: image,
+          rating_promedio: rating,
+        },
+      },
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+
   return (
     <div className="group bg-white dark:bg-primary rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-pearl/20 hover:-translate-y-2">
       <div className="relative h-56 overflow-hidden">
@@ -37,7 +50,7 @@ const ExperienceCard = ({
           {description}
         </p>
 
-        <button className="text-secondary font-semibold text-sm hover:underline">
+        <button onClick={handleDetails} className="text-secondary font-semibold text-sm hover:underline">
           Saber más →
         </button>
       </div>

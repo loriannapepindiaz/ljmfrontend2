@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const allExperiences = [
   {
@@ -61,6 +62,7 @@ const allExperiences = [
 
 const MustTryExperiences = () => {
   const [showAll, setShowAll] = useState(false);
+  const navigate = useNavigate();
   const visible = showAll ? allExperiences : allExperiences.slice(0, 4);
 
   return (
@@ -109,7 +111,23 @@ const MustTryExperiences = () => {
                   {exp.location}
                 </p>
                 <p className="text-sm text-gray-500 leading-relaxed mb-5 line-clamp-2">{exp.description}</p>
-                <button className="w-full bg-[#c5a267] hover:bg-[#b38e53] text-white text-xs font-bold tracking-widest uppercase py-3 rounded-full transition-all hover:scale-105">
+                <button
+                  onClick={() => {
+                    navigate('/destination-details', {
+                      state: {
+                        destination: {
+                          titulo: exp.title,
+                          pais: exp.location,
+                          descripcion: exp.description,
+                          imagen_url: exp.image,
+                          rating_promedio: exp.rating,
+                        },
+                      },
+                    });
+                    window.scrollTo({ top: 0, behavior: 'instant' });
+                  }}
+                  className="w-full bg-[#c5a267] hover:bg-[#b38e53] text-white text-xs font-bold tracking-widest uppercase py-3 rounded-full transition-all hover:scale-105"
+                >
                   VER DETALLES
                 </button>
               </div>

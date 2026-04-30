@@ -1,67 +1,77 @@
-import { X } from "lucide-react";
+import type { Guest } from "../types";
 
-const companions: Array<{ name: string; role: string; id: string; image?: string }> = [];
+const MONTHS_ES = [
+  "Ene","Feb","Mar","Abr","May","Jun",
+  "Jul","Ago","Sep","Oct","Nov","Dic",
+];
 
-export default function TravelCompanionsCard() {
+function formatDate(d: Date | null) {
+  if (!d) return "—";
+  return `${String(d.getDate()).padStart(2,"0")} ${MONTHS_ES[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+interface Props {
+  guests: Guest[];
+  setGuests?: React.Dispatch<React.SetStateAction<Guest[]>>;
+}
+
+export default function TravelCompanionsCard({ guests }: Props) {
+
   return (
     <div className="h-fit rounded-xl border border-white/5 bg-[#0f1b35] p-8 shadow-[0_40px_80px_rgba(2,13,39,0.5)] md:p-10">
-      <div className="mb-12 flex items-start justify-between">
+      <style>{`
+        .companions-scroll::-webkit-scrollbar { width: 3px; }
+        .companions-scroll::-webkit-scrollbar-track { background: transparent; }
+        .companions-scroll::-webkit-scrollbar-thumb { background: #dec29e55; border-radius: 99px; }
+        .companions-scroll::-webkit-scrollbar-thumb:hover { background: #dec29e99; }
+      `}</style>
+      <div className="mb-8 flex items-start justify-between">
         <div>
           <h4 className="text-2xl text-[#d9e2ff]" style={{ fontFamily: "'Noto Serif', serif" }}>
-            Companeros de Viaje
+            Compañeros de Viaje
           </h4>
-          <p className="mt-1 text-xs text-[#8f9098]">Confirmados para esta expedicion</p>
+          <p className="mt-1 text-xs text-[#8f9098]">Confirmados para esta expedición</p>
         </div>
+        {guests.length > 0 && (
+          <span className="rounded-full bg-[#dec29e]/15 px-3 py-1 text-[11px] font-bold text-[#dec29e]">
+            {guests.length}
+          </span>
+        )}
       </div>
 
-      <div className="mb-16 space-y-8">
-        {companions.length === 0 ? (
+      <div className="companions-scroll mb-8 space-y-4 max-h-72 overflow-y-auto pr-2">
+        {guests.length === 0 ? (
           <div className="rounded-xl border border-dashed border-white/10 bg-white/[0.03] px-5 py-10 text-center">
-            <p className="text-sm font-semibold text-[#d9e2ff]">No hay acompanantes agregados</p>
+            <p className="text-sm font-semibold text-[#d9e2ff]">No hay acompañantes agregados</p>
             <p className="mt-2 text-xs leading-relaxed text-[#8f9098]">
-              Los acompanantes apareceran aqui cuando se registren en esta reserva.
+              Los acompañantes aparecerán aquí cuando se registren en esta reserva.
             </p>
           </div>
-        ) : companions.map((companion) => (
-          <div key={companion.id} className="group flex items-center justify-between">
-            <div className="flex items-center gap-5">
-              {companion.image ? (
-                <img
-                  alt={companion.name}
-                  className="h-14 w-14 rounded-full object-cover grayscale"
-                  src={companion.image}
-                />
-              ) : null}
-              <div>
-                <p className="text-base font-semibold text-[#d9e2ff]">{companion.name}</p>
-                <p className="mt-0.5 text-[10px] uppercase tracking-widest text-[#8f9098]">
-                  {companion.role} - {companion.id}
-                </p>
+        ) : (
+          guests.map((g, i) => (
+            <div key={i}
+              className="rounded-lg border border-[#dec29e]/10 bg-[#dec29e]/5 px-4 py-3">
+              <p className="text-sm font-semibold text-[#d9e2ff] truncate"
+                style={{ fontFamily: "'Noto Serif', serif" }}>
+                {g.nombre} {g.apellidos}
+              </p>
+              <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5">
+                {g.pasaporte && (
+                  <span className="text-[10px] uppercase tracking-widest text-[#8f9098]">
+                    {g.pasaporte}
+                  </span>
+                )}
+                {g.fecha && (
+                  <span className="text-[10px] text-[#8f9098]">
+                    {formatDate(g.fecha)}
+                  </span>
+                )}
               </div>
             </div>
-
-            <button
-              className="flex h-10 w-10 items-center justify-center rounded-full text-[#8f9098]/40 transition-all duration-300 hover:bg-[#ffb4ab]/10 hover:text-[#ffb4ab]"
-              type="button"
-            >
-              <X size={18} />
-            </button>
-          </div>
-        ))}
+          ))
+        )}
       </div>
 
-      <div className="space-y-6">
-        <button
-          className="flex w-full items-center justify-center rounded-md bg-gradient-to-r from-[#bfa889] to-[#97805f] py-5 text-center text-[12px] font-bold uppercase tracking-[0.25em] text-[#3e2d14] shadow-xl transition-all duration-500 hover:brightness-105"
-          style={{ fontFamily: "'Noto Serif', serif" }}
-          type="button"
-        >
-          Confirmar y Continuar
-        </button>
-        <p className="text-center text-[9px] uppercase tracking-[0.3em] text-[#8f9098]/60">
-          Paso 3 de 5: Configuracion de Tripulacion
-        </p>
-      </div>
     </div>
   );
 }

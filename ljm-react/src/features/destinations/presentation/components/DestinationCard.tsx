@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { MapPin, Star } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 interface Destino {
   id: number
@@ -19,6 +20,24 @@ interface DestinationCardProps {
 }
 
 const DestinationCard: React.FC<DestinationCardProps> = ({ destino, variant = 'grid' }) => {
+  const navigate = useNavigate()
+
+  const handleViewDetails = () => {
+    navigate('/destination-details', {
+      state: {
+        destination: {
+          id: destino.id,
+          titulo: destino.titulo,
+          pais: destino.pais,
+          descripcion: destino.descripcion,
+          imagen_url: destino.img,
+          rating_promedio: destino.rating,
+        },
+      },
+    })
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }
+
   if (variant === 'featured') {
     return (
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 ease-out cursor-pointer group">
@@ -50,7 +69,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destino, variant = 'g
           <p className="text-[#0e1a34]/70 text-sm leading-relaxed mb-6 line-clamp-2">
             {destino.descripcion}
           </p>
-          <button className="w-full border-2 border-[#c9a962] text-[#c9a962] py-3.5 rounded-full font-semibold uppercase text-sm tracking-widest hover:bg-[#c9a962] hover:text-white transition-all duration-300">
+          <button onClick={handleViewDetails} className="w-full border-2 border-[#c9a962] text-[#c9a962] py-3.5 rounded-full font-semibold uppercase text-sm tracking-widest hover:bg-[#c9a962] hover:text-white transition-all duration-300">
             VER DETALLES
           </button>
         </div>
@@ -86,7 +105,7 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destino, variant = 'g
           {destino.descripcion}
         </p>
         {/* Botón al fondo, ancho completo — consistente con variant featured */}
-        <button className="w-full border-2 border-[#c9a962] text-[#c9a962] py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#c9a962] hover:text-white transition-all duration-300">
+        <button onClick={handleViewDetails} className="w-full border-2 border-[#c9a962] text-[#c9a962] py-2.5 rounded-full text-xs font-semibold uppercase tracking-widest hover:bg-[#c9a962] hover:text-white transition-all duration-300">
           VER DETALLES
         </button>
       </div>

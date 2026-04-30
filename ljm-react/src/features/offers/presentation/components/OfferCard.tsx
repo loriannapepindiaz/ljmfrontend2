@@ -1,5 +1,6 @@
 // features/offers/presentation/components/OfferCard.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface OfferCardProps {
   title: string;
@@ -11,9 +12,10 @@ interface OfferCardProps {
   isReversed?: boolean;
 }
 
-const OfferCard: React.FC<OfferCardProps> = ({ 
-  title, description, image, price, discount, tags, isReversed 
+const OfferCard: React.FC<OfferCardProps> = ({
+  title, description, image, price, discount, tags, isReversed
 }) => {
+  const navigate = useNavigate();
   return (
     <article className="relative group w-full mb-12 overflow-hidden rounded-[1.2rem] bg-[#0A1128] border border-white/10 shadow-xl transition-all duration-500 hover:border-white/20">
       <div className={`flex flex-col ${isReversed ? 'md:flex-row-reverse' : 'md:flex-row'} items-stretch`}>
@@ -60,7 +62,23 @@ const OfferCard: React.FC<OfferCardProps> = ({
               <p className="text-xl md:text-2xl font-serif text-[#C5A059]">{price}</p>
             </div>
             
-            <button className="bg-[#C5A059] hover:bg-white hover:text-[#0A1128] px-7 py-3 rounded-full flex items-center gap-2 transition-all duration-500 text-white shadow-lg group">
+            <button
+              onClick={() => {
+                navigate('/destination-details', {
+                  state: {
+                    destination: {
+                      titulo: title,
+                      descripcion: description,
+                      imagen_url: image,
+                      precio_desde: price,
+                      tags,
+                    },
+                  },
+                });
+                window.scrollTo({ top: 0, behavior: 'instant' });
+              }}
+              className="bg-[#C5A059] hover:bg-white hover:text-[#0A1128] px-7 py-3 rounded-full flex items-center gap-2 transition-all duration-500 text-white shadow-lg group"
+            >
               <span className="font-bold text-[9px] tracking-[0.15em] uppercase">Reservar</span>
               <span className="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">
                 arrow_forward

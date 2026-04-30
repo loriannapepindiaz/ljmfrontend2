@@ -1,14 +1,17 @@
 import { GalleryItem } from "./GalleryItem";
 
-export const DestinationGallery = () => {
-  const photos: Array<{ url: string; location: string }> = [];
+interface DestinationGalleryProps {
+  photos?: Array<{ url: string; location: string }>;
+  titulo?: string;
+}
 
+export const DestinationGallery = ({ photos = [], titulo }: DestinationGalleryProps) => {
   return (
     <div className="pt-8 border-t border-white/10">
       <div className="flex items-center justify-between mb-8">
         <h3 className="text-sm font-bold tracking-[0.3em] uppercase text-primary">Galeria de Destinos</h3>
         <span className="text-[10px] text-pearl-beige/40 tracking-widest uppercase font-bold border-b border-pearl-beige/10 pb-1">
-          Sin portafolio
+          {photos.length > 0 ? `${photos.length} fotos` : "Sin portafolio"}
         </span>
       </div>
       {photos.length === 0 ? (
@@ -22,7 +25,7 @@ export const DestinationGallery = () => {
       ) : (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {photos.map((photo, index) => (
-            <GalleryItem key={index} src={photo.url} label={photo.location} />
+            <GalleryItem key={index} src={photo.url} label={photo.location || titulo || ""} />
           ))}
         </div>
       )}
