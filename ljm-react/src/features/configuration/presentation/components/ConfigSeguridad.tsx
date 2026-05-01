@@ -6,10 +6,26 @@ const ConfigSeguridad: React.FC = () => {
   const [twoFactor, setTwoFactor] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
+  const [currentPass, setCurrentPass] = useState('');
+  const [newPass, setNewPass] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   const handleClose = () => {
     setShowModal(false);
     setShowNewPass(false);
+    setCurrentPass('');
+    setNewPass('');
+    setConfirmPass('');
+    setError(null);
+  };
+
+  const handleConfirm = () => {
+    if (newPass !== confirmPass) {
+      setError('Las contraseñas no coinciden');
+      return;
+    }
+    handleClose();
   };
 
   return (
@@ -91,8 +107,8 @@ const ConfigSeguridad: React.FC = () => {
                   data-lpignore="true"
                   data-1p-ignore="true"
                   data-form-type="other"
-                  readOnly
-                  onFocus={(e) => e.target.removeAttribute('readonly')}
+                  value={currentPass}
+                  onChange={(e) => setCurrentPass(e.target.value)}
                   placeholder={t('config.security.currentPasswordPlaceholder')}
                   className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
                   style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
@@ -111,13 +127,11 @@ const ConfigSeguridad: React.FC = () => {
                     data-lpignore="true"
                     data-1p-ignore="true"
                     data-form-type="other"
-                    readOnly
-                    onFocus={(e) => e.target.removeAttribute('readonly')}
+                    value={newPass}
+                    onChange={(e) => { setNewPass(e.target.value); setError(null); }}
                     placeholder={t('config.security.newPasswordPlaceholder')}
                     className="w-full border border-slate-200 rounded-xl px-4 py-2.5 pr-12 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
-                    style={{
-                      WebkitTextSecurity: showNewPass ? 'none' : 'disc',
-                    } as React.CSSProperties}
+                    style={{ WebkitTextSecurity: showNewPass ? 'none' : 'disc' } as React.CSSProperties}
                   />
                   <button
                     type="button"
@@ -142,12 +156,22 @@ const ConfigSeguridad: React.FC = () => {
                   data-lpignore="true"
                   data-1p-ignore="true"
                   data-form-type="other"
-                  readOnly
-                  onFocus={(e) => e.target.removeAttribute('readonly')}
+                  value={confirmPass}
+                  onChange={(e) => { setConfirmPass(e.target.value); setError(null); }}
                   placeholder={t('config.security.confirmPasswordPlaceholder')}
-                  className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none"
+                  className={`w-full border rounded-xl px-4 py-2.5 text-sm focus:ring-2 outline-none transition-colors ${
+                    error
+                      ? 'border-red-400 focus:ring-red-200 focus:border-red-400'
+                      : 'border-slate-200 focus:ring-[#eacea9]/50 focus:border-[#eacea9]'
+                  }`}
                   style={{ WebkitTextSecurity: 'disc' } as React.CSSProperties}
                 />
+                {error && (
+                  <p className="text-red-500 text-[11px] mt-1.5 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-[14px]">error</span>
+                    {error}
+                  </p>
+                )}
               </div>
 
             </div>
@@ -160,7 +184,7 @@ const ConfigSeguridad: React.FC = () => {
                 {t('config.security.cancelBtn')}
               </button>
               <button
-                onClick={handleClose}
+                onClick={handleConfirm}
                 className="flex-1 py-3 rounded-xl bg-[#0e1a34] text-white text-xs font-bold hover:bg-slate-800 transition-all flex items-center justify-center gap-2"
               >
                 <span className="material-symbols-outlined text-[16px]">check</span>
