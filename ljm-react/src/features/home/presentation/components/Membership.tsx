@@ -6,15 +6,15 @@ const Membership = () => {
     <section className="py-24 bg-luxury-blue text-white relative">
       <div className="container mx-auto px-6 text-center">
         <span className="text-primary font-bold tracking-[0.4em] text-xs uppercase mb-6 block">
-          The LJM Privilege
+          El Privilegio LJM
         </span>
 
         <h2 className="text-4xl md:text-5xl font-display mb-8">
-          Join Our Membership Elite
+          Únete a Nuestra Membresía Elite
         </h2>
 
         <p className="max-w-3xl mx-auto text-gray-300 mb-16 text-lg font-light leading-relaxed">
-          Elevate your travels with benefits that extend far beyond the horizon. Early booking access, private shore excursions, and world-class recognition.
+          Eleva tus viajes con beneficios que se extienden mucho más allá del horizonte. Acceso anticipado a reservas, excursiones privadas en tierra y reconocimiento de clase mundial.
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12">
@@ -29,9 +29,9 @@ const Membership = () => {
                 workspace_premium
               </span>
             </div>
-            <h5 className="font-display text-lg mb-2">Priority Boarding</h5>
+            <h5 className="font-display text-lg mb-2">Embarque Prioritario</h5>
             <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-              Instant access to serenity
+              Acceso inmediato a la serenidad
             </p>
           </div>
 
@@ -45,9 +45,9 @@ const Membership = () => {
                 wine_bar
               </span>
             </div>
-            <h5 className="font-display text-lg mb-2">Complimentary Bars</h5>
+            <h5 className="font-display text-lg mb-2">Bares Gratuitos</h5>
             <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-              Premium spirits everywhere
+              Licores premium en todas partes
             </p>
           </div>
 
@@ -61,9 +61,9 @@ const Membership = () => {
                 explore
               </span>
             </div>
-            <h5 className="font-display text-lg mb-2">Private Tours</h5>
+            <h5 className="font-display text-lg mb-2">Tours Privados</h5>
             <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-              Bespoke local experiences
+              Experiencias locales a medida
             </p>
           </div>
 
@@ -77,9 +77,9 @@ const Membership = () => {
                 airport_shuttle
               </span>
             </div>
-            <h5 className="font-display text-lg mb-2">Limo Transfers</h5>
+            <h5 className="font-display text-lg mb-2">Traslados en Limusina</h5>
             <p className="text-[10px] text-gray-400 uppercase tracking-widest">
-              Door-to-sea service
+              Servicio de puerta a puerto
             </p>
           </div>
 

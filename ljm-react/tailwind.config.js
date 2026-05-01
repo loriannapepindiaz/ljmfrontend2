@@ -5,41 +5,57 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Colores inspirados en Stitch (prioridad en azules icónicos)
-        primary: '#2972B6',          // Azul principal de Stitch (usa como accent principal)
-        'stitch-blue': '#2972B6',    // Alias claro
-        'stitch-light': '#4EBCFF',   // Highlights / cyan brillante
-        'stitch-dark': '#002790',    // Sombras profundas
-        'stitch-purple': '#945CB4',  // Morado de orejas / detalles traviesos
-        'stitch-navy': '#001D4F',    // Fondo oscuro navy
+        // --- PALETA STITCH (Identidad) ---
+        primary: '#2972B6',
+        'stitch-blue': '#2972B6',
+        'stitch-light': '#4EBCFF',
+        'stitch-dark': '#002790',
+        'stitch-purple': '#945CB4',
+        'stitch-navy': '#001D4F',
+        'navy': '#001D4F',
 
-        // Mantén o ajusta tus fondos para que combinen
-        "background-light": "#FDFCF0",     // Light mode suave (como cielo hawaiano claro)
-        'background-dark': '#0A1224',      // Dark mode (tu actual, perfecto para vibe Stitch nocturno)
-
-        // Opcionales extras para acentos (rojo de Lilo o negro)
-        'accent-red': '#ED192D',           // Rojo de Lilo o detalles
+        // --- ACENTOS Y FONDOS ---
+        'accent': '#F5F1E8',
+        'pearl-beige': '#F5F1E8',
+        'accent-red': '#ED192D',
         'stitch-black': '#0A0A0A',
+        'background-light': '#FDFCF0',
+        'background-dark': '#0A1224',
 
-        // Colores para Payment
-        'night-blue': '#0D1B2A',           // Azul oscuro para fondos de payment
-        'pearl-beige': '#F5F1E8',          // Beige perlado para texto
-        'maroon-gold': '#8B6F47',          // Dorado/marrón para acentos
-        'off-white': '#FEFDFB',            // Blanco crema
+        // --- LJM SEALINE ---
+        'night-blue': '#0e1a34',
+        'maroon-gold': '#785d32',
+        'off-white': '#f8f9fa',
+        'card-white': '#ffffff',
+        'text-secondary': '#4b5563',
+        'border-light': '#e5e7eb',
+
+        // ✅ NUEVOS: para que funcionen las clases del diseño de reservas
+        'ljm-primary': '#0e1a34',      // bg-ljm-primary, text-ljm-primary
+        'ljm-accent': '#eacea9',       // bg-ljm-accent (gold claro)
+        'ljm-accent-dark': '#d4af37',  // text-ljm-accent-dark (gold oscuro)
+        'ljm-bg': '#f8fafc',           // bg-ljm-bg (fondo gris claro)
       },
 
       fontFamily: {
-        // Lo que ya tenías ✅
-        display: ['"Comic Sans MS"', '"Montserrat"', 'sans-serif'],
-        sans: ['Montserrat', 'sans-serif'],
-
-        // 👉 NUEVA FUENTE AÑADIDA (Playfair Display con Swashes)
-        playfair: ["'Playfair Display'", "serif"],
+        display: ['Literata', '"Comic Sans MS"', 'Montserrat', 'sans-serif'], // ✅ Literata primero para LJM
+        sans: ['Public Sans', 'Montserrat', 'sans-serif'],                    // ✅ Public Sans primero para LJM
+        body: ['Montserrat', 'sans-serif'],
+        playfair: ["'Playfair Display'", 'serif'],
       },
 
-      // Opcional: sombras con glow cyan como los ojos de Stitch
       boxShadow: {
         'stitch-glow': '0 0 15px rgba(78, 188, 255, 0.6)',
+        'stitch-glow-strong': '0 0 25px rgba(41, 114, 182, 0.8)',
+        'premium': '0 10px 40px -15px rgba(14, 26, 52, 0.08)',
+      },
+
+      borderRadius: {
+        'DEFAULT': '0.25rem',
+        'lg': '0.5rem',
+        'xl': '0.75rem',
+        '2xl': '1rem',
+        'full': '9999px',
       },
     },
   },

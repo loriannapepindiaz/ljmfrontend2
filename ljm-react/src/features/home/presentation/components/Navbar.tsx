@@ -1,92 +1,223 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-// Importa tu logo aquí (ajusta la ruta según donde lo guardes)
-<img src="/logo.png" alt="Logo" />
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { authApi, type AuthUser } from "../../../../lib/api";
+
+const getCachedUser = (): AuthUser | null => {
+  try {
+    const rawUser = localStorage.getItem("ljm_auth_user");
+    return rawUser ? (JSON.parse(rawUser) as AuthUser) : null;
+  } catch {
+    return null;
+  }
+};
+
+const getStoredToken = () => localStorage.getItem("ljm_auth_token");
+
+const getInitials = (user: AuthUser | null) => {
+  if (!user) return "";
+
+  const firstName = user.cliente?.nombre?.trim();
+  const lastName = user.cliente?.apellido?.trim();
+
+  if (firstName || lastName) {
+    return `${firstName?.[0] ?? ""}${lastName?.[0] ?? ""}`.toUpperCase();
+  }
+
+  const fallback = user.email ?? user.username ?? "";
+  return fallback.slice(0, 2).toUpperCase();
+};
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => getCachedUser());
+  const userInitials = getInitials(currentUser);
+  const isLoggedIn = Boolean(userInitials);
+
+  useEffect(() => {
+    const token = getStoredToken();
+
+    if (!token) {
+      setCurrentUser(null);
+      return;
+    }
+
+    let isMounted = true;
+
+    authApi
+      .me(token)
+      .then(({ user }) => {
+        if (!isMounted) return;
+        localStorage.setItem("ljm_auth_user", JSON.stringify(user));
+        setCurrentUser(user);
+      })
+      .catch(() => {
+        if (!isMounted) return;
+        localStorage.removeItem("ljm_auth_token");
+        localStorage.removeItem("ljm_auth_user");
+        setCurrentUser(null);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => setIsOpen((current) => !current);
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-[#0B1120]">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center relative">
-        {/* Logo - ahora usa la imagen de la estrella dorada */}
-        <Link to="/" className="flex items-center gap-2.5">
-          <img 
-            src="/logo.png" 
-            alt="LJM Sealine Logo" 
+    <nav className="fixed top-0 z-50 w-full bg-background-dark font-sans">
+      <div className="container mx-auto flex items-center px-4 py-4">
+        <Link to="/" className="flex items-center gap-2.5" onClick={closeMenu}>
+          <img
+            src="/logo.png"
+            alt="LJM Sealine Logo"
             className="h-9 w-auto object-contain"
           />
-
-          {/* Si quieres mantener el texto también, descomenta esto: */}
-          {/* <span className="text-xl font-display font-bold tracking-widest text-primary">
-            LJM SEALINE
-          </span> */}
         </Link>
 
-        {/* Desktop Menu - centrar */}
-        <div className="hidden md:flex items-center gap-8 absolute left-1/2 transform -translate-x-1/2">
-          <Link to="/" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
-            HOME
+        <div className="hidden flex-1 items-center justify-center gap-6 md:flex">
+          <Link
+            to="/"
+            className="text-sm font-medium tracking-wide text-pearl-beige transition-colors hover:text-primary"
+          >
+            INICIO
           </Link>
-          <Link to="/destinations" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
-            DESTINATIONS
+
+          <Link
+            to="/destinations"
+            className="text-sm font-medium tracking-wide text-pearl-beige transition-colors hover:text-primary"
+          >
+            DESTINOS
           </Link>
-          <Link to="/fleet" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
-            THE FLEET
+
+          <Link
+            to="/fleet"
+            className="text-sm font-medium tracking-wide text-pearl-beige transition-colors hover:text-primary"
+          >
+            LA FLOTA
           </Link>
-          <a href="#" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
-            EXPERIENCES
-          </a>
-          <a href="#" className="text-pearl-beige hover:text-primary transition-colors font-light tracking-wide text-sm">
-            OFFERS
-          </a>
+
+          <Link
+            to="/experiences"
+            className="text-sm font-medium tracking-wide text-pearl-beige transition-colors hover:text-primary"
+          >
+            EXPERIENCIAS
+          </Link>
+
+          <Link
+            to="/offers"
+            className="text-sm font-medium tracking-wide text-pearl-beige transition-colors hover:text-primary"
+          >
+            OFERTAS
+          </Link>
         </div>
 
-        {/* Right Section - sin cambios */}
-        <div className="hidden md:flex items-center gap-10">
-          <button className="hidden sm:block text-xs font-medium tracking-widest text-pearl-beige hover:text-primary transition-colors">
-            SIGN IN
-          </button>
-          <Link to="/details-suit" className="bg-primary hover:bg-luxury-gold text-white px-7 py-2.5 rounded-full text-xs font-bold tracking-widest shadow-lg transition-all">
-            RESERVE NOW
+        <div className="ml-auto hidden items-center gap-6 md:flex">
+          <Link
+            to="/destinations"
+            className="rounded-full bg-primary px-7 py-2.5 text-sm font-bold tracking-widest text-white shadow-lg transition-all hover:bg-luxury-gold"
+          >
+            RESERVAR AHORA
           </Link>
+
+          {isLoggedIn ? (
+            <Link
+              to="/perfil"
+              aria-label="Abrir perfil"
+              className="flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige shadow-lg transition-all hover:border-primary hover:text-primary"
+            >
+              {userInitials}
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className="text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
+            >
+              INICIAR SESION
+            </Link>
+          )}
         </div>
 
-        {/* Mobile Menu Button - sin cambios */}
-        <button 
-          className="md:hidden text-pearl-beige"
-          onClick={() => setIsOpen(!isOpen)}
+        <button
+          className="ml-auto text-pearl-beige md:hidden"
+          onClick={toggleMenu}
+          aria-label={isOpen ? "Cerrar menu" : "Abrir menu"}
+          type="button"
         >
-          <span className="material-symbols-outlined">menu</span>
+          <span className="material-symbols-outlined">{isOpen ? "close" : "menu"}</span>
         </button>
       </div>
 
-      {/* Mobile Menu - sin cambios */}
       {isOpen && (
-        <div className="md:hidden bg-[#0B1120] border-t border-pearl-beige/10 p-4 space-y-4">
-          <Link to="/" className="block text-pearl-beige hover:text-primary transition-colors">
-            HOME
-          </Link>
-          <Link to="/destinations" className="block text-pearl-beige hover:text-primary transition-colors">
-            DESTINATIONS
-          </Link>
-          <Link to="/fleet" className="block text-pearl-beige hover:text-primary transition-colors">
-            THE FLEET
-          </Link>
-          <a href="#" className="block text-pearl-beige hover:text-primary transition-colors">
-            EXPERIENCES
-          </a>
-          <a href="#" className="block text-pearl-beige hover:text-primary transition-colors">
-            OFFERS
-          </a>
-          <div className="pt-2">
-            <button className="w-full text-center text-pearl-beige hover:text-primary transition-colors text-sm font-medium tracking-widest">
-              SIGN IN
-            </button>
+        <div className="border-t border-pearl-beige/10 bg-background-dark p-4 md:hidden">
+          <div className="mx-auto flex w-full max-w-7xl flex-col gap-2">
+            <Link
+              to="/"
+              onClick={closeMenu}
+              className="block rounded-lg px-2 py-2 text-pearl-beige transition-colors hover:text-primary"
+            >
+              INICIO
+            </Link>
+
+            <Link
+              to="/destinations"
+              onClick={closeMenu}
+              className="block rounded-lg px-2 py-2 text-pearl-beige transition-colors hover:text-primary"
+            >
+              DESTINOS
+            </Link>
+
+            <Link
+              to="/fleet"
+              onClick={closeMenu}
+              className="block rounded-lg px-2 py-2 text-pearl-beige transition-colors hover:text-primary"
+            >
+              LA FLOTA
+            </Link>
+
+            <Link
+              to="/experiences"
+              onClick={closeMenu}
+              className="block rounded-lg px-2 py-2 text-pearl-beige transition-colors hover:text-primary"
+            >
+              EXPERIENCIAS
+            </Link>
+
+            <Link
+              to="/offers"
+              onClick={closeMenu}
+              className="block rounded-lg px-2 py-2 text-pearl-beige transition-colors hover:text-primary"
+            >
+              OFERTAS
+            </Link>
+
+            <Link
+              to="/destinations"
+              onClick={closeMenu}
+              className="mt-2 block w-full rounded-full bg-primary px-6 py-3 text-center text-sm font-bold tracking-widest text-white transition-all hover:bg-luxury-gold"
+            >
+              RESERVAR AHORA
+            </Link>
+
+            {isLoggedIn ? (
+              <Link
+                to="/perfil"
+                onClick={closeMenu}
+                className="mx-auto mt-3 flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige transition-all hover:border-primary hover:text-primary"
+              >
+                {userInitials}
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="block w-full rounded-lg px-2 pt-4 text-center text-sm font-medium tracking-widest text-pearl-beige transition-colors hover:text-primary"
+              >
+                INICIAR SESION
+              </Link>
+            )}
           </div>
-          <Link to="/details-suit" className="block w-full bg-primary hover:bg-luxury-gold text-white px-6 py-3 rounded-full text-sm font-bold tracking-widest transition-all text-center">
-            RESERVE NOW
-          </Link>
         </div>
       )}
     </nav>

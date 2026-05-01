@@ -22,10 +22,10 @@ const VideoSection = () => {
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between mb-12">
           <h2 className="text-4xl font-display text-gray-900 dark:text-white">
-            Witness the Journey
+            Contempla la Travesía
           </h2>
           <button className="bg-primary text-white px-8 py-3 rounded-full font-bold text-xs tracking-widest hover:bg-luxury-gold transition-all shadow-lg">
-            BOOK NOW
+            RESERVAR AHORA
           </button>
         </div>
 
@@ -59,7 +59,7 @@ const VideoSection = () => {
           {/* Texto inferior izquierdo */}
           <div className="absolute bottom-8 left-8 md:bottom-10 md:left-10 pointer-events-none">
             <p className="text-white text-2xl md:text-3xl font-display drop-shadow-lg">
-              A Symphony of Ocean & Sky
+              Una Sinfonía del Océano y el Cielo
             </p>
           </div>
         </div>

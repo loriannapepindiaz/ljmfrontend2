@@ -1,84 +1,196 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DestinationCard from './DestinationCard';
 
-const destinos = [
-  { 
-    id: 1, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBnEhzMTeQRFrXIYaiRDEA96_d6VTKAVKnRdt4RsDGK3bFwjffFJ3ACpMplUQE39bt_wboZ6KNm8K1XWl-5cwIF1v-cljyPsdXgYG0ljgIz8axoZbCqEFF3PCH0ohgsY9lcPSW6CJnhwaq9oNw0o17AudyCcF2-qOHxQH9vG6g4WlQqqOpzQjp9NYkUAuGJnoSlwQkVt6Kjop-oaFLol4EcJMx-ClYau6F-iz77K-1Qm6mr9HsT6i4RTElrSNOuMEXA0xskl_6-Mas",
-    titulo: "Isla Mombasa", 
-    pais: "Kenia", 
-    rating: 4.8, 
-    descripcion: "Descubre la perla del Índico con playas de arena blanca y una cultura vibrante que te cautivará desde el primer momento."
+const todosLosDestinos = [
+  {
+    id: 1,
+    img: "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80",
+    titulo: "Isla Mombasa",
+    pais: "Kenia",
+    rating: 4.8,
+    descripcion: "Descubre la perla del Indico con playas de arena blanca y una cultura vibrante que te cautivara desde el primer momento.",
+    precio: 4800,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Puerto de Mombasa",
+    clima: "Tropical costero",
+    idioma: "Suajili / Ingles",
+    highlights: ["Casco antiguo", "Playas de Diani", "Fuerte Jesus"],
+    incluye: ["Tour cultural", "Snorkel guiado", "Traslados"],
+    galeria_urls: ["https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80"]
   },
-  { 
-    id: 2, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCmG3GMcRBeiWB3WiniRudUK8BeMC9LnI_BYxeXKeKz4oKFuqELjoT0OkPdlEH3nNA11y3FZJGR-W8c-jVWSnf9b3xZoPx11myjaIXkS1dnT_ONiDAITniquIaC76JiOLUlUeiFmiePQXdTSzdHutMcyK8IAKhyfpUx42YtXUEJ23GGqqecIJE5nqVCAHhEkjC3OliPlnNlJsXCXAgvmK81skCj6vUiQSJ0u8mc3NAsqcKdEpxtp0RCOtM-hOKDcuponkpZi-yIe_0",
-    titulo: "Ciudad de Addu", 
-    pais: "Maldivas", 
-    rating: 4.6, 
-    descripcion: "Un atolón en forma de corazón que ofrece algunos de los mejores lugares de buceo y snorkel del archipiélago, con aguas cristalinas e inigualables vistas aéreas cinematográficas."
+  {
+    id: 2,
+    img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+    titulo: "Ciudad de Addu",
+    pais: "Maldivas",
+    rating: 4.6,
+    descripcion: "Un atolon en forma de corazon que ofrece lugares de buceo y snorkel con aguas cristalinas.",
+    precio: 6200,
+    duracion_tipica: "8 noches",
+    puerto_principal: "Male",
+    clima: "Ecuatorial",
+    idioma: "Dhivehi",
+    highlights: ["Addu Atoll", "Buceo", "Lagunas cristalinas"],
+    incluye: ["Equipo de snorkel", "Excursion marina", "Traslados"],
+    galeria_urls: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"]
   },
-  { 
-    id: 3, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAxt8NmmldWth4kftJXzEFO1_NpD9EQAhIoHkyG3kqegGeQQWo3Pwv44wCyKrovUw3Bin4PFsYVcVbaFxNBFrhD8Rj9jYMu3IMzv4jbDqOhZ-89nlDd2Dbmc8CC1kf9y2vQNGFU_pNZSzjmAmxWWvY4CHpzNg5fc_nQHvH0A8Zc9xgXPN7nIc8Xv_z-685n9DApoiqlu-VpwdEUJsgW1mx9kqaBou2u16ssmazrvO623uR6vmYjuzbxSXFHM3BLSrVbuEU_7pg-qsg",
-    titulo: "Garden City", 
-    pais: "Singapur", 
-    rating: 4.4, 
-    descripcion: "La modernidad se encuentra con la naturaleza en una de las ciudades portuarias más impresionantes del mundo."
+  {
+    id: 3,
+    img: "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800&q=80",
+    titulo: "Garden City",
+    pais: "Singapur",
+    rating: 4.4,
+    descripcion: "La modernidad se encuentra con la naturaleza en una de las ciudades portuarias mas impresionantes del mundo.",
+    precio: 4300,
+    duracion_tipica: "5 noches",
+    puerto_principal: "Marina Bay",
+    clima: "Ecuatorial",
+    idioma: "Ingles",
+    highlights: ["Gardens by the Bay", "Marina Bay", "Sentosa"],
+    incluye: ["City tour", "Paseo nocturno", "Cena panoramica"],
+    galeria_urls: ["https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800&q=80"]
   },
-  { 
-    id: 4, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCCt6tnyxTzoFXPwhFpwAGmH2SoZeo9WSOlVX3iVGiM9nXEOiGUxkaY_FUupmCB0pLR33TJ9GG-H_UNVq9SekPoK2niRpGg9WCFVD257IrE5HR9b2mJ8OeD4idZcod1Dhrp_AVyO8aojJyW5hmfq-zGpyTQEch_sN2fOQXMieBtkVnQhysooAER9ijM1gpZz70VHPr5xCIHv9mvutC8A4-lvi0rt5zoxzlrXHRt75mbjYkA1BFxdIfGAnn9igYUMDr0l90JEsfx-08",
-    titulo: "Giza & El Cairo", 
-    pais: "Egipto", 
-    rating: 4.9, 
-    descripcion: "Un viaje en el tiempo a través de las maravillas de la antigüedad con el confort de la modernidad."
+  {
+    id: 4,
+    img: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80",
+    titulo: "Giza & El Cairo",
+    pais: "Egipto",
+    rating: 4.9,
+    descripcion: "Un viaje en el tiempo a traves de las maravillas de la antiguedad con el confort de la modernidad.",
+    precio: 5100,
+    duracion_tipica: "6 noches",
+    puerto_principal: "Puerto Said",
+    clima: "Desertico",
+    idioma: "Arabe",
+    highlights: ["Piramides de Giza", "Museo Egipcio", "Nilo"],
+    incluye: ["Guia historico", "Entradas", "Traslados privados"],
+    galeria_urls: ["https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80"]
   },
-  { 
-    id: 5, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCLM7KF5dLUSakOkJ1I2z7e4HBbdBauq3Mh8WgR_3wryZV4uCoupFrnSmL7pC0RkuRObyusdZdTGL5gvRPLe0kaFBjOsojpkKopNOB697l2OCuPeoexs4ZIeuofnf1RPLVeejqKt6hO5Q21R5NhvHt3mDVuXhLp090r_UdlE8y0yH7im1nesL7mSgZz8NBQrUQM96XVONHmnF86wH9j1OWXAb6M-gFdDKUotnamswMf9W39clCC8w1BL45DLTA88uDu6g2VJy_HCps",
-    titulo: "Burj Al Arab Area", 
-    pais: "Dubái", 
-    rating: 4.9, 
-    descripcion: "El epítome del lujo mundial. Experimente la extravagancia árabe en su máximo esplendor desde su suite privada."
+  {
+    id: 5,
+    img: "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80",
+    titulo: "Burj Al Arab Area",
+    pais: "Dubai",
+    rating: 4.9,
+    descripcion: "El epitome del lujo mundial. Experimente la extravagancia arabe en su maximo esplendor.",
+    precio: 5500,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Port Rashid",
+    clima: "Arido",
+    idioma: "Arabe / Ingles",
+    highlights: ["Burj Al Arab", "Marina", "Safari en dunas"],
+    incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
+    galeria_urls: ["https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80"]
   },
-  { 
-    id: 6, 
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDRIOYUDt3PNIi_bUqwmc9pVaOFPMldl0kNaAjmE6ji4AD9g9B5tTNPPFHykBaMZIMnlanDr5OI6hli2_PcdSt-CzTFBfm7dJPjk-MaVNNH_R3tMwzKuSBOtueVp4PEJllnbF0YGRYha7Zc-lTRCa6HtM8qcWmPFkjJqwycnIbFTXiLPUo3kRwPw1ZnHs8MJqR4QaOXeorI83m58c7c6yq7G_pFWuvbB0mfywXT62ysLnt3xAILvZghd_psl_EroHXMX8I3IjpoCN8",
-    titulo: "Table Mountain", 
-    pais: "Sudáfrica", 
-    rating: 4.7, 
-    descripcion: "Combine la majestuosidad de la icónica montaña con la elegancia costera de Ciudad del Cabo en una parada inolvidable frente al océano."
-  }
+  {
+    id: 6,
+    img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+    titulo: "Table Mountain",
+    pais: "Sudafrica",
+    rating: 4.7,
+    descripcion: "Combine la majestuosidad de la montana con la elegancia costera de Ciudad del Cabo.",
+    precio: 4700,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Cape Town",
+    clima: "Mediterraneo",
+    idioma: "Ingles / Afrikaans",
+    highlights: ["Table Mountain", "Waterfront", "Cabo de Buena Esperanza"],
+    incluye: ["Teleferico", "Tour de vinos", "Guia local"],
+    galeria_urls: ["https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80"]
+  },
+  {
+    id: 7,
+    img: "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+    titulo: "Santorini",
+    pais: "Grecia",
+    rating: 4.9,
+    descripcion: "Casas blancas, cupulas azules y atardeceres que detienen el tiempo.",
+    precio: 4850,
+    duracion_tipica: "7 noches",
+    puerto_principal: "Puerto de Santorini",
+    clima: "Mediterraneo",
+    idioma: "Griego",
+    highlights: ["Oia", "Caldera", "Atardeceres"],
+    incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
+    galeria_urls: ["https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"]
+  },
+  {
+    id: 8,
+    img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+    titulo: "Tokio",
+    pais: "Japon",
+    rating: 4.8,
+    descripcion: "La metropolis donde la tradicion milenaria convive con el futuro mas avanzado del planeta.",
+    precio: 5900,
+    duracion_tipica: "10 noches",
+    puerto_principal: "Puerto de Yokohama",
+    clima: "Templado",
+    idioma: "Japones",
+    highlights: ["Shibuya", "Templos", "Monte Fuji"],
+    incluye: ["Guia local", "Ceremonia del te", "Transporte"],
+    galeria_urls: ["https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"]
+  },
+  {
+    id: 9,
+    img: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80",
+    titulo: "Rio de Janeiro",
+    pais: "Brasil",
+    rating: 4.7,
+    descripcion: "Playas legendarias, el Cristo Redentor y el ritmo inconfundible del carnaval.",
+    precio: 4400,
+    duracion_tipica: "6 noches",
+    puerto_principal: "Puerto de Rio",
+    clima: "Tropical",
+    idioma: "Portugues",
+    highlights: ["Copacabana", "Cristo Redentor", "Pan de Azucar"],
+    incluye: ["City tour", "Teleferico", "Cena carioca"],
+    galeria_urls: ["https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80"]
+  },
 ];
 
+const ITEMS_POR_PAGINA = 6;
+
 const DestinationsGrid = () => {
+  const [visibles, setVisibles] = useState(ITEMS_POR_PAGINA);
+
+  const destinosMostrados = todosLosDestinos.slice(0, visibles);
+  const hayMas = visibles < todosLosDestinos.length;
+
+  const cargarMas = () => {
+    setVisibles(prev => Math.min(prev + ITEMS_POR_PAGINA, todosLosDestinos.length));
+  };
+
   return (
     <section className="max-w-[1200px] mx-auto px-8 lg:px-20 pb-24 pt-8">
-      <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div className="mb-12">
         <div className="max-w-xl">
           <h2 className="magiona-style text-4xl mb-4 text-night">Todos los Destinos</h2>
-          <p className="text-night/60">Explore nuestro catálogo completo de puertos y experiencias seleccionadas para los viajeros más exigentes.</p>
-        </div>
-        <div className="flex gap-4">
-          <select className="bg-white border border-gold/20 rounded-full px-6 py-2 text-sm focus:ring-gold focus:border-gold text-night shadow-sm">
-            <option>Filtrar por Región</option>
-            <option>Mediterráneo</option>
-            <option>Caribe</option>
-            <option>Asia Pacífico</option>
-          </select>
+          <p className="text-night/60">
+            Explore nuestro catalogo completo de puertos y experiencias seleccionadas para los viajeros mas exigentes.
+          </p>
         </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {destinos.map(destino => (
+        {destinosMostrados.map(destino => (
           <DestinationCard key={destino.id} destino={destino} />
         ))}
       </div>
+
       <div className="mt-20 text-center">
-        <button className="bg-[#0e1a34] text-[#eacea9] px-12 py-4 rounded-full font-bold uppercase text-sm tracking-widest hover:shadow-2xl hover:bg-gold hover:text-white transition-all flex items-center gap-3 mx-auto border border-[#0e1a34]">
-          Cargar más destinos
-          <span className="material-symbols-outlined">expand_more</span>
-        </button>
+        {hayMas ? (
+          <button
+            onClick={cargarMas}
+            className="border-2 border-[#0e1a34] text-[#0e1a34] px-12 py-4 rounded-full font-bold uppercase text-sm tracking-widest hover:bg-[#0e1a34] hover:text-[#eacea9] transition-all duration-300 flex items-center gap-3 mx-auto"
+          >
+            Cargar mas destinos
+            <span className="material-symbols-outlined">expand_more</span>
+          </button>
+        ) : (
+          <p className="text-[#0e1a34]/40 text-sm uppercase tracking-widest font-medium">
+            No hay mas destinos por el momento
+          </p>
+        )}
       </div>
     </section>
   );

@@ -1,8 +1,48 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap');
+@import "leaflet/dist/leaflet.css";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
+/* Leaflet tooltip custom style */
+.leaflet-label-custom {
+  background: #0e1a34 !important;
+  border: 1px solid rgba(197, 160, 89, 0.4) !important;
+  border-radius: 20px !important;
+  color: #eacea9 !important;
+  font-size: 9px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  padding: 3px 10px !important;
+  box-shadow: none !important;
+  white-space: nowrap !important;
+}
+.leaflet-label-custom::before { display: none !important; }
 
+/* Static maps — no grab/crosshair cursor */
+.leaflet-container,
+.leaflet-grab,
+.leaflet-crosshair { cursor: default !important; }
+
+/* Admin sidebar — left-side scrollbar spanning full height */
+.sidebar-nav {
+  direction: rtl;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(234,206,169,0.5) rgba(255,255,255,0.06);
+}
+.sidebar-nav::-webkit-scrollbar { width: 4px; }
+.sidebar-nav::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.06);
+  border-radius: 2px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(234,206,169,0.5);
+  border-radius: 2px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(234,206,169,0.8); }
+
+/* 2. DEFINICIÓN DEL TEMA Y COLORES */
 @theme {
   --color-primary: #C5A059;
   --color-pearl-beige: #eacea9;
@@ -14,11 +54,42 @@
   --color-night-blue: #0D1B2A;
   --color-off-white: #FEFDFB;
   --color-maroon-gold: #8B6F47;
+  
+  /* Report Colors */
+  --color-naval: #06122C;
+  --color-sand: #DEC29E;
+  --color-sand-dark: #97805f;
+  --color-slate-ink: #45464D;
+  --color-paper: #F9F7F2;
+
+  /* Alias de compatibilidad */
+  --color-accent: #eacea9;
+  --color-navy: #0e1a34;
 }
 
+/* 3. CAPA BASE Y ARREGLO DE ROOT */
 @layer base {
+  /* RESET CRÍTICO: Esto evita que Vite centre tus páginas o limite el ancho */
+  :root {
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #root {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
   body {
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    @apply antialiased bg-white text-[#0e1a34]; /* Ajustado a blanco para la personalización */
   }
 
   h1, h2, h3, .font-display {
@@ -26,29 +97,328 @@
   }
 }
 
+/* 4. CLASES DE TIPOGRAFÍA */
 .welcome-cursive {
   font-family: 'Dancing Script', cursive;
   font-weight: 600;
 }
 
+.auth-user-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.75rem, 5vw, 3.35rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 0.95;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+.login-user-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.05rem, 3.2vw, 2.75rem);
+  font-weight: 500;
+  font-style: italic;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
 .font-action {
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
+  letter-spacing: 0.1em;
+}
+
+/* 5. EFECTOS DE DISEÑO (GLASSMORPISM Y GRADIENTES) */
+@layer components {
+  .glass-panel {
+    background: rgba(14, 26, 52, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(234, 202, 169, 0.2);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(234, 202, 169, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .hero-gradient {
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(11, 17, 32, 0.5),
+        rgba(11, 17, 32, 0.8) 40%,
+        rgba(11, 17, 32, 1)
+      ),
+      url('https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=2000')
+      center 35% / cover no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* 6. CONFIGURACIÓN DE ICONOS Y ANIMACIONES */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+@keyframes logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo-animate {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Clases de utilidad adicionales de tu código original */
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Sombra de lujo para las cards de alojamiento */
+.luxury-shadow {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+/* index.css — agrega esto al final */
+
+/* Tema oscuro para el panel admin */
+.dark .admin-surface {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .admin-surface-header {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+}
+
+.dark .admin-text-primary {
+  color: #f1f5f9 !important;
+}
+
+.dark .admin-text-secondary {
+  color: #94a3b8 !important;
+}
+
+.dark .admin-bg-main {
+  background-color: #0f172a !important;
+}
+
+.dark .admin-input {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f1f5f9 !important;
+}
+
+/* Dark mode global para vistas admin aunque no usen clases dark: por componente */
+.dark body.admin-panel {
+  background-color: #0b1220 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel .bg-white,
+.dark body.admin-panel header.bg-white,
+.dark body.admin-panel section.bg-white,
+.dark body.admin-panel article.bg-white {
+  background-color: #0f172a !important;
+}
+
+.dark body.admin-panel .bg-white\/90,
+.dark body.admin-panel .bg-white\/80,
+.dark body.admin-panel .bg-white\/70 {
+  background-color: rgba(15, 23, 42, 0.92) !important;
+}
+
+.dark body.admin-panel .bg-slate-50,
+.dark body.admin-panel .bg-slate-50\/50,
+.dark body.admin-panel .bg-slate-50\/20,
+.dark body.admin-panel .bg-slate-100,
+.dark body.admin-panel .bg-slate-200 {
+  background-color: #1e293b !important;
+}
+
+.dark body.admin-panel .border-slate-100,
+.dark body.admin-panel .border-slate-200,
+.dark body.admin-panel .border-slate-300 {
+  border-color: #334155 !important;
+}
+
+.dark body.admin-panel .text-slate-400,
+.dark body.admin-panel .text-slate-500,
+.dark body.admin-panel .text-slate-600 {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel .text-slate-700,
+.dark body.admin-panel .text-slate-800,
+.dark body.admin-panel .text-slate-900 {
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel .text-\[\#0e1a34\],
+.dark body.admin-panel .text-\[\#001D4F\] {
+  color: #f8fafc !important;
+}
+
+.dark body.admin-panel .text-\[\#0e1a34\]\/40,
+.dark body.admin-panel .text-\[\#0e1a34\]\/50,
+.dark body.admin-panel .text-\[\#0e1a34\]\/60 {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel [class*="text-[#0e1a34]"] {
+  color: #f8fafc !important;
+}
+
+.dark body.admin-panel main[class*='bg-[#f'],
+.dark body.admin-panel main[class*='bg-slate'] {
+  background-color: #0b1220 !important;
+}
+
+.dark body.admin-panel .bg-\[\#f6f7f8\],
+.dark body.admin-panel .bg-\[\#f8fafc\],
+.dark body.admin-panel .bg-\[\#F8FAFC\],
+.dark body.admin-panel .bg-\[\#f5f7fb\],
+.dark body.admin-panel .bg-\[\#f3f4f6\],
+.dark body.admin-panel .bg-\[\#e5e7eb\] {
+  background-color: #0b1220 !important;
+}
+
+/* Oscuro global más agresivo para formularios admin */
+.dark body.admin-panel input,
+.dark body.admin-panel select,
+.dark body.admin-panel textarea {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #e2e8f0 !important;
+}
+
+.dark body.admin-panel input::placeholder,
+.dark body.admin-panel textarea::placeholder {
+  color: #94a3b8 !important;
+}
+
+.dark body.admin-panel .bg-\[\#eacea9\]\/10 {
+  background-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+.dark body.admin-panel .border-\[\#eacea9\]\/30,
+.dark body.admin-panel .border-\[\#eacea9\]\/50 {
+  border-color: #475569 !important;
+}
+
+.dark body.admin-panel .shadow-sm,
+.dark body.admin-panel .shadow,
+.dark body.admin-panel .shadow-md,
+.dark body.admin-panel .shadow-lg {
+  box-shadow: none !important;
+}
+
+/* Luxury date/calendar inputs — admin forms */
+body.admin-panel input[type="date"],
+body.admin-panel input[type="datetime-local"] {
+  color-scheme: light;
+  cursor: pointer;
+  color: #0e1a34;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 0.6rem 1rem;
+  border-radius: 0.75rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+body.admin-panel input[type="date"]:hover {
+  border-color: #eacea9;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(234, 206, 169, 0.15);
+}
+
+body.admin-panel input[type="date"]:focus {
+  border-color: #eacea9;
+  ring: 2px;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(234, 206, 169, 0.25);
+}
+
+body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 6px;
+  filter: invert(8%) sepia(21%) saturate(5427%) hue-rotate(204deg) brightness(94%) contrast(100%);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  background-color: rgba(234, 206, 169, 0.1);
+}
+
+body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+  background-color: rgba(234, 206, 169, 0.3);
+  transform: scale(1.15);
+}
+
+/* Forcing specific browser UI colors where possible */
+body.admin-panel ::-webkit-datetime-edit-fields-wrapper { padding: 0; }
+body.admin-panel ::-webkit-datetime-edit-text { color: #94a3b8; padding: 0 0.3em; font-weight: 400; }
+body.admin-panel ::-webkit-datetime-edit-month-field,
+body.admin-panel ::-webkit-datetime-edit-day-field,
+body.admin-panel ::-webkit-datetime-edit-year-field { 
+  color: #0e1a34; 
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+body.admin-panel ::-webkit-datetime-edit-month-field:focus,
+body.admin-panel ::-webkit-datetime-edit-day-field:focus,
+body.admin-panel ::-webkit-datetime-edit-year-field:focus {
+  background-color: #eacea9;
+  color: #0e1a34;
+}
+
+/* Dark mode date inputs */
+.dark body.admin-panel input[type="date"],
+.dark body.admin-panel input[type="datetime-local"] {
+  color-scheme: dark;
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #eacea9 !important;
+  box-shadow: none !important;
+}
+
+.dark body.admin-panel input[type="date"]:hover {
+  border-color: #eacea9 !important;
+  background-color: #1e293b !important;
+}
+
+.dark body.admin-panel input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(87%) sepia(20%) saturate(350%) hue-rotate(12deg) brightness(1.15) !important;
+  background-color: rgba(234, 206, 169, 0.05);
 }
 
 
-
-.hero-gradient {
-  background: 
-    linear-gradient(
-      to bottom, 
-      rgba(11, 17, 32, 0.5),
-      rgba(11, 17, 32, 0.8) 40%,
-      rgba(11, 17, 32, 1)
-    ),
-    url('https://images.unsplash.com/photo-1548574505-5e239809ee19?auto=format&fit=crop&q=80&w=2000') 
-    center 35% / cover no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  background-position: center;
-}

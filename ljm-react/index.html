@@ -3,32 +3,259 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LJM SEALINE</title>
 
-    <title>LJM SEALINE - Voyage Management</title>
+    <script>
+      try {
+        const tema = localStorage.getItem('tema');
+        if (tema === 'oscuro') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch(e) {}
+    </script>
 
-    <!-- Material Symbols -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Monsieur+La+Doulaise&family=Playfair+Display:opsz,wght@5..1200,400;600;700&family=Dancing+Script:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,700&family=Public+Sans:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Monsieur+La+Doulaise&family=Playfair+Display:opsz,wght@5..1200,400;600;700&family=Dancing+Script:wght@400;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <style>
+      #acc-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 99999;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #1a56db;
+        color: white;
+        border: 3px solid transparent;
+        cursor: pointer;
+        box-shadow: 0 4px 16px rgba(26,86,219,0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        outline: none;
+      }
+      #acc-btn:hover {
+        background: #1e429f;
+        border-color: rgba(255,255,255,0.6);
+        box-shadow: 0 0 0 5px rgba(26,86,219,0.25), 0 4px 16px rgba(26,86,219,0.45);
+      }
+      #acc-btn:focus {
+        border-color: white;
+        box-shadow: 0 0 0 5px rgba(147,197,253,0.55);
+      }
+      @media print { #acc-btn, #acc-panel { display: none !important; } }
+
+      #acc-panel {
+        position: fixed;
+        bottom: 90px;
+        right: 24px;
+        z-index: 99998;
+        background: #0e1a34;
+        border: 1px solid rgba(197,160,89,0.25);
+        border-radius: 20px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+        padding: 20px;
+        width: 240px;
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(8px);
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s;
+      }
+      #acc-panel.open {
+        display: flex;
+        opacity: 1;
+        transform: translateY(0);
+      }
+      #acc-panel-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-bottom: 14px;
+        margin-bottom: 14px;
+        border-bottom: 1px solid rgba(197,160,89,0.15);
+      }
+      #acc-panel-header .material-symbols-outlined {
+        font-size: 20px;
+        font-variation-settings: 'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;
+        color: #C5A059;
+      }
+      #acc-panel h3 {
+        margin: 0;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #eacea9;
+        font-family: 'Montserrat', sans-serif;
+      }
+      .acc-option {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        color: rgba(234,206,169,0.75);
+        padding: 9px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+      }
+      .acc-option:last-of-type { border-bottom: none; }
+      /* Font size buttons */
+      .acc-font-btn {
+        background: rgba(197,160,89,0.12);
+        border: 1px solid rgba(197,160,89,0.3);
+        border-radius: 8px;
+        padding: 4px 12px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 700;
+        color: #C5A059;
+        font-family: 'Montserrat', sans-serif;
+        transition: background 0.15s;
+      }
+      .acc-font-btn:hover { background: rgba(197,160,89,0.25); }
+      /* Toggle switch */
+      .acc-toggle {
+        position: relative;
+        width: 38px;
+        height: 22px;
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 11px;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+        flex-shrink: 0;
+      }
+      .acc-toggle::after {
+        content: '';
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.5);
+        transition: transform 0.2s, background 0.2s;
+      }
+      .acc-toggle.on {
+        background: rgba(197,160,89,0.3);
+        border-color: #C5A059;
+      }
+      .acc-toggle.on::after {
+        transform: translateX(16px);
+        background: #C5A059;
+      }
+      #acc-reset {
+        margin-top: 14px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        padding: 8px;
+        cursor: pointer;
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(234,206,169,0.5);
+        font-family: 'Montserrat', sans-serif;
+        transition: background 0.15s, color 0.15s;
+      }
+      #acc-reset:hover { background: rgba(255,255,255,0.1); color: #eacea9; }
+
+      body.acc-contrast { filter: contrast(150%); }
+      body.acc-grayscale { filter: grayscale(100%); }
+      body.acc-contrast.acc-grayscale { filter: contrast(150%) grayscale(100%); }
+    </style>
   </head>
 
-  <body class="font-sans antialiased">
+  <body class="font-sans antialiased transition-colors duration-300">
     <div id="root"></div>
-
-    <!-- React entry -->
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Botón de Accesibilidad -->
+    <button id="acc-btn" aria-label="Opciones de accesibilidad" title="Accesibilidad">
+      <span class="material-symbols-outlined" style="font-size:28px;font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24;line-height:1;">accessibility_new</span>
+    </button>
+
+    <div id="acc-panel" role="dialog" aria-label="Panel de accesibilidad">
+      <div id="acc-panel-header">
+        <span class="material-symbols-outlined">accessibility_new</span>
+        <h3>Accesibilidad</h3>
+      </div>
+
+      <div class="acc-option">
+        <span>Texto grande</span>
+        <button class="acc-font-btn" onclick="accFontSize(1)">A+</button>
+      </div>
+      <div class="acc-option">
+        <span>Texto pequeño</span>
+        <button class="acc-font-btn" onclick="accFontSize(-1)">A−</button>
+      </div>
+      <div class="acc-option">
+        <span>Alto contraste</span>
+        <button class="acc-toggle" id="toggle-contrast" onclick="accToggleBtn(this,'acc-contrast')" aria-pressed="false"></button>
+      </div>
+      <div class="acc-option">
+        <span>Escala de grises</span>
+        <button class="acc-toggle" id="toggle-grayscale" onclick="accToggleBtn(this,'acc-grayscale')" aria-pressed="false"></button>
+      </div>
+
+      <button id="acc-reset" onclick="accReset()">↺ Restablecer todo</button>
+    </div>
+
+    <script>
+      var accSize = 0;
+
+      document.getElementById('acc-btn').addEventListener('click', function() {
+        var panel = document.getElementById('acc-panel');
+        panel.classList.toggle('open');
+      });
+
+      function accFontSize(dir) {
+        accSize += dir * 2;
+        document.documentElement.style.fontSize = (16 + accSize) + 'px';
+      }
+
+      function accToggleBtn(btn, cls) {
+        document.body.classList.toggle(cls);
+        var isOn = document.body.classList.contains(cls);
+        btn.classList.toggle('on', isOn);
+        btn.setAttribute('aria-pressed', isOn);
+      }
+
+      function accReset() {
+        accSize = 0;
+        document.documentElement.style.fontSize = '';
+        document.body.classList.remove('acc-contrast', 'acc-grayscale');
+        document.getElementById('toggle-contrast').classList.remove('on');
+        document.getElementById('toggle-grayscale').classList.remove('on');
+        document.getElementById('toggle-contrast').setAttribute('aria-pressed', 'false');
+        document.getElementById('toggle-grayscale').setAttribute('aria-pressed', 'false');
+      }
+
+      document.addEventListener('click', function(e) {
+        var panel = document.getElementById('acc-panel');
+        var btn = document.getElementById('acc-btn');
+        if (!panel.contains(e.target) && !btn.contains(e.target)) {
+          panel.classList.remove('open');
+        }
+      });
+    </script>
   </body>
 </html>

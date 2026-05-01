@@ -14,7 +14,7 @@ const SuiteGallery: React.FC = () => {
         <div className="absolute top-6 left-6 flex flex-row gap-3">
           <div className="pill-tag flex items-center gap-2 px-5 py-2.5 rounded-full shadow-lg bg-night-blue border border-pearl-beige/20">
             <span className="material-symbols-outlined text-sm text-pearl-beige">square_foot</span>
-            <span className="text-[11px] font-bold tracking-[0.1em] uppercase text-pearl-beige">850 SQ FT</span>
+            <span className="text-[11px] font-bold tracking-[0.1em] uppercase text-pearl-beige">79 M²</span>
           </div>
           <div className="pill-tag flex items-center gap-2 px-5 py-2.5 rounded-full shadow-lg bg-night-blue border border-pearl-beige/20">
             <span className="material-symbols-outlined text-sm text-pearl-beige">deck</span>

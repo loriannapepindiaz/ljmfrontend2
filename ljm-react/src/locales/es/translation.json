@@ -1,0 +1,480 @@
+{
+  "sidebar": {
+    "panel": "Panel Admin",
+    "dashboard": "Panel de Control",
+    "cruises": "Cruceros",
+    "cruises_list": "Lista de Cruceros",
+    "cruises_add": "Agregar Crucero",
+    "reservations": "Reservas",
+    "passengers": "Pasajeros",
+    "cabins": "Cabinas",
+    "employees": "Empleados",
+    "employees_list": "Lista de Empleados",
+    "employees_add": "Agregar Empleado",
+    "payments": "Pagos",
+    "reports": "Reportes",
+    "settings": "Configuración",
+    "superAdmin": "Super Administrador",
+    "currentTime": "Hora",
+    "logout": "Cerrar Sesión"
+  },
+  "adminHeader": {
+    "addReservation": "Añadir Reserva",
+    "userAdmin": "Usuario Admin",
+    "superAdmin": "Super Administrador"
+  },
+  "dashboard": {
+    "title": "Panel de Control",
+    "search": "Buscar reservas, barcos...",
+    "stats": {
+      "totalReservations": "Total Reservas",
+      "income": "Ingresos",
+      "activeCruises": "Cruceros Activos",
+      "newPassengers": "Nuevos Pasajeros"
+    },
+    "quickActions": {
+      "title": "Acciones Rápidas",
+      "newReservation": "Nueva Reserva",
+      "addShip": "Añadir Barco",
+      "generateReport": "Generar Reporte",
+      "contactPassenger": "Contactar Pasajero"
+    },
+    "recentActivity": {
+      "title": "Actividad Reciente",
+      "filter": "Filtrar",
+      "filterByDate": "Filtrar por fecha",
+      "selectParams": "Selecciona los parámetros",
+      "day": "Día",
+      "month": "Mes",
+      "year": "Año",
+      "dayPlaceholder": "Ej: 15",
+      "selectMonth": "Seleccionar mes",
+      "selectYear": "Seleccionar año",
+      "clear": "Limpiar",
+      "applyFilter": "Aplicar filtro",
+      "allMonths": "Todos los meses",
+      "allYears": "Todos los años",
+      "colId": "ID",
+      "colPassenger": "Pasajero",
+      "colCruise": "Crucero",
+      "colStatus": "Estado",
+      "colAmount": "Monto",
+      "empty": "No hay actividad reciente",
+      "viewAll": "Ver toda la actividad"
+    },
+    "upcomingDepartures": {
+      "title": "Próximas Salidas",
+      "empty": "No hay salidas programadas"
+    }
+  },
+  "reservations": {
+    "title": "Gestión de Reservas",
+    "metrics": {
+      "total": "Total Reservas",
+      "confirmed": "Confirmadas",
+      "pending": "Pendientes",
+      "totalIncome": "Ingresos Totales",
+      "vsLastMonth": "0% vs mes anterior"
+    },
+    "filters": {
+      "all": "Todos",
+      "confirmed": "Confirmados",
+      "pending": "Pendientes",
+      "paid": "Pagados",
+      "search": "Buscar por ID, huésped o barco..."
+    },
+    "table": {
+      "colId": "ID Reserva",
+      "colGuest": "Huésped",
+      "colShip": "Barco",
+      "colCabin": "Cabina",
+      "colStatus": "Estado",
+      "colTotal": "Total",
+      "colActions": "Acciones",
+      "empty": "No hay reservas registradas",
+      "showing": "Mostrando {{from}} a {{to}} de {{total}} reservas"
+    }
+  },
+  "fleet": {
+    "title": "Gestión de Flota",
+    "add": {
+      "breadcrumb": "Gestión de Flota",
+      "breadcrumbSub": "Añadir Crucero",
+      "title": "Nuevo Crucero de Lujo",
+      "subtitle": "Ingrese las especificaciones y características de la nueva embarcación.",
+      "basic": {
+        "title": "Información Básica",
+        "cruiseName": "Nombre del Crucero",
+        "fleetId": "ID de Flota / Matrícula",
+        "verified": "VERIFICADO",
+        "capacity": "Capacidad (Pasajeros)",
+        "route": "Ruta Asignada",
+        "selectRoute": "Seleccionar ruta",
+        "routes": {
+          "mediterranean": "Mediterráneo Oriental",
+          "caribbean": "Caribe Premium",
+          "nordic": "Nórdicos & Fiordos",
+          "none": "Sin ruta asignada"
+        }
+      },
+      "tech": {
+        "title": "Especificaciones Técnicas",
+        "year": "Año de Fabricación / Refit",
+        "speed": "Velocidad de Crucero",
+        "knots": "nudos",
+        "decks": "Número de Cubiertas"
+      },
+      "facilities": {
+        "title": "Instalaciones y Gastronomía",
+        "restaurants": "Número de Restaurantes",
+        "bars": "Número de Bares / Lounges",
+        "items": {
+          "spa": "SPA & Bienestar",
+          "gym": "Gimnasio",
+          "casino": "Casino",
+          "helipad": "Helipuerto",
+          "theater": "Teatro",
+          "pool": "Piscina Infinita",
+          "restaurant": "Rest. Michelin",
+          "cinema": "Cine Privado"
+        }
+      },
+      "accommodation": {
+        "title": "Configuración de Alojamiento",
+        "addType": "Añadir Tipo",
+        "colType": "Tipo de Suite / Habitación",
+        "colQty": "Cantidad",
+        "colCapacity": "Cap. Máx",
+        "colActions": "Acciones"
+      },
+      "sidebar": {
+        "fleetStatus": "Estado de Flota",
+        "online": "En Línea",
+        "configVisibility": "Configurar Visibilidad",
+        "activeNote": "Al marcar como \"Activo\", el crucero aparecerá instantáneamente en el motor de búsqueda de pasajeros.",
+        "vis": {
+          "active": "Activo para Reservas",
+          "maintenance": "En Mantenimiento",
+          "inactive": "Inactivo / Puerto"
+        },
+        "multimedia": "Galería Multimedia",
+        "shipImages": "Imágenes del Buque",
+        "dragPhotos": "Arrastrar fotos aquí",
+        "clickSelect": "O haz clic para seleccionar (Máx 10 fotos)",
+        "promoVideo": "Vídeo Promocional (URL)",
+        "catalogDesc": "Descripción de Catálogo",
+        "descPlaceholder": "Describa la elegancia y confort del navío..."
+      },
+      "cancelEdit": "Cancelar Edición",
+      "saveDraft": "Guardar Borrador",
+      "publish": "Publicar en Flota"
+    },
+    "subtitle": "Supervise y gestione la flota de cruceros de lujo de LJM Sealine.",
+    "search": "Buscar crucero...",
+    "addCruise": "Añadir Crucero",
+    "tabs": {
+      "allShips": "Todos los Barcos",
+      "active": "Activos",
+      "maintenance": "En Mantenimiento",
+      "upcoming": "Próximos Lanzamientos"
+    },
+    "featured": {
+      "title": "Barcos Destacados",
+      "empty": "Sin barcos destacados",
+      "connectDB": "Los barcos aparecerán aquí al conectar la base de datos"
+    },
+    "table": {
+      "title": "Listado Completo de la Flota",
+      "viewAll": "Ver todos",
+      "colName": "Nombre del Barco",
+      "colStatus": "Estado",
+      "colCapacity": "Capacidad",
+      "colInspection": "Última Inspección",
+      "colActions": "Acciones",
+      "empty": "No hay barcos registrados"
+    }
+  },
+  "cabins": {
+    "title": "Gestión de Cabinas",
+    "search": "Buscar cabina o pasajero...",
+    "filters": {
+      "filterBy": "Filtrar por:",
+      "allShips": "Todos los Barcos",
+      "allDecks": "Todas las Cubiertas",
+      "all": "Todas",
+      "suite": "Suite",
+      "balcony": "Balcón",
+      "seaView": "Vista al Mar",
+      "clear": "Limpiar"
+    },
+    "metrics": {
+      "total": "Total Cabinas",
+      "occupied": "Ocupadas",
+      "available": "Disponibles",
+      "maintenance": "Mantenimiento"
+    },
+    "table": {
+      "colNumber": "Nº Cabina",
+      "colCategory": "Categoría",
+      "colStatus": "Estado",
+      "colGuest": "Información del Huésped",
+      "colActions": "Acciones",
+      "empty": "No hay cabinas registradas",
+      "prev": "Anterior",
+      "next": "Siguiente"
+    }
+  },
+  "payments": {
+    "title": "Gestión de Pagos",
+    "subtitle": "Supervise y gestione todas las transacciones financieras de la flota.",
+    "filters": {
+      "search": "Buscar por ID, pasajero o viaje...",
+      "all": "Todos",
+      "paid": "Pagados",
+      "pending": "Pendientes",
+      "last30Days": "Últimos 30 días"
+    },
+    "metrics": {
+      "totalIncome": "Ingresos Totales",
+      "pending": "Pagos Pendientes",
+      "refunds": "Reembolsos",
+      "monthlyGrowth": "Crecimiento Mensual"
+    },
+    "table": {
+      "colId": "ID Pago",
+      "colPassenger": "Pasajero",
+      "colRoute": "Viaje / Ruta",
+      "colDate": "Fecha",
+      "colAmount": "Monto",
+      "colStatus": "Estado",
+      "colActions": "Acciones",
+      "empty": "No hay transacciones registradas"
+    }
+  },
+  "passengers": {
+    "title": "Pasajeros",
+    "subtitle": "Gestione los miembros élite y el directorio de huéspedes",
+    "addPassenger": "Añadir Pasajero",
+    "filters": {
+      "search": "Buscar por nombre, ID o viaje...",
+      "all": "Todos",
+      "elite": "Élite Platino",
+      "gold": "Miembro Oro",
+      "silver": "Plata",
+      "diamond": "Diamante"
+    },
+    "metrics": {
+      "total": "Total Pasajeros",
+      "platinum": "Élite Platino",
+      "gold": "Miembros Oro",
+      "recent": "Viajeros Recientes"
+    },
+    "table": {
+      "colDetails": "Detalles del Pasajero",
+      "colLoyalty": "Estado de Lealtad",
+      "colLastTrip": "Último Viaje",
+      "colActions": "Acciones",
+      "empty": "No hay pasajeros registrados"
+    }
+  },
+  "employees": {
+    "title": "Gestión de Empleados",
+    "add": {
+      "breadcrumb": "Empleados",
+      "breadcrumbSub": "Añadir Nuevo Empleado",
+      "title": "Añadir Nuevo Empleado",
+      "subtitle": "Inicie el proceso de contratación ingresando las credenciales requeridas para la flota élite.",
+      "cancel": "Cancelar",
+      "register": "Registrar Tripulante",
+      "personal": {
+        "title": "Información Personal",
+        "section": "Sección 1 de 4",
+        "uploadPhoto": "Subir Foto",
+        "fullName": "Nombre Completo",
+        "birthDate": "Fecha de Nacimiento",
+        "nationality": "Nacionalidad",
+        "selectCountry": "Seleccionar país",
+        "idNumber": "Número de Identificación",
+        "idPlaceholder": "Número de ID / Pasaporte",
+        "phone": "Teléfono de Contacto",
+        "emergency": "Contacto de Emergencia",
+        "address": "Dirección de Residencia",
+        "addressPlaceholder": "Calle, Número, Ciudad, CP"
+      },
+      "professional": {
+        "title": "Perfil y Experiencia Profesional",
+        "role": "Cargo / Puesto",
+        "department": "Departamento",
+        "deptDeck": "Cubierta",
+        "deptEngine": "Máquinas",
+        "deptService": "Servicio",
+        "certifications": "Certificaciones y Títulos",
+        "colCert": "Certificado",
+        "colIssuer": "Entidad Emisora",
+        "colExpiry": "Vencimiento",
+        "addCert": "Añadir Certificación",
+        "experience": "Experiencia Previa / Notas",
+        "experiencePlaceholder": "Indique brevemente el historial laboral relevante o notas adicionales del reclutamiento..."
+      },
+      "docs": {
+        "title": "Repositorio Documental",
+        "required": "Documentos Obligatorios",
+        "manager": "Gestor de Carga de Documentos",
+        "dragFiles": "Arrastre archivos o haga clic para explorar",
+        "passport": "Pasaporte en vigor",
+        "maritime": "Licencia Marítima (COC)",
+        "medical": "Certificado Médico (ENG1)",
+        "logbook": "Libreta de Navegación",
+        "background": "Certificado Antecedentes Penales"
+      },
+      "contract": {
+        "title": "Asignación y Contrato",
+        "subtitle": "Asignación de Travesía y Legal",
+        "ship": "Buque Asignado",
+        "contractType": "Tipo de Contrato",
+        "indefinite": "Indefinido",
+        "campaign": "Campaña",
+        "startDate": "Fecha de Inicio",
+        "endDate": "Fecha Fin (Est.)",
+        "shift": "Turno / Rotación",
+        "homePort": "Puerto Base",
+        "insurance": "Detalles de Seguro Médico",
+        "insurancePlaceholder": "Nº Póliza / Cobertura",
+        "legalNote": "Al guardar este perfil, confirma que todas las credenciales marítimas han sido verificadas según los estándares STCW internacionales y la política de la empresa."
+      },
+      "status": {
+        "title": "Estado del Registro",
+        "completed": "Completado",
+        "pending": "Quedan campos obligatorios pendientes en las secciones de Perfil Profesional y Documentación."
+      }
+    },
+    "subtitle": "Monitoree y gestione su fuerza laboral marítima en todos los buques.",
+    "addEmployee": "Añadir Empleado",
+    "metrics": {
+      "total": "Total Empleados",
+      "active": "Tripulación Activa",
+      "onLeave": "Personal de Licencia",
+      "vacant": "Puestos Vacantes"
+    },
+    "table": {
+      "title": "Directorio de Empleados",
+      "search": "Buscar nombre, rol o barco...",
+      "filterTitle": "Filtrar empleados",
+      "filterParams": "Selecciona los parámetros",
+      "statusLabel": "Estado",
+      "departmentLabel": "Departamento",
+      "clear": "Limpiar",
+      "applyFilter": "Aplicar filtro",
+      "statusActive": "Activo",
+      "statusOnLeave": "De Licencia",
+      "statusTraining": "En Entrenamiento",
+      "statusOffDuty": "Fuera de Servicio",
+      "deptDeck": "Cubierta",
+      "deptEntertainment": "Entretenimiento",
+      "deptCulinary": "Culinario",
+      "deptEngineering": "Ingeniería",
+      "deptHospitality": "Hospitalidad",
+      "colEmployee": "Empleado",
+      "colDepartment": "Departamento / Barco",
+      "colStatus": "Estado",
+      "colPerformance": "Rendimiento",
+      "colActions": "Acciones",
+      "empty": "No hay empleados registrados"
+    }
+  },
+  "reports": {
+    "title": "Informes y Análisis",
+    "subtitle": "Resumen detallado de rendimiento y métricas operativas.",
+    "selectStartMonth": "Selecciona mes de inicio",
+    "selectEndMonth": "Selecciona mes de fin",
+    "resetYear": "Restablecer al año actual",
+    "months": ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+    "monthsShort": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    "charts": {
+      "incomeByService": {
+        "title": "Ingresos por Servicio",
+        "noData": "Sin datos",
+        "cruises": "Cruceros",
+        "dining": "Dining",
+        "excursions": "Excursiones",
+        "spa": "Spa & Wellness"
+      },
+      "occupancy": {
+        "title": "Ocupación por Crucero",
+        "last6months": "Últimos 6 meses",
+        "fullYear": "Año completo",
+        "empty": "Sin cruceros registrados",
+        "connectDB": "Los datos aparecerán aquí al conectar la BD"
+      },
+      "trend": {
+        "title": "Tendencia de Ingresos Anual",
+        "current": "Actual",
+        "noData": "Sin datos disponibles",
+        "connectDB": "Los ingresos aparecerán aquí al conectar la BD"
+      }
+    },
+    "kpis": {
+      "monthlyIncome": "Ingresos Mensuales",
+      "occupancyRate": "Tasa de Ocupación",
+      "satisfaction": "Satisfacción Cliente",
+      "reservationGrowth": "Crecimiento Reservas"
+    }
+  },
+  "config": {
+    "title": "Configuración",
+    "subtitle": "Gestione su perfil, seguridad y preferencias del sistema para una experiencia personalizada.",
+    "cancel": "Cancelar",
+    "applyAll": "Aplicar Todo",
+    "profile": {
+      "title": "Perfil de Usuario",
+      "fullName": "Nombre Completo",
+      "namePlaceholder": "Ingrese su nombre",
+      "email": "Correo Electrónico",
+      "emailPlaceholder": "correo@ljmsealine.com",
+      "systemRole": "Rol del Sistema",
+      "superAdmin": "Super Administrador",
+      "saveChanges": "Guardar Cambios"
+    },
+    "security": {
+      "title": "Seguridad",
+      "password": "Contraseña",
+      "changePassword": "Cambiar Contraseña",
+      "lastChanged": "Último cambio hace 3 meses",
+      "twoFactor": "Autenticación de dos factores (2FA)",
+      "twoFactorDesc": "Añade una capa extra de seguridad",
+      "modalTitle": "Cambiar Contraseña",
+      "modalSubtitle": "Ingrese sus credenciales",
+      "currentPassword": "Contraseña actual",
+      "currentPasswordPlaceholder": "Ingrese su contraseña actual",
+      "newPassword": "Nueva contraseña",
+      "newPasswordPlaceholder": "Ingrese su nueva contraseña",
+      "confirmPassword": "Confirmar contraseña",
+      "confirmPasswordPlaceholder": "Confirme su nueva contraseña",
+      "cancelBtn": "Cancelar",
+      "confirmBtn": "Confirmar"
+    },
+    "notifications": {
+      "title": "Notificaciones",
+      "newReservations": "Nuevas Reservas",
+      "newReservationsDesc": "Email y Push",
+      "shipStatus": "Estado de los Barcos",
+      "shipStatusDesc": "Alertas de mantenimiento",
+      "weeklyReports": "Reportes Semanales",
+      "weeklyReportsDesc": "Resumen de ingresos",
+      "email": "Email",
+      "push": "Push"
+    },
+    "preferences": {
+      "title": "Preferencias del Sistema",
+      "language": "Idioma",
+      "timezone": "Zona Horaria",
+      "theme": "Tema Visual",
+      "light": "Claro",
+      "dark": "Oscuro",
+      "save": "Guardar preferencias",
+      "saved": "Guardado",
+      "currentTime": "Hora actual",
+      "appliesImmediately": "Se aplica inmediatamente"
+    }
+  }
+}
