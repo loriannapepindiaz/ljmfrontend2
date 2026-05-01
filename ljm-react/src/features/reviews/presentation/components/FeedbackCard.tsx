@@ -16,7 +16,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
     <div className="bg-[#1E2944] p-8 rounded-lg relative overflow-hidden">
       <div className="flex justify-between items-start mb-6">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-[#06122C] rounded-full flex items-center justify-center text-[#DEC29E] border border-[#DEC29E]/10 font-semibold">
+          <div className="w-12 h-12 bg-[#06122C] rounded-full flex items-center justify-center text-[#DEC29E] border border-[#DEC29E]/30 font-semibold text-sm tracking-wider flex-shrink-0">
             {initials}
           </div>
           <div>

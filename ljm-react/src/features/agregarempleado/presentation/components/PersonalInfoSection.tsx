@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import AdminDatePicker from '../../../../components/AdminDatePicker';
 
 const inputClass = "w-full bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none text-sm transition-all";
 
@@ -9,6 +10,7 @@ const PersonalInfoSection: React.FC = () => {
   const { t } = useTranslation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [nacionalidad, setNacionalidad] = useState('');
+  const [birthDate, setBirthDate] = useState('');
 
   return (
     <section className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -51,7 +53,7 @@ const PersonalInfoSection: React.FC = () => {
                 <span className="material-symbols-outlined text-[14px]">cake</span>
                 {t('employees.add.personal.birthDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] outline-none text-sm transition-all text-slate-700" />
+              <AdminDatePicker value={birthDate} onChange={setBirthDate} />
             </div>
 
             {/* Nacionalidad */}

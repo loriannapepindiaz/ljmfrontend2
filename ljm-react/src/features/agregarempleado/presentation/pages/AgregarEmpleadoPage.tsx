@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AdminSidebar from '../../../gestionreserva/presentation/components/AdminSidebar';
+import { getStoredAdminSession } from '../../../../lib/api';
 import FormHeader from '../components/FormHeader';
 import PersonalInfoSection from '../components/PersonalInfoSection';
 import ProfessionalProfileSection from '../components/ProfessionalProfileSection';
@@ -9,6 +10,10 @@ import AssignmentContractSidebar from '../components/AssignmentContractSidebar';
 
 const AgregarEmpleadoPage: React.FC = () => {
   const { t } = useTranslation();
+  const session   = getStoredAdminSession();
+  const adminName = session?.user.username ?? session?.user.email ?? 'Administrador';
+  const adminRole = session?.user.rol ?? 'Admin';
+  const initials  = adminName.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
 
   return (
     <div className="flex h-screen overflow-hidden bg-[#f6f7f8]">
@@ -24,14 +29,12 @@ const AgregarEmpleadoPage: React.FC = () => {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-3 border-l border-slate-100 pl-6">
               <div className="text-right">
-                <p className="text-[10px] font-bold uppercase tracking-tighter text-[#0e1a34]">Almirante Henderson</p>
-                <p className="text-[9px] text-slate-400 uppercase">Comandante de Flota</p>
+                <p className="text-[10px] font-bold uppercase tracking-tighter text-[#0e1a34]">{adminName}</p>
+                <p className="text-[9px] text-slate-400 uppercase">{adminRole}</p>
               </div>
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw9Qh6s9PhGxCHucuiIXuLx78cVvfQRGtcCJFstlELaLxcmIJfXfzjp4Rrht7-yeE_n-8MK8fkDotu1LbX9sih8NjnZS7VCLjZxMXZstywemsYnYqvEPV-UQcBWze5NNwRKh1ODlYDvqavBF1O1AwpKcN7_o3Sg-zz7dc7IsyoWhur6ZVd1O3NBCa3OTlGnbKaK3_QUcabqUj7qDA45WS-Esg2qvLXolQOYfxI22GtYt5zjYPPTGQNRyYJtaP_umCtl_rXEbs5GVEM"
-                alt="Admiral"
-                className="w-8 h-8 rounded-full object-cover ring-2 ring-[#eacea9]/20"
-              />
+              <div className="w-8 h-8 rounded-full bg-[#0e1a34] border-2 border-[#eacea9]/40 flex items-center justify-center text-[#eacea9] text-[10px] font-bold">
+                {initials}
+              </div>
             </div>
           </div>
         </header>

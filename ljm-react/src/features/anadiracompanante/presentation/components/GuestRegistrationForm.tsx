@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import type { Guest } from "../types";
 
@@ -13,31 +14,36 @@ function CalendarPicker({ value, onChange }: {
   value: Date | null;
   onChange: (d: Date) => void;
 }) {
-  const [open, setOpen]     = useState(false);
-  const [view, setView]     = useState(new Date());
-  const [openUp, setOpenUp] = useState(false);
-  const wrapRef    = useRef<HTMLDivElement>(null);
+  const [selected, setSelected] = useState<Date | null>(value);
+  const [open, setOpen]         = useState(false);
+  const [view, setView]         = useState(() => value ?? new Date());
+  const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
   const triggerRef = useRef<HTMLButtonElement>(null);
 
+  // Only reset when parent explicitly clears (e.g. after adding guest to list)
   useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
+    if (value == null) setSelected(null);
+  }, [value]);
 
   const handleOpen = () => {
     if (triggerRef.current) {
       const rect = triggerRef.current.getBoundingClientRect();
-      setOpenUp(rect.bottom + 340 > window.innerHeight);
+      const spaceBelow = window.innerHeight - rect.bottom;
+      if (spaceBelow < 340) {
+        setPopupStyle({ position: 'fixed', bottom: window.innerHeight - rect.top + 4, left: rect.left, width: 288 });
+      } else {
+        setPopupStyle({ position: 'fixed', top: rect.bottom + 4, left: rect.left, width: 288 });
+      }
     }
+    if (selected) setView(selected);
     setOpen(o => !o);
   };
 
   const pick = (d: number) => {
-    onChange(new Date(view.getFullYear(), view.getMonth(), d));
+    const picked = new Date(view.getFullYear(), view.getMonth(), d);
+    setSelected(picked);
     setOpen(false);
+    onChange(picked);
   };
 
   const year  = view.getFullYear();
@@ -49,22 +55,82 @@ function CalendarPicker({ value, onChange }: {
   );
 
   const isSelected = (d: number) =>
-    value != null &&
-    value.getDate() === d &&
-    value.getMonth() === month &&
-    value.getFullYear() === year;
+    selected != null &&
+    selected.getDate() === d &&
+    selected.getMonth() === month &&
+    selected.getFullYear() === year;
 
   const isToday = (d: number) => {
     const t = new Date();
     return t.getDate() === d && t.getMonth() === month && t.getFullYear() === year;
   };
 
-  const selectedLabel = value
-    ? `${String(value.getDate()).padStart(2,"0")} de ${MONTHS_ES[value.getMonth()]} de ${value.getFullYear()}`
+  const selectedLabel = selected
+    ? `${String(selected.getDate()).padStart(2,"0")} de ${MONTHS_ES[selected.getMonth()]} de ${selected.getFullYear()}`
     : "";
 
+  const portal = open
+    ? createPortal(
+        <>
+          {/* Overlay — closing the calendar on outside click */}
+          <div className="fixed inset-0 z-[9990]" onClick={() => setOpen(false)} />
+
+          {/* Calendar popup — higher z so date clicks reach pick() */}
+          <div
+            style={popupStyle}
+            className="z-[9999] w-72 rounded-xl border border-[#dec29e]/20 bg-[#0b1628] shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden"
+          >
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[#dec29e]/10">
+              <button type="button"
+                onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() - 1, 1))}
+                className="text-[#dec29e]/60 hover:text-[#dec29e] transition-colors p-1">
+                <span className="material-symbols-outlined text-lg">chevron_left</span>
+              </button>
+              <span className="text-sm text-[#d9e2ff] tracking-widest uppercase"
+                style={{ fontFamily: "'Noto Serif', serif" }}>
+                {MONTHS_ES[month]} {year}
+              </span>
+              <button type="button"
+                onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() + 1, 1))}
+                className="text-[#dec29e]/60 hover:text-[#dec29e] transition-colors p-1">
+                <span className="material-symbols-outlined text-lg">chevron_right</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-7 px-3 pt-3">
+              {DAYS_ES.map(d => (
+                <div key={d} className="text-center text-[9px] uppercase tracking-widest text-[#8f9098] pb-2">
+                  {d}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 px-3 pb-4">
+              {cells.map((d, i) => (
+                <div key={i} className="flex items-center justify-center py-[2px]">
+                  {d === null ? <span className="w-8 h-8" /> : (
+                    <button type="button" onClick={() => pick(d)}
+                      className={`w-8 h-8 rounded-full text-xs font-medium transition-all duration-150 ${
+                        isSelected(d)
+                          ? "bg-[#dec29e] text-[#0b1628] font-bold shadow-lg"
+                          : isToday(d)
+                          ? "border border-[#dec29e]/50 text-[#dec29e]"
+                          : "text-[#c6c6ce] hover:bg-[#dec29e]/15 hover:text-[#dec29e]"
+                      }`}>
+                      {d}
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </>,
+        document.body,
+      )
+    : null;
+
   return (
-    <div ref={wrapRef} className="relative">
+    <div className="relative">
       <button
         ref={triggerRef}
         type="button"
@@ -72,7 +138,7 @@ function CalendarPicker({ value, onChange }: {
         className="flex min-h-[48px] w-full items-center justify-between border-b border-[#45464d]/40 bg-transparent px-4 py-3 text-left transition-colors hover:border-[#dec29e] focus:outline-none"
       >
         <span
-          className={value != null ? "block text-sm font-semibold text-[#f5e2bd]" : "block text-sm text-[#8f9098]/70"}
+          className={selected != null ? "block text-sm font-semibold text-[#f5e2bd]" : "block text-sm text-[#8f9098]/70"}
           style={{ fontFamily: "'Noto Serif', serif" }}
         >
           {selectedLabel || "Selecciona una fecha"}
@@ -81,56 +147,7 @@ function CalendarPicker({ value, onChange }: {
           calendar_month
         </span>
       </button>
-
-      {open && (
-        <div className={`absolute left-0 z-50 w-72 rounded-xl border border-[#dec29e]/20 bg-[#0b1628] shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden ${
-          openUp ? "bottom-full mb-2" : "top-full mt-2"
-        }`}>
-          <div className="flex items-center justify-between px-4 py-3 border-b border-[#dec29e]/10">
-            <button type="button"
-              onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() - 1, 1))}
-              className="text-[#dec29e]/60 hover:text-[#dec29e] transition-colors p-1">
-              <span className="material-symbols-outlined text-lg">chevron_left</span>
-            </button>
-            <span className="text-sm text-[#d9e2ff] tracking-widest uppercase"
-              style={{ fontFamily: "'Noto Serif', serif" }}>
-              {MONTHS_ES[month]} {year}
-            </span>
-            <button type="button"
-              onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() + 1, 1))}
-              className="text-[#dec29e]/60 hover:text-[#dec29e] transition-colors p-1">
-              <span className="material-symbols-outlined text-lg">chevron_right</span>
-            </button>
-          </div>
-
-          <div className="grid grid-cols-7 px-3 pt-3">
-            {DAYS_ES.map(d => (
-              <div key={d} className="text-center text-[9px] uppercase tracking-widest text-[#8f9098] pb-2">
-                {d}
-              </div>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-7 px-3 pb-4">
-            {cells.map((d, i) => (
-              <div key={i} className="flex items-center justify-center py-[2px]">
-                {d === null ? <span className="w-8 h-8" /> : (
-                  <button type="button" onClick={() => pick(d)}
-                    className={`w-8 h-8 rounded-full text-xs font-medium transition-all duration-150 ${
-                      isSelected(d)
-                        ? "bg-[#dec29e] text-[#0b1628] font-bold shadow-lg"
-                        : isToday(d)
-                        ? "border border-[#dec29e]/50 text-[#dec29e]"
-                        : "text-[#c6c6ce] hover:bg-[#dec29e]/15 hover:text-[#dec29e]"
-                    }`}>
-                    {d}
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+      {portal}
     </div>
   );
 }
@@ -229,7 +246,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
             <button
               className="min-w-[260px] rounded-md border border-[#dec29e]/35 bg-[#dec29e]/12 px-8 py-4 text-[#f5e2bd] shadow-lg transition-all hover:bg-[#dec29e]/20 active:scale-95"
-              onClick={() => navigate("/personalizar-estancia")}
+              onClick={() => navigate("/destinations")}
               type="button"
               style={{ fontFamily: "'Noto Serif', serif", fontSize: "13px", letterSpacing: "0.15em" }}
             >

@@ -7,9 +7,10 @@ interface Props {
   rating: string;
   image: string;
   description: string;
+  price?: number;
 }
 
-const ExperienceCard = ({ id, title, location, rating, image, description }: Props) => {
+const ExperienceCard = ({ id, title, location, rating, image, description, price }: Props) => {
   const navigate = useNavigate();
 
   const slugify = (value: string) =>
@@ -30,6 +31,7 @@ const ExperienceCard = ({ id, title, location, rating, image, description }: Pro
           rating,
           image,
           description,
+          price,
         },
       },
     });

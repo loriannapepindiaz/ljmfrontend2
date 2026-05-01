@@ -4,9 +4,21 @@ import Navbar from "../../../home/presentation/components/Navbar";
 import Footer from "../../../home/presentation/components/Footer";
 import BackButton from "../../../../components/BackButton";
 import AccommodationCard from "../components/AccommodationCard";
-import ExperienceRow from "../components/ExperienceRow";
+import ExperienceSelectCard from "../components/ExperienceSelectCard";
 import SummaryBar from "../components/SummaryBar";
+import { experienceApi, type Experience } from "../../../../lib/api";
 import { allExperiences } from "../../../experiences/data/experiences";
+
+const staticFallback: Experience[] = allExperiences.map((e) => ({
+  id: e.id,
+  nombre: e.title,
+  descripcion: e.description,
+  unidad_cobro: "por_persona",
+  precio_base: e.price,
+  categoria: e.location,
+  imagen_url: e.image,
+  activa: true,
+}));
 
 const suites = [
   {
@@ -42,10 +54,31 @@ const PersonalizationPage: FC = () => {
 
   const [selectedSuiteId, setSelectedSuiteId] = useState<number | null>(null);
   const [selectedExps, setSelectedExps] = useState<string[]>(selectedActivitiesFromState);
+  const [experiences, setExperiences] = useState<Experience[]>([]);
+  const [loadingExps, setLoadingExps] = useState(true);
 
-  const toggleExperience = (title: string) => {
+  useEffect(() => {
+    const staticById = Object.fromEntries(allExperiences.map((e) => [e.id, { image: e.image, title: e.title, description: e.description }]));
+
+    experienceApi.list()
+      .then((res) => {
+        const data = res.data.length > 0
+          ? res.data.map((e) => ({
+              ...e,
+              imagen_url: staticById[e.id]?.image ?? e.imagen_url,
+              nombre: staticById[e.id]?.title ?? e.nombre,
+              descripcion: staticById[e.id]?.description ?? e.descripcion,
+            }))
+          : staticFallback;
+        setExperiences(data);
+      })
+      .catch(() => setExperiences(staticFallback))
+      .finally(() => setLoadingExps(false));
+  }, []);
+
+  const toggleExperience = (id: string) => {
     setSelectedExps((prev) =>
-      prev.includes(title) ? prev.filter((item) => item !== title) : [...prev, title],
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
 
@@ -125,20 +158,22 @@ const PersonalizationPage: FC = () => {
               </h3>
             </div>
 
-            <div className="bg-white rounded-[2.5rem] overflow-hidden shadow-[0_25px_60px_rgba(14,26,52,0.12)] border border-[#0e1a34]/5 divide-y divide-gray-100">
-              {allExperiences.map((experience) => (
-                <ExperienceRow
-                  key={experience.id}
-                  title={experience.title}
-                  price={experience.price}
-                  unit={experience.unit}
-                  image={experience.image}
-                  description={experience.description}
-                  isSelected={selectedExps.includes(experience.title)}
-                  onSelect={() => toggleExperience(experience.title)}
-                />
-              ))}
-            </div>
+            {loadingExps ? (
+              <div className="flex items-center justify-center py-20">
+                <div className="w-10 h-10 border-4 border-[#0e1a34]/20 border-t-[#c5a059] rounded-full animate-spin" />
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {experiences.map((exp) => (
+                  <ExperienceSelectCard
+                    key={exp.id}
+                    experience={exp}
+                    isSelected={selectedExps.includes(exp.id)}
+                    onSelect={() => toggleExperience(exp.id)}
+                  />
+                ))}
+              </div>
+            )}
           </section>
 
           <div className="mb-20">
