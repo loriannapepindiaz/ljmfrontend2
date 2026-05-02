@@ -1,5 +1,7 @@
 // App.tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import type { ReactNode } from "react";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import { getStoredAdminSession } from "./lib/api";
 
 // Páginas de autenticación
 import LoginPage from "./features/auth/presentation/pages/LoginPage";
@@ -70,6 +72,12 @@ import { DestinationDetails } from "./features/destinationdetails/presentation/p
 import DetailsSuitPage from "./features/details_suit/presentation/pages/DetailsSuitPage";
 import BookingConfirmationPage from "./features/reservaconfirmada/presentation/pages/BookingConfirmationPage"
 import VoyageReviewsPage from "./features/reviews/presentation/pages/VoyageReviewsPage"
+import CoralImmersionPage from "./features/coralimmersion/presentation/pages/CoralImmersionPage";
+
+const AdminRoute = ({ children }: { children: ReactNode }) => {
+  const session = getStoredAdminSession();
+  return session ? children : <Navigate to="/admin" replace />;
+};
 
 function App() {
   return (
@@ -87,6 +95,9 @@ function App() {
         <Route path="/payment" element={<PaymentPage />} />
         <Route path="/offers" element={<OffersPage />} />
         <Route path="/experiences" element={<ExperiencesPage />} />
+        <Route path="/experiences/:slug" element={<CoralImmersionPage />} />
+        <Route path="/experiences/inmersion-arrecifes-coral" element={<CoralImmersionPage />} />
+        <Route path="/inmersion-arrecifes-coral" element={<CoralImmersionPage />} />
         <Route path="/room" element={<RoomPage />} />
         <Route path="/personalization" element={<PersonalizationPage />} />
         <Route path="/personalizar-estancia" element={<PersonalizarEstanciaPage />} />
@@ -108,35 +119,35 @@ function App() {
         
         <Route path="/admin" element={<AdminLoginPage />} />  
 
-        <Route path="/admin/cruceros/agregar" element={<AgregarCruceroPage />} />
+        <Route path="/admin/cruceros/agregar" element={<AdminRoute><AgregarCruceroPage /></AdminRoute>} />
 
         {/* Dashboard Admin */}
-        <Route path="/admin/dashboard" element={<DashboardOverviewPage />} />
+        <Route path="/admin/dashboard" element={<AdminRoute><DashboardOverviewPage /></AdminRoute>} />
 
         {/* Gestión de Reservas */}
-        <Route path="/admin/reservas" element={<ReservationManagementPage />} />
+        <Route path="/admin/reservas" element={<AdminRoute><ReservationManagementPage /></AdminRoute>} />
 
         {/* Gestión de Flota / Cruceros */}
-        <Route path="/admin/cruceros" element={<CrucerosPage />} />
+        <Route path="/admin/cruceros" element={<AdminRoute><CrucerosPage /></AdminRoute>} />
 
         {/* Pasajeros */}
-        <Route path="/admin/pasajeros" element={<PasajerosPage />} />
+        <Route path="/admin/pasajeros" element={<AdminRoute><PasajerosPage /></AdminRoute>} />
 
         {/* Cabinas */}
-        <Route path="/admin/cabinas" element={<CabinasPage />} />
+        <Route path="/admin/cabinas" element={<AdminRoute><CabinasPage /></AdminRoute>} />
 
         {/* Pagos */}
-        <Route path="/admin/pagos" element={<PagosPage />} />
+        <Route path="/admin/pagos" element={<AdminRoute><PagosPage /></AdminRoute>} />
 
         {/* Empleados */}
-        <Route path="/admin/empleados" element={<EmpleadosPage />} />
-        <Route path="/admin/empleados/agregar" element={<AgregarEmpleadoPage />} />
+        <Route path="/admin/empleados" element={<AdminRoute><EmpleadosPage /></AdminRoute>} />
+        <Route path="/admin/empleados/agregar" element={<AdminRoute><AgregarEmpleadoPage /></AdminRoute>} />
 
         {/* Reportes */}
-        <Route path="/admin/reportes" element={<ReportesPage />} />
+        <Route path="/admin/reportes" element={<AdminRoute><ReportesPage /></AdminRoute>} />
 
         {/* Configuración */}
-        <Route path="/admin/configuracion" element={<ConfiguracionPage />} />
+        <Route path="/admin/configuracion" element={<AdminRoute><ConfiguracionPage /></AdminRoute>} />
 
         <Route path="/voyage-history" element={<VoyageHistoryPage />} />
 

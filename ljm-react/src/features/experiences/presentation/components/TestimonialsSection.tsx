@@ -1,54 +1,14 @@
 import { useState } from 'react';
 
 const allTestimonials = [
-  {
-    name: 'Sarah, USA',
-    rating: 5,
-    review: "¡LJM Sealine es una experiencia de ensueño! Las excursiones, la tripulación y la atención al detalle fueron increíbles. ¡No puedo esperar para volver!",
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-  },
-  {
-    name: 'David, UK',
-    rating: 5,
-    review: "El tour en moto acuática en las Maldivas fue el punto culminante de mi año. Muy recomendable visitar las lagunas escondidas.",
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-  },
-  {
-    name: 'John, Australia',
-    rating: 5,
-    review: "Desde la exuberante naturaleza hasta la cálida hospitalidad, LJM Sealine superó todas mis expectativas de viaje de lujo.",
-    avatar: 'https://randomuser.me/api/portraits/men/75.jpg',
-  },
-  {
-    name: 'Maria, Spain',
-    rating: 5,
-    review: "La combinación de cultura, aventura y relajación en LJM Sealine no tiene igual. ¡Verdaderamente inolvidable!",
-    avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-  },
-  {
-    name: 'Lucas, France',
-    rating: 5,
-    review: "Navegar por Mónaco fue un sueño. La tripulación fue atenta, la comida exquisita y las vistas impresionantes.",
-    avatar: 'https://randomuser.me/api/portraits/men/11.jpg',
-  },
-  {
-    name: 'Emma, Canada',
-    rating: 5,
-    review: "El tirolesa sobre las aguas turquesas del Caribe fue la experiencia más emocionante de mi vida. ¡Absolutamente vale la pena!",
-    avatar: 'https://randomuser.me/api/portraits/women/21.jpg',
-  },
-  {
-    name: 'Carlos, Mexico',
-    rating: 5,
-    review: "Cada detalle fue perfecto. Desde los tours privados hasta las cenas al atardecer en cubierta, LJM Sealine define el lujo.",
-    avatar: 'https://randomuser.me/api/portraits/men/54.jpg',
-  },
-  {
-    name: 'Yuki, Japan',
-    rating: 5,
-    review: "Un viaje extraordinario por la Polinesia. La experiencia de esnórquel fue como nada que hubiera visto antes.",
-    avatar: 'https://randomuser.me/api/portraits/women/56.jpg',
-  },
+  { name: 'Sarah, USA',    initials: 'SA', rating: 5, review: "¡LJM Sealine es una experiencia de ensueño! Las excursiones, la tripulación y la atención al detalle fueron increíbles. ¡No puedo esperar para volver!" },
+  { name: 'David, UK',    initials: 'DU', rating: 5, review: "El tour en moto acuática en las Maldivas fue el punto culminante de mi año. Muy recomendable visitar las lagunas escondidas." },
+  { name: 'John, AU',     initials: 'JA', rating: 5, review: "Desde la exuberante naturaleza hasta la cálida hospitalidad, LJM Sealine superó todas mis expectativas de viaje de lujo." },
+  { name: 'Maria, Spain', initials: 'MS', rating: 5, review: "La combinación de cultura, aventura y relajación en LJM Sealine no tiene igual. ¡Verdaderamente inolvidable!" },
+  { name: 'Lucas, FR',    initials: 'LF', rating: 5, review: "Navegar por Mónaco fue un sueño. La tripulación fue atenta, la comida exquisita y las vistas impresionantes." },
+  { name: 'Emma, CA',     initials: 'EC', rating: 5, review: "El tirolesa sobre las aguas turquesas del Caribe fue la experiencia más emocionante de mi vida. ¡Absolutamente vale la pena!" },
+  { name: 'Carlos, MX',   initials: 'CM', rating: 5, review: "Cada detalle fue perfecto. Desde los tours privados hasta las cenas al atardecer en cubierta, LJM Sealine define el lujo." },
+  { name: 'Yuki, JP',     initials: 'YJ', rating: 5, review: "Un viaje extraordinario por la Polinesia. La experiencia de esnórquel fue como nada que hubiera visto antes." },
 ];
 
 const TestimonialsSection = () => {
@@ -102,11 +62,9 @@ const TestimonialsSection = () => {
               }}
             >
               <div className="flex items-center gap-3 mb-6">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="w-14 h-14 rounded-full object-cover flex-shrink-0 ring-2 ring-[#c5a267]/30"
-                />
+                <div className="w-14 h-14 rounded-full flex-shrink-0 flex items-center justify-center bg-[#06122C] border border-[#c5a267]/30 text-[#c5a267] font-semibold text-sm tracking-wider">
+                  {t.initials}
+                </div>
                 <div>
                   <p className="text-white font-semibold text-sm">{t.name}</p>
                   <div className="flex gap-0.5 mt-1">

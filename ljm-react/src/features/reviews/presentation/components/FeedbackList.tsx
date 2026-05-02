@@ -8,7 +8,32 @@ const feedbacks: Array<{
   stars: number;
   text: string;
   timeAgo: string;
-}> = [];
+}> = [
+  {
+    initials: 'SL',
+    name: 'Sophie L.',
+    registryId: 'LJM-00421',
+    stars: 5,
+    text: 'Una experiencia que superó todas mis expectativas. El servicio a bordo fue impecable y los destinos, simplemente mágicos.',
+    timeAgo: '2 días',
+  },
+  {
+    initials: 'MR',
+    name: 'Marco R.',
+    registryId: 'LJM-00398',
+    stars: 5,
+    text: 'El buceo en los arrecifes fue extraordinario. El equipo de LJM Sealine cuidó cada detalle durante todo el trayecto.',
+    timeAgo: '5 días',
+  },
+  {
+    initials: 'AT',
+    name: 'Amelia T.',
+    registryId: 'LJM-00374',
+    stars: 4,
+    text: 'El velero al atardecer con champán fue el momento más romántico de nuestro viaje de aniversario. Lo recomiendo sin duda.',
+    timeAgo: '1 semana',
+  },
+];
 
 const FeedbackList: React.FC = () => {
   return (

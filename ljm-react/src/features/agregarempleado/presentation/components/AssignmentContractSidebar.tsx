@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import AdminDatePicker from '../../../../components/AdminDatePicker';
 
 const AssignmentContractSidebar: React.FC = () => {
   const { t } = useTranslation();
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate]     = useState('');
 
   return (
     <div className="space-y-8">
@@ -51,13 +54,13 @@ const AssignmentContractSidebar: React.FC = () => {
               <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
                 {t('employees.add.contract.startDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
+              <AdminDatePicker value={startDate} onChange={setStartDate} />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
                 {t('employees.add.contract.endDate')}
               </label>
-              <input type="date" className="w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3 text-sm focus:ring-1 focus:ring-[#eacea9] outline-none" />
+              <AdminDatePicker value={endDate} onChange={setEndDate} />
             </div>
           </div>
 

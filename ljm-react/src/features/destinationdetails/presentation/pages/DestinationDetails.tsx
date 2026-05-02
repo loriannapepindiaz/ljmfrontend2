@@ -33,6 +33,7 @@ interface DestinationData {
   image?: string;
   rating?: number | string;
   price?: string;
+  localOnly?: boolean;
 }
 
 const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:3000";
@@ -87,6 +88,11 @@ export const DestinationDetails = () => {
 
   // Fetch desde backend: por ID si existe, o busca por título
   useEffect(() => {
+    if (stateDestination?.localOnly) {
+      setExtraData(null);
+      return;
+    }
+
     const id = stateDestination?.id;
     const tituloState = stateDestination?.titulo ?? stateDestination?.title;
 
@@ -103,7 +109,7 @@ export const DestinationDetails = () => {
         })
         .catch(() => {});
     }
-  }, [stateDestination?.id, stateDestination?.titulo, stateDestination?.title]);
+  }, [stateDestination?.id, stateDestination?.localOnly, stateDestination?.titulo, stateDestination?.title]);
 
   return (
     <div className="flex flex-col min-h-screen bg-midnight-blue">
