@@ -3,9 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../../home/presentation/components/Navbar";
 import Footer from "../../../home/presentation/components/Footer";
 import BackButton from "../../../../components/BackButton";
-import AccommodationCard from "../components/AccommodationCard";
 import ExperienceSelectCard from "../components/ExperienceSelectCard";
-import SummaryBar from "../components/SummaryBar";
 import { experienceApi, type Experience } from "../../../../lib/api";
 import { allExperiences } from "../../../experiences/data/experiences";
 
@@ -20,30 +18,6 @@ const staticFallback: Experience[] = allExperiences.map((e) => ({
   activa: true,
 }));
 
-const suites = [
-  {
-    id: 0,
-    title: "Grand Horizon Penthouse",
-    price: 0,
-    image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&q=80",
-    features: ["Terraza privada con Jacuzzi infinito", "Servicio de Mayordomo Real 24/7"],
-  },
-  {
-    id: 1,
-    title: "Royal Ocean Suite",
-    price: 0,
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80",
-    features: ["Vistas panoramicas 180 del horizonte", "Cena privada en suite Chef's Table"],
-  },
-  {
-    id: 2,
-    title: "Celestial Terrace Suite",
-    price: 0,
-    image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&q=80",
-    features: ["Techo retractil Sky-View", "Bano de marmol Carrara y Oro"],
-  },
-];
-
 const PersonalizationPage: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +26,6 @@ const PersonalizationPage: FC = () => {
   const selectedActivitiesFromState = personalizationState?.selectedActivities ?? [];
   const shouldFocusActivities = Boolean(personalizationState?.focusActivities);
 
-  const [selectedSuiteId, setSelectedSuiteId] = useState<number | null>(null);
   const [selectedExps, setSelectedExps] = useState<string[]>(selectedActivitiesFromState);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loadingExps, setLoadingExps] = useState(true);
@@ -82,13 +55,8 @@ const PersonalizationPage: FC = () => {
     );
   };
 
-  const selectedSuite = suites.find((suite) => suite.id === selectedSuiteId);
-
   useEffect(() => {
-    if (!shouldFocusActivities) {
-      return;
-    }
-
+    if (!shouldFocusActivities) return;
     activitiesRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [shouldFocusActivities]);
 
@@ -109,7 +77,7 @@ const PersonalizationPage: FC = () => {
                   Enriquezca su travesia
                 </h1>
                 <p className="text-lg text-[#0e1a34]/50 font-light leading-relaxed max-w-2xl">
-                  Disene cada detalle de su odisea por el Mediterraneo. Seleccione su refugio privado y anada experiencias exclusivas.
+                  Disene cada detalle de su odisea por el Mediterraneo. Anada experiencias exclusivas a bordo.
                 </p>
               </div>
 
@@ -123,32 +91,7 @@ const PersonalizationPage: FC = () => {
                 </button>
               </div>
             </div>
-
-            <div className="flex items-center gap-4 py-8 border-t border-[#0e1a34]/10 mt-12 mb-10">
-              <span className="material-symbols-outlined text-[#0e1a34] text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>king_bed</span>
-              <h3 className="text-[10px] font-bold text-[#0e1a34] uppercase tracking-[0.4em] font-serif">
-                Seleccion de Alojamiento Premium
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {suites.map((suite) => (
-                <AccommodationCard
-                  key={suite.id}
-                  {...suite}
-                  isSelected={selectedSuiteId === suite.id}
-                  onSelect={() => setSelectedSuiteId(selectedSuiteId === suite.id ? null : suite.id)}
-                />
-              ))}
-            </div>
           </section>
-
-          <div className="my-20">
-            <SummaryBar
-              selectedSuiteName={selectedSuite ? selectedSuite.title : null}
-              totalPrice={0}
-            />
-          </div>
 
           <section ref={activitiesRef} className="mb-24 scroll-mt-32">
             <div className="flex items-center gap-4 mb-10 border-b border-[#0e1a34]/10 pb-6">

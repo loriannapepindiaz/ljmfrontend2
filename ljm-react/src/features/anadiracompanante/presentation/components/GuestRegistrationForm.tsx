@@ -277,7 +277,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
             <button
               className="min-w-[260px] rounded-md border border-[#dec29e]/35 bg-[#dec29e]/12 px-8 py-4 text-[#f5e2bd] shadow-lg transition-all hover:bg-[#dec29e]/20 active:scale-95"
-              onClick={() => navigate("/destinations")}
+              onClick={() => navigate("/personalizar-estancia")}
               type="button"
               style={{ fontFamily: "'Noto Serif', serif", fontSize: "13px", letterSpacing: "0.15em" }}
             >

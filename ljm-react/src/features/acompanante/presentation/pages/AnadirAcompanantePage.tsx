@@ -41,11 +41,11 @@ const AnadirAcompanantePage: React.FC = () => {
                   className="mt-3 text-3xl text-[#1E2944] md:text-4xl"
                   style={{ fontFamily: 'Noto Serif, serif' }}
                 >
-                  Seleccione su tipo de alojamiento y actividades
+                  Descubra experiencias diseñadas para su travesía
                 </h3>
                 <p className="mt-4 text-sm leading-relaxed text-[#1E2944]/65 md:text-base">
-                  Elija su refugio ideal a bordo y complemente la travesia con experiencias
-                  disenadas para su ritmo de viaje.
+                  Complemente su viaje con actividades exclusivas a bordo, seleccionadas
+                  para elevar cada momento de su odisea.
                 </p>
               </div>
 

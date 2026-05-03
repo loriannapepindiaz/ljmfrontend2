@@ -118,7 +118,7 @@ const todosLosDestinos = [
     incluye: ["Teleferico", "Tour de vinos", "Guia local"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
-      "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=800&q=80",
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
       "https://images.unsplash.com/photo-1516026672322-bc52d61a4a3d?w=800&q=80",
     ]
   },
@@ -178,8 +178,8 @@ const todosLosDestinos = [
     incluye: ["City tour", "Teleferico", "Cena carioca"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80",
-      "https://images.unsplash.com/photo-1554302810-b1a787b3ec73?w=800&q=80",
-      "https://images.unsplash.com/photo-1544989164-31b5941ab473?w=800&q=80",
+      "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=800&q=80",
+      "https://images.unsplash.com/photo-1554544415-9de6c764dba3?w=800&q=80",
     ]
   },
 ];

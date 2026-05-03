@@ -40,7 +40,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1533105079780-92b9be482077',
         'https://images.unsplash.com/photo-1469796466635-455ede028ace',
-        'https://www.costacruises.com/content/dam/costa/inventory-assets/ports/JTR/jtr-santorini-port-1.jpg',
+        'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80',
       ],
     },
     {
@@ -82,7 +82,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1529963183134-61a90db47eaf',
         'https://images.unsplash.com/photo-1472791108553-c9405341e398',
-        'https://www.muchbetteradventures.com/magazine/content/images/size/w2000/2021/07/download-11.jpeg',
+        'https://images.unsplash.com/photo-1551009175-15bda6a7dcd9?w=800&q=80',
       ],
     },
   ],
@@ -105,7 +105,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1548574505-5e239809ee19',
         'https://images.unsplash.com/photo-1563214532-6a6ca7f3b890',
-        'https://virginvoyages.imgix.net/dam/jcr:6a050b05-d71e-4b4b-98a3-28516ab5c08a/IMG-DEST-SaintLucia-466203284-600x400.jpg',
+        'https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=800&q=80',
       ],
     },
     {
@@ -126,7 +126,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1519046904884-53103b34b206',
         'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57',
-        'https://images.squarespace-cdn.com/content/v1/5a3be8234c326dac28c79f25/1678327553646-L3GS6GA0XW3N9IJOZ0FS/Writer%27sCorner_BB_21_V1_CraneBeach.jpg',
+        'https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80',
       ],
     },
     {
@@ -147,7 +147,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1533719071182-182827365e8a',
         'https://images.unsplash.com/photo-1504512485720-7d83a16ee930',
-        'https://www.celebritycruises.com/content/dam/celebrity/new-images/port-pages/cozumel/white-beach-of-cozumel-mexico-3840x2160.jpg',
+        'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80',
       ],
     },
   ],
@@ -170,7 +170,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1534447677768-be436bb09401',
         'https://images.unsplash.com/photo-1544411047-c4915837c737',
-        'https://www.hollandamerica.com/blog/wp-content/uploads/2023/05/alaska-cruise-glacier-viewing.webp',
+        'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
       ],
     },
     {
@@ -191,7 +191,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800',
         'https://images.unsplash.com/photo-1544411047-c4915837c737?w=800',
-        'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/cb/39/5a/a-mother-sitka-brown.jpg?w=1200&h=-1&s=1',
+        'https://images.unsplash.com/photo-1533462153012-86e25addc0a4?w=800&q=80',
       ],
     },
     {
@@ -212,7 +212,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1503435980610-a51f3ddfee50?w=800',
         'https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800',
-        'https://www.royalcaribbean.com/media-assets/pmc/content/dam/shore-x/skagway-sgy/ska6-white-pass-legacy-club-luxury-railway-experience/stock-photo-skagway-alaska-the-scenic-white-pass-yukon-route-railroad-342932285.jpg?w=1440',
+        'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80',
       ],
     },
   ],
@@ -235,7 +235,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e',
         'https://images.unsplash.com/photo-1506929197914-5936936a4023',
-        'https://www.tahititourisme.com/app/uploads/iris-images/4122/p2-bora-bora-00242-borabora-a-gregoire-le-bacon-lionailes-2736x1824-1-1920x1080-f50_50.webp',
+        'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80',
       ],
     },
     {
@@ -256,7 +256,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1544550581-5f7ceaf7f992',
         'https://images.unsplash.com/photo-1560707303-4e9a4cc2697d',
-        'https://passions.com.au/wp-content/uploads/2016/12/ChristianMiller_reefsnorkel_passions-1-of-1.jpg',
+        'https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80',
       ],
     },
     {
@@ -277,7 +277,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57',
         'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800',
-        'https://www.adventourbegins.com/wp-content/uploads/2021/10/Auckland-cruise-port-min.webp',
+        'https://images.unsplash.com/photo-1507699622108-4be3abd695ad?w=800&q=80',
       ],
     },
   ],
@@ -300,7 +300,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1525625293386-3fb0ad7c1fe2',
         'https://images.unsplash.com/photo-1563214532-6a6ca7f3b890',
-        'https://cdn-imgix.headout.com/media/images/1b506af365b4cb66e47e109cda9fe6e8-31203-singapore-singapore-river-cruise-by-waterb-02.jpg?auto=format&w=900&h=562.5&q=90&ar=16%3A10&crop=faces%2Ccenter&fit=crop',
+        'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=800&q=80',
       ],
     },
     {
@@ -321,7 +321,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1493246318656-5bbd4cfb294d',
         'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb',
-        'https://media.cnn.com/api/v1/images/stellar/prod/181122125456-sheikh-zayed-grand-mosque-stock.jpg?q=w_3000,h_2002,x_0,y_0,c_fill',
+        'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80',
       ],
     },
     {
@@ -342,7 +342,7 @@ const destinationsData: Record<string, Destination[]> = {
       galeria_urls: [
         'https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d',
         'https://images.unsplash.com/photo-1528164344705-47542687000d',
-        'https://byfood.b-cdn.net/api/public/assets/9558/content?optimizer=image',
+        'https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80',
       ],
     },
   ],
