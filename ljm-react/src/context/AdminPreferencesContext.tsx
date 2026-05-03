@@ -243,7 +243,7 @@ const translatePlainText = (value: string, language: Language) => {
 const shouldIgnoreNode = (node: Node) => {
   const element = node.parentElement;
   if (!element) return true;
-  if (element.closest('script, style, code, pre, .material-symbols-outlined, .material-icons')) return true;
+  if (element.closest('script, style, code, pre, .material-symbols-outlined, .material-icons, [translate="no"]')) return true;
   const raw = node.nodeValue?.trim() ?? '';
   if (!raw) return true;
   if (/^[a-z0-9_]+$/i.test(raw)) return true;

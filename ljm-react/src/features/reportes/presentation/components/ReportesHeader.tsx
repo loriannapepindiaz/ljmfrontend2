@@ -58,7 +58,7 @@ const ReportesHeader: React.FC = () => {
       <div className="relative">
         <button
           onClick={() => { setShowCalendar(!showCalendar); setSelecting('start'); }}
-          className="flex items-center bg-white border border-slate-200 rounded-lg px-4 py-2.5 shadow-sm hover:border-[#eacea9] transition-all gap-2"
+          className="flex items-center bg-white border border-slate-200 rounded-lg px-4 py-2.5 shadow-sm hover:border-[#C5A059] transition-all gap-2"
         >
           <span className="material-symbols-outlined text-slate-400 text-sm">calendar_today</span>
           <span className="text-sm font-medium text-[#0e1a34]">
@@ -105,10 +105,10 @@ const ReportesHeader: React.FC = () => {
                     onClick={() => handleMonthClick(i)}
                     className={`py-2.5 rounded-xl text-xs font-bold transition-all ${
                       isSelected(i)
-                        ? 'bg-[#eacea9] text-[#0e1a34] shadow-sm'
+                        ? 'bg-[#C5A059] text-white shadow-sm'
                         : isInRange(i)
-                        ? 'bg-[#eacea9]/20 text-[#0e1a34]'
-                        : 'bg-slate-50 text-[#0e1a34]/70 hover:bg-[#eacea9]/10'
+                        ? 'bg-[#F5E6D3] text-[#C5A059]'
+                        : 'bg-slate-50 text-[#0e1a34]/70 hover:bg-[#F5E6D3] hover:text-[#C5A059]'
                     }`}
                   >
                     {m.slice(0, 3)}

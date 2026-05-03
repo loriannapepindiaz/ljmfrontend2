@@ -80,10 +80,10 @@ export const DestinationDetails = () => {
   const duracionViaje = primerViaje ? `${primerViaje.duracion_dias} noches` : undefined;
   const puertoViaje   = primerViaje?.ITINERARIO?.[0]?.escala?.[0]?.PUERTO?.nombre_puerto;
 
-  // Galería
-  const galeriaUrls: string[] = extraData?.galeria_urls?.length
-    ? extraData.galeria_urls
-    : stateDestination?.galeria_urls ?? [];
+  // Galería — API es fuente autoritativa; state solo como fallback si API no tiene fotos
+  const stateGaleria: string[] = stateDestination?.galeria_urls ?? [];
+  const apiGaleria: string[]   = extraData?.galeria_urls ?? [];
+  const galeriaUrls: string[]  = (apiGaleria.length > 0 ? apiGaleria : stateGaleria).filter(Boolean);
   const galleryPhotos = galeriaUrls.map((url: string) => ({ url, location: pais ?? '' }));
 
   // Fetch desde backend: por ID si existe, o busca por título

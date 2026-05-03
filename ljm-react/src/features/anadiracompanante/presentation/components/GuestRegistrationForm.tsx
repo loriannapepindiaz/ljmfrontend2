@@ -16,31 +16,33 @@ interface DateTriggerProps {
   onClick?: () => void;
 }
 
-const DateTrigger = forwardRef<HTMLButtonElement, DateTriggerProps>(function DateTrigger(
-  { displayValue, onClick },
+const DateTrigger = forwardRef<HTMLButtonElement, DateTriggerProps & { value?: string }>(function DateTrigger(
+  { displayValue, value, onClick },
   ref,
 ) {
+  const shown = displayValue || value;
   return (
     <button
       ref={ref}
       className={[
-        "flex w-full items-center justify-between border-x-0 border-b border-t-0 border-[#45464d]/30",
-        "bg-transparent px-4 py-3 text-left text-sm transition-colors",
-        "focus:border-[#dec29e] focus:outline-none",
+        "flex w-full items-center justify-between rounded-none",
+        "border-x-0 border-b border-t-0 border-[#45464d]/30 bg-transparent",
+        "px-4 py-3 text-left text-sm transition-colors",
+        "focus:border-[#C5A059] focus:outline-none focus:ring-0",
       ].join(" ")}
       type="button"
       onClick={onClick}
     >
       <span
         className={
-          displayValue
+          shown
             ? "font-serif tracking-[0.04em] text-[#f5e2bd]"
-            : "text-[#8f9098]/70"
+            : "text-[#8f9098]/60 italic text-[13px]"
         }
       >
-        {displayValue || "Selecciona una fecha"}
+        {shown || "Selecciona una fecha"}
       </span>
-      <span className="material-symbols-outlined text-lg text-[#dec29e]">calendar_month</span>
+      <span className="material-symbols-outlined text-[18px] text-[#C5A059]">calendar_month</span>
     </button>
   );
 });
@@ -65,7 +67,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
     "w-full rounded-none border-x-0 border-b border-t-0 border-[#45464d]/30 bg-transparent",
     "px-4 py-3 text-sm text-[#d9e2ff] transition-colors",
     "placeholder:text-[#8f9098]/60",
-    "focus:border-[#dec29e] focus:outline-none focus:ring-0",
+    "focus:border-[#C5A059] focus:outline-none focus:ring-0",
   ].join(" ");
 
   const labelClass = "block text-[10px] uppercase tracking-[0.25em] text-[#8f9098]";
@@ -87,10 +89,10 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
         .guest-datepicker {
           overflow: hidden;
-          border: 1px solid rgba(222, 194, 158, 0.28);
-          border-radius: 20px;
-          background: linear-gradient(180deg, #101a32 0%, #0a1326 100%);
-          box-shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
+          border: 1px solid rgba(197, 160, 89, 0.2);
+          border-radius: 16px;
+          background: #ffffff;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
           font-family: inherit;
         }
 
@@ -99,64 +101,82 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
         }
 
         .guest-datepicker .react-datepicker__header {
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid rgba(197, 160, 89, 0.1);
           background: transparent;
-          padding-top: 16px;
+          padding-top: 14px;
         }
 
         .guest-datepicker .react-datepicker__current-month,
         .guest-datepicker .react-datepicker-time__header,
         .guest-datepicker .react-datepicker-year-header {
-          color: #f5e2bd;
-          font-family: 'Noto Serif', serif;
-          font-size: 1rem;
-          letter-spacing: 0.06em;
+          color: #C5A059;
+          font-size: 0.875rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .guest-datepicker .react-datepicker__navigation {
+          top: 14px;
         }
 
         .guest-datepicker .react-datepicker__navigation-icon::before {
-          border-color: #dec29e;
+          border-color: #C5A059;
+        }
+
+        .guest-datepicker .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
+          border-color: #a07d3a;
         }
 
         .guest-datepicker .react-datepicker__day-name {
-          color: #8f9098;
+          color: #9CA3AF;
           width: 2.2rem;
           line-height: 2.2rem;
-          margin: 0.15rem;
+          margin: 0.1rem;
+          font-size: 0.7rem;
+          text-transform: uppercase;
         }
 
         .guest-datepicker .react-datepicker__day {
           width: 2.2rem;
           line-height: 2.2rem;
-          margin: 0.15rem;
-          border-radius: 10px;
-          color: #d9e2ff;
-          transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
+          margin: 0.1rem;
+          border-radius: 50%;
+          color: #333333;
+          font-weight: 500;
+          transition: background-color 120ms ease, color 120ms ease;
         }
 
         .guest-datepicker .react-datepicker__day:hover {
-          background: rgba(222, 194, 158, 0.18);
-          color: #f5e2bd;
+          background: #F5E6D3;
+          color: #C5A059;
         }
 
         .guest-datepicker .react-datepicker__day--keyboard-selected {
-          background: rgba(222, 194, 158, 0.24);
-          color: #f8eedc;
+          background: #F5E6D3;
+          color: #C5A059;
         }
 
         .guest-datepicker .react-datepicker__day--selected,
         .guest-datepicker .react-datepicker__day--selected:hover {
-          background: linear-gradient(135deg, #dcb66f 0%, #f3d8a9 100%);
-          color: #14203a;
+          background: #C5A059;
+          color: #ffffff;
           font-weight: 700;
         }
 
         .guest-datepicker .react-datepicker__day--outside-month {
-          color: rgba(143, 144, 152, 0.5);
+          color: #D1D5DB;
         }
 
         .guest-datepicker .react-datepicker__day--today {
-          box-shadow: inset 0 0 0 1px rgba(222, 194, 158, 0.45);
+          border: 1px solid rgba(197, 160, 89, 0.5);
+          color: #C5A059;
           font-weight: 600;
+        }
+
+        .guest-datepicker .react-datepicker__day--today.react-datepicker__day--selected {
+          border: none;
+          color: #ffffff;
         }
 
         .guest-datepicker .react-datepicker__month-container {
@@ -202,6 +222,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
           <div className="space-y-3">
             <label className={labelClass}>Fecha de Nacimiento</label>
+            <div className="w-full">
             <DatePicker
               calendarClassName="guest-datepicker"
               customInput={
@@ -226,6 +247,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
               showPopperArrow={false}
               onChange={(date) => setForm((f) => ({ ...f, fecha: date }))}
             />
+            </div>
           </div>
 
           <div className="space-y-3">

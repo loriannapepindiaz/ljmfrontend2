@@ -79,9 +79,9 @@ const AssignmentContractSidebar: React.FC = () => {
             <label className="text-[10px] uppercase font-bold tracking-widest text-slate-400 block">
               {t('employees.add.contract.homePort')}
             </label>
-            <div className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-lg px-4 py-3">
+            <div className="flex items-center gap-2 w-full bg-slate-50 border border-slate-100 rounded-lg px-4 py-3">
               <span className="material-symbols-outlined text-slate-300 text-sm">location_on</span>
-              <input type="text" placeholder="e.g. Puerto Banús" className="bg-transparent border-none p-0 w-full text-sm focus:ring-0 outline-none" />
+              <input type="text" placeholder="e.g. Puerto Banús" className="bg-slate-50 border-none p-0 w-full text-sm focus:ring-0 outline-none" />
             </div>
           </div>
 

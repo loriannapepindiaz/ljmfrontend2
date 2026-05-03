@@ -93,26 +93,26 @@ export default function AdminDatePicker({
           <div className="fixed inset-0 z-[9990]" onClick={() => setOpen(false)} />
 
           {/* Calendar popup — higher z than overlay so date clicks reach pick() */}
-          <div style={popupStyle} className="z-[9999] rounded-xl bg-[#0e1a34] border border-[#eacea9]/20 shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
+          <div style={popupStyle} className="z-[9999] rounded-xl bg-white border border-[#C5A059]/20 shadow-2xl overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-[#C5A059]/10">
               <button type="button"
                 onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() - 1, 1))}
-                className="text-[#eacea9]/60 hover:text-[#eacea9] transition-colors p-1">
+                className="w-7 h-7 flex items-center justify-center rounded-full text-[#C5A059]/60 hover:text-[#C5A059] hover:bg-[#F5E6D3] transition-all">
                 <span className="material-symbols-outlined text-lg">chevron_left</span>
               </button>
-              <span className="text-sm text-white tracking-widest uppercase font-semibold">
+              <span className="text-sm text-[#C5A059] tracking-widest uppercase font-bold">
                 {MONTHS_ES[month]} {year}
               </span>
               <button type="button"
                 onClick={() => setView(v => new Date(v.getFullYear(), v.getMonth() + 1, 1))}
-                className="text-[#eacea9]/60 hover:text-[#eacea9] transition-colors p-1">
+                className="w-7 h-7 flex items-center justify-center rounded-full text-[#C5A059]/60 hover:text-[#C5A059] hover:bg-[#F5E6D3] transition-all">
                 <span className="material-symbols-outlined text-lg">chevron_right</span>
               </button>
             </div>
 
             <div className="grid grid-cols-7 px-3 pt-3">
               {DAYS_ES.map(d => (
-                <div key={d} className="text-center text-[9px] uppercase tracking-widest text-white/30 pb-2">{d}</div>
+                <div key={d} className="text-center text-[9px] uppercase tracking-widest text-[#9CA3AF] pb-2">{d}</div>
               ))}
             </div>
 
@@ -123,10 +123,10 @@ export default function AdminDatePicker({
                     <button type="button" onClick={() => pick(d)}
                       className={`w-8 h-8 rounded-full text-xs font-medium transition-all ${
                         isSelected(d)
-                          ? 'bg-[#eacea9] text-[#0e1a34] font-bold shadow-lg'
+                          ? 'bg-[#C5A059] text-white font-bold shadow-lg'
                           : isToday(d)
-                          ? 'border border-[#eacea9]/60 text-[#eacea9]'
-                          : 'text-white/70 hover:bg-[#eacea9]/15 hover:text-[#eacea9]'
+                          ? 'border border-[#C5A059]/60 text-[#C5A059]'
+                          : 'text-[#333333] hover:bg-[#F5E6D3] hover:text-[#C5A059]'
                       }`}>
                       {d}
                     </button>
@@ -146,14 +146,16 @@ export default function AdminDatePicker({
         ref={triggerRef}
         type="button"
         onClick={handleOpen}
-        className={`w-full flex items-center justify-between bg-slate-50 border rounded-xl outline-none transition-all hover:border-[#eacea9] ${
-          open ? 'border-[#eacea9] ring-2 ring-[#eacea9]/30' : 'border-slate-200'
+        className={`w-full flex items-center justify-between border rounded-xl outline-none transition-all ${
+          open
+            ? 'border-[#C5A059] ring-2 ring-[#C5A059]/20 bg-white'
+            : 'border-slate-200 bg-slate-50 hover:border-[#C5A059]/70 hover:bg-white'
         } ${compact ? 'px-2 py-1.5 text-xs' : 'px-4 py-2.5 text-sm'}`}
       >
-        <span className={displayValue ? 'text-[#0e1a34] font-medium' : 'text-slate-400'}>
+        <span className={displayValue ? 'text-[#0e1a34] font-medium' : 'text-slate-400 italic text-[13px]'}>
           {displayValue || placeholder}
         </span>
-        <span className={`material-symbols-outlined text-slate-400 ${compact ? 'text-[16px]' : 'text-[18px]'}`}>
+        <span className={`material-symbols-outlined text-[#C5A059] ${compact ? 'text-[16px]' : 'text-[18px]'}`}>
           calendar_month
         </span>
       </button>

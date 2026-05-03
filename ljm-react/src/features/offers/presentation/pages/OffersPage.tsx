@@ -16,144 +16,192 @@ const OffersPage: React.FC = () => {
       title: "Odisea por las Islas Griegas",
       category: "MEDITERRANEAN",
       description: "Vive las ruinas antiguas y las aguas zafiro de las Cícladas a bordo de nuestro buque insignia.",
-      // ✅ Santorini atardecer — cúpula azul, casas blancas, mar dorado
       image: "https://images.unsplash.com/photo-1586015298373-f885ba285829?auto=format&fit=crop&w=1200&q=80",
       price: "$4,999",
       discount: "15% DESC.",
       tags: ["Wi-Fi", "Acceso al Spa", "Mayordomo Privado"],
-      isReversed: false
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+        "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
+        "https://images.unsplash.com/photo-1469796466635-455ede028ace?w=800&q=80",
+      ],
     },
-   {
-  id: 2,
-  title: "Maravilla Mediterránea",
-  category: "MEDITERRANEAN",
-  description: "Explora el glamour de Italia y Francia con descuento exclusivo más créditos a bordo.",
-  // ✅ photo-1729538453670 — Niza desde el aire, playa y ciudad de la Costa Azul (AH Morgan)
-  image: "https://images.unsplash.com/photo-1729538453670-46fdc2a4d2c4?auto=format&fit=crop&w=1200&q=80",
-  price: "$6,800",
-  discount: "20% DESC.",
-  tags: ["Todo Incluido", "Tours en Tierra", "Bar de Champán"],
-  isReversed: true
-},
     {
-  id: 3,
-  title: "Sueño en la Costa Amalfitana",
-  category: "MEDITERRANEAN",
-  description: "Navega frente a los viñedos verticales y los pueblos de colores pastel de Positano y Amalfi.",
-  // ✅ photo-1515400276915 — Positano desde el mar, casas coloridas en acantilado (Khachik Simonian)
-  image: "https://images.unsplash.com/photo-1515400276915-8aa3a8fd70f4?auto=format&fit=crop&w=1200&q=80",
-  price: "$5,200",
-  discount: "10% DESC.",
-  tags: ["Degustación de Vinos", "Balcón Privado"],
-  isReversed: false
-},
+      id: 2,
+      title: "Maravilla Mediterránea",
+      category: "MEDITERRANEAN",
+      description: "Explora el glamour de Italia y Francia con descuento exclusivo más créditos a bordo.",
+      image: "https://images.unsplash.com/photo-1729538453670-46fdc2a4d2c4?auto=format&fit=crop&w=1200&q=80",
+      price: "$6,800",
+      discount: "20% DESC.",
+      tags: ["Todo Incluido", "Tours en Tierra", "Bar de Champán"],
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800&q=80",
+        "https://images.unsplash.com/photo-1491166617655-89c28fe8eae3?w=800&q=80",
+        "https://images.unsplash.com/photo-1490750967868-88df5691cc14?w=800&q=80",
+      ],
+    },
+    {
+      id: 3,
+      title: "Sueño en la Costa Amalfitana",
+      category: "MEDITERRANEAN",
+      description: "Navega frente a los viñedos verticales y los pueblos de colores pastel de Positano y Amalfi.",
+      image: "https://images.unsplash.com/photo-1515400276915-8aa3a8fd70f4?auto=format&fit=crop&w=1200&q=80",
+      price: "$5,200",
+      discount: "10% DESC.",
+      tags: ["Degustación de Vinos", "Balcón Privado"],
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1633321702518-7feccafb94d5?w=800&q=80",
+        "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+        "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80",
+      ],
+    },
     {
       id: 4,
       title: "Sol en la Riviera Española",
       category: "MEDITERRANEAN",
       description: "De Barcelona a Ibiza, disfruta de la vibrante vida nocturna y las playas doradas de España.",
-      // ✅ photo-1563784462030 — Ibiza costa con mar azul (David Švihovec)
       image: "https://images.unsplash.com/photo-1563784462030-fe92bbdcf857?auto=format&fit=crop&w=1200&q=80",
       price: "$4,500",
       discount: "MEJORA GRATIS",
       tags: ["Beach Club", "Tapas Españolas"],
-      isReversed: true
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=800&q=80",
+        "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=800&q=80",
+        "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=800&q=80",
+      ],
     },
     {
       id: 5,
       title: "Escape al Paraíso Caribeño",
       category: "CARIBBEAN",
       description: "Descubre arenas blancas y horizontes turquesa en los destinos insulares más exclusivos.",
-      // ✅ photo-1519046904884 — playa caribeña arena blanca y palmeras
       image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1200&q=80",
       price: "$5,400",
       discount: "10% DESC.",
       tags: ["Acceso al Beach Club", "Deportes Acuáticos", "Barra Libre"],
-      isReversed: false
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+        "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800&q=80",
+        "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80",
+      ],
     },
     {
       id: 6,
       title: "Laguna Azul de Bahamas",
       category: "CARIBBEAN",
       description: "Nada con delfines en las aguas cristalinas de las Exumas y disfruta del lujo insular.",
-      // ✅ photo-1645539988396 — Shroud Cay, Exumas Bahamas desde el aire (Ryan Geller)
       image: "https://images.unsplash.com/photo-1645539988396-1d65a85fbb4e?auto=format&fit=crop&w=1200&q=80",
       price: "$3,900",
       discount: "25% DESC.",
       tags: ["Tour con Delfines", "Apto para Familias"],
-      isReversed: true
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+        "https://images.unsplash.com/photo-1506929197914-5936936a4023?w=800&q=80",
+        "https://images.unsplash.com/photo-1548574505-5e239809ee19?w=800&q=80",
+      ],
     },
     {
       id: 7,
       title: "Retiro de Lujo en St. Barts",
       category: "CARIBBEAN",
       description: "La escapada definitiva para quienes buscan privacidad y compras exclusivas en las Antillas Francesas.",
-      // ✅ photo-1578143571332 — yate blanco de lujo en Ibiza al atardecer (Sebastian Coman)
       image: "https://images.unsplash.com/photo-1578143571332-8e104b00dc5a?auto=format&fit=crop&w=1200&q=80",
       price: "$9,500",
       discount: "ACCESO VIP",
       tags: ["Enlace Jet Privado", "Helipuerto"],
-      isReversed: false
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=800&q=80",
+        "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?w=800&q=80",
+        "https://images.unsplash.com/photo-1563214532-6a6ca7f3b890?w=800&q=80",
+      ],
     },
     {
       id: 8,
       title: "Navegación por Islas Vírgenes",
       category: "CARIBBEAN",
       description: "Explora las ensenadas ocultas y cavernas submarinas de las Islas Vírgenes Británicas y de EE.UU.",
-      // ✅ photo-1505118380757 — velero en aguas caribeñas turquesa
       image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=80",
       price: "$4,200",
       discount: "15% DESC.",
       tags: ["Equipo de Esnórquel", "Bar de Ron"],
-      isReversed: true
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1483683804023-6ccbe29e5c71?w=800&q=80",
+        "https://images.unsplash.com/photo-1560707303-4e9a4cc2697d?w=800&q=80",
+        "https://images.unsplash.com/photo-1559494007-9f5847c49d94?w=800&q=80",
+      ],
     },
     {
       id: 9,
       title: "Expedición a los Fiordos Nórdicos",
       category: "NORDIC FJORDS",
       description: "Navega por aguas azul profundo y picos nevados en el corazón de Noruega.",
-      // ✅ photo-1531366936337 — fiordo noruego con montañas nevadas
       image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=1200&q=80",
       price: "$7,250",
       discount: "DESCUENTO ESPECIAL",
       tags: ["Equipo de Expedición", "Biblioteca Polar", "Guías Expertos"],
-      isReversed: false
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+        "https://images.unsplash.com/photo-1472791108553-c9405341e398?w=800&q=80",
+        "https://images.unsplash.com/photo-1529963183134-61a90db47eaf?w=800&q=80",
+      ],
     },
     {
       id: 10,
       title: "Búsqueda de la Aurora Islandesa",
       category: "NORDIC FJORDS",
       description: "Presencia la Aurora Boreal desde la cubierta de nuestro lujoso buque rompehielos especializado.",
-      // ✅ photo-1526938972776 — Kirkjufell Islandia con aurora boreal (Landon Arnold)
       image: "https://images.unsplash.com/photo-1526938972776-11558ad4de30?auto=format&fit=crop&w=1200&q=80",
       price: "$8,900",
       discount: "ÚLTIMO MINUTO",
       tags: ["Aurora Boreal", "Spa Termal"],
-      isReversed: true
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1551009175-15bda6a7dcd9?w=800&q=80",
+        "https://images.unsplash.com/photo-1544411047-c4915837c737?w=800&q=80",
+        "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&q=80",
+      ],
     },
     {
       id: 11,
       title: "Patrimonio de Geirangerfjord",
       category: "NORDIC FJORDS",
       description: "Un recorrido Patrimonio de la Humanidad por el fiordo más hermoso del mundo.",
-      // ✅ photo-1441861256423 — cascadas en Geirangerfjord Noruega (Cosmic Timetraveler)
       image: "https://images.unsplash.com/photo-1441861256423-eea295e53fe2?auto=format&fit=crop&w=1200&q=80",
       price: "$6,100",
       discount: "10% DESC.",
       tags: ["Sitio UNESCO", "Clase de Fotografía"],
-      isReversed: false
+      isReversed: false,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1504512485720-7d83a16ee930?w=800&q=80",
+        "https://images.unsplash.com/photo-1533719071182-182827365e8a?w=800&q=80",
+        "https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800&q=80",
+      ],
     },
     {
       id: 12,
       title: "Aventura del Sol de Medianoche",
       category: "NORDIC FJORDS",
       description: "Experimenta el fenómeno de la luz solar de 24 horas mientras navegamos hacia el Círculo Ártico.",
-      // ✅ photo-1594220937195 — sol de medianoche en Nordkapp, Noruega (Nicola Gambetti)
       image: "https://images.unsplash.com/photo-1594220937195-fb2ed1c8d7e5?auto=format&fit=crop&w=1200&q=80",
       price: "$7,500",
       discount: "CRÉDITO GRATIS A BORDO",
       tags: ["Círculo Ártico", "Sauna"],
-      isReversed: true
+      isReversed: true,
+      galeria_urls: [
+        "https://images.unsplash.com/photo-1475688621402-4257c812d6db?w=800&q=80",
+        "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=80",
+        "https://images.unsplash.com/photo-1516026672322-bc52d61a4a3d?w=800&q=80",
+      ],
     }
   ];
 

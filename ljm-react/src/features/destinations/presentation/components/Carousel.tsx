@@ -19,6 +19,11 @@ const destinosDestacados = [
     idioma: "Griego",
     highlights: ["Oia", "Caldera", "Atardeceres"],
     incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
+      "https://images.unsplash.com/photo-1469796466635-455ede028ace?w=800&q=80",
+    ],
   },
   {
     id: 1,
@@ -34,6 +39,11 @@ const destinosDestacados = [
     idioma: "Italiano",
     highlights: ["Positano", "Amalfi", "Napoles"],
     incluye: ["Tour costero", "Cena italiana", "Traslados"],
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1633321702518-7feccafb94d5?w=800&q=80",
+      "https://images.unsplash.com/photo-1519922639192-e73293ca430e?w=800&q=80",
+      "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80",
+    ],
   },
   {
     id: 2,
@@ -49,6 +59,11 @@ const destinosDestacados = [
     idioma: "Dhivehi",
     highlights: ["Lagunas", "Buceo", "Playas privadas"],
     incluye: ["Snorkel", "Excursion marina", "Traslados"],
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&q=80",
+    ],
   },
   {
     id: 3,
@@ -64,6 +79,11 @@ const destinosDestacados = [
     idioma: "Arabe / Ingles",
     highlights: ["Dubai Marina", "Burj Al Arab", "Safari en dunas"],
     incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+      "https://images.unsplash.com/photo-1493246318656-5bbd4cfb294d?w=800&q=80",
+    ],
   },
   {
     id: 4,
@@ -79,6 +99,11 @@ const destinosDestacados = [
     idioma: "Frances",
     highlights: ["Niza", "Cannes", "Monaco"],
     incluye: ["Tour privado", "Cena costera", "Traslados"],
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800&q=80",
+      "https://images.unsplash.com/photo-1491166617655-89c28fe8eae3?w=800&q=80",
+      "https://images.unsplash.com/photo-1490750967868-88df5691cc14?w=800&q=80",
+    ],
   }
 ]
 
@@ -118,7 +143,7 @@ export default function DestinationsCarousel() {
           idioma: destino.idioma,
           highlights: destino.highlights,
           incluye: destino.incluye,
-          galeria_urls: [destino.img],
+          galeria_urls: destino.galeria_urls,
           localOnly: true,
         },
       },

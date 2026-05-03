@@ -191,6 +191,7 @@ const ConfigPreferencias: React.FC = () => {
             {t('config.preferences.currentTime')}:
           </p>
           <div
+            translate="no"
             className={`mt-2 inline-flex rounded-xl border px-3 py-2 font-mono text-sm font-bold tracking-[0.18em] ${
               tema === 'oscuro'
                 ? 'border-slate-600 bg-slate-900 text-[#eacea9]'
