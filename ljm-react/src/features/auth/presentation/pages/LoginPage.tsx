@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Lock } from 'lucide-react';
-import { authApi, persistAuthSession } from '../../../../lib/api';
+import { authApi, consumePostAuthRedirect, persistAuthSession } from '../../../../lib/api';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -25,7 +25,7 @@ export default function LoginPage() {
     try {
       const session = await authApi.login({ username, password });
       persistAuthSession(session);
-      navigate('/home');
+      navigate(consumePostAuthRedirect() ?? '/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudo iniciar sesión.');
     } finally {

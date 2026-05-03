@@ -24,7 +24,10 @@ const ReservationManagementPage: React.FC = () => {
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar />
       <main className="flex-1 flex flex-col overflow-hidden bg-[#f8fafc]">
-        <AdminHeader title={t('reservations.title')} />
+        <AdminHeader
+          title={t('reservations.title')}
+          subtitle="Supervise el estado de las reservas, filtre resultados y gestione cada solicitud desde un solo panel."
+        />
         <div className="flex-1 overflow-auto p-8">
           <MetricsGrid metrics={METRICS} />
           <ReservationFilters

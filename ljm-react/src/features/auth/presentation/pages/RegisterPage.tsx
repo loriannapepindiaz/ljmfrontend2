@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, User, Mail, Lock, Shield } from 'lucide-react';
-import { authApi, persistAuthSession } from '../../../../lib/api';
+import { authApi, consumePostAuthRedirect, persistAuthSession } from '../../../../lib/api';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -57,7 +57,7 @@ export default function Register() {
       const session = await authApi.register(formData);
       persistAuthSession(session);
       setShowToast(true);
-      setTimeout(() => navigate('/home'), 1400);
+      setTimeout(() => navigate(consumePostAuthRedirect() ?? '/home'), 1400);
     } catch (err) {
       setErrors({
         general: err instanceof Error ? err.message : 'Algo salió mal. Por favor inténtelo de nuevo.',
