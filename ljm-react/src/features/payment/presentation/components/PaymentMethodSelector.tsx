@@ -116,14 +116,14 @@ const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({ onSelect 
   };
 
   return (
-    <div className="bg-white rounded-[2rem] border border-gray-100 flex-1 flex flex-col overflow-hidden relative min-h-[300px] shadow-sm">
-      <div className="p-8 h-full flex flex-col justify-between">
+    <div className="bg-white rounded-[2rem] border border-gray-100 flex flex-col overflow-hidden relative shadow-sm">
+      <div className="p-8">
         <div className="flex items-center gap-3">
           <span className="material-symbols-outlined text-maroon-gold">payments</span>
           <h3 className="text-[11px] font-bold text-night-blue uppercase tracking-[0.3em]">Forma de Pago</h3>
         </div>
 
-        <div className="flex items-center h-[85px] my-6"> 
+        <div className="flex items-center h-[85px] my-8"> 
           {selected ? (
             <div 
               onClick={handleEdit}

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../../home/presentation/components/Navbar';
 import Footer from '../../../home/presentation/components/Footer';
 import BackButton from '../../../../components/BackButton';
+import { loadBookingDraft, type BookingDraft } from '../../../../lib/bookingDraft';
 
 import ExpeditionHero from '../components/ExpeditionHero';
 import ResidenceSpecs from '../components/ResidenceSpecs';
@@ -12,23 +13,45 @@ import FinancialStatement from '../components/FinancialStatement';
 
 const AnadirAcompanantePage: React.FC = () => {
   const navigate = useNavigate();
+  const [draft, setDraft] = useState<BookingDraft>({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let mounted = true;
+
+    loadBookingDraft()
+      .then((bookingDraft) => {
+        if (mounted) {
+          setDraft(bookingDraft);
+        }
+      })
+      .finally(() => {
+        if (mounted) {
+          setIsLoading(false);
+        }
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   return (
     <div className="bg-[#F6F7F8] text-[#1E2944] min-h-screen">
       <Navbar />
       <BackButton />
       <main className="pt-32 pb-40 max-w-7xl mx-auto px-6 md:px-12">
-        <ExpeditionHero />
+        <ExpeditionHero draft={draft} isLoading={isLoading} />
 
         <section className="mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            <ResidenceSpecs />
-            <GastronomyPanel />
+          <div className="grid grid-cols-1 gap-10 xl:grid-cols-[1.18fr_0.82fr] xl:items-start">
+            <ResidenceSpecs destination={draft.destination} suite={draft.suite} />
+            <GastronomyPanel personalization={draft.personalization} />
           </div>
         </section>
 
-        <CompanionManifest />
-        <FinancialStatement />
+        <CompanionManifest companions={draft.companions ?? []} />
+        <FinancialStatement draft={draft} />
 
         <section className="mt-20">
           <div className="mx-auto max-w-5xl rounded-[2rem] border border-[#c9a96c]/30 bg-[linear-gradient(135deg,#fffdf9_0%,#f4ede2_100%)] p-8 shadow-[0_24px_70px_rgba(30,41,68,0.12)] md:p-10">

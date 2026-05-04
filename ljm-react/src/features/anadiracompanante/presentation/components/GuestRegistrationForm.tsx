@@ -1,7 +1,6 @@
-import { forwardRef, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
 import type { Guest } from "../types";
 
 const empty = (): Guest => ({ nombre: "", apellidos: "", fecha: null, pasaporte: "" });
@@ -11,45 +10,10 @@ interface Props {
   setGuests: React.Dispatch<React.SetStateAction<Guest[]>>;
 }
 
-interface DateTriggerProps {
-  displayValue?: string;
-  onClick?: () => void;
-}
-
-const DateTrigger = forwardRef<HTMLButtonElement, DateTriggerProps & { value?: string }>(function DateTrigger(
-  { displayValue, value, onClick },
-  ref,
-) {
-  const shown = displayValue || value;
-  return (
-    <button
-      ref={ref}
-      className={[
-        "flex w-full items-center justify-between rounded-none",
-        "border-x-0 border-b border-t-0 border-[#45464d]/30 bg-transparent",
-        "px-4 py-3 text-left text-sm transition-colors",
-        "focus:border-[#C5A059] focus:outline-none focus:ring-0",
-      ].join(" ")}
-      type="button"
-      onClick={onClick}
-    >
-      <span
-        className={
-          shown
-            ? "font-serif tracking-[0.04em] text-[#f5e2bd]"
-            : "text-[#8f9098]/60 italic text-[13px]"
-        }
-      >
-        {shown || "Selecciona una fecha"}
-      </span>
-      <span className="material-symbols-outlined text-[18px] text-[#C5A059]">calendar_month</span>
-    </button>
-  );
-});
-
-export default function GuestRegistrationForm({ setGuests }: Props) {
+export default function GuestRegistrationForm({ guests, setGuests }: Props) {
   const navigate = useNavigate();
   const [form, setForm] = useState<Guest>(empty());
+  const [isSaving, setIsSaving] = useState(false);
 
   const canAdd =
     form.nombre.trim() !== "" &&
@@ -63,6 +27,28 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
     setForm(empty());
   };
 
+  const continueToPersonalize = async () => {
+    if (isSaving) return;
+
+    const nextGuests = canAdd ? [...guests, form] : guests;
+    const companions = nextGuests.map((guest) => ({
+      nombre: guest.nombre,
+      apellidos: guest.apellidos,
+      fecha: guest.fecha ? guest.fecha.toISOString() : null,
+      pasaporte: guest.pasaporte,
+    }));
+
+    setIsSaving(true);
+    if (canAdd) {
+      setGuests(nextGuests);
+      setForm(empty());
+    }
+
+    await saveBookingDraftToBackend({ companions });
+    setIsSaving(false);
+    navigate("/personalizar-estancia");
+  };
+
   const inputClass = [
     "w-full rounded-none border-x-0 border-b border-t-0 border-[#45464d]/30 bg-transparent",
     "px-4 py-3 text-sm text-[#d9e2ff] transition-colors",
@@ -71,6 +57,7 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
   ].join(" ");
 
   const labelClass = "block text-[10px] uppercase tracking-[0.25em] text-[#8f9098]";
+  const nativeDateValue = form.fecha ? form.fecha.toISOString().slice(0, 10) : "";
 
   return (
     <>
@@ -83,104 +70,14 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
           caret-color: #d9e2ff;
         }
 
-        .guest-datepicker-popper {
-          z-index: 40;
+        .guest-native-date {
+          color-scheme: dark;
+          color: #d9e2ff !important;
         }
 
-        .guest-datepicker {
-          overflow: hidden;
-          border: 1px solid rgba(197, 160, 89, 0.2);
-          border-radius: 16px;
-          background: #ffffff;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-          font-family: inherit;
-        }
-
-        .guest-datepicker .react-datepicker__triangle {
-          display: none;
-        }
-
-        .guest-datepicker .react-datepicker__header {
-          border-bottom: 1px solid rgba(197, 160, 89, 0.1);
-          background: transparent;
-          padding-top: 14px;
-        }
-
-        .guest-datepicker .react-datepicker__current-month,
-        .guest-datepicker .react-datepicker-time__header,
-        .guest-datepicker .react-datepicker-year-header {
-          color: #C5A059;
-          font-size: 0.875rem;
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
-        }
-
-        .guest-datepicker .react-datepicker__navigation {
-          top: 14px;
-        }
-
-        .guest-datepicker .react-datepicker__navigation-icon::before {
-          border-color: #C5A059;
-        }
-
-        .guest-datepicker .react-datepicker__navigation:hover .react-datepicker__navigation-icon::before {
-          border-color: #a07d3a;
-        }
-
-        .guest-datepicker .react-datepicker__day-name {
-          color: #9CA3AF;
-          width: 2.2rem;
-          line-height: 2.2rem;
-          margin: 0.1rem;
-          font-size: 0.7rem;
-          text-transform: uppercase;
-        }
-
-        .guest-datepicker .react-datepicker__day {
-          width: 2.2rem;
-          line-height: 2.2rem;
-          margin: 0.1rem;
-          border-radius: 50%;
-          color: #333333;
-          font-weight: 500;
-          transition: background-color 120ms ease, color 120ms ease;
-        }
-
-        .guest-datepicker .react-datepicker__day:hover {
-          background: #F5E6D3;
-          color: #C5A059;
-        }
-
-        .guest-datepicker .react-datepicker__day--keyboard-selected {
-          background: #F5E6D3;
-          color: #C5A059;
-        }
-
-        .guest-datepicker .react-datepicker__day--selected,
-        .guest-datepicker .react-datepicker__day--selected:hover {
-          background: #C5A059;
-          color: #ffffff;
-          font-weight: 700;
-        }
-
-        .guest-datepicker .react-datepicker__day--outside-month {
-          color: #D1D5DB;
-        }
-
-        .guest-datepicker .react-datepicker__day--today {
-          border: 1px solid rgba(197, 160, 89, 0.5);
-          color: #C5A059;
-          font-weight: 600;
-        }
-
-        .guest-datepicker .react-datepicker__day--today.react-datepicker__day--selected {
-          border: none;
-          color: #ffffff;
-        }
-
-        .guest-datepicker .react-datepicker__month-container {
-          background: transparent;
+        .guest-native-date::-webkit-calendar-picker-indicator {
+          cursor: pointer;
+          filter: invert(74%) sepia(28%) saturate(714%) hue-rotate(2deg) brightness(88%) contrast(87%);
         }
       `}</style>
 
@@ -222,32 +119,18 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
           <div className="space-y-3">
             <label className={labelClass}>Fecha de Nacimiento</label>
-            <div className="w-full">
-            <DatePicker
-              calendarClassName="guest-datepicker"
-              customInput={
-                <DateTrigger
-                  displayValue={
-                    form.fecha
-                      ? form.fecha.toLocaleDateString("es-ES", {
-                          day: "2-digit",
-                          month: "2-digit",
-                          year: "numeric",
-                        })
-                      : ""
-                  }
-                />
+            <input
+              className={`${inputClass} guest-native-date rounded-md border border-[#45464d]/50 bg-[#07142f]`}
+              max={new Date().toISOString().slice(0, 10)}
+              type="date"
+              value={nativeDateValue}
+              onChange={(e) =>
+                setForm((f) => ({
+                  ...f,
+                  fecha: e.target.value ? new Date(`${e.target.value}T00:00:00`) : null,
+                }))
               }
-              dateFormat="dd/MM/yyyy"
-              maxDate={new Date()}
-              placeholderText="Selecciona una fecha"
-              popperClassName="guest-datepicker-popper"
-              selected={form.fecha}
-              shouldCloseOnSelect
-              showPopperArrow={false}
-              onChange={(date) => setForm((f) => ({ ...f, fecha: date }))}
             />
-            </div>
           </div>
 
           <div className="space-y-3">
@@ -277,11 +160,12 @@ export default function GuestRegistrationForm({ setGuests }: Props) {
 
             <button
               className="min-w-[260px] rounded-md border border-[#dec29e]/35 bg-[#dec29e]/12 px-8 py-4 text-[#f5e2bd] shadow-lg transition-all hover:bg-[#dec29e]/20 active:scale-95"
-              onClick={() => navigate("/personalizar-estancia")}
+              disabled={isSaving}
+              onClick={continueToPersonalize}
               type="button"
               style={{ fontFamily: "'Noto Serif', serif", fontSize: "13px", letterSpacing: "0.15em" }}
             >
-              Personaliza tu Estancia
+              {isSaving ? "Guardando..." : "Personaliza tu Estancia"}
             </button>
           </div>
         </form>

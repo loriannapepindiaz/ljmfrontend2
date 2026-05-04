@@ -122,8 +122,8 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 hero-gradient">
-      <div className="container mx-auto px-6 text-center">
+    <section className="relative flex min-h-screen w-full max-w-full items-center justify-center overflow-x-hidden pt-20 hero-gradient">
+      <div className="mx-auto w-full max-w-7xl px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-display text-white mb-6 leading-tight">
           Explora el Horizonte en <br />
           <span className="italic text-primary">Absoluta Elegancia</span>

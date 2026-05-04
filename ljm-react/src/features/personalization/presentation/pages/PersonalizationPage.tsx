@@ -6,6 +6,7 @@ import BackButton from "../../../../components/BackButton";
 import ExperienceSelectCard from "../components/ExperienceSelectCard";
 import { experienceApi, type Experience } from "../../../../lib/api";
 import { allExperiences } from "../../../experiences/data/experiences";
+import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
 
 const staticFallback: Experience[] = allExperiences.map((e) => ({
   id: e.id,
@@ -29,6 +30,7 @@ const PersonalizationPage: FC = () => {
   const [selectedExps, setSelectedExps] = useState<string[]>(selectedActivitiesFromState);
   const [experiences, setExperiences] = useState<Experience[]>([]);
   const [loadingExps, setLoadingExps] = useState(true);
+  const [savingDraft, setSavingDraft] = useState(false);
 
   useEffect(() => {
     const staticById = Object.fromEntries(allExperiences.map((e) => [e.id, { image: e.image, title: e.title, description: e.description }]));
@@ -53,6 +55,27 @@ const PersonalizationPage: FC = () => {
     setSelectedExps((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
+  };
+
+  const continueToPayment = async () => {
+    if (savingDraft) return;
+
+    const activities = experiences
+      .filter((experience) => selectedExps.includes(String(experience.id)))
+      .map((experience) => ({
+        id: String(experience.id),
+        nombre: experience.nombre,
+        descripcion: experience.descripcion,
+        categoria: experience.categoria,
+        imagen_url: experience.imagen_url,
+        unidad_cobro: experience.unidad_cobro,
+        precio_base: Number(experience.precio_base ?? 0),
+      }));
+
+    setSavingDraft(true);
+    await saveBookingDraftToBackend({ activities });
+    setSavingDraft(false);
+    navigate("/payment");
   };
 
   useEffect(() => {
@@ -83,10 +106,11 @@ const PersonalizationPage: FC = () => {
 
               <div className="pb-2">
                 <button
-                  onClick={() => navigate("/payment")}
+                  disabled={savingDraft}
+                  onClick={continueToPayment}
                   className="flex items-center gap-2 px-8 py-2.5 bg-[#0e1a34] text-white text-[9px] font-bold uppercase tracking-[0.2em] rounded-full hover:bg-[#c5a059] transition-all shadow-md active:scale-95 whitespace-nowrap"
                 >
-                  Omitir
+                  {savingDraft ? "Guardando" : "Omitir"}
                   <span className="material-symbols-outlined text-xs">arrow_forward</span>
                 </button>
               </div>
@@ -121,10 +145,11 @@ const PersonalizationPage: FC = () => {
 
           <div className="mb-20">
             <button
-              onClick={() => navigate("/payment")}
+              disabled={savingDraft}
+              onClick={continueToPayment}
               className="group w-full bg-[#785d32] hover:bg-[#5a4626] text-white font-bold py-7 px-12 rounded-[2.5rem] text-[10px] tracking-[0.4em] uppercase transition-all shadow-2xl flex items-center justify-center gap-4 active:scale-[0.99]"
             >
-              Gestionar los detalles de su pago
+              {savingDraft ? "Guardando experiencias..." : "Gestionar los detalles de su pago"}
               <span className="material-symbols-outlined text-xl group-hover:translate-x-3 transition-transform">
                 arrow_forward
               </span>

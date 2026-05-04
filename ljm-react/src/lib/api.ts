@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
+export const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
 export const ADMIN_SESSION_EVENT = 'ljm-admin-session-change';
 
 export type AuthUser = {
@@ -42,6 +42,16 @@ export type Experience = {
   activa: boolean;
 };
 
+export type Vessel = {
+  id: string | number;
+  title?: string;
+  nombre?: string;
+  subtitle?: string;
+  descripcion?: string | null;
+  imagen_url?: string | null;
+  hero_image?: string | null;
+};
+
 type ExperiencesResponse = {
   ok: boolean;
   data: Experience[];
@@ -52,18 +62,42 @@ type ExperienceResponse = {
   data: Experience;
 };
 
+type VesselsResponse = {
+  ok: boolean;
+  data: Vessel[];
+};
+
+type VesselResponse = {
+  ok: boolean;
+  data: Vessel;
+};
+
+type CabinsResponse<TCabin> = {
+  ok: boolean;
+  data: TCabin[];
+};
+
+type BookingDraftResponse<TDraft> = {
+  ok: boolean;
+  data: TDraft;
+};
+
 type ApiErrorResponse = {
   ok: false;
   message?: string;
 };
 
-const request = async <T>(path: string, options: RequestInit): Promise<T> => {
+const getAuthToken = () => localStorage.getItem('ljm_auth_token') ?? localStorage.getItem('ljm_admin_token');
+
+export const request = async <T>(path: string, options: RequestInit): Promise<T> => {
   let response: Response;
+  const token = getAuthToken();
 
   try {
     response = await fetch(`${API_BASE_URL}${path}`, {
       headers: {
         'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...options.headers,
       },
       ...options,
@@ -125,6 +159,38 @@ export const experienceApi = {
   getById: (id: string | number) =>
     request<ExperienceResponse>(`/experiences/${id}`, {
       method: 'GET',
+      }),
+};
+
+export const fleetApi = {
+  list: () =>
+    request<VesselsResponse>('/cruceros', {
+      method: 'GET',
+    }),
+
+  getById: (id: string | number) =>
+    request<VesselResponse>(`/cruceros/${id}`, {
+      method: 'GET',
+    }),
+};
+
+export const cabinApi = {
+  list: <TCabin>() =>
+    request<CabinsResponse<TCabin>>('/cabinas', {
+      method: 'GET',
+    }),
+};
+
+export const bookingDraftApi = {
+  getCurrent: <TDraft>() =>
+    request<BookingDraftResponse<TDraft>>('/booking-drafts/current', {
+      method: 'GET',
+    }),
+
+  saveCurrent: <TDraft>(payload: TDraft) =>
+    request<BookingDraftResponse<TDraft>>('/booking-drafts/current', {
+      method: 'PUT',
+      body: JSON.stringify(payload),
     }),
 };
 

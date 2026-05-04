@@ -9,7 +9,7 @@ import Footer from '../components/Footer'
 
 const HomePage = () => {
   return (
-    <div className="bg-background-light dark:bg-background-dark text-gray-800 dark:text-gray-100 transition-colors">
+    <div className="w-full max-w-full overflow-x-hidden bg-background-light text-gray-800 transition-colors dark:bg-background-dark dark:text-gray-100">
       <Navbar />
       <Hero />
       <Experiences />
