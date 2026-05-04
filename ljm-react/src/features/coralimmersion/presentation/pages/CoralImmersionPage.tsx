@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { BadgeCheck, Clock3, MapPin, Star } from 'lucide-react';
+import { BadgeCheck, Clock3, Star } from 'lucide-react';
 import Navbar from '../../../home/presentation/components/Navbar';
 import Footer from '../../../home/presentation/components/Footer';
 import { experienceApi, type Experience } from '../../../../lib/api';
@@ -13,6 +13,7 @@ type SelectedExperience = {
   rating?: string;
   image?: string;
   description?: string;
+  price?: number;
 };
 
 const fallbackExperience: SelectedExperience = {
@@ -23,10 +24,55 @@ const fallbackExperience: SelectedExperience = {
   description: 'Una expedicion silenciosa a traves de los jardines sumergidos del Mediterraneo.',
 };
 
-const staticGallery = {
+type Gallery = { detail: string; equipment: string; yacht: string };
+
+const staticGallery: Gallery = {
   detail: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?q=80&w=1200&auto=format&fit=crop',
   equipment: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=900&auto=format&fit=crop',
   yacht: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=900&auto=format&fit=crop',
+};
+
+const galleryBySlug: Record<string, Gallery> = {
+  'tirolesa-sobre-el-mar': {
+    detail: 'https://www.ncl.com/sites/default/files/blog-hero-best-places-zipline.jpg',
+    equipment: 'https://images.unsplash.com/photo-1533240332313-0db49b459ad6?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=900&auto=format&fit=crop',
+  },
+  'tour-privado': {
+    detail: 'https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=1260',
+    equipment: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=900&auto=format&fit=crop',
+  },
+  'jet-ski': {
+    detail: 'https://images.pexels.com/photos/18972198/pexels-photo-18972198.jpeg?auto=compress&cs=tinysrgb&w=1260',
+    equipment: 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1559494007-9f5847c49d94?q=80&w=900&auto=format&fit=crop',
+  },
+  'buceo-premium': {
+    detail: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop',
+    equipment: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?q=80&w=900&auto=format&fit=crop',
+  },
+  'spa-bienestar': {
+    detail: 'https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=1260',
+    equipment: 'https://images.pexels.com/photos/3757954/pexels-photo-3757954.jpeg?auto=compress&cs=tinysrgb&w=900',
+    yacht: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=900&auto=format&fit=crop',
+  },
+  'velero-sunset': {
+    detail: 'https://images.unsplash.com/photo-1500514966906-fe245eea9344?q=80&w=1200&auto=format&fit=crop',
+    equipment: 'https://images.pexels.com/photos/1118448/pexels-photo-1118448.jpeg?auto=compress&cs=tinysrgb&w=900',
+    yacht: 'https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?q=80&w=900&auto=format&fit=crop',
+  },
+  'snorkel-guiado': {
+    detail: 'https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?q=80&w=1200&auto=format&fit=crop',
+    equipment: 'https://images.unsplash.com/photo-1560275619-4662e36fa65c?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=900&auto=format&fit=crop',
+  },
+  'kayak': {
+    detail: 'https://images.pexels.com/photos/1497584/pexels-photo-1497584.jpeg?auto=compress&cs=tinysrgb&w=1260',
+    equipment: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=900&auto=format&fit=crop',
+    yacht: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=900&auto=format&fit=crop',
+  },
 };
 
 const slugToTitle = (value?: string) =>
@@ -46,51 +92,44 @@ const CoralImmersionPage: React.FC = () => {
 
   const titleFromSlug = slugToTitle(slug);
   const selectedExperience = stateExperience ?? (titleFromSlug ? { title: titleFromSlug } : fallbackExperience);
+  const gallery = galleryBySlug[slug ?? ''] ?? staticGallery;
   const title = backendExperience?.nombre ?? selectedExperience.title ?? titleFromSlug ?? fallbackExperience.title;
   const description = backendExperience?.descripcion ?? selectedExperience.description ?? fallbackExperience.description;
-  const heroImage = backendExperience?.imagen_url ?? selectedExperience.image ?? fallbackExperience.image;
-  const locationLabel = selectedExperience.location ?? backendExperience?.categoria ?? 'Sin datos';
-  const price = backendExperience
-    ? Number(backendExperience.precio_base) > 0
-      ? `$${backendExperience.precio_base}`
-      : 'Incluido'
-    : 'Sin datos';
+  const heroImage = selectedExperience.image ?? backendExperience?.imagen_url ?? fallbackExperience.image;
+  const rawPrice = backendExperience
+    ? Number(backendExperience.precio_base)
+    : (selectedExperience.price ?? null);
+  const price = rawPrice === null
+    ? 'Sin datos'
+    : rawPrice > 0
+      ? `€${rawPrice}`
+      : 'Incluido';
   const rating = selectedExperience.rating ?? 'Sin datos';
   const noBackendData = backendChecked && !backendExperience;
-  const goToPersonalization = () => {
-    navigate('/personalization', {
-      state: { selectedActivities: [selectedExperience.title ?? title], focusActivities: true },
-    });
-  };
-
   const details = useMemo(
     () => [
       {
         icon: Clock3,
         title: 'Duracion',
         value: 'No registrada',
-        text: 'La tabla experiencias no tiene un campo de duracion',
+        text: '',
       },
       {
         icon: Star,
         title: 'Nivel',
-        value: backendExperience?.categoria ?? 'Sin datos',
-        text: backendExperience ? `Calificacion destacada: ${rating}` : 'Sin categoria en backend/BD',
-      },
-      {
-        icon: MapPin,
-        title: 'Ubicacion',
-        value: locationLabel,
-        text: 'Ubicacion enviada desde la experiencia seleccionada',
+        value: backendExperience?.categoria ?? selectedExperience.location ?? 'Sin datos',
+        text: rating !== 'Sin datos' ? `Calificacion: ${rating}` : '',
       },
       {
         icon: BadgeCheck,
         title: 'Precio',
         value: price,
-        text: backendExperience?.unidad_cobro ? `Cobro: ${backendExperience.unidad_cobro.replaceAll('_', ' ')}` : 'Sin precio registrado',
+        text: backendExperience?.unidad_cobro
+          ? backendExperience.unidad_cobro.replace('por_', 'Por ').replace('_', ' ')
+          : '',
       },
     ],
-    [backendExperience, locationLabel, price, rating],
+    [backendExperience, price, rating, selectedExperience.location],
   );
 
   useEffect(() => {
@@ -148,11 +187,6 @@ const CoralImmersionPage: React.FC = () => {
           <p className="mt-7 max-w-3xl font-['Playfair_Display'] text-lg italic text-white md:text-2xl">
             {description}
           </p>
-          {noBackendData && (
-            <div className="mt-8 rounded-full border border-[#eacea9]/40 bg-[#0b1730]/70 px-5 py-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#eacea9]">
-              Sin datos adicionales en backend/BD
-            </div>
-          )}
         </div>
 
         <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-center">
@@ -172,27 +206,22 @@ const CoralImmersionPage: React.FC = () => {
           <p className="mx-auto mt-7 max-w-2xl text-sm leading-7 text-slate-600">
             {description}
           </p>
-          {noBackendData && (
-            <p className="mx-auto mt-5 max-w-xl rounded-xl bg-amber-50 px-5 py-3 text-xs font-semibold text-amber-800">
-              Esta experiencia se abrio con la informacion local de la tarjeta. No se encontro un registro equivalente en backend/BD.
-            </p>
-          )}
         </section>
 
         <section className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-6 pb-12 md:grid-cols-[1.18fr_0.82fr]">
           <img
-            src={staticGallery.detail}
+            src={gallery.detail}
             alt="Detalle de experiencia marina"
-            className="h-[780px] w-full object-cover grayscale"
+            className="h-[780px] w-full object-cover"
           />
           <div className="grid gap-6">
             <img
-              src={staticGallery.equipment}
+              src={gallery.equipment}
               alt="Equipo premium"
-              className="h-[370px] w-full object-cover grayscale"
+              className="h-[370px] w-full object-cover"
             />
             <img
-              src={staticGallery.yacht}
+              src={gallery.yacht}
               alt="Yate en aguas azules"
               className="h-[384px] w-full object-cover"
             />
@@ -200,17 +229,24 @@ const CoralImmersionPage: React.FC = () => {
         </section>
 
         <section className="bg-[#0b1730] px-6 py-20 text-white">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
-            {details.map((item) => (
-              <div key={item.title}>
-                <div className="mb-6 flex size-7 items-center justify-center rounded-full bg-[#eacea9] text-[#0b1730]">
-                  <item.icon size={14} strokeWidth={2.5} />
+          <div className="mx-auto max-w-7xl">
+            <p className="mb-14 text-center text-[8px] font-bold uppercase tracking-[0.52em] text-[#eacea9]/40">
+              Detalles de la experiencia
+            </p>
+            <div className="flex flex-col sm:flex-row items-stretch justify-center divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+              {details.map((item) => (
+                <div key={item.title} className="flex flex-col items-center text-center px-24 py-10 sm:py-0 w-full sm:w-1/3">
+                  <div className="mb-6 flex size-14 items-center justify-center rounded-full bg-[#eacea9]/10 border border-[#eacea9]/25 text-[#eacea9]">
+                    <item.icon size={20} strokeWidth={1.5} />
+                  </div>
+                  <p className="text-[8px] font-bold uppercase tracking-[0.38em] text-[#eacea9]/55 mb-4">{item.title}</p>
+                  <p className="font-['Playfair_Display'] text-3xl text-white mb-2">{item.value}</p>
+                  {item.text && (
+                    <p className="text-xs text-white/35 tracking-wide mt-1">{item.text}</p>
+                  )}
                 </div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.18em] text-[#eacea9]">{item.title}</p>
-                <p className="mt-3 font-['Playfair_Display'] text-lg text-white">{item.value}</p>
-                <p className="mt-4 whitespace-pre-line text-xs leading-5 text-white/55">{item.text}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </section>
 
@@ -220,14 +256,11 @@ const CoralImmersionPage: React.FC = () => {
             Las plazas se gestionan segun disponibilidad y datos registrados para cada experiencia.
           </p>
           <button
-            onClick={goToPersonalization}
+            onClick={() => navigate('/destinations')}
             className="mt-12 bg-[#eacea9] px-16 py-4 text-[10px] font-bold uppercase tracking-[0.28em] text-[#09152b] hover:bg-[#f2dfc5]"
           >
-            Personalizar esta experiencia
+            Ver destinos disponibles
           </button>
-          <p className="mx-auto mt-5 max-w-xl text-xs leading-6 text-slate-500">
-            Se abrira personalizacion con esta experiencia seleccionada.
-          </p>
           <p className="mt-10 text-[8px] uppercase tracking-[0.26em] text-slate-400">
             Atencion personalizada 24/7 para miembros
           </p>

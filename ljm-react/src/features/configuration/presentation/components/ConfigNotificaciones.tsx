@@ -1,67 +1,80 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useTheme } from '../../../../context/ThemeContext';
+import { getStoredAdminSession } from '../../../../lib/api';
 
-interface NotifItem {
-  labelKey: string;
-  descKey: string;
-  email: boolean;
-  push: boolean;
-}
+type ConfigNotificacionesProps = {
+  twoFactorEnabled: boolean;
+};
 
-const ConfigNotificaciones: React.FC = () => {
-  const { t } = useTranslation();
+const ConfigNotificaciones: React.FC<ConfigNotificacionesProps> = ({ twoFactorEnabled }) => {
+  const { tema } = useTheme();
+  const adminSession = getStoredAdminSession();
+  const adminUser = adminSession?.user;
+  const [resolvedLoginAt, setResolvedLoginAt] = useState(() => adminSession?.loginAt ?? localStorage.getItem('ljm_admin_login_at'));
 
-  const [notifs, setNotifs] = useState<NotifItem[]>([
-    { labelKey: 'config.notifications.newReservations', descKey: 'config.notifications.newReservationsDesc', email: false, push: true  },
-    { labelKey: 'config.notifications.shipStatus',      descKey: 'config.notifications.shipStatusDesc',      email: true,  push: true  },
-    { labelKey: 'config.notifications.weeklyReports',   descKey: 'config.notifications.weeklyReportsDesc',   email: true,  push: false },
-  ]);
+  useEffect(() => {
+    const storedLoginAt = localStorage.getItem('ljm_admin_login_at');
 
-  const toggle = (index: number, type: 'email' | 'push') => {
-    setNotifs(prev => prev.map((n, i) =>
-      i === index ? { ...n, [type]: !n[type] } : n
-    ));
-  };
+    if (storedLoginAt) {
+      setResolvedLoginAt(storedLoginAt);
+      return;
+    }
+
+    const fallbackLoginAt = new Date().toISOString();
+    localStorage.setItem('ljm_admin_login_at', fallbackLoginAt);
+    setResolvedLoginAt(fallbackLoginAt);
+  }, []);
+
+  const currentSession = useMemo(
+    () => {
+      const loginDate = resolvedLoginAt ? new Date(resolvedLoginAt) : null;
+      const baseDate = loginDate && !Number.isNaN(loginDate.getTime()) ? loginDate : new Date();
+
+      return baseDate.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+      });
+    },
+    [resolvedLoginAt],
+  );
 
   return (
-    <section className="bg-white rounded-xl shadow-sm border border-slate-200">
-      <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex items-center gap-2">
-        <span className="material-symbols-outlined text-[#0e1a34]">notifications_active</span>
-        <h2 className="text-xl font-bold text-[#0e1a34]">{t('config.notifications.title')}</h2>
+    <section className={`rounded-xl border shadow-sm ${tema === 'oscuro' ? 'border-slate-700 bg-slate-800' : 'border-slate-200 bg-white'}`}>
+      <div className={`flex items-center gap-2 border-b px-6 py-4 ${tema === 'oscuro' ? 'border-slate-700 bg-slate-800/50' : 'border-slate-100 bg-slate-50/50'}`}>
+        <span className="material-symbols-outlined text-[#0e1a34]">devices</span>
+        <h2 className={`text-xl font-bold ${tema === 'oscuro' ? 'text-white' : 'text-[#0e1a34]'}`}>Sesion y Accesos</h2>
       </div>
-      <div className="p-6 space-y-5">
-        {notifs.map((n, i) => (
-          <div key={n.labelKey} className="flex items-center justify-between">
+
+      <div className="space-y-5 p-6">
+        <div className={`rounded-2xl border p-4 ${tema === 'oscuro' ? 'border-slate-700 bg-slate-900/60' : 'border-slate-100 bg-slate-50'}`}>
+          <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-sm font-semibold text-slate-700">{t(n.labelKey)}</p>
-              <p className="text-xs text-slate-400">{t(n.descKey)}</p>
+              <p className={`text-sm font-semibold ${tema === 'oscuro' ? 'text-slate-100' : 'text-slate-700'}`}>Sesion actual del panel</p>
+              <p className={`mt-1 text-xs leading-relaxed ${tema === 'oscuro' ? 'text-slate-400' : 'text-slate-500'}`}>
+                <span className="break-all">{adminUser?.email ?? 'Administrador conectado'}</span>
+                {' '}
+                <span>desde este navegador.</span>
+              </p>
             </div>
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => toggle(i, 'email')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
-                  n.email
-                    ? 'bg-[#0e1a34] text-white border-[#0e1a34]'
-                    : 'bg-slate-50 text-slate-400 border-slate-200 hover:border-[#eacea9]'
-                }`}
-              >
-                <span className="material-symbols-outlined text-[14px]">mail</span>
-                {t('config.notifications.email')}
-              </button>
-              <button
-                onClick={() => toggle(i, 'push')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all ${
-                  n.push
-                    ? 'bg-[#0e1a34] text-white border-[#0e1a34]'
-                    : 'bg-slate-50 text-slate-400 border-slate-200 hover:border-[#eacea9]'
-                }`}
-              >
-                <span className="material-symbols-outlined text-[14px]">phone_iphone</span>
-                {t('config.notifications.push')}
-              </button>
+            <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-700">
+              Activa
+            </span>
+          </div>
+          <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className={`rounded-xl border px-3 py-3 ${tema === 'oscuro' ? 'border-slate-700 bg-slate-800' : 'border-white bg-white'}`}>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Inicio reciente</p>
+              <p className={`mt-1 text-sm font-semibold ${tema === 'oscuro' ? 'text-slate-100' : 'text-slate-700'}`}>{currentSession}</p>
+            </div>
+            <div className={`rounded-xl border px-3 py-3 ${tema === 'oscuro' ? 'border-slate-700 bg-slate-800' : 'border-white bg-white'}`}>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">Verificacion</p>
+              <p className={`mt-1 text-sm font-semibold ${twoFactorEnabled ? 'text-emerald-600' : 'text-amber-600'}`}>
+                {twoFactorEnabled ? '2FA activa' : 'Pendiente de 2FA'}
+              </p>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );

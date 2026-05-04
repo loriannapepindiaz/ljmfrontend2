@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import i18n from '../i18next';
+import { ADMIN_SESSION_EVENT, getStoredAdminSession } from '../lib/api';
 import {
   LANGUAGE_OPTIONS,
   TIMEZONE_OPTIONS,
@@ -13,6 +14,7 @@ interface AdminPreferencesContextType {
   timezone: string;
   setLanguage: (lang: Language) => void;
   setTimezone: (tz: string) => void;
+  savePreferences: (next: { language: Language; timezone: string }) => void;
   t: (key: TranslationKey) => string;
   getLanguageLabel: (lang: Language) => string;
   getTimezoneLabel: (tz: string) => string;
@@ -241,7 +243,7 @@ const translatePlainText = (value: string, language: Language) => {
 const shouldIgnoreNode = (node: Node) => {
   const element = node.parentElement;
   if (!element) return true;
-  if (element.closest('script, style, code, pre, .material-symbols-outlined, .material-icons')) return true;
+  if (element.closest('script, style, code, pre, .material-symbols-outlined, .material-icons, [translate="no"]')) return true;
   const raw = node.nodeValue?.trim() ?? '';
   if (!raw) return true;
   if (/^[a-z0-9_]+$/i.test(raw)) return true;
@@ -307,11 +309,24 @@ const normalizeTimezone = (rawValue: string | null): string => {
   return LEGACY_TIMEZONE_MAP[rawValue] ?? DEFAULT_TIMEZONE;
 };
 
+const getPreferenceStorageKey = (baseKey: 'idioma' | 'zona') => {
+  const session = getStoredAdminSession();
+  const identity = session?.user.id ?? session?.user.email ?? 'guest';
+  return `${baseKey}:${identity}`;
+};
+
+const readStoredLanguage = () =>
+  normalizeLanguage(localStorage.getItem(getPreferenceStorageKey('idioma')) ?? localStorage.getItem('idioma'));
+
+const readStoredTimezone = () =>
+  normalizeTimezone(localStorage.getItem(getPreferenceStorageKey('zona')) ?? localStorage.getItem('zona'));
+
 const AdminPreferencesContext = createContext<AdminPreferencesContextType>({
   language: DEFAULT_LANGUAGE,
   timezone: DEFAULT_TIMEZONE,
   setLanguage: () => {},
   setTimezone: () => {},
+  savePreferences: () => {},
   t: (key) => key,
   getLanguageLabel: () => '',
   getTimezoneLabel: () => '',
@@ -319,24 +334,43 @@ const AdminPreferencesContext = createContext<AdminPreferencesContextType>({
 });
 
 export const AdminPreferencesProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(() =>
-    normalizeLanguage(localStorage.getItem('idioma')),
-  );
-  const [timezone, setTimezoneState] = useState<string>(() =>
-    normalizeTimezone(localStorage.getItem('zona')),
-  );
+  const [language, setLanguageState] = useState<Language>(() => readStoredLanguage());
+  const [timezone, setTimezoneState] = useState<string>(() => readStoredTimezone());
 
   const setLanguage = (lang: Language) => {
-    localStorage.setItem('idioma', lang);
     i18n.changeLanguage(lang);
     setLanguageState(lang);
   };
 
   const setTimezone = (tz: string) => {
     const normalized = normalizeTimezone(tz);
-    localStorage.setItem('zona', normalized);
     setTimezoneState(normalized);
   };
+
+  const savePreferences = ({ language: nextLanguage, timezone: nextTimezone }: { language: Language; timezone: string }) => {
+    const normalizedLanguage = normalizeLanguage(nextLanguage);
+    const normalizedTimezone = normalizeTimezone(nextTimezone);
+    localStorage.setItem(getPreferenceStorageKey('idioma'), normalizedLanguage);
+    localStorage.setItem(getPreferenceStorageKey('zona'), normalizedTimezone);
+    localStorage.setItem('idioma', normalizedLanguage);
+    localStorage.setItem('zona', normalizedTimezone);
+    i18n.changeLanguage(normalizedLanguage);
+    setLanguageState(normalizedLanguage);
+    setTimezoneState(normalizedTimezone);
+  };
+
+  useEffect(() => {
+    const syncPreferencesFromSession = () => {
+      const nextLanguage = readStoredLanguage();
+      const nextTimezone = readStoredTimezone();
+      i18n.changeLanguage(nextLanguage);
+      setLanguageState(nextLanguage);
+      setTimezoneState(nextTimezone);
+    };
+
+    window.addEventListener(ADMIN_SESSION_EVENT, syncPreferencesFromSession);
+    return () => window.removeEventListener(ADMIN_SESSION_EVENT, syncPreferencesFromSession);
+  }, []);
 
   const value = useMemo<AdminPreferencesContextType>(
     () => ({
@@ -344,6 +378,7 @@ export const AdminPreferencesProvider: React.FC<{ children: React.ReactNode }> =
       timezone,
       setLanguage,
       setTimezone,
+      savePreferences,
       t: (key) => translate(language, key),
       getLanguageLabel: (lang) => LANGUAGE_OPTIONS.find((option) => option.code === lang)?.label[language] ?? '',
       getTimezoneLabel: (tz) =>

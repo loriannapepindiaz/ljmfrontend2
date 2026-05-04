@@ -253,13 +253,14 @@ interface VoyageRouteMapProps {
   titulo?: string;
   pais?: string;
   ubicacion?: string;
+  className?: string;
 }
 
-export const VoyageRouteMap = ({ titulo, pais, ubicacion }: VoyageRouteMapProps) => {
+export const VoyageRouteMap = ({ titulo, pais, ubicacion, className }: VoyageRouteMapProps) => {
   const route = findRoute(titulo, pais, ubicacion);
 
   return (
-    <div className="lg:w-1/2 flex flex-col bg-midnight-blue/40 rounded-[2.5rem] border border-white/10 p-10 relative overflow-hidden">
+    <div className={className ?? "lg:w-1/2 flex flex-col bg-midnight-blue/40 rounded-[2.5rem] border border-white/10 p-10 relative overflow-hidden"}>
       <div className="flex flex-col flex-1 relative z-10">
 
         <div className="flex items-center mb-6 flex-shrink-0">

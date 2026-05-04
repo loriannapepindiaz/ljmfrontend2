@@ -1,14 +1,17 @@
-// src/features/fleet/presentation/components/VesselCardSmall.tsx
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface VesselCardSmallProps {
+  id: string;
   title: string;
   className: string;
   description: string;
   imageSrc: string;
 }
 
-const VesselCardSmall: React.FC<VesselCardSmallProps> = ({ title, className, description, imageSrc }) => {
+const VesselCardSmall: React.FC<VesselCardSmallProps> = ({ id, title, className, description, imageSrc }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="group bg-[#f8f9fa] rounded-5xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-100 p-3">
       <div className="aspect-4/3 overflow-hidden relative rounded-[2.5rem]">
@@ -22,12 +25,13 @@ const VesselCardSmall: React.FC<VesselCardSmallProps> = ({ title, className, des
         <span className="text-primary text-[10px] font-bold tracking-widest uppercase mb-2 block">{className}</span>
         <h3 className="font-magiona text-2xl text-navy mb-3">{title}</h3>
         <p className="text-gray-500 text-sm mb-6 leading-relaxed">{description}</p>
-        <a
+        <button
+          type="button"
           className="text-navy font-bold text-xs underline underline-offset-4 hover:text-primary transition-colors uppercase tracking-widest"
-          href="#"
+          onClick={() => navigate(`/crucero/${id}`)}
         >
           Ver Especificaciones
-        </a>
+        </button>
       </div>
     </div>
   );

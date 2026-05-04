@@ -1,5 +1,6 @@
 import { useState, type FC } from "react";
 import { useNavigate } from "react-router-dom";
+import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
 import Footer from "../../../home/presentation/components/Footer";
 import Navbar from "../../../home/presentation/components/Navbar";
 import GastronomySection from "../components/GastronomySection";
@@ -7,7 +8,7 @@ import PersonalizarEstanciaHero from "../components/PersonalizarEstanciaHero";
 import PillowSection from "../components/PillowSection";
 import SpecialRequestSection from "../components/SpecialRequestSection";
 import StayServicesSection from "../components/StayServicesSection";
-import { pillowOptions, stayOptions } from "../components/personalizarEstanciaData";
+import { allergyOptions, pillowOptions, stayOptions } from "../components/personalizarEstanciaData";
 
 const PersonalizarEstanciaPage: FC = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const PersonalizarEstanciaPage: FC = () => {
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
   const [additionalRequirements, setAdditionalRequirements] = useState("");
   const [specialRequest, setSpecialRequest] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
 
   const selectedSummary = {
     services: stayOptions.filter((option) => enabledServices[option.id]).map((option) => option.label),
@@ -41,6 +43,34 @@ const PersonalizarEstanciaPage: FC = () => {
         ? current.filter((item) => item !== allergyId)
         : [...current, allergyId],
     );
+  };
+
+  const continueReservation = async () => {
+    if (isSaving) return;
+
+    const selectedPillowOption = pillowOptions.find((option) => option.id === selectedPillow) ?? pillowOptions[0];
+    const personalization = {
+      services: stayOptions.map((option) => ({
+        id: option.id,
+        label: option.label,
+        active: Boolean(enabledServices[option.id]),
+      })),
+      pillow: {
+        id: selectedPillowOption.id,
+        label: selectedPillowOption.label,
+      },
+      diet: selectedDiet,
+      allergies: allergyOptions
+        .filter((option) => selectedAllergies.includes(option.id))
+        .map((option) => ({ id: option.id, label: option.label })),
+      additionalRequirements,
+      specialRequest,
+    };
+
+    setIsSaving(true);
+    await saveBookingDraftToBackend({ personalization });
+    setIsSaving(false);
+    navigate("/acompanante");
   };
 
   return (
@@ -80,10 +110,11 @@ const PersonalizarEstanciaPage: FC = () => {
 
             <button
               className="rounded-full bg-gradient-to-r from-[#eacea9] to-[#dec29e] px-10 py-5 text-xs font-black uppercase tracking-[0.28em] text-[#0e1a34] shadow-[0_18px_45px_rgba(234,206,169,0.28)] transition hover:-translate-y-1 hover:shadow-[0_24px_55px_rgba(234,206,169,0.36)]"
-              onClick={() => navigate("/acompanante")}
+              disabled={isSaving}
+              onClick={continueReservation}
               type="button"
             >
-              Continuar con la reserva
+              {isSaving ? "Guardando reserva..." : "Continuar con la reserva"}
             </button>
           </div>
         </section>

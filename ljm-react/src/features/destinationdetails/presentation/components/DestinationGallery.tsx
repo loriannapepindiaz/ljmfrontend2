@@ -23,7 +23,7 @@ export const DestinationGallery = ({ photos = [], titulo }: DestinationGalleryPr
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           {photos.map((photo, index) => (
             <GalleryItem key={index} src={photo.url} label={photo.location || titulo || ""} />
           ))}

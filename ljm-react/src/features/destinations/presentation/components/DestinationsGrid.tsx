@@ -16,7 +16,11 @@ const todosLosDestinos = [
     idioma: "Suajili / Ingles",
     highlights: ["Casco antiguo", "Playas de Diani", "Fuerte Jesus"],
     incluye: ["Tour cultural", "Snorkel guiado", "Traslados"],
-    galeria_urls: ["https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?w=800&q=80",
+      "https://images.unsplash.com/photo-1523805081446-99b2503d9d91?w=800&q=80",
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
+    ]
   },
   {
     id: 2,
@@ -32,7 +36,11 @@ const todosLosDestinos = [
     idioma: "Dhivehi",
     highlights: ["Addu Atoll", "Buceo", "Lagunas cristalinas"],
     incluye: ["Equipo de snorkel", "Excursion marina", "Traslados"],
-    galeria_urls: ["https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
+      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+      "https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=800&q=80",
+    ]
   },
   {
     id: 3,
@@ -48,7 +56,11 @@ const todosLosDestinos = [
     idioma: "Ingles",
     highlights: ["Gardens by the Bay", "Marina Bay", "Sentosa"],
     incluye: ["City tour", "Paseo nocturno", "Cena panoramica"],
-    galeria_urls: ["https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800&q=80",
+      "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80",
+      "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80",
+    ]
   },
   {
     id: 4,
@@ -64,7 +76,11 @@ const todosLosDestinos = [
     idioma: "Arabe",
     highlights: ["Piramides de Giza", "Museo Egipcio", "Nilo"],
     incluye: ["Guia historico", "Entradas", "Traslados privados"],
-    galeria_urls: ["https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80",
+      "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800&q=80",
+      "https://images.unsplash.com/photo-1572252009286-268acec5ca0a?w=800&q=80",
+    ]
   },
   {
     id: 5,
@@ -80,7 +96,11 @@ const todosLosDestinos = [
     idioma: "Arabe / Ingles",
     highlights: ["Burj Al Arab", "Marina", "Safari en dunas"],
     incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
-    galeria_urls: ["https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80",
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+      "https://images.unsplash.com/photo-1493246318656-5bbd4cfb294d?w=800&q=80",
+    ]
   },
   {
     id: 6,
@@ -96,7 +116,11 @@ const todosLosDestinos = [
     idioma: "Ingles / Afrikaans",
     highlights: ["Table Mountain", "Waterfront", "Cabo de Buena Esperanza"],
     incluye: ["Teleferico", "Tour de vinos", "Guia local"],
-    galeria_urls: ["https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+      "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
+      "https://images.unsplash.com/photo-1516026672322-bc52d61a4a3d?w=800&q=80",
+    ]
   },
   {
     id: 7,
@@ -112,7 +136,11 @@ const todosLosDestinos = [
     idioma: "Griego",
     highlights: ["Oia", "Caldera", "Atardeceres"],
     incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
-    galeria_urls: ["https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
+      "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
+      "https://images.unsplash.com/photo-1469796466635-455ede028ace?w=800&q=80",
+    ]
   },
   {
     id: 8,
@@ -128,7 +156,11 @@ const todosLosDestinos = [
     idioma: "Japones",
     highlights: ["Shibuya", "Templos", "Monte Fuji"],
     incluye: ["Guia local", "Ceremonia del te", "Transporte"],
-    galeria_urls: ["https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
+      "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80",
+      "https://images.unsplash.com/photo-1492571350019-22de08371fd3?w=800&q=80",
+    ]
   },
   {
     id: 9,
@@ -144,7 +176,11 @@ const todosLosDestinos = [
     idioma: "Portugues",
     highlights: ["Copacabana", "Cristo Redentor", "Pan de Azucar"],
     incluye: ["City tour", "Teleferico", "Cena carioca"],
-    galeria_urls: ["https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80"]
+    galeria_urls: [
+      "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80",
+      "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=800&q=80",
+      "https://images.unsplash.com/photo-1554544415-9de6c764dba3?w=800&q=80",
+    ]
   },
 ];
 

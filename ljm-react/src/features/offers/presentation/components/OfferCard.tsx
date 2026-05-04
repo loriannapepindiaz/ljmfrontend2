@@ -10,10 +10,11 @@ interface OfferCardProps {
   discount: string;
   tags: string[];
   isReversed?: boolean;
+  galeria_urls?: string[];
 }
 
 const OfferCard: React.FC<OfferCardProps> = ({
-  title, description, image, price, discount, tags, isReversed
+  title, description, image, price, discount, tags, isReversed, galeria_urls
 }) => {
   const navigate = useNavigate();
   return (
@@ -72,6 +73,8 @@ const OfferCard: React.FC<OfferCardProps> = ({
                       imagen_url: image,
                       precio_desde: price,
                       tags,
+                      galeria_urls: galeria_urls ?? [image],
+                      localOnly: true,
                     },
                   },
                 });

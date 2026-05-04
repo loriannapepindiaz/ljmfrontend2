@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
+const MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+
 interface MonthProps {
   year: number;
-  month: number;        // 1 = enero, 2 = febrero, etc.
-  startDay: number;     // 0 = domingo, 1 = lunes, ..., 6 = sábado
-  daysInMonth: number;
-  monthName: string;
+  month: number; // 1-indexed
 }
 
 const Hero = () => {
@@ -18,6 +17,7 @@ const Hero = () => {
   const [kids, setKids] = useState(0);
   const [rooms, setRooms] = useState(0);
   const [pets, setPets] = useState(false);
+  const [calendarOffset, setCalendarOffset] = useState(0);
   // Draft values for the guests panel (changes only commit when user presses "Listo")
   const [adultsDraft, setAdultsDraft] = useState(adults);
   const [kidsDraft, setKidsDraft] = useState(kids);
@@ -65,7 +65,17 @@ const Hero = () => {
     setShowGuests(false);
   };
 
-  const renderMonth = ({ year, month, startDay, daysInMonth, monthName }: MonthProps) => {
+  const getMonthData = (offset: number): MonthProps => {
+    const base = new Date();
+    base.setDate(1);
+    base.setMonth(base.getMonth() + offset);
+    return { year: base.getFullYear(), month: base.getMonth() + 1 };
+  };
+
+  const renderMonth = ({ year, month }: MonthProps) => {
+    const startDay = new Date(year, month - 1, 1).getDay();
+    const daysInMonth = new Date(year, month, 0).getDate();
+    const monthName = MONTHS_ES[month - 1];
     const days = [];
     // Días vacíos antes del 1ero del mes
     for (let i = 0; i < startDay; i++) {
@@ -112,8 +122,8 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-20 hero-gradient">
-      <div className="container mx-auto px-6 text-center">
+    <section className="relative flex min-h-screen w-full max-w-full items-center justify-center overflow-x-hidden pt-20 hero-gradient">
+      <div className="mx-auto w-full max-w-7xl px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-display text-white mb-6 leading-tight">
           Explora el Horizonte en <br />
           <span className="italic text-primary">Absoluta Elegancia</span>
@@ -180,14 +190,27 @@ const Hero = () => {
               </span>
             </div>
             {showDeparture && (
-              <div className="absolute top-full left-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-auto mt-2 max-h-96 overflow-y-auto">
-                <div className="flex justify-between mb-3 text-[#C5A059] font-semibold text-xs">
+              <div className="absolute top-full left-0 bg-white rounded-xl shadow-2xl p-4 z-20 w-auto mt-2 max-h-96 overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+                <div className="flex justify-between items-center mb-3 text-[#C5A059] font-semibold text-xs">
                   <span>Calendario</span>
-                  <span className="text-[#C5A059] cursor-pointer text-[11px]">Flexible</span>
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      disabled={calendarOffset === 0}
+                      onClick={(e) => { e.stopPropagation(); setCalendarOffset(o => o - 1); }}
+                      className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-[#F5E6D3] transition disabled:opacity-30 text-base leading-none"
+                    >‹</button>
+                    <button
+                      type="button"
+                      onClick={(e) => { e.stopPropagation(); setCalendarOffset(o => o + 1); }}
+                      className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-[#F5E6D3] transition text-base leading-none"
+                    >›</button>
+                    <span className="ml-2 text-[#C5A059] cursor-pointer text-[11px]">Flexible</span>
+                  </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
-                  {renderMonth({ year: 2026, month: 1, startDay: 3, daysInMonth: 31, monthName: 'enero' })}
-                  {renderMonth({ year: 2026, month: 2, startDay: 6, daysInMonth: 28, monthName: 'febrero' })}
+                  {renderMonth(getMonthData(calendarOffset))}
+                  {renderMonth(getMonthData(calendarOffset + 1))}
                 </div>
               </div>
             )}

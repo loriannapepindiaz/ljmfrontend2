@@ -9,7 +9,7 @@ interface CruceroAlojamientosProps {
 const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = [
+  const slides = vessel?.accommodations || [
     // SLIDE 1 - Owner's Pavilion
     {
       mainImage: "https://lh3.googleusercontent.com/aida-public/AB6AXuBVdjZIuZySJPAAaI3_ZWHfkmdVw1BufcSoU_uXkQ3PojJS85ZLs1iER7zTAhTqyQlsKzs3z9bzBckPKszRQS7r1VpL0HZAfwsgY3P8p5oIJF4KTYhIc0f3Lkog9-NfS7uwpujOZRs5GazNrFZ_4zwoCcEXENljtiAb8SyJUlxLWN6zvVRjHBAeCBkYZfjq5mvw5XX1bt6r56btKWGvxcqsiyfjfFaKmL0Hp_wPMQ6FyFw57LS7W43iU4wuggdz2vL6OkCDyn734tKx",
@@ -82,7 +82,7 @@ const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => 
               Retiros Magistrales
             </h2>
             <p className="text-[#45464d] mt-6 text-lg">
-              Cada camarote del The Serenity es un ambiente a medida, con roble de origen sostenible, cuero cosido a mano y cristal panorámico de suelo a techo.
+              Cada camarote del {vessel?.title || 'The Serenity'} es un ambiente a medida, con materiales nobles, servicio privado y vistas panoramicas de suelo a techo.
             </p>
           </div>
           <div className="flex gap-4">
@@ -161,3 +161,5 @@ const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => 
 };
 
 export default CruceroAlojamientos;
+
+

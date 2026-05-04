@@ -1,62 +1,32 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface AdminHeaderProps {
   title: string;
+  subtitle?: string;
   onAddClick?: () => void;
 }
 
-const AdminHeader: React.FC<AdminHeaderProps> = ({ title, onAddClick }) => {
-  const { t, timezone, locale } = useAdminPreferences();
-  const [now, setNow] = useState(() => new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => setNow(new Date()), 60000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const localTime = useMemo(
-    () =>
-      new Intl.DateTimeFormat(locale, {
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: timezone,
-      }).format(now),
-    [locale, timezone, now],
-  );
+const AdminHeader: React.FC<AdminHeaderProps> = ({ title, subtitle, onAddClick }) => {
+  const { t } = useTranslation();
 
   return (
-    <header className="flex items-center justify-between px-8 py-5 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 transition-colors">
-      <h2 className="font-bold text-2xl text-[#0e1a34] dark:text-white transition-colors">{title}</h2>
-
-      <div className="flex items-center gap-6">
-        {onAddClick ? (
-          <button
-            onClick={onAddClick}
-            className="bg-[#eacea9] hover:bg-[#d4af37] text-[#0e1a34] font-bold px-6 py-2.5 rounded-lg flex items-center gap-2 transition-all shadow-sm text-sm"
-          >
-            <span className="material-symbols-outlined text-[20px]">add</span>
-            {t('adminHeader.addReservation')}
-          </button>
-        ) : null}
-
-        <div className="flex items-center gap-3">
-          <div className="text-right">
-            <p className="text-sm font-bold text-[#0e1a34] dark:text-white transition-colors">{t('adminHeader.userAdmin')}</p>
-            <p className="text-[10px] text-slate-400 uppercase tracking-tighter">
-              {t('adminHeader.superAdmin')} · {localTime}
-            </p>
-          </div>
-          <div
-            className="size-10 rounded-full bg-slate-200 border-2 border-[#eacea9]/40 overflow-hidden"
-            style={{
-              backgroundImage:
-                "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCZppru5LtfKXUD7p02Kq7BK47dx6wPhWDEOsoLu4Kh3ZpKkqcWDa1zE0qdS5RW4bHQ-gykGxdLQyfwqM5qf78vawXWClL33747BeXhYBH0zUmMbNtR13pGb_9tHW7ycLrh08AFalQPzY6LsCbkc_yUKU9xA42Umn0YP8Zfyvtj_Q-7W5vl0Httnv2mIqLzII5oW2s2_rgN2YT4d0fgzJerkFwZ6GzHzxWQQbXPTdVZRjazNxysQQMmwxqAyoyEWRG-cKLjPs9ld9ql')",
-              backgroundSize: 'cover',
-            }}
-          />
-        </div>
+    <header className="mb-8 pl-8 pt-4 flex items-start justify-between gap-6">
+      <div className="flex-1">
+        <h2 className="text-4xl font-bold text-[#0e1a34]">{title}</h2>
+        <div className="mt-3 h-px w-full rounded-full bg-[#0e1a34]/10" />
+        {subtitle ? <p className="mt-3 max-w-2xl text-sm text-slate-500">{subtitle}</p> : null}
       </div>
+
+      {onAddClick ? (
+        <button
+          className="flex items-center gap-2 rounded-lg bg-[#eacea9] px-6 py-2.5 text-sm font-bold text-[#0e1a34] shadow-sm transition-all hover:bg-[#d4af37]"
+          onClick={onAddClick}
+        >
+          <span className="material-symbols-outlined text-[20px]">add</span>
+          {t('adminHeader.addReservation')}
+        </button>
+      ) : null}
     </header>
   );
 };

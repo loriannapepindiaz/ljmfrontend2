@@ -7,6 +7,7 @@ import { DestinationGallery } from "../components/DestinationGallery";
 import Navbar from '../../../home/presentation/components/Navbar';
 import Footer from '../../../home/presentation/components/Footer';
 import BackButton from '../../../../components/BackButton';
+import { saveBookingDraftToBackend } from '../../../../lib/bookingDraft';
 
 interface DestinationData {
   id?: string | number;
@@ -80,11 +81,36 @@ export const DestinationDetails = () => {
   const duracionViaje = primerViaje ? `${primerViaje.duracion_dias} noches` : undefined;
   const puertoViaje   = primerViaje?.ITINERARIO?.[0]?.escala?.[0]?.PUERTO?.nombre_puerto;
 
-  // Galería
-  const galeriaUrls: string[] = extraData?.galeria_urls?.length
-    ? extraData.galeria_urls
-    : stateDestination?.galeria_urls ?? [];
+  // Galería — API es fuente autoritativa; state solo como fallback si API no tiene fotos
+  const stateGaleria: string[] = stateDestination?.galeria_urls ?? [];
+  const apiGaleria: string[]   = extraData?.galeria_urls ?? [];
+  const galeriaUrls: string[]  = (apiGaleria.length > 0 ? apiGaleria : stateGaleria).filter(Boolean);
   const galleryPhotos = galeriaUrls.map((url: string) => ({ url, location: pais ?? '' }));
+
+  const handleReserveTrip = async () => {
+    await saveBookingDraftToBackend({
+      destination: {
+        id: stateDestination?.id ?? extraData?.id,
+        titulo,
+        pais,
+        ubicacion,
+        descripcion,
+        imagen_url: imagenUrl,
+        precio_desde: precioDesde,
+        moneda,
+        rating_promedio: rating,
+        duracion_tipica: duracionViaje ?? duracionTipica,
+        puerto_principal: puertoViaje ?? puertoPrincipal,
+        clima,
+        idioma,
+        highlights,
+        incluye,
+        galeria_urls: galeriaUrls,
+      },
+    });
+
+    navigate('/room');
+  };
 
   // Fetch desde backend: por ID si existe, o busca por título
   useEffect(() => {
@@ -157,7 +183,7 @@ export const DestinationDetails = () => {
                 />
                 <div className="pt-2">
                   <button
-                    onClick={() => navigate('/Room')}
+                    onClick={handleReserveTrip}
                     className="bg-primary hover:bg-luxury-gold text-midnight-blue px-14 py-5 rounded-full text-sm font-extrabold tracking-[0.3em] transition-all w-full md:w-auto uppercase shadow-lg active:scale-95"
                   >
                     Reservar Este Viaje

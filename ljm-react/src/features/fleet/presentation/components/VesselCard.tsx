@@ -52,12 +52,13 @@ const VesselCard: React.FC<VesselCardProps> = ({
               <span className="text-base font-semibold text-navy uppercase tracking-tighter">{guests} HUÉSPEDES</span>
             </div>
           </div>
-          <a
+          <button
+            type="button"
             className="text-navy font-bold text-sm underline underline-offset-8 hover:text-primary transition-colors uppercase tracking-widest cursor-pointer"
-            onClick={() => navigate(`/cruceros/${id}`)}
+            onClick={() => navigate(`/crucero/${id}`)}
           >
             Explorar Embarcación
-          </a>
+          </button>
         </div>
       </div>
     </div>
