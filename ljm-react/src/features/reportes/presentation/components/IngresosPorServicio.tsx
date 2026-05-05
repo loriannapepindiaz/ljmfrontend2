@@ -1,15 +1,29 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { IngresoPorServicio } from '../../data/reportesService';
 
 const SERVICE_KEYS = [
-  { key: 'cruises', color: 'bg-[#0e1a34]', value: '0%' },
-  { key: 'dining',  color: 'bg-[#eacea9]', value: '0%' },
-  { key: 'excursions', color: 'bg-slate-700', value: '0%' },
-  { key: 'spa',     color: 'bg-slate-400',  value: '0%' },
+  { key: 'cruises', service: 'Cruceros', color: 'bg-[#0e1a34]', stroke: '#0e1a34' },
+  { key: 'dining', service: 'Dining', color: 'bg-[#eacea9]', stroke: '#eacea9' },
+  { key: 'excursions', service: 'Excursiones', color: 'bg-slate-700', stroke: '#334155' },
+  { key: 'spa', service: 'Spa & Wellness', color: 'bg-slate-400', stroke: '#94a3b8' },
 ] as const;
 
-const IngresosPorServicio: React.FC = () => {
+type IngresosPorServicioProps = {
+  data: IngresoPorServicio[];
+  loading: boolean;
+};
+
+const formatPercent = (value: number) => `${Number.isFinite(value) ? Math.round(value) : 0}%`;
+
+const IngresosPorServicio: React.FC<IngresosPorServicioProps> = ({ data, loading }) => {
   const { t } = useTranslation();
+  const items = SERVICE_KEYS.map((service) => ({
+    ...service,
+    porcentaje: data.find((item) => item.servicio === service.service)?.porcentaje ?? 0,
+  }));
+  const hasData = items.some((item) => item.porcentaje > 0);
+  let offset = 25;
 
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-slate-100">
@@ -18,27 +32,42 @@ const IngresosPorServicio: React.FC = () => {
       <div className="relative size-48 mx-auto mb-6 flex items-center justify-center">
         <svg className="size-full" viewBox="0 0 36 36">
           <circle cx="18" cy="18" fill="none" r="15.915" stroke="#f1f2f4" strokeWidth="3" />
-          <circle cx="18" cy="18" fill="none" r="15.915" stroke="#0e1a34" strokeDasharray="25 75" strokeDashoffset="25" strokeWidth="3" />
-          <circle cx="18" cy="18" fill="none" r="15.915" stroke="#eacea9" strokeDasharray="25 75" strokeDashoffset="0" strokeWidth="3" />
-          <circle cx="18" cy="18" fill="none" r="15.915" stroke="#334155" strokeDasharray="25 75" strokeDashoffset="75" strokeWidth="3" />
-          <circle cx="18" cy="18" fill="none" r="15.915" stroke="#94a3b8" strokeDasharray="25 75" strokeDashoffset="50" strokeWidth="3" />
+          {hasData && items.map((item) => {
+            const currentOffset = offset;
+            offset -= item.porcentaje;
+            return (
+              <circle
+                key={item.service}
+                cx="18"
+                cy="18"
+                fill="none"
+                r="15.915"
+                stroke={item.stroke}
+                strokeDasharray={`${item.porcentaje} ${100 - item.porcentaje}`}
+                strokeDashoffset={currentOffset}
+                strokeWidth="3"
+              />
+            );
+          })}
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-bold text-[#0e1a34]">—</span>
+          <span className="text-2xl font-bold text-[#0e1a34]">
+            {loading ? '...' : hasData ? formatPercent(Math.max(...items.map((item) => item.porcentaje))) : '-'}
+          </span>
           <span className="text-[10px] text-slate-400 uppercase tracking-widest">
-            {t('reports.charts.incomeByService.noData')}
+            {loading ? 'Cargando' : hasData ? 'Top' : t('reports.charts.incomeByService.noData')}
           </span>
         </div>
       </div>
 
       <div className="space-y-2">
-        {SERVICE_KEYS.map((s) => (
+        {items.map((s) => (
           <div key={s.key} className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className={`size-2 rounded-full ${s.color}`}></span>
               <span className="text-xs font-medium">{t(`reports.charts.incomeByService.${s.key}`)}</span>
             </div>
-            <span className="text-xs font-bold">{s.value}</span>
+            <span className="text-xs font-bold">{loading ? '...' : formatPercent(s.porcentaje)}</span>
           </div>
         ))}
       </div>

@@ -3,7 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 import { clearAdminSession, getStoredAdminSession } from '../../../../lib/api';
 
-const AdminSidebar: React.FC = () => {
+type AdminSidebarProps = {
+  activeItem?: string;
+};
+
+const AdminSidebar: React.FC<AdminSidebarProps> = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, timezone, locale } = useAdminPreferences();

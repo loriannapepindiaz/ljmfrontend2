@@ -27,7 +27,7 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
   paymentError,
   selectedMethod,
 }) => {
-  const currency = draft.destination?.moneda ?? 'USD';
+  const currency = draft.destination?.moneda ?? draft.moneda ?? 'USD';
   const { destinationPrice, serviceFee, suitePrice, total } = getBookingDraftCharges(draft);
   const activities = draft.activities ?? [];
   const companionCount = draft.companions?.length ?? 0;
@@ -40,8 +40,8 @@ const PriceBreakdown: React.FC<PriceBreakdownProps> = ({
     ...activeServices.map((service) => ({ label: service.label, value: 0 })),
     serviceFee ? { label: 'Gestion y procesamiento', value: serviceFee } : null,
   ].filter((line): line is { label: string; value: number } => Boolean(line));
-  const lineTotal = lines.reduce((sum, line) => sum + line.value, 0);
-  const visibleTotal = total > 0 ? total : lineTotal;
+  const lineTotal = lines.reduce((sum, line) => sum + (Number(line.value) || 0), 0);
+  const visibleTotal = lineTotal > 0 ? lineTotal : (total > 0 ? total : parseCurrencyAmount(draft.monto_total));
   const canPay = Boolean(selectedMethod && visibleTotal > 0 && !isLoading && !isPaying);
 
   return (

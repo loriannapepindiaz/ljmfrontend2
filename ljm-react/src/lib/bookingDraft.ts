@@ -76,10 +76,25 @@ export type BookingDraft = {
   companions?: BookingCompanionDraft[];
   personalization?: BookingPersonalizationDraft;
   activities?: BookingActivityDraft[];
+  monto_total?: number | string;
+  moneda?: string;
   syncStatus?: 'synced' | 'local-fallback';
 };
 
 const BOOKING_DRAFT_KEY = 'ljm_booking_draft';
+
+// Precios de referencia por si el backend no tiene precio_noche configurado en la DB
+const SUITE_FALLBACK_PRICES: Record<string, number> = {
+  'suite oceanica': 1250,
+  'camarote clasico': 690,
+  'penthouse de deck': 2450,
+  'suite familiar deluxe': 1780,
+};
+
+const getSuiteFallbackPrice = (title?: string): number => {
+  if (!title) return 0;
+  return SUITE_FALLBACK_PRICES[title.toLowerCase().trim()] ?? 0;
+};
 
 const hasBookingDraftData = (draft: BookingDraft) =>
   Boolean(
@@ -121,7 +136,8 @@ export const parseCurrencyAmount = (value: unknown): number => {
 
 export const getBookingDraftCharges = (draft: BookingDraft) => {
   const destinationPrice = parseCurrencyAmount(draft.destination?.precio_desde);
-  const suitePrice = parseCurrencyAmount(draft.suite?.pricePerNight);
+  const rawSuitePrice = parseCurrencyAmount(draft.suite?.pricePerNight);
+  const suitePrice = rawSuitePrice > 0 ? rawSuitePrice : getSuiteFallbackPrice(draft.suite?.title);
   const activities = draft.activities ?? [];
   const activitiesTotal = activities.reduce(
     (sum, activity) => sum + parseCurrencyAmount(activity.precio_base),
@@ -129,6 +145,9 @@ export const getBookingDraftCharges = (draft: BookingDraft) => {
   );
   const subtotal = destinationPrice + suitePrice + activitiesTotal;
   const serviceFee = subtotal > 0 ? Math.round(subtotal * 0.05) : 0;
+  const calculatedTotal = subtotal + serviceFee;
+  const serverTotal = parseCurrencyAmount(draft.monto_total);
+  const total = calculatedTotal > 0 ? calculatedTotal : serverTotal;
 
   return {
     activitiesTotal,
@@ -136,7 +155,7 @@ export const getBookingDraftCharges = (draft: BookingDraft) => {
     serviceFee,
     subtotal,
     suitePrice,
-    total: subtotal + serviceFee,
+    total,
   };
 };
 

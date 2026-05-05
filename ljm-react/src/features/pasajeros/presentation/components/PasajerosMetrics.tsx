@@ -1,14 +1,21 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const PasajerosMetrics: React.FC = () => {
+interface PasajerosMetricsProps {
+  total: number;
+  platinum: number;
+  gold: number;
+  recent: number;
+}
+
+const PasajerosMetrics: React.FC<PasajerosMetricsProps> = ({ total, platinum, gold, recent }) => {
   const { t } = useTranslation();
 
   const metrics = [
-    { labelKey: 'passengers.metrics.total',    value: '0', icon: 'group'             },
-    { labelKey: 'passengers.metrics.platinum', value: '0', icon: 'military_tech'     },
-    { labelKey: 'passengers.metrics.gold',     value: '0', icon: 'workspace_premium' },
-    { labelKey: 'passengers.metrics.recent',   value: '0', icon: 'anchor'            },
+    { labelKey: 'passengers.metrics.total',    value: total,    icon: 'group'             },
+    { labelKey: 'passengers.metrics.platinum', value: platinum, icon: 'military_tech'     },
+    { labelKey: 'passengers.metrics.gold',     value: gold,     icon: 'workspace_premium' },
+    { labelKey: 'passengers.metrics.recent',   value: recent,   icon: 'anchor'            },
   ];
 
   return (

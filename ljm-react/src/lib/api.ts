@@ -162,6 +162,17 @@ export const experienceApi = {
       }),
 };
 
+export type CreateCruisePayload = {
+  nombre: string;
+  capacidad_max_pasajeros: number;
+  id_tipo_crucero: number;
+  descripcion?: string;
+  eslora_metros?: number;
+  numero_cubiertas?: number;
+  tonelaje?: number;
+  imagen_portada_url?: string;
+};
+
 export const fleetApi = {
   list: () =>
     request<VesselsResponse>('/cruceros', {
@@ -171,6 +182,23 @@ export const fleetApi = {
   getById: (id: string | number) =>
     request<VesselResponse>(`/cruceros/${id}`, {
       method: 'GET',
+    }),
+
+  create: (payload: CreateCruisePayload) =>
+    request<VesselResponse>('/cruceros', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+
+  update: (id: string | number, payload: { nombre?: string; capacidad_max_pasajeros?: number; activo?: boolean }) =>
+    request<VesselResponse>(`/cruceros/${id}`, {
+      method: 'PATCH',
+      body: JSON.stringify(payload),
+    }),
+
+  softDelete: (id: string | number) =>
+    request<{ ok: boolean; message: string }>(`/cruceros/${id}/inactivar`, {
+      method: 'PATCH',
     }),
 };
 

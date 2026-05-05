@@ -67,7 +67,7 @@ export const normalizeSuiteFromApi = (suite: any): SuiteOption => {
   const id = String(suite.id ?? suite.id_tipo_habitacion ?? suite.nombre ?? suite.title ?? "");
   const fallback = getSuiteById(id) ?? SUITES.find((item) => item.title.toLowerCase() === String(suite.title ?? suite.nombre ?? "").toLowerCase()) ?? SUITES[0];
   const image = suite.imageUrl ?? suite.imagen_url ?? suite.image ?? fallback.imageUrl;
-  const price = Number(suite.pricePerNight ?? suite.precio_noche ?? suite.precio_base ?? fallback.pricePerNight);
+  const price = Number(suite.pricePerNight || suite.precio_noche || suite.precio_base || fallback.pricePerNight);
 
   return {
     id,

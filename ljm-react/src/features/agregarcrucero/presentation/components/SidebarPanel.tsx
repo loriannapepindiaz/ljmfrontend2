@@ -4,7 +4,19 @@ import { useTranslation } from 'react-i18next';
 const VIS_KEYS = ['active', 'maintenance', 'inactive'] as const;
 type VisKey = typeof VIS_KEYS[number];
 
-const SidebarPanel: React.FC = () => {
+interface SidebarPanelProps {
+  descripcion: string;
+  onDescripcionChange: (v: string) => void;
+  imagenPortadaUrl: string;
+  onImagenPortadaUrlChange: (v: string) => void;
+}
+
+const SidebarPanel: React.FC<SidebarPanelProps> = ({
+  descripcion,
+  onDescripcionChange,
+  imagenPortadaUrl,
+  onImagenPortadaUrlChange,
+}) => {
   const { t } = useTranslation();
   const [visibilidad, setVisibilidad] = useState<VisKey>('active');
   const [openVis, setOpenVis] = useState(false);
@@ -92,6 +104,24 @@ const SidebarPanel: React.FC = () => {
 
         <div className="flex flex-col gap-2">
           <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            URL Imagen de Portada
+          </label>
+          <div className="relative">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+              image
+            </span>
+            <input
+              type="text"
+              placeholder="https://..."
+              className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 pl-10 text-xs text-slate-900 bg-white outline-none transition-all"
+              value={imagenPortadaUrl}
+              onChange={(e) => onImagenPortadaUrlChange(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
             {t('fleet.add.sidebar.promoVideo')}
           </label>
           <div className="relative">
@@ -115,6 +145,8 @@ const SidebarPanel: React.FC = () => {
           className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-4 text-sm text-slate-900 bg-white outline-none leading-relaxed resize-none transition-all"
           placeholder={t('fleet.add.sidebar.descPlaceholder')}
           rows={6}
+          value={descripcion}
+          onChange={(e) => onDescripcionChange(e.target.value)}
         />
       </section>
 

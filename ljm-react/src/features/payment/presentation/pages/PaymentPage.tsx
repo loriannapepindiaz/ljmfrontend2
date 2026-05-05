@@ -12,7 +12,8 @@ import { getBookingDraftCharges, loadBookingDraft, syncBookingDraftWithBackend, 
 import { paymentApi, type PaymentMethod } from '../../data/paymentApi';
 
 const getPaymentTotal = (draft: BookingDraft) => {
-  return getBookingDraftCharges(draft).total;
+  const { subtotal, serviceFee } = getBookingDraftCharges(draft);
+  return subtotal + serviceFee;
 };
 
 const PaymentPage: React.FC = () => {
@@ -47,7 +48,7 @@ const PaymentPage: React.FC = () => {
     if (!selectedMethod || isPaying) return;
 
     const amount = getPaymentTotal(draft);
-    const currency = draft.destination?.moneda ?? 'USD';
+    const currency = draft.destination?.moneda ?? draft.moneda ?? 'USD';
 
     setIsPaying(true);
     setPaymentError(null);

@@ -12,6 +12,7 @@ interface Metric {
 
 interface MetricsGridProps {
   metrics?: Metric[];
+  loading?: boolean;
 }
 
 const iconColors: Record<string, string> = {
@@ -21,7 +22,11 @@ const iconColors: Record<string, string> = {
   attach_money:    'text-blue-500',
 };
 
-const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics }) => {
+const Skeleton: React.FC = () => (
+  <div className="h-9 w-28 bg-slate-100 rounded animate-pulse mb-2" />
+);
+
+const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics, loading }) => {
   const { t } = useTranslation();
 
   const DEFAULT_METRICS: Metric[] = [
@@ -51,7 +56,7 @@ const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics }) => {
     },
     {
       label: t('reservations.metrics.totalIncome'),
-      value: 'R$ 0',
+      value: '$0.00',
       icon: 'attach_money',
       trend: '0%',
       trendUp: true,
@@ -79,7 +84,10 @@ const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics }) => {
           </div>
 
           {/* Valor grande */}
-          <p className="text-3xl font-bold text-[#0e1a34] mb-2">{metric.value}</p>
+          {loading
+            ? <Skeleton />
+            : <p className="text-3xl font-bold text-[#0e1a34] mb-2">{metric.value}</p>
+          }
 
           {/* Trend abajo */}
           <div className="flex items-center gap-1">

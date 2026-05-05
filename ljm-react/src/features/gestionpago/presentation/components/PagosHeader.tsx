@@ -2,7 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getStoredAdminSession } from '../../../../lib/api';
 
-const PagosHeader: React.FC = () => {
+interface PagosHeaderProps {
+  onAddClick?: () => void;
+}
+
+const PagosHeader: React.FC<PagosHeaderProps> = ({ onAddClick }) => {
   const { t } = useTranslation();
   const adminUser = getStoredAdminSession()?.user;
   const adminName =
@@ -17,6 +21,15 @@ const PagosHeader: React.FC = () => {
         <p className="mt-1 text-slate-500">{t('payments.subtitle')}</p>
       </div>
       <div className="flex items-center gap-4">
+        {onAddClick && (
+          <button
+            onClick={onAddClick}
+            className="flex items-center gap-2 rounded-lg bg-[#eacea9] px-6 py-2.5 text-sm font-bold text-[#0e1a34] shadow-sm hover:bg-[#d4af37] transition-colors"
+          >
+            <span className="material-symbols-outlined text-[20px]">add</span>
+            Registrar pago
+          </button>
+        )}
         <div className="flex items-center gap-3 border-l border-slate-200 pl-4">
           <div className="text-right">
             <p className="text-sm font-bold text-[#0e1a34]">{adminName}</p>

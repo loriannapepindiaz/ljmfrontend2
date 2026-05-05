@@ -232,6 +232,7 @@
       "all": "Todos",
       "paid": "Pagados",
       "pending": "Pendientes",
+      "refunded": "Reembolsados",
       "last30Days": "Últimos 30 días"
     },
     "metrics": {
@@ -258,15 +259,15 @@
     "filters": {
       "search": "Buscar por nombre, ID o viaje...",
       "all": "Todos",
-      "elite": "Élite Platino",
-      "gold": "Miembro Oro",
-      "silver": "Plata",
-      "diamond": "Diamante"
+      "elite": "Admiral",
+      "gold": "Navegante",
+      "silver": "Explorer",
+      "diamond": "Commodore"
     },
     "metrics": {
       "total": "Total Pasajeros",
-      "platinum": "Élite Platino",
-      "gold": "Miembros Oro",
+      "platinum": "Admiral",
+      "gold": "Navegante",
       "recent": "Viajeros Recientes"
     },
     "table": {

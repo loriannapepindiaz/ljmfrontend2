@@ -3,7 +3,23 @@ import { useTranslation } from 'react-i18next';
 
 const inputClass = "w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 text-slate-900 bg-white outline-none text-sm transition-all";
 
-const TechnicalSpecsSection: React.FC = () => {
+interface TechnicalSpecsSectionProps {
+  cubiertas: string;
+  onCubiertasChange: (v: string) => void;
+  eslora: string;
+  onEsloraChange: (v: string) => void;
+  tonelaje: string;
+  onTonelajeChange: (v: string) => void;
+}
+
+const TechnicalSpecsSection: React.FC<TechnicalSpecsSectionProps> = ({
+  cubiertas,
+  onCubiertasChange,
+  eslora,
+  onEsloraChange,
+  tonelaje,
+  onTonelajeChange,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -41,7 +57,45 @@ const TechnicalSpecsSection: React.FC = () => {
           <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
             {t('fleet.add.tech.decks')}
           </label>
-          <input type="number" placeholder="12" className={inputClass} />
+          <input
+            type="number"
+            placeholder="12"
+            className={inputClass}
+            value={cubiertas}
+            onChange={(e) => onCubiertasChange(e.target.value)}
+          />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
+            Eslora (m)
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              placeholder="180"
+              className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 pr-10 text-slate-900 bg-white outline-none text-sm transition-all"
+              value={eslora}
+              onChange={(e) => onEsloraChange(e.target.value)}
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs uppercase">m</span>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
+            Tonelaje
+          </label>
+          <div className="relative">
+            <input
+              type="number"
+              placeholder="45000"
+              className="w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 pr-10 text-slate-900 bg-white outline-none text-sm transition-all"
+              value={tonelaje}
+              onChange={(e) => onTonelajeChange(e.target.value)}
+            />
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 font-bold text-xs uppercase">t</span>
+          </div>
         </div>
       </div>
     </section>

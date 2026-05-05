@@ -1,14 +1,21 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const CabinasMetrics: React.FC = () => {
+interface CabinasMetricsProps {
+  total: number;
+  occupied: number;
+  available: number;
+  maintenance: number;
+}
+
+const CabinasMetrics: React.FC<CabinasMetricsProps> = ({ total, occupied, available, maintenance }) => {
   const { t } = useTranslation();
 
   const metrics = [
-    { labelKey: 'cabins.metrics.total',       value: '0', icon: 'hotel',        accent: null,    trend: true  },
-    { labelKey: 'cabins.metrics.occupied',    value: '0', icon: 'person_check', accent: 'blue',  trend: false },
-    { labelKey: 'cabins.metrics.available',   value: '0', icon: 'check_circle', accent: 'green', trend: false },
-    { labelKey: 'cabins.metrics.maintenance', value: '0', icon: 'handyman',     accent: 'red',   trend: false },
+    { labelKey: 'cabins.metrics.total',       value: total,       icon: 'hotel',        accent: null,    trend: true  },
+    { labelKey: 'cabins.metrics.occupied',    value: occupied,    icon: 'person_check', accent: 'blue',  trend: false },
+    { labelKey: 'cabins.metrics.available',   value: available,   icon: 'check_circle', accent: 'green', trend: false },
+    { labelKey: 'cabins.metrics.maintenance', value: maintenance, icon: 'handyman',     accent: 'red',   trend: false },
   ];
 
   return (
@@ -26,7 +33,7 @@ const CabinasMetrics: React.FC = () => {
             </span>
             {m.trend && (
               <span className="text-green-600 text-xs font-bold flex items-center gap-1 bg-green-50 px-2 py-1 rounded-full">
-                <span className="material-symbols-outlined text-xs">trending_up</span> 0%
+                <span className="material-symbols-outlined text-xs">trending_up</span> {total}
               </span>
             )}
           </div>
