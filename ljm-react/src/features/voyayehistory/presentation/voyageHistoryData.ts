@@ -1,4 +1,4 @@
-import { request } from '../../../lib/api';
+import { request, API_BASE_URL } from '../../../lib/api';
 import {
   getBookingDraft,
   getBookingDraftPayableTotal,
@@ -58,6 +58,7 @@ export type VoyageHistoryData = {
     totalNights: number;
   };
   upcomingReservation: VoyageHistoryReservation | null;
+  upcomingReservations: VoyageHistoryReservation[];
   travelHistory: VoyageHistoryItem[];
 };
 
@@ -299,6 +300,7 @@ export const getLocalVoyageHistoryData = (): VoyageHistoryData | null => {
       totalNights: upcomingReservation.nights ?? 0,
     },
     upcomingReservation,
+    upcomingReservations: [],
     travelHistory: [],
   };
 };
@@ -311,7 +313,18 @@ export const normalizeVoyageHistoryData = (historyData: VoyageHistoryData): Voya
       memberCode: resolveMemberCode(historyData.client.memberCode, historyData.client.id),
     },
     upcomingReservation: historyData.upcomingReservation ?? buildLocalUpcomingReservation(),
+    upcomingReservations: historyData.upcomingReservations ?? [],
   };
+};
+
+export const cancelReservation = async (id: string | number): Promise<void> => {
+  const token = localStorage.getItem('ljm_auth_token') ?? '';
+  const res = await fetch(`${API_BASE_URL}/reservas/${id}/cancelar`, {
+    method: 'PATCH',
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(json.message ?? 'No se pudo cancelar la reserva');
 };
 
 export const voyageHistoryApi = {

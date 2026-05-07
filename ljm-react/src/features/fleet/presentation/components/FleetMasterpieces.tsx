@@ -11,15 +11,20 @@ const FleetMasterpieces: React.FC = () => {
   const secondaryVessels = vessels.slice(2);
 
   useEffect(() => {
+    const allStatic = [...getFeaturedVessels(), ...getSecondaryVessels()];
     fleetApi
       .list()
       .then((response) => {
         if (response.data?.length) {
-          setVessels(response.data.map(normalizeVesselFromApi));
+          const apiBySlug = new Map(
+            response.data.map(normalizeVesselFromApi).map(v => [v.id, v])
+          );
+          // Merge: use API data for ships that matched, keep static for the rest
+          setVessels(allStatic.map(sv => apiBySlug.get(sv.id) ?? sv));
         }
       })
       .catch(() => {
-        setVessels([...getFeaturedVessels(), ...getSecondaryVessels()]);
+        setVessels(allStatic);
       });
   }, []);
 

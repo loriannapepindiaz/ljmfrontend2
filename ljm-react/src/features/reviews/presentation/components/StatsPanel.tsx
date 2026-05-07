@@ -23,7 +23,7 @@ const StatsPanel: React.FC<Props> = ({ summary, history, isLoading }) => {
     >
       <div className="mb-10 text-center">
         <span className="font-serif text-8xl font-bold text-[#DEC29E] block mb-2">
-          {isLoading ? '--' : (summary?.average ?? 0).toFixed(1)}
+          {!summary && isLoading ? '--' : Number(summary?.average ?? 0).toFixed(1)}
         </span>
         <p className="text-xs uppercase tracking-[0.15em] text-[#D9E2FF]/50">Puntuación promedio real</p>
       </div>

@@ -43,22 +43,21 @@ const buildAmenities = (booking: ManageBookingData) => {
 
 const PaqueteDetalle: React.FC<Props> = ({ booking, isLoading }) => {
   if (isLoading && !booking) return (
-    <div className="rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] backdrop-blur-sm">
-      <div className="grid md:grid-cols-2">
-        <Sk className="h-56 md:h-full rounded-none" />
-        <div className="p-8 space-y-5">
+    <div className="rounded-3xl border border-white/8 bg-white/[0.03] p-8 space-y-5">
+      <div className="flex items-center gap-4">
+        <Sk className="size-14 rounded-2xl shrink-0" />
+        <div className="flex-1 space-y-2">
           <Sk className="h-3 w-20" />
-          <Sk className="h-8 w-56" />
-          <Sk className="h-4 w-full" />
-          <Sk className="h-4 w-4/5" />
-          <div className="grid grid-cols-2 gap-3 pt-2">
-            {[0, 1, 2, 3].map(i => <Sk key={i} className="h-8 rounded-xl" />)}
-          </div>
-          <div className="border-t border-white/8 pt-4">
-            <Sk className="h-4 w-24" />
-            <Sk className="h-7 w-32 mt-2" />
-          </div>
+          <Sk className="h-7 w-52" />
+          <Sk className="h-3 w-full" />
         </div>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
+        {[0, 1, 2, 3, 4, 5].map(i => <Sk key={i} className="h-10 rounded-xl" />)}
+      </div>
+      <div className="border-t border-white/8 pt-5 grid grid-cols-2 gap-4">
+        <Sk className="h-10 rounded-xl" />
+        <Sk className="h-10 rounded-xl" />
       </div>
     </div>
   );
@@ -66,76 +65,79 @@ const PaqueteDetalle: React.FC<Props> = ({ booking, isLoading }) => {
   if (!booking) return null;
 
   const amenities = buildAmenities(booking);
-  const suiteImg = booking.suiteImage ?? booking.destinationImage;
 
   return (
-    <div className="rounded-3xl overflow-hidden border border-white/8 bg-white/[0.03] backdrop-blur-sm shadow-2xl">
-      <div className="grid md:grid-cols-2">
-        {/* Image side */}
-        <div className="relative h-56 md:h-auto min-h-[220px] bg-[#060f1e] overflow-hidden">
-          {suiteImg ? (
-            <>
-              <img
-                alt={booking.suiteName}
-                className="absolute inset-0 h-full w-full object-cover"
-                src={suiteImg}
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#060f1e]/30" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#060f1e]/60 via-transparent to-transparent" />
-            </>
-          ) : (
-            <div className="h-full flex items-center justify-center">
-              <span className="material-symbols-outlined text-8xl text-[#eacea9]/10">king_bed</span>
-            </div>
-          )}
-          {/* Suite badge */}
-          <div className="absolute top-4 left-4">
-            <span className="px-3 py-1.5 rounded-full bg-[#c8a96e]/20 border border-[#c8a96e]/30 text-[10px] font-bold uppercase tracking-widest text-[#c8a96e] backdrop-blur-sm">
-              Suite Premium
-            </span>
-          </div>
+    <div className="rounded-3xl border border-white/8 bg-white/[0.03] overflow-hidden shadow-2xl">
+
+      {/* Header row */}
+      <div className="flex items-start gap-5 p-7 pb-6 border-b border-white/8">
+        {/* Icon */}
+        <div className="shrink-0 size-16 rounded-2xl bg-[#c8a96e]/10 border border-[#c8a96e]/20 flex items-center justify-center">
+          <span className="material-symbols-outlined text-3xl text-[#c8a96e]">king_bed</span>
         </div>
 
-        {/* Info side */}
-        <div className="p-8 space-y-6">
-          <div>
-            <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c8a96e]/60 mb-2">Tu Alojamiento</p>
-            <h3 className="text-2xl font-black text-white leading-tight">{booking.suiteName}</h3>
-            {booking.suiteDescription && (
-              <p className="mt-2 text-sm text-slate-400 leading-relaxed line-clamp-2">{booking.suiteDescription}</p>
-            )}
-          </div>
+        {/* Name + description */}
+        <div className="flex-1 min-w-0">
+          <p className="text-[9px] font-bold uppercase tracking-[0.4em] text-[#c8a96e]/60 mb-1">
+            Tu Alojamiento
+          </p>
+          <h3 className="text-xl font-black text-white leading-tight truncate">
+            {booking.suiteName || 'Suite Premium'}
+          </h3>
+          {booking.suiteDescription && (
+            <p className="mt-1 text-xs text-slate-400 leading-relaxed line-clamp-2">
+              {booking.suiteDescription}
+            </p>
+          )}
+        </div>
 
-          {amenities.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {amenities.map((item, i) => (
-                <div key={i} className="flex items-center gap-2.5">
-                  <div className="size-7 rounded-lg bg-[#c8a96e]/10 flex items-center justify-center shrink-0">
-                    <span className="material-symbols-outlined text-[14px] text-[#c8a96e]">{amenityIcon(item)}</span>
-                  </div>
-                  <span className="text-[11px] text-slate-300 font-medium leading-tight">{item}</span>
+        {/* Suite label pill */}
+        <span className="shrink-0 hidden sm:inline-flex px-3 py-1 rounded-full bg-[#c8a96e]/10 border border-[#c8a96e]/20 text-[10px] font-bold uppercase tracking-widest text-[#c8a96e]">
+          Suite
+        </span>
+      </div>
+
+      {/* Amenities grid */}
+      {amenities.length > 0 && (
+        <div className="px-7 py-5 border-b border-white/8">
+          <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-slate-500 mb-4">Incluido en tu suite</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {amenities.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 rounded-xl bg-white/[0.03] border border-white/6 px-3 py-2.5"
+              >
+                <div className="size-7 rounded-lg bg-[#c8a96e]/10 flex items-center justify-center shrink-0">
+                  <span className="material-symbols-outlined text-[14px] text-[#c8a96e]">
+                    {amenityIcon(item)}
+                  </span>
                 </div>
-              ))}
-            </div>
-          )}
-
-          <div className="border-t border-white/8 pt-5 grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">
-                {booking.cabinNumber ? 'Número de Cabina' : 'Cabina'}
-              </p>
-              <p className="text-xl font-black text-[#eacea9]">
-                {booking.cabinNumber ?? booking.cabinLabel ?? '—'}
-              </p>
-            </div>
-            {booking.cruiseName && (
-              <div>
-                <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">Crucero</p>
-                <p className="text-sm font-bold text-white leading-tight">{booking.cruiseName}</p>
+                <span className="text-[11px] text-slate-300 font-medium leading-tight">{item}</span>
               </div>
-            )}
+            ))}
           </div>
         </div>
+      )}
+
+      {/* Footer row — cabin + cruise */}
+      <div className="px-7 py-5 grid grid-cols-2 gap-4">
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-slate-500 mb-1.5">
+            {booking.cabinNumber ? 'Número de Cabina' : 'Cabina'}
+          </p>
+          <p className="text-lg font-black text-[#eacea9] leading-none">
+            {booking.cabinNumber ?? booking.cabinLabel ?? '—'}
+          </p>
+        </div>
+        {booking.cruiseName && (
+          <div>
+            <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-slate-500 mb-1.5">Crucero</p>
+            <div className="flex items-center gap-2">
+              <span className="material-symbols-outlined text-base text-[#c8a96e]/70">sailing</span>
+              <p className="text-sm font-bold text-white leading-tight">{booking.cruiseName}</p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

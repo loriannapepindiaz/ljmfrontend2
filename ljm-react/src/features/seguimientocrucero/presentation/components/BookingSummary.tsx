@@ -53,24 +53,22 @@ const BookingSummary: React.FC<Props> = ({ booking, isLoading }) => {
       {/* Reference */}
       <div>
         <p className="text-[9px] font-bold uppercase tracking-[0.35em] text-[#c8a96e]/70 mb-1">Referencia de Reserva</p>
-        <p className="text-2xl font-black text-white tracking-tight">{booking.reference}</p>
+        <p className="text-base sm:text-2xl font-black text-white tracking-tight break-all leading-tight">{booking.reference}</p>
       </div>
 
       {/* Status + Payment */}
-      <div className="flex items-center gap-3 border-t border-white/8 pt-5">
-        <div className="flex-1">
-          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">Estado</p>
-          <p className={`text-sm font-bold ${statusColor(booking.status)}`}>{booking.status}</p>
+      <div className="grid grid-cols-3 border-t border-white/8 pt-5">
+        <div className="pr-2 border-r border-white/10">
+          <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-slate-500 mb-1">Estado</p>
+          <p className={`text-xs sm:text-sm font-bold ${statusColor(booking.status)}`}>{booking.status}</p>
         </div>
-        <div className="w-px h-8 bg-white/10" />
-        <div className="flex-1">
-          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">Pago</p>
-          <p className={`text-sm font-bold ${statusColor(booking.paymentStatus)}`}>{booking.paymentStatus}</p>
+        <div className="px-2 border-r border-white/10">
+          <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-slate-500 mb-1">Pago</p>
+          <p className={`text-xs sm:text-sm font-bold ${statusColor(booking.paymentStatus)}`}>{booking.paymentStatus}</p>
         </div>
-        <div className="w-px h-8 bg-white/10" />
-        <div className="flex-1">
-          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">Total</p>
-          <p className="text-sm font-bold text-[#eacea9]">{booking.total}</p>
+        <div className="pl-2">
+          <p className="text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.2em] sm:tracking-[0.3em] text-slate-500 mb-1">Total</p>
+          <p className="text-xs sm:text-sm font-bold text-[#eacea9] break-all">{booking.total}</p>
         </div>
       </div>
 

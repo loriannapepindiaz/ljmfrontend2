@@ -35,7 +35,7 @@ const UpcomingCard = ({ reservation }: { reservation: ProfileReservation }) => (
           <h3 className="mt-2 text-2xl font-bold text-white font-serif">{reservation.destination}</h3>
           <p className="mt-1 text-sm text-slate-400">{reservation.ship} · {reservation.cabin}</p>
           <Link
-            to="/seguimiento-crucero"
+            to={`/seguimiento-crucero?reservationId=${reservation.id}`}
             className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-[#eacea9] px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.18em] text-[#0e1a34] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white"
           >
             Ver seguimiento
@@ -94,7 +94,13 @@ const HistoryItem = ({ item }: { item: ProfileHistoryItem }) => (
 );
 
 const TravelHistory: React.FC<TravelHistoryProps> = ({ profile, isLoading }) => {
-  const upcomingReservation = profile?.upcomingReservation ?? null;
+  const primaryUpcoming = profile?.upcomingReservation ?? null;
+  const extraUpcoming = profile?.upcomingReservations ?? [];
+  const allUpcoming = [
+    ...(primaryUpcoming ? [primaryUpcoming] : []),
+    ...extraUpcoming,
+  ];
+  const visibleUpcoming = allUpcoming.slice(0, 2);
   const history = profile?.travelHistory ?? [];
   const recentHistory = history.slice(0, 2);
 
@@ -102,10 +108,25 @@ const TravelHistory: React.FC<TravelHistoryProps> = ({ profile, isLoading }) => 
     <div className="space-y-8">
       <section>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-white font-serif">Próximo Crucero</h2>
+          <h2 className="text-2xl font-bold text-white font-serif">
+            {allUpcoming.length > 1 ? 'Próximos Cruceros' : 'Próximo Crucero'}
+          </h2>
+          {allUpcoming.length > 2 && (
+            <Link
+              to="/voyage-history"
+              className="inline-flex w-fit items-center justify-center gap-2 rounded-full border border-[#eacea9]/25 bg-[#eacea9] px-5 py-2.5 text-[10px] font-black uppercase tracking-[0.18em] text-[#0e1a34] shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white"
+            >
+              Ver todos ({allUpcoming.length})
+              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+            </Link>
+          )}
         </div>
-        {upcomingReservation ? (
-          <UpcomingCard reservation={upcomingReservation} />
+        {allUpcoming.length > 0 ? (
+          <div className="flex flex-col gap-4">
+            {visibleUpcoming.map((r, i) => (
+              <UpcomingCard key={String(r.id ?? i)} reservation={r} />
+            ))}
+          </div>
         ) : (
           <div className="rounded-xl border border-dashed border-white/10 bg-[#132345] px-6 py-12 text-center shadow-2xl">
             <span className="material-symbols-outlined mb-3 text-5xl text-[#d4af37]/40">directions_boat</span>

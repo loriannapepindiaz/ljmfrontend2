@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import BackButton from '../../../../components/BackButton';
 import SeguimientoHeader from '../components/SeguimientoHeader';
 import RutaProgreso from '../components/RutaProgreso';
@@ -8,77 +8,18 @@ import PaqueteDetalle from '../components/PaqueteDetalle';
 import HighlightsRow from '../components/HighlightsRow';
 import ItinerarioBanner from '../components/ItinerarioBanner';
 import {
-  getLocalVoyageHistoryData,
   voyageHistoryApi,
+  cancelReservation,
   type VoyageHistoryReservation,
+  type VoyageHistoryItem,
 } from '../../../voyayehistory/presentation/voyageHistoryData';
-import {
-  getLocalManageBookingData,
-  manageBookingApi,
-  type ManageBookingData,
-} from '../../../manageyourbooking/presentation/manageBookingData';
-import { profileApi, type ProfileHistoryItem, type ProfileReservation } from '../../../perfil/presentation/profileData';
+import { type ManageBookingData } from '../../../manageyourbooking/presentation/manageBookingData';
+import { request } from '../../../../lib/api';
+import { clearBookingDraft } from '../../../../lib/bookingDraft';
+
+type ManageBookingResponse = { ok: boolean; data: ManageBookingData };
 
 /* ── helpers ─────────────────────────────────────────────── */
-
-const hasRealText = (value: unknown): value is string => {
-  if (typeof value !== 'string') return false;
-  const n = value.trim().toLowerCase();
-  return Boolean(n && !n.startsWith('sin ') && !n.includes('por confirmar') && n !== 'ljm-pendiente');
-};
-
-const hasUsefulBookingData = (b: ManageBookingData | null) =>
-  Boolean(
-    b &&
-      (hasRealText(b.reference) ||
-        hasRealText(b.destinationName) ||
-        hasRealText(b.suiteName) ||
-        hasRealText(b.cabinLabel) ||
-        hasRealText(b.departureDate ?? null)),
-  );
-
-const pickRealText = (a: string | null | undefined, b: string | null | undefined, fallback = '') =>
-  hasRealText(a) ? a : hasRealText(b) ? b : a?.trim() || b?.trim() || fallback;
-
-const pickNum = (a: number | null | undefined, b: number | null | undefined) =>
-  Number.isFinite(a) && Number(a) > 0 ? Number(a) : Number.isFinite(b) && Number(b) > 0 ? Number(b) : a ?? b ?? null;
-
-const keepBetter = (cur: ManageBookingData | null, next: ManageBookingData | null) =>
-  hasUsefulBookingData(next) ? next : hasUsefulBookingData(cur) ? cur : next;
-
-const merge = (primary: ManageBookingData | null, fallback: ManageBookingData | null): ManageBookingData | null => {
-  if (!primary) return fallback;
-  if (!fallback) return primary;
-  return {
-    ...fallback, ...primary,
-    reference:       pickRealText(primary.reference, fallback.reference, 'Sin referencia'),
-    status:          pickRealText(primary.status, fallback.status, 'Confirmada'),
-    destinationName: pickRealText(primary.destinationName, fallback.destinationName, 'Reserva LJM Sealine'),
-    destinationImage: primary.destinationImage || fallback.destinationImage,
-    departureDate:   pickRealText(primary.departureDate ?? undefined, fallback.departureDate ?? undefined) || null,
-    returnDate:      pickRealText(primary.returnDate ?? undefined, fallback.returnDate ?? undefined) || null,
-    nights:          pickNum(primary.nights, fallback.nights),
-    route:           pickRealText(primary.route, fallback.route, 'Ruta por confirmar'),
-    suiteName:       pickRealText(primary.suiteName, fallback.suiteName, 'Suite por confirmar'),
-    cabinLabel:      pickRealText(primary.cabinLabel, fallback.cabinLabel, 'Cabina por confirmar'),
-    cabinNumber:     pickRealText(primary.cabinNumber ?? undefined, fallback.cabinNumber ?? undefined) || null,
-    suiteCapacity:   primary.suiteCapacity ?? fallback.suiteCapacity,
-    cruiseName:      primary.cruiseName ?? fallback.cruiseName,
-    suiteImage:      primary.suiteImage ?? fallback.suiteImage,
-    suiteDescription:primary.suiteDescription ?? fallback.suiteDescription,
-    itineraryName:   primary.itineraryName ?? fallback.itineraryName,
-    itineraryStops:  primary.itineraryStops?.length ? primary.itineraryStops : fallback.itineraryStops,
-    butler:          primary.butler ?? fallback.butler,
-    guestCount:      Math.max(primary.guestCount ?? 0, fallback.guestCount ?? 0),
-    guests:          primary.guests.length ? primary.guests : fallback.guests,
-    diningRequests:  primary.diningRequests.length ? primary.diningRequests : fallback.diningRequests,
-    excursions:      primary.excursions.length ? primary.excursions : fallback.excursions,
-    payments:        primary.payments.length ? primary.payments : fallback.payments,
-    total:           pickRealText(primary.total, fallback.total, '0 US$'),
-    paymentStatus:   pickRealText(primary.paymentStatus, fallback.paymentStatus, 'Por confirmar'),
-    animalCompanion: primary.animalCompanion ?? fallback.animalCompanion,
-  };
-};
 
 const fromVoyage = (r: VoyageHistoryReservation | null): ManageBookingData | null => {
   if (!r) return null;
@@ -110,45 +51,51 @@ const fromVoyage = (r: VoyageHistoryReservation | null): ManageBookingData | nul
   };
 };
 
-const fromProfile = (r: ProfileReservation | ProfileHistoryItem | null): ManageBookingData | null => {
-  if (!r) return null;
-  const rp = r as ProfileReservation;
-  const total = rp.total ?? 0;
-  const currency = rp.currency ?? 'USD';
-  return {
-    reservationId: rp.id ?? r.reservationId,
-    reference: rp.code ?? `LJM-${r.reservationId}`,
-    status: rp.status ?? 'Confirmada',
-    destinationName: r.destination || 'Reserva LJM Sealine',
-    destinationImage: rp.image ?? undefined,
-    departureDate: r.departureDate,
-    returnDate: r.returnDate,
-    nights: r.nights,
-    route: r.ship,
-    suiteName: r.cabin,
-    cabinLabel: r.cabin,
-    cabinNumber: null,
-    guestCount: Math.max(0, Number(rp.guests ?? 0)),
-    butler: { included: false },
-    guests: [],
-    diningRequests: [],
-    excursions: (rp.experiences ?? []).map(e => ({
-      id: e.id, imagen: '', nombre: e.name,
-      fecha: r.departureDate ?? 'Por confirmar',
-      puerto: r.destination, estado: 'Confirmada', precio: e.price,
-    })),
-    payments: [{ label: 'Estado de pago', value: rp.paymentStatus ?? 'Pagado', color: 'text-emerald-300' }],
-    total: new Intl.NumberFormat('es-ES', { style: 'currency', currency, maximumFractionDigits: 0 }).format(total),
-    paymentStatus: rp.paymentStatus ?? 'Pagado',
-  };
-};
-
-const withTimeout = async <T,>(p: Promise<T>, ms: number): Promise<T | null> => {
+const withTimeout = async <T,>(p: Promise<T> | null, ms: number): Promise<T | null> => {
+  if (!p) return null;
   let tid: number | undefined;
   const timeout = new Promise<null>(res => { tid = window.setTimeout(() => res(null), ms); });
   const result = await Promise.race([p.catch(() => null), timeout]);
   if (tid !== undefined) window.clearTimeout(tid);
   return result;
+};
+
+const applyVoyageBase = (
+  booking: ManageBookingData,
+  vhUpcoming: VoyageHistoryReservation[],
+  vhHistory: VoyageHistoryItem[],
+  currentId: string | null,
+): ManageBookingData => {
+  const id = currentId ?? String(booking.reservationId ?? '');
+
+  // Buscar en próximas reservas (tienen imagen y más datos)
+  const upcomingMatch = vhUpcoming.find(r => String(r.id) === id);
+  if (upcomingMatch) {
+    return {
+      ...booking,
+      destinationName: upcomingMatch.destination || booking.destinationName,
+      destinationImage: upcomingMatch.image ?? booking.destinationImage,
+      departureDate: upcomingMatch.departureDate ?? booking.departureDate,
+      returnDate: upcomingMatch.returnDate ?? booking.returnDate,
+      nights: upcomingMatch.nights ?? booking.nights,
+    };
+  }
+
+  // Buscar en historial (reservas pasadas — id puede ser id_reserva o id_historial)
+  const historyMatch = vhHistory.find(
+    r => String(r.id) === id || String(r.reservationId) === id,
+  );
+  if (historyMatch) {
+    return {
+      ...booking,
+      destinationName: historyMatch.destination || booking.destinationName,
+      departureDate: historyMatch.departureDate ?? booking.departureDate,
+      returnDate: historyMatch.returnDate ?? booking.returnDate,
+      nights: historyMatch.nights ?? booking.nights,
+    };
+  }
+
+  return booking;
 };
 
 /* ── Empty state ─────────────────────────────────────────── */
@@ -184,63 +131,249 @@ const EmptyState: React.FC = () => {
   );
 };
 
+/* ── Cancel modal ────────────────────────────────────────── */
+
+const CancelModal: React.FC<{
+  destination: string;
+  onConfirm: () => Promise<void>;
+  onClose: () => void;
+}> = ({ destination, onConfirm, onClose }) => {
+  const [cancelling, setCancelling] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleConfirm = async () => {
+    setCancelling(true);
+    setError(null);
+    try {
+      await onConfirm();
+      onClose();
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Error al cancelar');
+      setCancelling(false);
+    }
+  };
+
+  return (
+    <>
+      <div className="fixed inset-0 z-[80] bg-black/70 backdrop-blur-sm" onClick={onClose} />
+      <div className="fixed left-1/2 top-1/2 z-[90] w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-[#0e1a34] border border-white/10 p-8 shadow-2xl">
+        <h3 className="text-xl font-bold text-white" style={{ fontFamily: 'Newsreader, serif' }}>
+          ¿Cancelar reserva?
+        </h3>
+        <p className="mt-2 text-sm text-slate-400">
+          Estás a punto de cancelar <span className="font-semibold text-[#c8a96e]">{destination}</span>. Esta acción no se puede deshacer.
+        </p>
+        {error && <p className="mt-3 text-sm text-red-400">{error}</p>}
+        <div className="mt-6 flex gap-3">
+          <button
+            type="button"
+            onClick={onClose}
+            disabled={cancelling}
+            className="flex-1 rounded-xl border border-white/20 py-2.5 text-sm font-bold text-slate-300 transition hover:bg-white/5"
+          >
+            Mantener
+          </button>
+          <button
+            type="button"
+            onClick={handleConfirm}
+            disabled={cancelling}
+            className="flex-1 rounded-xl bg-red-600 py-2.5 text-sm font-bold text-white transition hover:bg-red-700 disabled:opacity-50"
+          >
+            {cancelling ? 'Cancelando...' : 'Sí, cancelar'}
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+/* ── Additional upcoming card ────────────────────────────── */
+
+const formatDate = (value: string | null | undefined) =>
+  value
+    ? new Intl.DateTimeFormat('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).format(new Date(value))
+    : 'Fecha por confirmar';
+
+const CARD_GRADIENTS = [
+  'from-[#1a3a5c] to-[#0e2040]',
+  'from-[#2d1a4a] to-[#1a0e34]',
+  'from-[#1a3a2d] to-[#0e2018]',
+  'from-[#3a2d1a] to-[#201a0e]',
+];
+
+const AdditionalUpcomingCard: React.FC<{ reservation: VoyageHistoryReservation; index?: number }> = ({ reservation, index = 0 }) => {
+  const navigate = useNavigate();
+  const gradient = CARD_GRADIENTS[index % CARD_GRADIENTS.length];
+
+  return (
+    <div className={`relative overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-br ${gradient}`}>
+      {reservation.image ? (
+        <img
+          src={reservation.image}
+          alt={reservation.destination}
+          className="absolute inset-0 w-full h-full object-cover opacity-15"
+        />
+      ) : null}
+      <div className="relative p-4 flex flex-col gap-3">
+        <div>
+          <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#c8a96e]/70 mb-1">Próxima Reserva</p>
+          <h3 className="text-sm font-bold text-white leading-tight">{reservation.destination}</h3>
+          <p className="text-[11px] text-slate-400 mt-0.5 truncate">{reservation.ship} · {reservation.cabin}</p>
+        </div>
+        <div className="flex gap-2 text-xs">
+          <div className="rounded-lg bg-black/20 px-3 py-1.5 flex-1">
+            <p className="text-[9px] uppercase tracking-widest text-slate-500">Salida</p>
+            <p className="font-bold text-white mt-0.5 text-[11px]">{formatDate(reservation.departureDate)}</p>
+          </div>
+          {reservation.nights ? (
+            <div className="rounded-lg bg-black/20 px-3 py-1.5 shrink-0">
+              <p className="text-[9px] uppercase tracking-widest text-slate-500">Noches</p>
+              <p className="font-bold text-white mt-0.5 text-[11px]">{reservation.nights}</p>
+            </div>
+          ) : null}
+        </div>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-[10px] text-slate-500 truncate">Reserva {reservation.code}</p>
+          <button
+            onClick={() => navigate(`/seguimiento-crucero?reservationId=${reservation.id}`)}
+            className="shrink-0 rounded-lg bg-[#c8a96e]/15 border border-[#c8a96e]/25 px-3 py-1 text-[10px] font-bold text-[#c8a96e] transition hover:bg-[#c8a96e]/25"
+          >
+            Ver detalle
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 /* ── Page ────────────────────────────────────────────────── */
 
 const SeguimientoCruceroPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const reservationId = searchParams.get('reservationId');
+
   const [booking, setBooking] = useState<ManageBookingData | null>(null);
+  const [additionalUpcoming, setAdditionalUpcoming] = useState<VoyageHistoryReservation[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showCancel, setShowCancel] = useState(false);
+  const [showAllUpcoming, setShowAllUpcoming] = useState(false);
 
   useEffect(() => {
-    const local = getLocalManageBookingData();
-    const localHistory = fromVoyage(getLocalVoyageHistoryData()?.upcomingReservation ?? null);
-    const immediate = merge(local, localHistory);
     let mounted = true;
+    setBooking(null);
+    setIsLoading(true);
+    setShowAllUpcoming(false);
+    setAdditionalUpcoming([]);
 
-    setBooking(hasUsefulBookingData(immediate) ? immediate : null);
-    setIsLoading(!hasUsefulBookingData(immediate));
+    const safety = window.setTimeout(() => { if (mounted) setIsLoading(false); }, 5000);
 
-    const safety = window.setTimeout(() => { if (mounted) setIsLoading(false); }, 4500);
-
+    const params = reservationId ? `?reservationId=${reservationId}` : '';
     Promise.all([
-      withTimeout(manageBookingApi.current(), 5000),
-      withTimeout(manageBookingApi.latest(), 5000),
-      withTimeout(voyageHistoryApi.current(), 5000),
-      withTimeout(profileApi.current(), 5000),
-    ]).then(([manageRes, latestRes, historyRes, profileRes]) => {
+      withTimeout(request<ManageBookingResponse>(`/manage-booking/current${params}`, { method: 'GET' }), 6000),
+      withTimeout(voyageHistoryApi.current(), 6000),
+    ]).then(([manageRes, historyRes]) => {
       if (!mounted) return;
 
-      const backend  = merge(manageRes?.data ?? null, latestRes?.data ?? null);
-      const history  = fromVoyage(historyRes?.data.upcomingReservation ?? null);
-      const profile  = fromProfile(profileRes?.data.upcomingReservation ?? profileRes?.data.travelHistory?.[0] ?? null);
-      const merged   = merge(backend, merge(profile, merge(history, immediate)));
+      const vhPrimary = historyRes?.data.upcomingReservation ?? null;
+      const vhOthers  = historyRes?.data.upcomingReservations ?? [];
+      const vhAll     = [...(vhPrimary ? [vhPrimary] : []), ...vhOthers];
+      const vhHistory = historyRes?.data.travelHistory ?? [];
 
-      setBooking(cur => keepBetter(cur, merged));
+      if (manageRes?.data) {
+        setBooking(applyVoyageBase(manageRes.data, vhAll, vhHistory, reservationId));
+      } else {
+        const found = reservationId
+          ? vhAll.find(r => String(r.id) === String(reservationId))
+          : vhPrimary;
+        setBooking(found ? fromVoyage(found) : null);
+      }
+
+      const currentId = reservationId ?? String(manageRes?.data?.reservationId ?? '');
+      const combined  = vhAll.filter(r => !currentId || String(r.id) !== currentId);
+      const seen = new Set<string>();
+      const deduped = combined.filter(r => { const k = String(r.id); return seen.has(k) ? false : (seen.add(k), true); });
+      setAdditionalUpcoming(
+        [...deduped].sort((a, b) => {
+          const da = a.departureDate ? new Date(a.departureDate).getTime() : Infinity;
+          const db = b.departureDate ? new Date(b.departureDate).getTime() : Infinity;
+          return da - db;
+        }),
+      );
     }).finally(() => {
       window.clearTimeout(safety);
       if (mounted) setIsLoading(false);
     });
 
     return () => { mounted = false; window.clearTimeout(safety); };
-  }, []);
+  }, [reservationId]);
+
+  const handleCancel = async () => {
+    if (!booking?.reservationId) throw new Error('Sin ID de reserva');
+    await cancelReservation(booking.reservationId);
+    clearBookingDraft();
+    sessionStorage.removeItem('ljm_booking_confirmation');
+    setBooking(null);
+    setAdditionalUpcoming([]);
+  };
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-[#060f1e] text-slate-100">
-      <BackButton />
+      <BackButton topClass="top-6" />
 
       <SeguimientoHeader booking={booking} isLoading={isLoading} />
 
-      <main className="w-full max-w-7xl mx-auto px-4 md:px-6 py-10">
+      <main className="w-full max-w-7xl mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-10">
 
         {/* Empty state — only when done loading and truly nothing */}
         {!isLoading && !booking && <EmptyState />}
 
         {(isLoading || booking) && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
 
             {/* Left column */}
             <div className="lg:col-span-4 flex flex-col gap-6">
               <BookingSummary booking={booking} isLoading={isLoading} />
               <RutaProgreso   booking={booking} isLoading={isLoading} />
+
+              {/* Cancel section */}
+              {booking && (
+                <div className="rounded-2xl border border-red-500/20 bg-red-500/[0.04] p-5">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-red-400/70 mb-2">Cancelación de reserva</p>
+                  <p className="text-xs text-slate-400 leading-relaxed mb-4">
+                    Cancelar el viaje eliminará tu reserva y liberará la cabina asignada. Esta acción no se puede deshacer y puede estar sujeta a cargos según la política de cancelación de LJM Sealine.
+                  </p>
+                  <button
+                    onClick={() => setShowCancel(true)}
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm font-bold text-red-400 transition hover:bg-red-500/20"
+                  >
+                    <span className="material-symbols-outlined text-base">cancel</span>
+                    Cancelar viaje
+                  </button>
+                </div>
+              )}
+
+              {/* Additional upcoming reservations — max 2 visible, expand with button */}
+              {additionalUpcoming.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-slate-500">Próximas reservas</p>
+                  {(showAllUpcoming ? additionalUpcoming : additionalUpcoming.slice(0, 1)).map((r, i) => (
+                    <AdditionalUpcomingCard key={String(r.id)} reservation={r} index={i} />
+                  ))}
+                  {additionalUpcoming.length > 1 && (
+                    <button
+                      onClick={() => setShowAllUpcoming(prev => !prev)}
+                      className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] py-2.5 text-xs font-bold text-slate-400 transition hover:bg-white/6 hover:text-white"
+                    >
+                      <span className="material-symbols-outlined text-sm">
+                        {showAllUpcoming ? 'expand_less' : 'expand_more'}
+                      </span>
+                      {showAllUpcoming
+                        ? 'Ver menos'
+                        : `Ver todos los viajes (${additionalUpcoming.length})`}
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Right column */}
@@ -266,6 +399,14 @@ const SeguimientoCruceroPage: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {showCancel && booking && (
+        <CancelModal
+          destination={booking.destinationName}
+          onConfirm={handleCancel}
+          onClose={() => setShowCancel(false)}
+        />
+      )}
     </div>
   );
 };

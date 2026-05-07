@@ -272,14 +272,22 @@ export const getFeaturedVessels = () => VESSELS.slice(0, 2);
 export const getSecondaryVessels = () => VESSELS.slice(2);
 
 export const normalizeVesselFromApi = (vessel: any): VesselData => {
-  const id = String(vessel.id ?? vessel.crucero_id ?? vessel.slug ?? vessel.nombre ?? vessel.title ?? '');
-  const fallback = getVesselById(id) ?? VESSELS[0];
+  const dbId = String(vessel.id ?? vessel.crucero_id ?? '');
+  const name = vessel.title ?? vessel.nombre ?? vessel.nombre_crucero ?? '';
+
+  // Match by slug first, then by name, then fall back to first static vessel
+  const fallback =
+    getVesselById(dbId) ??
+    VESSELS.find(v => v.title.toLowerCase() === name.toLowerCase()) ??
+    VESSELS[0];
+
+  // Always use the static slug as the id so navigation (/crucero/serenity) keeps working
   const image = vessel.imagen_url ?? vessel.imageSrc ?? vessel.hero_image ?? vessel.heroImage ?? fallback.imageSrc;
 
   return {
     ...fallback,
-    id,
-    title: vessel.title ?? vessel.nombre ?? vessel.nombre_crucero ?? fallback.title,
+    id: fallback.id,
+    title: name || fallback.title,
     subtitle: vessel.subtitle ?? vessel.categoria ?? vessel.clase ?? fallback.subtitle,
     className: vessel.className ?? vessel.clase ?? vessel.categoria ?? fallback.className,
     description: vessel.description ?? vessel.descripcion ?? fallback.description,

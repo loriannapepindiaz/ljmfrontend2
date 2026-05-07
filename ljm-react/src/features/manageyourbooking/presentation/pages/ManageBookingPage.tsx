@@ -1,4 +1,5 @@
 ﻿import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import Navbar from '../../../home/presentation/components/Navbar';
 import Footer from '../../../home/presentation/components/Footer';
 import BackButton from '../../../../components/BackButton';
@@ -10,7 +11,29 @@ import ExcursionsList from '../components/ExcursionsList';
 import PaymentDetails from '../components/PaymentDetails';
 import ConciergeCard from '../components/ConciergeCard';
 import { manageBookingApi, type ManageBookingData } from '../manageBookingData';
+import { request } from '../../../../lib/api';
+import { voyageHistoryApi, type VoyageHistoryReservation } from '../../../voyayehistory/presentation/voyageHistoryData';
 import { allExperiences } from '../../../experiences/data/experiences';
+
+type ManageBookingResponse = { ok: boolean; data: ManageBookingData };
+
+const applyVoyageBase = (
+  booking: ManageBookingData,
+  vhList: VoyageHistoryReservation[],
+  currentId: string | null,
+): ManageBookingData => {
+  const id = currentId ?? String(booking.reservationId ?? '');
+  const match = vhList.find(r => String(r.id) === id);
+  if (!match) return booking;
+  return {
+    ...booking,
+    destinationName: match.destination || booking.destinationName,
+    destinationImage: match.image ?? booking.destinationImage,
+    departureDate: match.departureDate ?? booking.departureDate,
+    returnDate: match.returnDate ?? booking.returnDate,
+    nights: match.nights ?? booking.nights,
+  };
+};
 
 type ModalName = 'guest' | 'excursion' | 'confirm-payment' | null;
 
@@ -58,6 +81,9 @@ const EmptyBookingState = () => (
 );
 
 const ManageBookingPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const reservationId = searchParams.get('reservationId');
+
   const [booking, setBooking] = useState<ManageBookingData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
@@ -72,13 +98,20 @@ const ManageBookingPage: React.FC = () => {
   const remainingGuestSlots = Math.max(suiteCapacity - currentGuests, 0);
   const capacityMessage = `Capacidad de la habitación: ${currentGuests}/${suiteCapacity} huésped${suiteCapacity === 1 ? '' : 'es'}. Puedes añadir ${remainingGuestSlots} acompañante${remainingGuestSlots === 1 ? '' : 's'} más.`;
 
-  const loadBooking = () => {
+  const loadBooking = (id: string | null) => {
     setIsLoading(true);
     setError(null);
+    const params = id ? `?reservationId=${id}` : '';
 
-    return manageBookingApi.current()
-      .then((response) => {
-        setBooking(response.data);
+    return Promise.all([
+      request<ManageBookingResponse>(`/manage-booking/current${params}`, { method: 'GET' }),
+      voyageHistoryApi.current().catch(() => null),
+    ])
+      .then(([manageRes, historyRes]) => {
+        const vhPrimary = historyRes?.data.upcomingReservation ?? null;
+        const vhOthers  = historyRes?.data.upcomingReservations ?? [];
+        const vhList    = [...(vhPrimary ? [vhPrimary] : []), ...vhOthers];
+        setBooking(applyVoyageBase(manageRes.data, vhList, id));
       })
       .catch((requestError) => {
         setBooking(null);
@@ -93,8 +126,8 @@ const ManageBookingPage: React.FC = () => {
   };
 
   useEffect(() => {
-    loadBooking();
-  }, []);
+    loadBooking(reservationId);
+  }, [reservationId]);
 
   const runAction = async (action: () => Promise<{ data: ManageBookingData }>) => {
     setIsSaving(true);

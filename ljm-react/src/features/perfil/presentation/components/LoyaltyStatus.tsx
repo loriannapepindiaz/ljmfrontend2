@@ -174,6 +174,8 @@ const LoyaltyStatus: React.FC<LoyaltyStatusProps> = ({ profile, isLoading, isSav
             <p className="text-[9px] text-slate-500 uppercase font-bold tracking-widest mb-2">Correo Electrónico</p>
             {isEditing ? (
               <input
+                id="profile-email"
+                name="email"
                 type="email"
                 value={tempEmail}
                 onChange={(e) => setTempEmail(e.target.value)}

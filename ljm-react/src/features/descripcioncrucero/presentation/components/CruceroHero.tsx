@@ -7,7 +7,7 @@ interface CruceroHeroProps {
 }
 
 const CruceroHero: React.FC<CruceroHeroProps> = ({ vessel }) => {
-  const title = vessel?.title || 'The Serenity';
+  const title = vessel?.title || 'LJM Sealine';
   const description = vessel?.description || 'Una obra maestra de arquitectura naval, que combina la serenidad arquitectónica con el ritmo de las mareas.';
   const heroImage = vessel?.heroImage || 'https://lh3.googleusercontent.com/aida-public/AB6AXuDtNJgtd1USMUa5nZZumatCZ05sKe2au3FQlBVMsKD8LOQJyKFPUX0fSRWAeM_KA3pYqStmKmLvcfSyjFSGF-qSOKUKsP0HeN-tVz8t94nZareXttPswLsDJt6QjZmuXPQigHwHOtxnovgIguemQNVdHWHp2RcRa34hYyoF0TBBmrWAXOU9qcRbS275yu6rzIrjHujh73E4dt8vEkVOVc_jv1YJaNWRLk1SGFWzvATmDqDJRWlTR_bUtJ5IYBkYIDj5w7IFg_4SLlpk';
 

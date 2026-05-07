@@ -70,18 +70,23 @@ const ReviewForm: React.FC<Props> = ({ client, history, isSaving, initialHistory
           <label className="block text-[11px] uppercase tracking-widest text-[#D9E2FF]/50">
             Viaje de tu historial
           </label>
-          <select
-            value={selectedHistoryId}
-            onChange={(event) => setSelectedHistoryId(event.target.value)}
-            className="w-full bg-[#06122C] border-none rounded-lg p-4 text-[#D9E2FF] focus:ring-1 focus:ring-[#DEC29E] outline-none"
-          >
-            <option value="">{history.length ? 'Selecciona un viaje' : 'Sin historial disponible'}</option>
-            {history.map((trip) => (
-              <option key={`${trip.historyId}-${trip.reservationId}`} value={trip.historyId}>
-                {trip.title} - {trip.ship} - Reserva {trip.reservationId}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={selectedHistoryId}
+              onChange={(event) => setSelectedHistoryId(event.target.value)}
+              className="w-full appearance-none bg-[#06122C] border-none rounded-lg p-4 pr-10 text-[#D9E2FF] focus:ring-1 focus:ring-[#DEC29E] outline-none cursor-pointer"
+            >
+              <option value="">{history.length ? 'Selecciona un viaje' : 'Sin historial disponible'}</option>
+              {history.map((trip) => (
+                <option key={`${trip.historyId}-${trip.reservationId}`} value={trip.historyId}>
+                  {trip.title} - {trip.ship} - Reserva {trip.reservationId}
+                </option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2">
+              <span className="material-symbols-outlined text-[#DEC29E] text-xl leading-none">expand_more</span>
+            </div>
+          </div>
         </div>
 
         <div className="space-y-2">

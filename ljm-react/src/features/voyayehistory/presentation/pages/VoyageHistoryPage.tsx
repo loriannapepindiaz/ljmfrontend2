@@ -93,7 +93,18 @@ const VoyageHistoryPage: React.FC = () => {
             </div>
           ) : null}
 
-          <UpcomingVoyageCard reservation={historyData?.upcomingReservation ?? null} isLoading={isLoading && !historyData?.upcomingReservation} />
+          <UpcomingVoyageCard
+            reservation={historyData?.upcomingReservation ?? null}
+            isLoading={isLoading && !historyData?.upcomingReservation}
+            extraUpcoming={historyData?.upcomingReservations ?? []}
+            onCancelled={(cancelledId) =>
+              setHistoryData(prev => prev ? {
+                ...prev,
+                upcomingReservation: prev.upcomingReservation?.id === cancelledId ? null : prev.upcomingReservation,
+                upcomingReservations: prev.upcomingReservations.filter(r => r.id !== cancelledId),
+              } : prev)
+            }
+          />
           <VoyageHistoryList items={historyData?.travelHistory ?? []} isLoading={isLoading} />
           <LoyaltySection data={historyData} isLoading={isLoading} />
 

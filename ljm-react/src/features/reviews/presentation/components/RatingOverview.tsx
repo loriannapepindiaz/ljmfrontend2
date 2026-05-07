@@ -19,7 +19,9 @@ const RatingOverview: React.FC<Props> = ({ summary, isLoading }) => {
             Mérito agregado
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-serif text-6xl font-bold text-[#D9E2FF]">{isLoading ? '--' : average.toFixed(1)}</span>
+            <span className="font-serif text-6xl font-bold text-[#D9E2FF]">
+              {!summary && isLoading ? '--' : Number(average).toFixed(1)}
+            </span>
             <span className="text-[#D9E2FF]/60 text-xl">/ 5</span>
           </div>
         </div>

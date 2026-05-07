@@ -77,6 +77,7 @@ export type ProfileData = {
     totalNights: number;
   };
   upcomingReservation: ProfileReservation | null;
+  upcomingReservations: ProfileReservation[];
   travelHistory: ProfileHistoryItem[];
   recommendation: {
     title: string;
@@ -261,6 +262,7 @@ const buildProfileFromHistory = (historyData: VoyageHistoryData | null): Profile
       totalNights: 0,
     },
     upcomingReservation: historyData?.upcomingReservation ?? null,
+    upcomingReservations: historyData?.upcomingReservations ?? [],
     travelHistory: historyData?.travelHistory ?? [],
     recommendation: buildUnregisteredRecommendation(historyData?.upcomingReservation ?? null, historyData?.travelHistory ?? []),
   };
@@ -345,6 +347,7 @@ const mergeProfileWithHistory = (profile: ProfileData, historyData: VoyageHistor
   loyalty: historyData?.loyalty ?? profile.loyalty,
   stats: mergeStats(profile, historyData),
   upcomingReservation: mergeUpcomingReservation(profile.upcomingReservation, historyData?.upcomingReservation ?? null),
+  upcomingReservations: profile.upcomingReservations?.length ? profile.upcomingReservations : historyData?.upcomingReservations ?? [],
   travelHistory: profile.travelHistory.length ? profile.travelHistory : historyData?.travelHistory ?? [],
   recommendation: buildUnregisteredRecommendation(
     mergeUpcomingReservation(profile.upcomingReservation, historyData?.upcomingReservation ?? null),

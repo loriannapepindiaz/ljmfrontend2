@@ -269,9 +269,13 @@ export const getLocalManageBookingData = (): ManageBookingData | null => {
 
 const normalizeManageBookingData = (booking: ManageBookingData): ManageBookingData => {
   const localBooking = getLocalManageBookingData();
+  const hasRealReservation = booking.reservationId && String(booking.reservationId) !== 'local';
   const listedGuests = booking.guests.length;
   const reportedGuests = booking.guestCount ?? listedGuests;
-  const companionCount = Math.max(reportedGuests, listedGuests, localBooking?.guestCount ?? 0);
+  // When backend has a real reservation ID, trust its guest count (don't inflate from stale local data)
+  const companionCount = hasRealReservation
+    ? Math.max(reportedGuests, listedGuests)
+    : Math.max(reportedGuests, listedGuests, localBooking?.guestCount ?? 0);
   const localAnimalCompanion = mergeLocalDraft().animalCompanion ?? null;
 
   return {
@@ -287,7 +291,8 @@ const normalizeManageBookingData = (booking: ManageBookingData): ManageBookingDa
     cabinLabel: pickRealText(booking.cabinLabel, localBooking?.cabinLabel, "Cabina por confirmar"),
     cabinNumber: pickRealText(booking.cabinNumber ?? undefined, localBooking?.cabinNumber ?? undefined) || null,
     guestCount: Math.max(0, companionCount),
-    guests: booking.guests.length ? booking.guests : localBooking?.guests ?? [],
+    // When backend has a real reservation, trust its guest list — even empty means companion was deleted
+    guests: hasRealReservation ? booking.guests : (booking.guests.length ? booking.guests : localBooking?.guests ?? []),
     excursions: booking.excursions.length ? booking.excursions : localBooking?.excursions ?? [],
     diningRequests: booking.diningRequests.length ? booking.diningRequests : localBooking?.diningRequests ?? [],
     payments: booking.payments.length ? booking.payments : localBooking?.payments ?? [],
@@ -298,13 +303,15 @@ const normalizeManageBookingData = (booking: ManageBookingData): ManageBookingDa
 };
 
 export const manageBookingApi = {
-  current: () =>
-    request<ManageBookingResponse>("/manage-booking/current", {
+  current: (reservationId?: string | number | null) => {
+    const params = reservationId ? `?reservationId=${reservationId}` : '';
+    return request<ManageBookingResponse>(`/manage-booking/current${params}`, {
       method: "GET",
     }).then((response) => ({
       ...response,
       data: normalizeManageBookingData(response.data),
-    })),
+    }));
+  },
 
   latest: () =>
     request<ManageBookingResponse>("/manage-booking/latest", {
