@@ -7,7 +7,7 @@ interface CruceroVisionProps {
 }
 
 const CruceroVision: React.FC<CruceroVisionProps> = ({ vessel }) => {
-  const title = vessel?.visionTitle || 'La Vision: Diseno en Movimiento';
+  const title = vessel?.visionTitle || 'La visión: Diseño en Movimiento';
   const text = vessel?.visionDescription || 'Inspirado en lineas minimalistas y la amplitud del mar abierto.';
   const quote = vessel?.visionQuote || 'No construimos un barco. Esculpimos un santuario que por casualidad navega a 24 nudos.';
   const gallery = vessel?.galleryImages;

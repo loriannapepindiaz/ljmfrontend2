@@ -10,6 +10,44 @@ import { normalizeSuiteFromApi, SUITES, type SuiteOption } from "../../data/suit
 import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
 import { cabinApi } from "../../../../lib/api";
 
+const normalizeRoomText = (value: unknown) =>
+  String(value ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const findBackendSuite = (suite: SuiteOption, backendSuites: SuiteOption[]) => {
+  const suiteTitle = normalizeRoomText(suite.title);
+
+  if (suite.id === "penthouse-deck") {
+    return backendSuites.find((item) => normalizeRoomText(item.title).includes("penthouse"));
+  }
+
+  return backendSuites.find((item) => {
+    const backendTitle = normalizeRoomText(item.title);
+    return backendTitle === suiteTitle || backendTitle.includes(suiteTitle) || suiteTitle.includes(backendTitle);
+  });
+};
+
+const mergeCuratedWithBackend = (backendSuites: SuiteOption[]) =>
+  SUITES.map((suite) => {
+    const backendSuite = findBackendSuite(suite, backendSuites);
+
+    if (!backendSuite) return suite;
+
+    return {
+      ...suite,
+      id: backendSuite.id,
+      idHabitacion: backendSuite.idHabitacion,
+      idTipoHabitacion: backendSuite.idTipoHabitacion,
+      id_habitacion: backendSuite.id_habitacion,
+      id_tipo_habitacion: backendSuite.id_tipo_habitacion,
+      pricePerNight: backendSuite.pricePerNight || suite.pricePerNight,
+    };
+  });
+
 const RoomPage: FC = () => {
   const navigate = useNavigate();
   const [suites, setSuites] = useState<SuiteOption[]>(SUITES);
@@ -22,15 +60,7 @@ const RoomPage: FC = () => {
       .then((response) => {
         if (response.data?.length) {
           const backendSuites = response.data.map(normalizeSuiteFromApi);
-          const curatedSuites = SUITES.map((suite) => {
-            const backendMatch = backendSuites.find(
-              (item) => item.title.toLowerCase() === suite.title.toLowerCase(),
-            );
-
-            return backendMatch ? { ...suite, ...backendMatch, id: suite.id } : suite;
-          });
-
-          setSuites(curatedSuites);
+          setSuites(mergeCuratedWithBackend(backendSuites));
         }
       })
       .catch(() => {
@@ -72,8 +102,8 @@ const RoomPage: FC = () => {
           <RoomLayout>
             <div className="flex flex-col gap-10 p-6 md:p-12 relative bg-[#0e1a34] rounded-b-xl border-t border-accent/10">
               <SectionTitle
-                title="Eleva Tu Travesia"
-                subtitle="Selecciona el tipo de habitacion para personalizar tu estancia."
+                title="Eleva Tu Travesía"
+                subtitle="Selecciona el tipo de habitación para personalizar tu estancia."
               />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

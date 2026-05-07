@@ -1,11 +1,19 @@
-const meta = [
-  { label: "Client Name", value: "Sin cliente" },
-  { label: "Member ID", value: "Sin ID" },
-  { label: "Issue Date", value: "Sin fecha" },
-  { label: "Boarding", value: "Sin embarque" },
+import type { InvoiceViewData } from "../invoiceData";
+
+type InvoiceMetaGridProps = {
+  invoice: InvoiceViewData;
+};
+
+const getMeta = (invoice: InvoiceViewData) => [
+  { label: "Cliente", value: invoice.clientName },
+  { label: "ID de miembro", value: invoice.memberId },
+  { label: "Emision", value: invoice.issueDate },
+  { label: "Embarque", value: invoice.boarding },
 ];
 
-export default function InvoiceMetaGrid() {
+export default function InvoiceMetaGrid({ invoice }: InvoiceMetaGridProps) {
+  const meta = getMeta(invoice);
+
   return (
     <div className="invoice-meta-grid relative z-10 mb-12 grid grid-cols-1 gap-4 border-y border-slate-200 py-6 md:grid-cols-4">
       {meta.map((item) => (

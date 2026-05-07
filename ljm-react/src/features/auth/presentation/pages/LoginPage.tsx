@@ -24,7 +24,7 @@ export default function LoginPage() {
 
     try {
       const session = await authApi.login({ username, password });
-      persistAuthSession(session);
+      persistAuthSession(session, username);
       navigate(consumePostAuthRedirect() ?? '/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'No se pudo iniciar sesión.');

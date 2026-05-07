@@ -18,11 +18,14 @@ export type CreatePaymentPayload = {
 
 export type PaymentRecord = {
   id: string | number;
+  reservationId?: string | number;
   amount: number;
   currency: string;
   status: string;
   method: PaymentMethod;
   createdAt?: string;
+  reference?: string;
+  paidAt?: string;
 };
 
 type CreatePaymentResponse = {

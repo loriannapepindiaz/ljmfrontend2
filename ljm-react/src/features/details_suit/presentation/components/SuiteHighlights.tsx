@@ -38,7 +38,7 @@ const SuiteHighlights: React.FC<SuiteHighlightsProps> = ({ suite }) => {
           <div>
             <span className="material-symbols-outlined mb-3 text-5xl text-gray-300">hotel</span>
             <p className="text-sm font-bold uppercase tracking-widest text-night-blue">Sin destacados</p>
-            <p className="mt-2 text-sm text-gray-500">Los destacados apareceran cuando se seleccione una suite real.</p>
+            <p className="mt-2 text-sm text-gray-500">Los destacados aparecerán cuando se seleccione una suite real.</p>
           </div>
         </div>
       )}

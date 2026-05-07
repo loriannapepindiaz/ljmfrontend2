@@ -1,8 +1,38 @@
 import React from 'react';
+import type { ManageBookingData } from '../manageBookingData';
 
-const reservas: Array<{ label: string; nombre: string; detalle: string }> = [];
+type Props = {
+  reservas?: ManageBookingData['diningRequests'];
+  onAddRequest?: () => void;
+  onReserveTable?: () => void;
+};
 
-const DiningRequests: React.FC = () => {
+const cleanText = (value: string) => {
+  if (!value?.trim()) return 'Pendiente';
+
+  try {
+    const parsed = JSON.parse(value);
+    if (parsed && typeof parsed === 'object') {
+      const services = Array.isArray(parsed.services)
+        ? parsed.services.filter((service: { active?: boolean }) => service.active).length
+        : 0;
+      const pieces = [
+        parsed.pillow?.label ? `Almohada: ${parsed.pillow.label}` : null,
+        services ? `${services} servicio${services === 1 ? '' : 's'} activo${services === 1 ? '' : 's'}` : null,
+        parsed.additionalRequirements ? `Requisitos: ${parsed.additionalRequirements}` : null,
+        parsed.specialRequest ? `Solicitud: ${parsed.specialRequest}` : null,
+      ].filter(Boolean);
+
+      return pieces.join(' | ') || 'Preferencias registradas';
+    }
+  } catch {
+    return value;
+  }
+
+  return value;
+};
+
+const DiningRequests: React.FC<Props> = ({ reservas = [], onAddRequest, onReserveTable }) => {
   return (
     <div
       className="rounded-xl p-6"
@@ -14,11 +44,11 @@ const DiningRequests: React.FC = () => {
           Restauracion y Solicitudes
         </h4>
         <div className="flex gap-3">
-          <button className="px-3 py-1.5 rounded border border-[#eacea9]/30 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/10 transition-all uppercase tracking-widest flex items-center gap-1">
+          <button onClick={onAddRequest} className="px-3 py-1.5 rounded border border-[#eacea9]/30 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/10 transition-all uppercase tracking-widest flex items-center gap-1">
             <span className="material-symbols-outlined text-xs">add</span>
-            Anadir Solicitud
+            Añadir solicitud
           </button>
-          <button className="px-3 py-1.5 rounded bg-[#eacea9]/10 border border-[#eacea9]/20 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/20 transition-all uppercase tracking-widest">
+          <button onClick={onReserveTable} className="px-3 py-1.5 rounded bg-[#eacea9]/10 border border-[#eacea9]/20 text-[#eacea9] text-[10px] font-bold hover:bg-[#eacea9]/20 transition-all uppercase tracking-widest">
             Reservar Mesa
           </button>
         </div>
@@ -28,14 +58,14 @@ const DiningRequests: React.FC = () => {
         {reservas.length === 0 ? (
           <div className="rounded-lg border border-dashed border-white/10 bg-white/[0.03] px-4 py-8 text-center md:col-span-2">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin solicitudes de restauracion</p>
-            <p className="mt-2 text-xs text-slate-500">Las solicitudes apareceran cuando se registren preferencias o reservas de mesa.</p>
+            <p className="mt-2 text-xs text-slate-500">Las solicitudes aparecerán cuando se registren preferencias o reservas de mesa.</p>
           </div>
         ) : reservas.map((r) => (
           <div key={r.label} className="p-4 rounded-lg border border-white/5 bg-white/[0.03] flex justify-between items-start">
             <div>
               <p className="text-xs text-slate-400 font-bold uppercase mb-1">{r.label}</p>
               <p className="font-bold text-white">{r.nombre}</p>
-              <p className="text-xs text-[#eacea9]">{r.detalle}</p>
+              <p className="text-xs text-[#eacea9]">{cleanText(r.detalle)}</p>
             </div>
             <button className="text-slate-500 hover:text-red-400 transition-colors">
               <span className="material-symbols-outlined text-lg">delete</span>

@@ -1,45 +1,52 @@
 import React from 'react';
+import type { ReviewsData } from '../reviewsData';
 
-const bars = [
-  { label: '5 STARS', pct: '72%', count: 89 },
-  { label: '4 STARS', pct: '18%', count: 22 },
-  { label: '3 STARS', pct: '6%',  count: 7  },
-  { label: '2 STARS', pct: '3%',  count: 4  },
-  { label: '1 STAR',  pct: '1%',  count: 2  },
-];
+type Props = {
+  summary: ReviewsData['summary'] | null;
+  isLoading: boolean;
+};
 
-const RatingOverview: React.FC = () => {
+const RatingOverview: React.FC<Props> = ({ summary, isLoading }) => {
+  const average = summary?.average ?? 0;
+  const total = summary?.total ?? 0;
+  const distribution = summary?.distribution ?? [5, 4, 3, 2, 1].map((stars) => ({ stars, count: 0, pct: 0 }));
+
   return (
     <div className="bg-[#0F1B35] p-8 rounded-lg shadow-sm">
       <div className="flex items-end gap-6 mb-8">
         <div>
           <div className="font-label text-xs uppercase tracking-[0.2em] text-[#DEC29E] mb-2">
-            Mérito Agregado
+            Mérito agregado
           </div>
           <div className="flex items-center gap-2">
-            <span className="font-serif text-6xl font-bold text-[#D9E2FF]">4.3</span>
+            <span className="font-serif text-6xl font-bold text-[#D9E2FF]">{isLoading ? '--' : average.toFixed(1)}</span>
             <span className="text-[#D9E2FF]/60 text-xl">/ 5</span>
           </div>
         </div>
         <div className="flex flex-col mb-1">
           <div className="flex text-[#DEC29E] mb-1">
-            {['star', 'star', 'star', 'star'].map((_, i) => (
-              <span key={i} className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+            {Array.from({ length: 5 }).map((_, i) => (
+              <span
+                key={i}
+                className="material-symbols-outlined"
+                style={{ fontVariationSettings: i < Math.round(average) ? "'FILL' 1" : "'FILL' 0" }}
+              >
+                star
+              </span>
             ))}
-            <span className="material-symbols-outlined">star_half</span>
           </div>
           <span className="text-[10px] uppercase tracking-widest text-[#D9E2FF]/50">
-            Verificado por 124 Navegantes
+            {total} reseñas verificadas
           </span>
         </div>
       </div>
 
       <div className="space-y-3">
-        {bars.map(({ label, pct, count }) => (
-          <div key={label} className="flex items-center gap-4">
-            <span className="text-[10px] w-12 text-[#D9E2FF]/50 uppercase">{label}</span>
+        {distribution.map(({ stars, pct, count }) => (
+          <div key={stars} className="flex items-center gap-4">
+            <span className="text-[10px] w-12 text-[#D9E2FF]/50 uppercase">{stars} star</span>
             <div className="flex-1 h-1.5 bg-[#06122C] rounded-full overflow-hidden">
-              <div className="h-full bg-[#DEC29E]" style={{ width: pct }} />
+              <div className="h-full bg-[#DEC29E]" style={{ width: `${pct}%` }} />
             </div>
             <span className="text-[10px] w-8 text-right text-[#D9E2FF]/50">{count}</span>
           </div>

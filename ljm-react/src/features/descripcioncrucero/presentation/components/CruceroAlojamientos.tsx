@@ -82,7 +82,7 @@ const CruceroAlojamientos: React.FC<CruceroAlojamientosProps> = ({ vessel }) => 
               Retiros Magistrales
             </h2>
             <p className="text-[#45464d] mt-6 text-lg">
-              Cada camarote del {vessel?.title || 'The Serenity'} es un ambiente a medida, con materiales nobles, servicio privado y vistas panoramicas de suelo a techo.
+              Cada camarote del {vessel?.title || 'The Serenity'} es un ambiente a medida, con materiales nobles, servicio privado y vistas panorámicas de suelo a techo.
             </p>
           </div>
           <div className="flex gap-4">

@@ -96,6 +96,16 @@ type ApiErrorResponse = {
 
 const getAuthToken = () => localStorage.getItem('ljm_auth_token') ?? localStorage.getItem('ljm_admin_token');
 
+export class ApiRequestError extends Error {
+  status?: number;
+
+  constructor(message: string, status?: number) {
+    super(message);
+    this.name = 'ApiRequestError';
+    this.status = status;
+  }
+}
+
 export const request = async <T>(path: string, options: RequestInit): Promise<T> => {
   let response: Response;
   const token = getAuthToken();
@@ -111,7 +121,7 @@ export const request = async <T>(path: string, options: RequestInit): Promise<T>
     });
   } catch (error) {
     if (error instanceof TypeError) {
-      throw new Error(`No se pudo conectar con el servidor (${API_BASE_URL}). Verifica que el backend esté encendido y permita solicitudes desde este frontend.`);
+      throw new ApiRequestError(`No se pudo conectar con el servidor (${API_BASE_URL}). Verifica que el backend esté encendido y permita solicitudes desde este frontend.`);
     }
 
     throw error;
@@ -120,7 +130,10 @@ export const request = async <T>(path: string, options: RequestInit): Promise<T>
   const data = (await response.json().catch(() => ({}))) as T | ApiErrorResponse;
 
   if (!response.ok) {
-    throw new Error('message' in data && data.message ? data.message : 'No se pudo completar la solicitud.');
+    throw new ApiRequestError(
+      'message' in data && data.message ? data.message : 'No se pudo completar la solicitud.',
+      response.status,
+    );
   }
 
   return data as T;
@@ -229,9 +242,33 @@ export const bookingDraftApi = {
     }),
 };
 
-export const persistAuthSession = ({ token, user }: AuthResponse) => {
+const isEmail = (value: unknown): value is string =>
+  typeof value === 'string' && /\S+@\S+\.\S+/.test(value.trim());
+
+export const persistAuthSession = ({ token, user }: AuthResponse, fallbackEmail?: string) => {
+  const email = isEmail(user.cliente?.email)
+    ? user.cliente.email.trim()
+    : isEmail(user.email)
+      ? user.email.trim()
+      : isEmail(fallbackEmail)
+        ? fallbackEmail.trim()
+        : null;
+  const userWithEmail: AuthUser = {
+    ...user,
+    email: email ?? user.email,
+    cliente: user.cliente
+      ? {
+          ...user.cliente,
+          email: email ?? user.cliente.email,
+        }
+      : user.cliente,
+  };
+
   localStorage.setItem('ljm_auth_token', token);
-  localStorage.setItem('ljm_auth_user', JSON.stringify(user));
+  localStorage.setItem('ljm_auth_user', JSON.stringify(userWithEmail));
+  if (email) {
+    localStorage.setItem('ljm_auth_email', email);
+  }
 };
 
 export const persistAdminSession = ({ token, user }: AuthResponse) => {

@@ -1,8 +1,11 @@
-import React from 'react';
+﻿import React from 'react';
+import type { ManageBookingData } from '../manageBookingData';
 
-const payments: Array<{ label: string; value: string; color: string }> = [];
+type Props = {
+  payments?: ManageBookingData['payments'];
+};
 
-const PaymentDetails: React.FC = () => {
+const PaymentDetails: React.FC<Props> = ({ payments = [] }) => {
   return (
     <div
       className="rounded-xl p-6 shadow-[0_0_30px_rgba(120,93,50,0.05)]"
@@ -10,14 +13,14 @@ const PaymentDetails: React.FC = () => {
     >
       <h4 className="text-xl font-bold mb-6 flex items-center gap-3 text-white">
         <span className="material-symbols-outlined text-[#eacea9]">account_balance_wallet</span>
-        Detalles de Pago
+        Detalles de pago
       </h4>
 
       <div className="space-y-3 mb-6">
         {payments.length === 0 ? (
           <div className="rounded-lg border border-dashed border-white/10 bg-white/[0.03] px-4 py-8 text-center">
             <p className="text-xs font-bold uppercase tracking-widest text-slate-400">Sin movimientos de pago</p>
-            <p className="mt-2 text-xs text-slate-500">Los pagos apareceran cuando exista una reserva activa.</p>
+            <p className="mt-2 text-xs text-slate-500">Los pagos aparecerán cuando exista una reserva activa.</p>
           </div>
         ) : payments.map((item) => (
           <div key={item.label} className="flex justify-between text-sm">
@@ -31,3 +34,4 @@ const PaymentDetails: React.FC = () => {
 };
 
 export default PaymentDetails;
+

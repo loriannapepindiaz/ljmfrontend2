@@ -121,10 +121,18 @@ const ConfigSeguridad: React.FC<Props> = ({ twoFactorEnabled, onTwoFactorChange 
   };
 
   const enableTwoFactor = async () => {
-    if (!pendingSecret) { setTwoFactorError('No pudimos generar el secreto. Intenta otra vez.'); return; }
-    setIsVerifying(true); setTwoFactorError(null);
-    const valid = await verifyTotpCode(pendingSecret, verificationCode);
-    if (!valid) { setIsVerifying(false); setTwoFactorError('El código no coincide. Revisa la app y prueba otra vez.'); return; }
+    if (!pendingSecret) {
+      setTwoFactorError('No pudimos generar el secreto. Intenta otra vez.');
+      return;
+    }
+    setIsVerifying(true);
+    setTwoFactorError(null);
+    const isValid = await verifyTotpCode(pendingSecret, verificationCode);
+    if (!isValid) {
+      setIsVerifying(false);
+      setTwoFactorError('El código no coincide. Revisa la app y prueba otra vez.');
+      return;
+    }
     localStorage.setItem(TWO_FACTOR_SECRET_KEY, pendingSecret);
     localStorage.setItem(TWO_FACTOR_ENABLED_KEY, 'true');
     localStorage.removeItem(TWO_FACTOR_DRAFT_SECRET_KEY);
@@ -175,7 +183,7 @@ const ConfigSeguridad: React.FC<Props> = ({ twoFactorEnabled, onTwoFactorChange 
               {twoFactorEnabled && (
                 <>
                   <p className={`text-[11px] ${dark ? 'text-slate-500' : 'text-slate-400'}`}>Proveedor: Google Authenticator, Authy o cualquier app compatible con TOTP.</p>
-                  <p className={`text-[11px] ${dark ? 'text-slate-500' : 'text-slate-400'}`}>El código seguirá cambiando cada 30 segundos y eso es normal.</p>
+                  <p className={`text-[11px] ${dark ? 'text-slate-500' : 'text-slate-400'}`}>El código seguirá cambiando cada 30 segundos y eso es normal. No necesitas borrar la cuenta del autenticador.</p>
                 </>
               )}
               {twoFactorMessage && <p className="pt-1 text-[11px] font-medium text-emerald-600">{twoFactorMessage}</p>}
@@ -307,10 +315,15 @@ const ConfigSeguridad: React.FC<Props> = ({ twoFactorEnabled, onTwoFactorChange 
 
             <div className="mt-5">
               <label className={`mb-2 block text-[11px] font-bold uppercase tracking-[0.22em] ${dark ? 'text-slate-400' : 'text-[#0e1a34]/50'}`}>Código de verificación</label>
-              <input className={`w-full rounded-2xl border px-4 py-3 text-center text-lg tracking-[0.35em] outline-none focus:border-[#eacea9] focus:ring-2 focus:ring-[#eacea9]/40 ${dark ? 'border-slate-600 bg-slate-900 text-white placeholder:text-slate-500' : 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400'}`}
-                inputMode="numeric" maxLength={6} placeholder="000000" value={verificationCode}
-                onChange={(e) => { setVerificationCode(e.target.value.replace(/\D/g,'').slice(0,6)); if (twoFactorError) setTwoFactorError(null); }} />
-              <p className={`mt-2 text-xs ${dark ? 'text-slate-400' : 'text-slate-500'}`}>El código cambia cada 30 segundos. Usa el valor visible en tu app.</p>
+              <input
+                className={`w-full rounded-2xl border px-4 py-3 text-center text-lg tracking-[0.35em] outline-none focus:border-[#eacea9] focus:ring-2 focus:ring-[#eacea9]/40 ${dark ? 'border-slate-600 bg-slate-900 text-white placeholder:text-slate-500' : 'border-slate-200 bg-white text-slate-900 placeholder:text-slate-400'}`}
+                inputMode="numeric" maxLength={6} placeholder="000000" type="text" value={verificationCode}
+                onChange={(e) => {
+                  const nextValue = e.target.value.replace(/\D/g, '').slice(0, 6);
+                  setVerificationCode(nextValue);
+                  if (twoFactorError && /^\d{6}$/.test(nextValue)) setTwoFactorError(null);
+                }} />
+              <p className={`mt-2 text-xs ${dark ? 'text-slate-400' : 'text-slate-500'}`}>El código cambia cada 30 segundos. Usa el valor visible en tu app para validar este acceso.</p>
               {twoFactorError && <p className="mt-2 text-xs font-medium text-red-500">{twoFactorError}</p>}
             </div>
 

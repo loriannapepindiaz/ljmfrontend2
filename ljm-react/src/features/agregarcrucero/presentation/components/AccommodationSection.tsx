@@ -9,8 +9,8 @@ interface Suite {
 }
 
 const initialSuites: Suite[] = [
-  { tipo: 'Suite Real del Almirante', desc: 'Balcon Privado & Jacuzzi', cantidad: 12, capacidad: 2 },
-  { tipo: 'Habitacion Deluxe Balcon', desc: 'Vistas al Mar', cantidad: 150, capacidad: 4 },
+  { tipo: 'Suite Real del Almirante', desc: 'Balcón privado & jacuzzi', cantidad: 12, capacidad: 2 },
+  { tipo: 'Habitación Deluxe Balcón', desc: 'Vistas al mar', cantidad: 150, capacidad: 4 },
 ];
 
 const emptySuite: Suite = {
@@ -81,7 +81,7 @@ const AccommodationSection: React.FC = () => {
                 Nuevo tipo de alojamiento
               </h4>
               <p className="mt-1 text-sm text-slate-500">
-                Agrega una cabina o suite y se mostrara inmediatamente en la lista.
+                Agrega una cabina o suite y se mostrará inmediatamente en la lista.
               </p>
             </div>
             <button
@@ -109,11 +109,11 @@ const AccommodationSection: React.FC = () => {
 
             <div className="space-y-2">
               <label className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-                Descripcion
+                Descripción
               </label>
               <input
                 className={inputClass}
-                placeholder="Ej. Vista panoramica y sala privada"
+                placeholder="Ej. Vista panorámica y sala privada"
                 type="text"
                 value={draft.desc}
                 onChange={(e) => setDraft((prev) => ({ ...prev, desc: e.target.value }))}
@@ -191,7 +191,7 @@ const AccommodationSection: React.FC = () => {
               <tr key={`${s.tipo}-${i}`}>
                 <td className="py-4">
                   <div className="font-bold text-slate-800">{s.tipo}</div>
-                  <div className="text-[10px] text-slate-400">{s.desc || 'Sin descripcion adicional'}</div>
+                  <div className="text-[10px] text-slate-400">{s.desc || 'Sin descripción adicional'}</div>
                 </td>
                 <td className="py-4 text-center font-medium text-slate-700">{s.cantidad}</td>
                 <td className="py-4 text-center font-medium text-slate-700">{s.capacidad}</td>

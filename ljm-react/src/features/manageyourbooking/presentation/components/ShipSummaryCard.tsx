@@ -1,20 +1,40 @@
 import React from 'react';
+import type { ManageBookingData } from '../manageBookingData';
 
-const ShipSummaryCard: React.FC = () => {
+type Props = {
+  booking?: ManageBookingData | null;
+};
+
+const ShipSummaryCard: React.FC<Props> = ({ booking }) => {
   return (
     <div
-      className="rounded-xl overflow-hidden mb-10 flex flex-col md:flex-row shadow-2xl"
+      className="mb-8 flex flex-col overflow-hidden rounded-xl shadow-xl md:flex-row"
       style={{ background: 'rgba(255,255,255,0.02)', backdropFilter: 'blur(16px)', border: '1px solid rgba(234,230,169,0.1)' }}
     >
-      <div className="md:w-1/3 h-48 md:h-auto bg-white/[0.03] flex items-center justify-center">
-        <span className="material-symbols-outlined text-6xl text-[#eacea9]/20">directions_boat</span>
+      <div className="flex h-40 items-center justify-center bg-white/[0.03] md:h-52 md:w-[34%]">
+        {booking?.destinationImage ? (
+          <img
+            alt={booking.destinationName}
+            className="h-full w-full object-cover"
+            src={booking.destinationImage}
+          />
+        ) : (
+          <span className="material-symbols-outlined text-5xl text-[#eacea9]/20">travel_explore</span>
+        )}
       </div>
-      <div className="p-8 flex-1 flex flex-col justify-center">
-        <h3 className="text-2xl font-bold text-white mb-2">Sin barco asignado</h3>
-        <p className="text-slate-400 mb-6 flex items-center gap-2">
-          <span className="material-symbols-outlined text-[#eacea9]">info</span>
-          Esta seccion se completa con los datos reales de la reserva.
+      <div className="flex flex-1 flex-col justify-center p-5 md:p-6">
+        <h3 className="mb-2 text-xl font-bold text-white md:text-2xl">{booking?.destinationName ?? 'Destino de la reserva'}</h3>
+        <p className="mb-4 flex items-center gap-2 text-sm text-slate-400">
+          <span className="material-symbols-outlined text-base text-[#eacea9]">info</span>
+          {booking?.route ?? 'Los detalles aparecerán cuando exista una reserva activa.'}
         </p>
+        {booking ? (
+          <div className="grid gap-3 text-sm text-slate-300 sm:grid-cols-3">
+            <span><strong className="text-[#eacea9]">Estado:</strong> {booking.status}</span>
+            <span><strong className="text-[#eacea9]">Habitación:</strong> {booking.suiteName}</span>
+            <span><strong className="text-[#eacea9]">Total:</strong> {booking.total}</span>
+          </div>
+        ) : null}
       </div>
     </div>
   );

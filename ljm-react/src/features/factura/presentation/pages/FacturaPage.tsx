@@ -1,5 +1,6 @@
 import { Printer, Home } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import BackButton from "../../../../components/BackButton";
 import { InvoiceSheetHeader } from "../components/InvoiceHeader";
 import InvoiceMetaGrid from "../components/InvoiceMetaGrid";
@@ -7,9 +8,53 @@ import InvoiceSidebar from "../components/InvoiceSidebar";
 import InvoiceItemsTable from "../components/InvoiceItemsTable";
 import InvoiceSheetFooter from "../components/InvoiceSheetFooter";
 import InvoicePageFooter from "../components/InvoicePageFooter";
+import {
+  buildInvoiceData,
+  buildInvoiceDataFromBackend,
+  fetchInvoiceByReservation,
+  loadInvoiceConfirmation,
+  mergeInvoiceData,
+  type InvoiceViewData,
+} from "../invoiceData";
 
 export default function FacturaPage() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const confirmation = useMemo(() => loadInvoiceConfirmation(state), [state]);
+  const fallbackInvoice = useMemo(() => buildInvoiceData(confirmation), [confirmation]);
+  const [invoice, setInvoice] = useState<InvoiceViewData>(fallbackInvoice);
+  const [invoiceError, setInvoiceError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const reservationId = confirmation.payment?.reservationId ?? confirmation.bookingDraft?.reservationId;
+
+    setInvoice(fallbackInvoice);
+
+    if (!reservationId) {
+      setInvoiceError(null);
+      return;
+    }
+
+    let mounted = true;
+    setInvoiceError(null);
+
+    fetchInvoiceByReservation(reservationId)
+      .then((response) => {
+        if (mounted) {
+          setInvoice(mergeInvoiceData(fallbackInvoice, buildInvoiceDataFromBackend(response.data)));
+        }
+      })
+      .catch((error) => {
+        if (mounted) {
+          setInvoiceError(error instanceof Error ? error.message : "No se pudo cargar la factura desde el servidor.");
+        }
+      })
+      .finally(() => undefined);
+
+    return () => {
+      mounted = false;
+    };
+  }, [confirmation, fallbackInvoice]);
 
   return (
     <div className="bg-[#06122c] font-sans text-[#0e1a34] selection:bg-[#eacea9] selection:text-[#0e1a34] factura-print-page">
@@ -198,15 +243,21 @@ export default function FacturaPage() {
             LJM Sealine
           </div>
 
-          <InvoiceSheetHeader />
-          <InvoiceMetaGrid />
+          {invoiceError && (
+            <div className="factura-print-hide relative z-20 mb-6 rounded-xl border border-red-200 bg-red-50 px-5 py-3 text-sm text-red-700">
+              {invoiceError}
+            </div>
+          )}
+
+          <InvoiceSheetHeader invoice={invoice} />
+          <InvoiceMetaGrid invoice={invoice} />
 
           <div className="invoice-content-row relative z-10 flex flex-col gap-8 md:flex-row md:gap-12">
-            <InvoiceSidebar />
-            <InvoiceItemsTable />
+            <InvoiceSidebar invoice={invoice} />
+            <InvoiceItemsTable invoice={invoice} />
           </div>
 
-          <InvoiceSheetFooter />
+          <InvoiceSheetFooter invoice={invoice} />
         </div>
 
         <div className="factura-print-hide mt-12 flex justify-center gap-4">

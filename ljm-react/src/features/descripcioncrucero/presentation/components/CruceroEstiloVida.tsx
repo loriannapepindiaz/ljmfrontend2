@@ -8,16 +8,16 @@ interface CruceroEstiloVidaProps {
 
 const defaultItems = [
   {
-    title: 'Gastronomia',
-    description: 'Tres exclusivos espacios gastronomicos, incluyendo experiencias privadas al aire libre.',
+    title: 'Gastronomía',
+    description: 'Tres exclusivos espacios gastronómicos, incluyendo experiencias privadas al aire libre.',
   },
   {
     title: 'Centro de Bienestar',
-    description: 'Un spa completo, sauna y gimnasio panoramico con vistas a la piscina de popa.',
+    description: 'Un spa completo, sauna y gimnasio panorámico con vistas a la piscina de popa.',
   },
   {
     title: 'Beach Club',
-    description: 'Plataformas hidraulicas de natacion y salon de observacion para contemplar el mar.',
+    description: 'Plataformas hidráulicas de natación y salón de observación para contemplar el mar.',
   },
 ];
 

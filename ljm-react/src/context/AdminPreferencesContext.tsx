@@ -24,7 +24,7 @@ interface AdminPreferencesContextType {
 const LEGACY_LANGUAGE_MAP: Record<string, Language> = {
   'Espanol (ES)': 'es',
   'Español (ES)': 'es',
-  'Ingles (US)': 'en',
+  'Inglés (US)': 'en',
   'English (US)': 'en',
 };
 

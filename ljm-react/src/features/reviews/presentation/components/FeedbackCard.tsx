@@ -7,10 +7,12 @@ interface FeedbackCardProps {
   stars: number;
   text: string;
   timeAgo: string;
+  voyageName?: string;
+  mine?: boolean;
 }
 
 const FeedbackCard: React.FC<FeedbackCardProps> = ({
-  initials, name, registryId, stars, text, timeAgo,
+  initials, name, registryId, stars, text, timeAgo, voyageName, mine,
 }) => {
   return (
     <div className="bg-[#1E2944] p-8 rounded-lg relative overflow-hidden">
@@ -24,6 +26,9 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
             <p className="text-[10px] uppercase tracking-widest text-[#D9E2FF]/50">
               ID de Registro: {registryId}
             </p>
+            {voyageName ? (
+              <p className="mt-1 text-[10px] uppercase tracking-widest text-[#DEC29E]/60">{voyageName}</p>
+            ) : null}
           </div>
         </div>
         <div className="flex text-[#DEC29E] text-sm">
@@ -43,7 +48,7 @@ const FeedbackCard: React.FC<FeedbackCardProps> = ({
 
       <div className="mt-6 flex items-center gap-2 text-[10px] uppercase text-[#DEC29E]/40">
         <span className="material-symbols-outlined text-xs">schedule</span>
-        <span>Registrado hace {timeAgo}</span>
+        <span>{mine ? 'Tu reseña' : 'Registrado'} hace {timeAgo}</span>
       </div>
     </div>
   );

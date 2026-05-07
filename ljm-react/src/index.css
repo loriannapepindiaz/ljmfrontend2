@@ -401,3 +401,26 @@ body.admin-panel input[type="datetime-local"]:focus {
   background: rgba(139, 111, 71, 0.55);
 }
 
+/* Manage booking modal fields */
+.manage-booking-field,
+.manage-booking-field:hover,
+.manage-booking-field:focus,
+.manage-booking-field:active {
+  background-color: #07142f !important;
+  color: #f1f5f9 !important;
+  caret-color: #eacea9;
+}
+
+.manage-booking-field::placeholder {
+  color: #64748b !important;
+}
+
+.manage-booking-field:-webkit-autofill,
+.manage-booking-field:-webkit-autofill:hover,
+.manage-booking-field:-webkit-autofill:focus,
+.manage-booking-field:-webkit-autofill:active {
+  -webkit-text-fill-color: #f1f5f9 !important;
+  box-shadow: 0 0 0 1000px #07142f inset !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+

@@ -55,7 +55,7 @@ export default function Register() {
     setIsLoading(true);
     try {
       const session = await authApi.register(formData);
-      persistAuthSession(session);
+      persistAuthSession(session, formData.email);
       setShowToast(true);
       setTimeout(() => navigate(consumePostAuthRedirect() ?? '/home'), 1400);
     } catch (err) {

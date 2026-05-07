@@ -8,10 +8,28 @@ import TravelCompanionsCard from "../components/TravelCompanionsCard";
 import CapacityStatus from "../components/CapacityStatus";
 import EditorialQuote from "../components/EditorialQuote";
 import type { Guest } from "../types";
+import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
 
 export default function AnadirAcompanantePage() {
   const [guests, setGuests] = useState<Guest[]>([]);
+  const [isSkipping, setIsSkipping] = useState(false);
   const navigate = useNavigate();
+
+  const skipCompanions = async () => {
+    if (isSkipping) return;
+
+    setIsSkipping(true);
+    await saveBookingDraftToBackend({
+      companions: guests.map((guest) => ({
+        nombre: guest.nombre,
+        apellidos: guest.apellidos,
+        fecha: guest.fecha ? guest.fecha.toISOString() : null,
+        pasaporte: guest.pasaporte,
+      })),
+    });
+    setIsSkipping(false);
+    navigate("/personalizar-estancia");
+  };
 
   return (
     <div className="min-h-screen bg-[#06122c] font-sans text-[#d9e2ff] selection:bg-[#dec29e] selection:text-[#3e2d14]">
@@ -19,10 +37,11 @@ export default function AnadirAcompanantePage() {
       <BackButton topClass="top-20" />
       <button
         type="button"
-        onClick={() => navigate("/personalizar-estancia")}
+        disabled={isSkipping}
+        onClick={skipCompanions}
         className="fixed right-6 top-20 z-[9999] flex items-center gap-2 rounded-full border border-[#eacea9]/30 bg-[#0e1a34] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.25em] text-[#eacea9] shadow-lg transition-all hover:bg-[#132345]"
       >
-        Omitir
+        {isSkipping ? "Guardando" : "Omitir"}
         <span className="material-symbols-outlined text-sm">arrow_forward</span>
       </button>
 
@@ -39,7 +58,7 @@ export default function AnadirAcompanantePage() {
               </p>
             </header>
 
-            <ExclusiveSearch />
+            <ExclusiveSearch onSelectMember={g => setGuests(prev => [...prev, g])} />
             <GuestRegistrationForm guests={guests} setGuests={setGuests} />
           </div>
 
