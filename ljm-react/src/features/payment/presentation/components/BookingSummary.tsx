@@ -11,9 +11,10 @@ const BookingSummary: React.FC<Props> = ({ draft, isLoading }) => {
   const destination = draft.destination;
   const suite = draft.suite;
   const companions = draft.companions ?? [];
+  const animalCompanion = draft.animalCompanion;
   const activities = draft.activities ?? [];
   const activeServices = draft.personalization?.services.filter((service) => service.active) ?? [];
-  const hasBookingData = Boolean(destination || suite || companions.length || activities.length || activeServices.length);
+  const hasBookingData = Boolean(destination || suite || companions.length || animalCompanion || activities.length || activeServices.length);
 
   return (
     <div className="bg-white rounded-[2rem] premium-shadow border border-gray-100">
@@ -32,7 +33,7 @@ const BookingSummary: React.FC<Props> = ({ draft, isLoading }) => {
             <span className="material-symbols-outlined mb-3 text-5xl text-gray-300">event_busy</span>
             <p className="text-sm font-bold uppercase tracking-widest text-night-blue">Sin reserva seleccionada</p>
             <p className="mx-auto mt-2 max-w-md text-sm text-gray-500">
-              El crucero, alojamiento, pasajeros y experiencias se mostraran cuando exista una reserva activa.
+              El crucero, alojamiento, pasajeros y experiencias se mostrarán cuando exista una reserva activa.
             </p>
           </div>
         ) : (
@@ -62,7 +63,7 @@ const BookingSummary: React.FC<Props> = ({ draft, isLoading }) => {
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
               <div className="rounded-2xl bg-night-blue px-5 py-4 text-white">
-                <p className="text-[9px] uppercase tracking-[0.2em] text-white/50">Acompanantes</p>
+                <p className="text-[9px] uppercase tracking-[0.2em] text-white/50">Acompañantes</p>
                 <p className="mt-2 text-2xl font-display">{companions.length}</p>
               </div>
               <div className="rounded-2xl bg-[#f7f2ea] px-5 py-4 text-night-blue">
@@ -74,6 +75,33 @@ const BookingSummary: React.FC<Props> = ({ draft, isLoading }) => {
                 <p className="mt-2 text-2xl font-display">{activities.length}</p>
               </div>
             </div>
+
+            {animalCompanion && (
+              <div className="rounded-2xl border border-[#c8a96e]/20 bg-[#f7f2ea] p-5">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="material-symbols-outlined text-maroon-gold">pets</span>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.28em] text-maroon-gold">
+                    Compañero animal registrado
+                  </p>
+                </div>
+                <div className="grid gap-3 text-xs text-night-blue/65 sm:grid-cols-2">
+                  <p><span className="font-bold text-night-blue">Nombre:</span> {animalCompanion.nombre}</p>
+                  <p><span className="font-bold text-night-blue">Tipo:</span> {animalCompanion.tipoAnimal}</p>
+                  <p><span className="font-bold text-night-blue">Raza:</span> {animalCompanion.raza || "No indicada"}</p>
+                  <p><span className="font-bold text-night-blue">Peso:</span> {animalCompanion.pesoKg} {animalCompanion.unidadPeso ?? "kg"}</p>
+                </div>
+                {animalCompanion.cuidadosEspeciales ? (
+                  <p className="mt-3 text-xs leading-relaxed text-night-blue/55">
+                    {animalCompanion.cuidadosEspeciales}
+                  </p>
+                ) : null}
+                {animalCompanion.certificadoNombre ? (
+                  <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.18em] text-night-blue/45">
+                    Certificado: {animalCompanion.certificadoNombre}
+                  </p>
+                ) : null}
+              </div>
+            )}
 
             {activities.length > 0 && (
               <div className="rounded-2xl border border-gray-100 p-5">

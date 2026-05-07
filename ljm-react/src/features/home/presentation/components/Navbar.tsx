@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { authApi, setPostAuthRedirect, type AuthUser } from "../../../../lib/api";
+import { ApiRequestError, authApi, setPostAuthRedirect, type AuthUser } from "../../../../lib/api";
 
 const getCachedUser = (): AuthUser | null => {
   try {
@@ -130,8 +130,13 @@ const Navbar: React.FC = () => {
         localStorage.setItem("ljm_auth_user", JSON.stringify(user));
         setCurrentUser(user);
       })
-      .catch(() => {
+      .catch((error) => {
         if (!isMounted) return;
+        if (!(error instanceof ApiRequestError) || error.status !== 401) {
+          setCurrentUser(getCachedUser());
+          return;
+        }
+
         localStorage.removeItem("ljm_auth_token");
         localStorage.removeItem("ljm_auth_user");
         setCurrentUser(null);
@@ -141,6 +146,27 @@ const Navbar: React.FC = () => {
       isMounted = false;
     };
   }, []);
+
+  const [showUserMenu, setShowUserMenu] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
+        setShowUserMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("ljm_auth_token");
+    localStorage.removeItem("ljm_auth_user");
+    setCurrentUser(null);
+    setShowUserMenu(false);
+    navigate("/login");
+  };
 
   const closeMenu = () => setIsOpen(false);
   const toggleMenu = () => setIsOpen((current) => !current);
@@ -202,13 +228,38 @@ const Navbar: React.FC = () => {
             </button>
 
             {isLoggedIn ? (
-              <Link
-                to="/perfil"
-                aria-label="Abrir perfil"
-                className="flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige shadow-lg transition-all hover:border-primary hover:text-primary"
-              >
-                {userInitials}
-              </Link>
+              <div ref={userMenuRef} className="relative">
+                <button
+                  type="button"
+                  aria-label="Abrir perfil"
+                  onClick={() => setShowUserMenu(v => !v)}
+                  className="flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige shadow-lg transition-all hover:border-primary hover:text-primary"
+                >
+                  {userInitials}
+                </button>
+
+                {showUserMenu && (
+                  <div className="absolute right-0 top-[calc(100%+0.5rem)] z-[200] w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0e1a34] shadow-[0_16px_48px_rgba(0,0,0,0.4)]">
+                    <Link
+                      to="/perfil"
+                      onClick={() => setShowUserMenu(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-medium text-pearl-beige transition-colors hover:bg-white/5 hover:text-primary"
+                    >
+                      <span className="material-symbols-outlined text-base">person</span>
+                      Ver perfil
+                    </Link>
+                    <div className="mx-4 border-t border-white/10" />
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full items-center gap-3 px-4 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-white/5"
+                    >
+                      <span className="material-symbols-outlined text-base">logout</span>
+                      Cerrar sesión
+                    </button>
+                  </div>
+                )}
+              </div>
             ) : (
               <Link
                 to="/login"
@@ -257,13 +308,24 @@ const Navbar: React.FC = () => {
               </button>
 
               {isLoggedIn ? (
-                <Link
-                  to="/perfil"
-                  onClick={closeMenu}
-                  className="mx-auto mt-3 flex size-11 items-center justify-center rounded-full border border-pearl-beige/40 bg-[#0e1a34] text-sm font-bold tracking-widest text-pearl-beige transition-all hover:border-primary hover:text-primary"
-                >
-                  {userInitials}
-                </Link>
+                <div className="mt-3 flex flex-col gap-1 border-t border-pearl-beige/10 pt-3">
+                  <Link
+                    to="/perfil"
+                    onClick={closeMenu}
+                    className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-medium text-pearl-beige transition-colors hover:text-primary"
+                  >
+                    <span className="material-symbols-outlined text-base">person</span>
+                    Ver perfil
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => { closeMenu(); handleLogout(); }}
+                    className="flex items-center gap-3 rounded-lg px-2 py-2 text-sm font-medium text-red-400 transition-colors hover:text-red-300"
+                  >
+                    <span className="material-symbols-outlined text-base">logout</span>
+                    Cerrar sesión
+                  </button>
+                </div>
               ) : (
                 <Link
                   to="/login"

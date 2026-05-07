@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
+import type { ReportesDateRange } from '../../data/reportesService';
 
-const ReportesHeader: React.FC = () => {
+type ReportesHeaderProps = {
+  onRangeChange: (range: ReportesDateRange) => void;
+};
+
+const toDateParam = (month: number, year: number) => `${year}-${String(month + 1).padStart(2, '0')}-01`;
+
+const ReportesHeader: React.FC<ReportesHeaderProps> = ({ onRangeChange }) => {
   const { t } = useTranslation();
   const { timezone } = useAdminPreferences();
   const currentYear = Number(
@@ -17,6 +24,13 @@ const ReportesHeader: React.FC = () => {
   const [viewYear, setViewYear] = useState(currentYear);
 
   const MONTHS = t('reports.months', { returnObjects: true }) as string[];
+
+  useEffect(() => {
+    onRangeChange({
+      fecha_inicio: toDateParam(startMonth, startYear),
+      fecha_fin: toDateParam(endMonth, endYear),
+    });
+  }, [endMonth, endYear, onRangeChange, startMonth, startYear]);
 
   const formatDate = (month: number, year: number) => {
     return `01 ${MONTHS[month].slice(0, 3)}, ${year}`;

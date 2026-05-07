@@ -45,6 +45,7 @@ import EmpleadosPage from "./features/employeemanagement/presentation/pages/Empl
 
 // ✅ ADMIN - REPORTES
 import ReportesPage from "./features/reportes/presentation/pages/ReportesPage";
+import ReporteEjecutivoPage from "./features/reportes/presentation/pages/ReporteEjecutivoPage";
 
 // ✅ ADMIN - CONFIGURACIÓN
 import ConfiguracionPage from "./features/configuration/presentation/pages/ConfiguracionPage";
@@ -147,6 +148,7 @@ function App() {
 
         {/* Reportes */}
         <Route path="/admin/reportes" element={<AdminRoute><ReportesPage /></AdminRoute>} />
+        <Route path="/admin/reporte/ejecutivo" element={<AdminRoute><ReporteEjecutivoPage /></AdminRoute>} />
 
         {/* Configuración */}
         <Route path="/admin/configuracion" element={<AdminRoute><ConfiguracionPage /></AdminRoute>} />

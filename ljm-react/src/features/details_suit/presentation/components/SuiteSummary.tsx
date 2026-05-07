@@ -15,7 +15,7 @@ const SuiteSummary: React.FC = () => {
         <div>
           <span className="material-symbols-outlined mb-3 text-5xl text-gray-300">king_bed</span>
           <p className="text-sm font-bold uppercase tracking-widest text-night-blue">Sin datos de suite</p>
-          <p className="mt-2 text-sm text-gray-500">Las caracteristicas y el precio se cargaran desde una cabina real.</p>
+          <p className="mt-2 text-sm text-gray-500">Las características y el precio se cargarán desde una cabina real.</p>
         </div>
       </div>
     </div>

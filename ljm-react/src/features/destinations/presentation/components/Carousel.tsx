@@ -10,15 +10,15 @@ const destinosDestacados = [
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAs8AJnlXBrdROZM-BvFrz9gtoxh2DmZfwv_Bb75xHZYOqCnczsgWoTd1h1xhVC8_ZZxLWJtH2XNSRGKFryl4c58zQxlub0CodBQX69ULPtIopvVTTO6qy0XUDB97av89916F-ZoBGGMSX4YVUcrX5XViMuH6251cXi2ByyW-x-9V2LuevL8fail6Rbfr-s4nQkw560tiiFNNvXmLZU3h-d5GM4tkMg0kahgzVben14bTrLIVs3dxp5yIDLXZLhjANcB4WZpYLO3ro",
     titulo: "Santorini",
     subtitulo: "Grecia",
-    descripcion: "Puestas de sol espectaculares en las islas volcanicas de Grecia.",
+    descripcion: "Puestas de sol espectaculares en las islas volcánicas de Grecia.",
     rating: 4.9,
     precio: 4850,
     duracion_tipica: "7 noches",
     puerto_principal: "Puerto de Santorini",
-    clima: "Mediterraneo",
+    clima: "Mediterráneo",
     idioma: "Griego",
     highlights: ["Oia", "Caldera", "Atardeceres"],
-    incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
+    incluye: ["Tour fotográfico", "Cena sunset", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
       "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
@@ -30,14 +30,14 @@ const destinosDestacados = [
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBkYPP2yj0hgJBnq9KHhhFzrLa8cw2eoJRIKLTTkNeev4mjhGm24fTSUQihf3nbGzq0qWtW6t8aPwZ6eDr0NQmsrq7EiLlOtahySW7KHkDp22sTOQgeuQX_CXktsqoyU2it2REGyS6ytaeZyr_BjBDgB-b0fkFih2azZczPhfBY8IjbuAjuQx_uTKWK07-rKL5uksSo9MSvVvOnHdS-YGnLJ_yl-MUu9SVMVBU_-L8mLd7UgKbFpG9iJheNpwgach44mDQOE9n6tkA",
     titulo: "Costa Amalfitana",
     subtitulo: "Italia",
-    descripcion: "Acantilados dramaticos y pueblos coloridos en la costa italiana.",
+    descripcion: "Acantilados dramáticos y pueblos coloridos en la costa italiana.",
     rating: 4.8,
     precio: 5200,
     duracion_tipica: "7 noches",
-    puerto_principal: "Napoles",
-    clima: "Mediterraneo",
+    puerto_principal: "Nápoles",
+    clima: "Mediterráneo",
     idioma: "Italiano",
-    highlights: ["Positano", "Amalfi", "Napoles"],
+    highlights: ["Positano", "Amalfi", "Nápoles"],
     incluye: ["Tour costero", "Cena italiana", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1633321702518-7feccafb94d5?w=800&q=80",
@@ -50,7 +50,7 @@ const destinosDestacados = [
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBblcdXtDz6k0sqnSBdwTK8AlLvUim3ZI1y9MKqz4u_HrT0AR5y1B4Tu-mreo6U8MbeRiUPi2qf6eMdrBsHbYNkbPU6K2Qt7wppJiOXFP332PQkatVIWTFtywGkAH7w3h8DYWTRcsN76eNO_VOm95Zw3XIBlYCKMEEllswbjptcZMQaiyXbeRWETlK4TusldUlLTs4NB9FZcwk8CUk78qrXU98zj6paLPfxt2TFo7klKWrI7YZkIvn-3fSiWD0pjZHJ7ERnebel20M",
     titulo: "Islas Maldivas",
     subtitulo: "Maldivas",
-    descripcion: "Privacidad absoluta y aguas cristalinas en el corazon del Oceano Indico.",
+    descripcion: "Privacidad absoluta y aguas cristalinas en el corazón del Océano Índico.",
     rating: 5.0,
     precio: 6200,
     duracion_tipica: "8 noches",
@@ -58,7 +58,7 @@ const destinosDestacados = [
     clima: "Ecuatorial",
     idioma: "Dhivehi",
     highlights: ["Lagunas", "Buceo", "Playas privadas"],
-    incluye: ["Snorkel", "Excursion marina", "Traslados"],
+    incluye: ["Snorkel", "Excursión marina", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
@@ -70,13 +70,13 @@ const destinosDestacados = [
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA_w8KL05KnzVo64Lhd8JqIPwltnM4jk1p_oTIWpZ_Z_E-6NUB-hFWT9Q2WLNw2HjA2bMZEcdwMy7DUdrPR9SSc1WSwSnHm6A5Umj2CCCwnrEOlr64CRPkKw7svflZWaHeIGFQVCZB39Ez0FsnA2KcZAHW9iSgYcnAl-_f0pddwKnzpggVizGXodDZvC4stQ9j4wJKC2XhMxVCuvUJj2MwtvNJ108FXG0_hwt-HCkmFGvUEK3YDo7fHFPKbOnMcnrX1DeSh6MUPelE",
     titulo: "Dubai Marina",
     subtitulo: "EAU",
-    descripcion: "Rascacielos futuristas y lujo moderno en el desierto arabe.",
+    descripcion: "Rascacielos futuristas y lujo moderno en el desierto árabe.",
     rating: 4.9,
     precio: 5500,
     duracion_tipica: "7 noches",
     puerto_principal: "Port Rashid",
-    clima: "Arido",
-    idioma: "Arabe / Ingles",
+    clima: "Árido",
+    idioma: "Árabe / Inglés",
     highlights: ["Dubai Marina", "Burj Al Arab", "Safari en dunas"],
     incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
     galeria_urls: [
@@ -90,14 +90,14 @@ const destinosDestacados = [
     img: "https://lh3.googleusercontent.com/aida-public/AB6AXuA9f2ltuR0r10x_SFdyVGXzZlLoRoVSHewy6wrLVs1g_GJOAju6ujPctF4FsHK0DnSWzLPzI3bqS6iYwZRQnHO7TlDGOvRVyX-hQCNOUoPN6T0RUt7YJLs8gEiiOLyqMGgL-oJvzz_x0TuHlw3aqc-lRixDVYH6bLjyy44L8Z5JdhOEDekSdp4Fx0bhMQPnyFw48ndZN1THMQVLtnWip-O6yyWwawBpYTt9ahwTmOECxBfMnqbcmpwvTuJx5fgn3indbX6L5F4gz8E",
     titulo: "Riviera Francesa",
     subtitulo: "Francia",
-    descripcion: "Playas glamorosas y vida cosmopolita en la costa mediterranea.",
+    descripcion: "Playas glamorosas y vida cosmopolita en la costa mediterránea.",
     rating: 4.8,
     precio: 5300,
     duracion_tipica: "7 noches",
     puerto_principal: "Niza",
-    clima: "Mediterraneo",
-    idioma: "Frances",
-    highlights: ["Niza", "Cannes", "Monaco"],
+    clima: "Mediterráneo",
+    idioma: "Francés",
+    highlights: ["Niza", "Cannes", "Mónaco"],
     incluye: ["Tour privado", "Cena costera", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=800&q=80",
@@ -244,7 +244,7 @@ export default function DestinationsCarousel() {
                         }}
                         className="px-6 py-2.5 rounded-full border border-[#c9a962] text-[#c9a962] text-xs font-semibold uppercase tracking-widest hover:bg-[#c9a962] hover:text-[#0a1628] transition-all duration-300"
                       >
-                        Explorar Ahora
+                        Explorar ahora
                       </button>
                     </div>
                   )}

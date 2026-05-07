@@ -8,12 +8,12 @@ const todosLosDestinos = [
     titulo: "Isla Mombasa",
     pais: "Kenia",
     rating: 4.8,
-    descripcion: "Descubre la perla del Indico con playas de arena blanca y una cultura vibrante que te cautivara desde el primer momento.",
+    descripcion: "Descubre la perla del Índico con playas de arena blanca y una cultura vibrante que te cautivará desde el primer momento.",
     precio: 4800,
     duracion_tipica: "7 noches",
     puerto_principal: "Puerto de Mombasa",
     clima: "Tropical costero",
-    idioma: "Suajili / Ingles",
+    idioma: "Suajili / Inglés",
     highlights: ["Casco antiguo", "Playas de Diani", "Fuerte Jesus"],
     incluye: ["Tour cultural", "Snorkel guiado", "Traslados"],
     galeria_urls: [
@@ -28,14 +28,14 @@ const todosLosDestinos = [
     titulo: "Ciudad de Addu",
     pais: "Maldivas",
     rating: 4.6,
-    descripcion: "Un atolon en forma de corazon que ofrece lugares de buceo y snorkel con aguas cristalinas.",
+    descripcion: "Un atolón en forma de corazón que ofrece lugares de buceo y snorkel con aguas cristalinas.",
     precio: 6200,
     duracion_tipica: "8 noches",
     puerto_principal: "Male",
     clima: "Ecuatorial",
     idioma: "Dhivehi",
     highlights: ["Addu Atoll", "Buceo", "Lagunas cristalinas"],
-    incluye: ["Equipo de snorkel", "Excursion marina", "Traslados"],
+    incluye: ["Equipo de snorkel", "Excursión marina", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=800&q=80",
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
@@ -48,14 +48,14 @@ const todosLosDestinos = [
     titulo: "Garden City",
     pais: "Singapur",
     rating: 4.4,
-    descripcion: "La modernidad se encuentra con la naturaleza en una de las ciudades portuarias mas impresionantes del mundo.",
+    descripcion: "La modernidad se encuentra con la naturaleza en una de las ciudades portuarias más impresionantes del mundo.",
     precio: 4300,
     duracion_tipica: "5 noches",
     puerto_principal: "Marina Bay",
     clima: "Ecuatorial",
-    idioma: "Ingles",
+    idioma: "Inglés",
     highlights: ["Gardens by the Bay", "Marina Bay", "Sentosa"],
-    incluye: ["City tour", "Paseo nocturno", "Cena panoramica"],
+    incluye: ["City tour", "Paseo nocturno", "Cena panorámica"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1508964942454-1a56651d54ac?w=800&q=80",
       "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80",
@@ -68,14 +68,14 @@ const todosLosDestinos = [
     titulo: "Giza & El Cairo",
     pais: "Egipto",
     rating: 4.9,
-    descripcion: "Un viaje en el tiempo a traves de las maravillas de la antiguedad con el confort de la modernidad.",
+    descripcion: "Un viaje en el tiempo a través de las maravillas de la antigüedad con el confort de la modernidad.",
     precio: 5100,
     duracion_tipica: "6 noches",
     puerto_principal: "Puerto Said",
-    clima: "Desertico",
-    idioma: "Arabe",
-    highlights: ["Piramides de Giza", "Museo Egipcio", "Nilo"],
-    incluye: ["Guia historico", "Entradas", "Traslados privados"],
+    clima: "Desértico",
+    idioma: "Árabe",
+    highlights: ["Pirámides de Giza", "Museo Egipcio", "Nilo"],
+    incluye: ["Guía histórico", "Entradas", "Traslados privados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?w=800&q=80",
       "https://images.unsplash.com/photo-1539650116574-8efeb43e2750?w=800&q=80",
@@ -88,12 +88,12 @@ const todosLosDestinos = [
     titulo: "Burj Al Arab Area",
     pais: "Dubai",
     rating: 4.9,
-    descripcion: "El epitome del lujo mundial. Experimente la extravagancia arabe en su maximo esplendor.",
+    descripcion: "El epítome del lujo mundial. Experimente la extravagancia árabe en su máximo esplendor.",
     precio: 5500,
     duracion_tipica: "7 noches",
     puerto_principal: "Port Rashid",
-    clima: "Arido",
-    idioma: "Arabe / Ingles",
+    clima: "Árido",
+    idioma: "Árabe / Inglés",
     highlights: ["Burj Al Arab", "Marina", "Safari en dunas"],
     incluye: ["Safari 4x4", "Cena premium", "Traslados VIP"],
     galeria_urls: [
@@ -106,16 +106,16 @@ const todosLosDestinos = [
     id: 6,
     img: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
     titulo: "Table Mountain",
-    pais: "Sudafrica",
+    pais: "Sudáfrica",
     rating: 4.7,
-    descripcion: "Combine la majestuosidad de la montana con la elegancia costera de Ciudad del Cabo.",
+    descripcion: "Combine la majestuosidad de la montaña con la elegancia costera de Ciudad del Cabo.",
     precio: 4700,
     duracion_tipica: "7 noches",
     puerto_principal: "Cape Town",
-    clima: "Mediterraneo",
-    idioma: "Ingles / Afrikaans",
+    clima: "Mediterráneo",
+    idioma: "Inglés / Afrikaans",
     highlights: ["Table Mountain", "Waterfront", "Cabo de Buena Esperanza"],
-    incluye: ["Teleferico", "Tour de vinos", "Guia local"],
+    incluye: ["Teleférico", "Tour de vinos", "Guía local"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
       "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80",
@@ -128,14 +128,14 @@ const todosLosDestinos = [
     titulo: "Santorini",
     pais: "Grecia",
     rating: 4.9,
-    descripcion: "Casas blancas, cupulas azules y atardeceres que detienen el tiempo.",
+    descripcion: "Casas blancas, cúpulas azules y atardeceres que detienen el tiempo.",
     precio: 4850,
     duracion_tipica: "7 noches",
     puerto_principal: "Puerto de Santorini",
-    clima: "Mediterraneo",
+    clima: "Mediterráneo",
     idioma: "Griego",
     highlights: ["Oia", "Caldera", "Atardeceres"],
-    incluye: ["Tour fotografico", "Cena sunset", "Traslados"],
+    incluye: ["Tour fotográfico", "Cena sunset", "Traslados"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&q=80",
       "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
@@ -146,16 +146,16 @@ const todosLosDestinos = [
     id: 8,
     img: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
     titulo: "Tokio",
-    pais: "Japon",
+    pais: "Japón",
     rating: 4.8,
-    descripcion: "La metropolis donde la tradicion milenaria convive con el futuro mas avanzado del planeta.",
+    descripcion: "La metrópolis donde la tradición milenaria convive con el futuro más avanzado del planeta.",
     precio: 5900,
     duracion_tipica: "10 noches",
     puerto_principal: "Puerto de Yokohama",
     clima: "Templado",
-    idioma: "Japones",
+    idioma: "Japonés",
     highlights: ["Shibuya", "Templos", "Monte Fuji"],
-    incluye: ["Guia local", "Ceremonia del te", "Transporte"],
+    incluye: ["Guía local", "Ceremonia del té", "Transporte"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80",
       "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80",
@@ -165,17 +165,17 @@ const todosLosDestinos = [
   {
     id: 9,
     img: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80",
-    titulo: "Rio de Janeiro",
+    titulo: "Río de Janeiro",
     pais: "Brasil",
     rating: 4.7,
     descripcion: "Playas legendarias, el Cristo Redentor y el ritmo inconfundible del carnaval.",
     precio: 4400,
     duracion_tipica: "6 noches",
-    puerto_principal: "Puerto de Rio",
+    puerto_principal: "Puerto de Río",
     clima: "Tropical",
-    idioma: "Portugues",
-    highlights: ["Copacabana", "Cristo Redentor", "Pan de Azucar"],
-    incluye: ["City tour", "Teleferico", "Cena carioca"],
+    idioma: "Portugués",
+    highlights: ["Copacabana", "Cristo Redentor", "Pan de Azúcar"],
+    incluye: ["City tour", "Teleférico", "Cena carioca"],
     galeria_urls: [
       "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=800&q=80",
       "https://images.unsplash.com/photo-1516306580123-e6e52b1b7b5f?w=800&q=80",
@@ -202,7 +202,7 @@ const DestinationsGrid = () => {
         <div className="max-w-xl">
           <h2 className="magiona-style text-4xl mb-4 text-night">Todos los Destinos</h2>
           <p className="text-night/60">
-            Explore nuestro catalogo completo de puertos y experiencias seleccionadas para los viajeros mas exigentes.
+            Explore nuestro catálogo completo de puertos y experiencias seleccionadas para los viajeros más exigentes.
           </p>
         </div>
       </div>
@@ -219,12 +219,12 @@ const DestinationsGrid = () => {
             onClick={cargarMas}
             className="border-2 border-[#0e1a34] text-[#0e1a34] px-12 py-4 rounded-full font-bold uppercase text-sm tracking-widest hover:bg-[#0e1a34] hover:text-[#eacea9] transition-all duration-300 flex items-center gap-3 mx-auto"
           >
-            Cargar mas destinos
+            Cargar más destinos
             <span className="material-symbols-outlined">expand_more</span>
           </button>
         ) : (
           <p className="text-[#0e1a34]/40 text-sm uppercase tracking-widest font-medium">
-            No hay mas destinos por el momento
+            No hay más destinos por el momento
           </p>
         )}
       </div>

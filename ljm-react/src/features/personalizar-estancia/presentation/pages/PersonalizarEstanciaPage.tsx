@@ -1,6 +1,6 @@
-import { useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import { useNavigate } from "react-router-dom";
-import { saveBookingDraftToBackend } from "../../../../lib/bookingDraft";
+import { loadBookingDraft, saveBookingDraftToBackend, type BookingAnimalCompanionDraft } from "../../../../lib/bookingDraft";
 import Footer from "../../../home/presentation/components/Footer";
 import Navbar from "../../../home/presentation/components/Navbar";
 import GastronomySection from "../components/GastronomySection";
@@ -21,6 +21,7 @@ const PersonalizarEstanciaPage: FC = () => {
   const [selectedAllergies, setSelectedAllergies] = useState<string[]>([]);
   const [additionalRequirements, setAdditionalRequirements] = useState("");
   const [specialRequest, setSpecialRequest] = useState("");
+  const [animalCompanion, setAnimalCompanion] = useState<BookingAnimalCompanionDraft | undefined>();
   const [isSaving, setIsSaving] = useState(false);
 
   const selectedSummary = {
@@ -30,11 +31,82 @@ const PersonalizarEstanciaPage: FC = () => {
     allergies: selectedAllergies,
   };
 
-  const toggleService = (serviceId: string) => {
-    setEnabledServices((current) => ({
-      ...current,
-      [serviceId]: !current[serviceId],
-    }));
+  const buildPersonalization = (
+    servicesState = enabledServices,
+  ) => {
+    const selectedPillowOption = pillowOptions.find((option) => option.id === selectedPillow) ?? pillowOptions[0];
+
+    return {
+      services: stayOptions.map((option) => ({
+        id: option.id,
+        label: option.label,
+        active: Boolean(servicesState[option.id]),
+      })),
+      pillow: {
+        id: selectedPillowOption.id,
+        label: selectedPillowOption.label,
+      },
+      diet: selectedDiet,
+      allergies: allergyOptions
+        .filter((option) => selectedAllergies.includes(option.id))
+        .map((option) => ({ id: option.id, label: option.label })),
+      additionalRequirements,
+      specialRequest,
+    };
+  };
+
+  useEffect(() => {
+    let mounted = true;
+
+    loadBookingDraft().then((draft) => {
+      if (!mounted) return;
+
+      if (draft.personalization?.services?.length) {
+        setEnabledServices((current) => ({
+          ...current,
+          ...Object.fromEntries(draft.personalization?.services.map((service) => [service.id, service.active]) ?? []),
+        }));
+      }
+
+      if (draft.animalCompanion) {
+        setAnimalCompanion(draft.animalCompanion);
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  const toggleService = async (serviceId: string) => {
+    const nextEnabledServices = {
+      ...enabledServices,
+      [serviceId]: !enabledServices[serviceId],
+    };
+
+    setEnabledServices(nextEnabledServices);
+
+    if (serviceId === "pet-care" && !nextEnabledServices[serviceId]) {
+      setAnimalCompanion(undefined);
+      await saveBookingDraftToBackend({
+        personalization: buildPersonalization(nextEnabledServices),
+        animalCompanion: null,
+      });
+    }
+  };
+
+  const registerAnimalCompanion = async (animal: BookingAnimalCompanionDraft) => {
+    const nextEnabledServices = {
+      ...enabledServices,
+      "pet-care": true,
+    };
+
+    setAnimalCompanion(animal);
+    setEnabledServices(nextEnabledServices);
+    await saveBookingDraftToBackend({
+      personalization: buildPersonalization(nextEnabledServices),
+      animalCompanion: animal,
+    });
   };
 
   const toggleAllergy = (allergyId: string) => {
@@ -48,27 +120,10 @@ const PersonalizarEstanciaPage: FC = () => {
   const continueReservation = async () => {
     if (isSaving) return;
 
-    const selectedPillowOption = pillowOptions.find((option) => option.id === selectedPillow) ?? pillowOptions[0];
-    const personalization = {
-      services: stayOptions.map((option) => ({
-        id: option.id,
-        label: option.label,
-        active: Boolean(enabledServices[option.id]),
-      })),
-      pillow: {
-        id: selectedPillowOption.id,
-        label: selectedPillowOption.label,
-      },
-      diet: selectedDiet,
-      allergies: allergyOptions
-        .filter((option) => selectedAllergies.includes(option.id))
-        .map((option) => ({ id: option.id, label: option.label })),
-      additionalRequirements,
-      specialRequest,
-    };
+    const personalization = buildPersonalization();
 
     setIsSaving(true);
-    await saveBookingDraftToBackend({ personalization });
+    await saveBookingDraftToBackend({ personalization, animalCompanion });
     setIsSaving(false);
     navigate("/acompanante");
   };
@@ -78,9 +133,14 @@ const PersonalizarEstanciaPage: FC = () => {
       <Navbar />
 
       <main className="overflow-x-hidden pt-20">
-        <PersonalizarEstanciaHero summary={selectedSummary} />
+        <PersonalizarEstanciaHero />
 
-        <StayServicesSection enabledServices={enabledServices} onToggleService={toggleService} />
+        <StayServicesSection
+          animalCompanion={animalCompanion}
+          enabledServices={enabledServices}
+          onRegisterAnimal={registerAnimalCompanion}
+          onToggleService={toggleService}
+        />
 
         <PillowSection onSelectPillow={setSelectedPillow} selectedPillow={selectedPillow} />
 

@@ -4,6 +4,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 /* Leaflet tooltip custom style */
 .leaflet-label-custom {
   background: #0e1a34 !important;
@@ -396,5 +399,28 @@ body.admin-panel input[type="datetime-local"]:focus {
 }
 .payment-scroll::-webkit-scrollbar-thumb:hover {
   background: rgba(139, 111, 71, 0.55);
+}
+
+/* Manage booking modal fields */
+.manage-booking-field,
+.manage-booking-field:hover,
+.manage-booking-field:focus,
+.manage-booking-field:active {
+  background-color: #07142f !important;
+  color: #f1f5f9 !important;
+  caret-color: #eacea9;
+}
+
+.manage-booking-field::placeholder {
+  color: #64748b !important;
+}
+
+.manage-booking-field:-webkit-autofill,
+.manage-booking-field:-webkit-autofill:hover,
+.manage-booking-field:-webkit-autofill:focus,
+.manage-booking-field:-webkit-autofill:active {
+  -webkit-text-fill-color: #f1f5f9 !important;
+  box-shadow: 0 0 0 1000px #07142f inset !important;
+  transition: background-color 9999s ease-in-out 0s;
 }
 

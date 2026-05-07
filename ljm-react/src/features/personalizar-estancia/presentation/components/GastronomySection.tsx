@@ -26,7 +26,7 @@ const GastronomySection = ({
               02. Nutricion y placer
             </span>
             <h2 className="font-display text-4xl leading-tight text-white md:text-5xl">
-              Gastronomia
+              Gastronomía
               <br />
               <span className="font-light italic">Personalizada</span>
             </h2>
@@ -125,7 +125,7 @@ const GastronomySection = ({
             <textarea
               className="min-h-[200px] w-full rounded-[28px] border border-[#eacea9]/10 bg-[#eacea9]/4 p-8 text-lg font-light text-[#eacea9] outline-none transition placeholder:text-[#eacea9]/25 focus:border-[#eacea9]/35 focus:bg-[#eacea9]/6"
               onChange={(event) => setAdditionalRequirements(event.target.value)}
-              placeholder="Indique aqui cualquier detalle especifico o preferencia culinaria..."
+              placeholder="Indique aquí cualquier detalle específico o preferencia culinaria..."
               value={additionalRequirements}
             />
           </div>

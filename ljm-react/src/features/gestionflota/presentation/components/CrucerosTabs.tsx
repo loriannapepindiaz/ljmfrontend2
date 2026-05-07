@@ -1,35 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import type { TabKey } from '../../data/types';
 
-const TAB_KEYS = ['allShips', 'active', 'maintenance', 'upcoming'] as const;
-type TabKey = typeof TAB_KEYS[number];
+const TAB_KEYS: TabKey[] = ['allShips', 'active', 'maintenance', 'upcoming'];
 
 interface CrucerosTabsProps {
-  onTabChange?: (tab: TabKey) => void;
+  activeTab: TabKey;
+  onTabChange: (tab: TabKey) => void;
+  counts?: Record<TabKey, number>;
 }
 
-const CrucerosTabs: React.FC<CrucerosTabsProps> = ({ onTabChange }) => {
+const CrucerosTabs: React.FC<CrucerosTabsProps> = ({ activeTab, onTabChange, counts }) => {
   const { t } = useTranslation();
-  const [active, setActive] = useState<TabKey>('allShips');
-
-  const handleTab = (tab: TabKey) => {
-    setActive(tab);
-    onTabChange?.(tab);
-  };
 
   return (
-    <div className="flex border-b border-slate-200 mb-8 overflow-x-auto">
+    <div className="no-scrollbar flex border-b border-slate-200 mb-8 overflow-x-auto" style={{ scrollbarWidth: 'none' } as React.CSSProperties}>
       {TAB_KEYS.map((tab) => (
         <button
           key={tab}
-          onClick={() => handleTab(tab)}
-          className={`px-6 py-4 text-sm font-medium transition-colors whitespace-nowrap relative -mb-[2px] ${
-            active === tab
+          onClick={() => onTabChange(tab)}
+          className={`px-6 py-4 text-sm font-medium transition-colors whitespace-nowrap relative -mb-[2px] flex items-center gap-2 ${
+            activeTab === tab
               ? 'border-b-2 border-[#0e1a34] text-[#0e1a34] font-bold'
               : 'text-slate-500 hover:text-[#0e1a34]'
           }`}
         >
           {t(`fleet.tabs.${tab}`)}
+          {counts && counts[tab] > 0 && (
+            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+              activeTab === tab
+                ? 'bg-[#0e1a34] text-white'
+                : 'bg-slate-100 text-slate-500'
+            }`}>
+              {counts[tab]}
+            </span>
+          )}
         </button>
       ))}
     </div>

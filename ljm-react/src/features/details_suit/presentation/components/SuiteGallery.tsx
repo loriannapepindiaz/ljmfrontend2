@@ -11,7 +11,7 @@ const fallbackImage =
 
 const SuiteGallery: React.FC<SuiteGalleryProps> = ({ suite }) => {
   const gallery = suite?.gallery?.length ? suite.gallery : [fallbackImage];
-  const amenities = suite?.amenities?.length ? suite.amenities.slice(0, 2) : ['Wi-Fi Ultra Rapido', 'Minibar Premium'];
+  const amenities = suite?.amenities?.length ? suite.amenities.slice(0, 2) : ['Wi-Fi Ultra Rápido', 'Minibar Premium'];
 
   return (
     <div className="space-y-4">

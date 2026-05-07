@@ -12,8 +12,8 @@ export type ExperienceItem = {
 export const allExperiences: ExperienceItem[] = [
   {
     id: "1",
-    title: "Tirolesa sobre el Mar",
-    location: "AVENTURA",
+    title: "Tirolesa sobre el mar",
+    location: "Aventura",
     rating: "4.9",
     image: "https://www.ncl.com/sites/default/files/blog-hero-best-places-zipline.jpg",
     description: "Adrenalina pura sobrevolando aguas cristalinas en nuestra tirolesa exclusiva.",
@@ -22,8 +22,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "2",
-    title: "Tour Privado",
-    location: "EXCLUSIVO",
+    title: "Tour privado",
+    location: "Exclusivo",
     rating: "5.0",
     image: "https://images.pexels.com/photos/1174732/pexels-photo-1174732.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
     description: "Explora cada puerto con guía privado y transporte VIP personalizado.",
@@ -32,8 +32,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "3",
-    title: "Jet Ski",
-    location: "ACUÁTICO",
+    title: "Jet ski",
+    location: "Acuático",
     rating: "4.8",
     image: "https://images.pexels.com/photos/18972198/pexels-photo-18972198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     description: "Domina las olas con nuestras motos de agua de última generación.",
@@ -42,8 +42,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "4",
-    title: "Buceo Premium",
-    location: "ACUÁTICO",
+    title: "Buceo premium",
+    location: "Acuático",
     rating: "4.9",
     image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5",
     description: "Descubre arrecifes vibrantes con instructores certificados a tu lado.",
@@ -52,8 +52,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "5",
-    title: "Spa & Bienestar",
-    location: "BIENESTAR",
+    title: "Spa y bienestar",
+    location: "Bienestar",
     rating: "4.8",
     image: "https://images.pexels.com/photos/3757942/pexels-photo-3757942.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
     description: "Relájate con tratamientos premium en nuestro spa de lujo a bordo.",
@@ -62,8 +62,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "6",
-    title: "Velero Sunset",
-    location: "ROMÁNTICO",
+    title: "Velero al atardecer",
+    location: "Romántico",
     rating: "5.0",
     image: "https://images.unsplash.com/photo-1500514966906-fe245eea9344?auto=format&fit=crop&w=800&q=80",
     description: "Navega al atardecer en velero privado con champán y vistas al horizonte.",
@@ -72,8 +72,8 @@ export const allExperiences: ExperienceItem[] = [
   },
   {
     id: "7",
-    title: "Snorkel Guiado",
-    location: "ACUÁTICO",
+    title: "Snorkel guiado",
+    location: "Acuático",
     rating: "4.9",
     image: "https://images.unsplash.com/photo-1516690561799-46d8f74f9abf?w=800&q=80",
     description: "Explora la vida marina con guías expertos en cada puerto de escala.",
@@ -83,7 +83,7 @@ export const allExperiences: ExperienceItem[] = [
   {
     id: "8",
     title: "Kayak",
-    location: "AVENTURA",
+    location: "Aventura",
     rating: "4.7",
     image: "https://images.pexels.com/photos/1497584/pexels-photo-1497584.jpeg?auto=compress&cs=tinysrgb&w=800&q=80",
     description: "Aventura de kayak entre paisajes costeros únicos en cada destino.",

@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseCurrencyAmount, type BookingDraft } from '../../../../lib/bookingDraft';
+import { getBookingDraftCharges, type BookingDraft } from '../../../../lib/bookingDraft';
 
 type Props = {
   draft: BookingDraft;
@@ -13,14 +13,14 @@ const formatCurrency = (value: number, currency = 'USD') =>
   }).format(value);
 
 const FinancialStatement: React.FC<Props> = ({ draft }) => {
-  const suitePrice = parseCurrencyAmount(draft.suite?.pricePerNight);
+  const { destinationPrice, suitePrice, total } = getBookingDraftCharges(draft);
   const companionCount = draft.companions?.length ?? 0;
   const activeServices = draft.personalization?.services?.filter((service) => service.active) ?? [];
   const lines = [
     draft.destination
       ? {
           label: `Destino: ${draft.destination.titulo}`,
-          value: parseCurrencyAmount(draft.destination.precio_desde),
+          value: destinationPrice,
         }
       : null,
     draft.suite
@@ -41,8 +41,7 @@ const FinancialStatement: React.FC<Props> = ({ draft }) => {
     })),
   ].filter((line): line is { label: string; value: number } => Boolean(line));
 
-  const total = lines.reduce((sum, line) => sum + line.value, 0);
-  const currency = draft.destination?.moneda ?? 'USD';
+  const currency = draft.destination?.moneda ?? draft.moneda ?? 'USD';
 
   return (
     <section className="max-w-4xl mx-auto">

@@ -1,13 +1,37 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const ROUTE_KEYS = ['mediterranean', 'caribbean', 'nordic', 'none'] as const;
+const ROUTE_KEYS = ['lujo', 'expedicion', 'familiar', 'aventura', 'clasico'] as const;
+type RouteKey = typeof ROUTE_KEYS[number];
+
+const ROUTE_LABELS: Record<RouteKey, string> = {
+  lujo: 'Lujo',
+  expedicion: 'Expedición',
+  familiar: 'Familiar',
+  aventura: 'Aventura',
+  clasico: 'Clásico',
+};
 
 const inputClass = "w-full rounded-lg border border-slate-300 focus:ring-2 focus:ring-[#eacea9]/50 focus:border-[#eacea9] p-3 text-slate-900 bg-white outline-none text-sm transition-all";
 
-const BasicInfoSection: React.FC = () => {
+interface BasicInfoSectionProps {
+  nombre: string;
+  onNombreChange: (v: string) => void;
+  capacidad: string;
+  onCapacidadChange: (v: string) => void;
+  rutaKey: string;
+  onRutaKeyChange: (key: RouteKey) => void;
+}
+
+const BasicInfoSection: React.FC<BasicInfoSectionProps> = ({
+  nombre,
+  onNombreChange,
+  capacidad,
+  onCapacidadChange,
+  rutaKey,
+  onRutaKeyChange,
+}) => {
   const { t } = useTranslation();
-  const [ruta, setRuta] = useState('');
   const [openRuta, setOpenRuta] = useState(false);
 
   return (
@@ -23,7 +47,13 @@ const BasicInfoSection: React.FC = () => {
           <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
             {t('fleet.add.basic.cruiseName')}
           </label>
-          <input type="text" placeholder="ej. Majestic Sealine II" className={inputClass} />
+          <input
+            type="text"
+            placeholder="ej. Majestic Sealine II"
+            className={inputClass}
+            value={nombre}
+            onChange={(e) => onNombreChange(e.target.value)}
+          />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -43,7 +73,13 @@ const BasicInfoSection: React.FC = () => {
           <label className="text-sm font-semibold text-slate-700 uppercase tracking-wider">
             {t('fleet.add.basic.capacity')}
           </label>
-          <input type="number" placeholder="450" className={inputClass} />
+          <input
+            type="number"
+            placeholder="450"
+            className={inputClass}
+            value={capacidad}
+            onChange={(e) => onCapacidadChange(e.target.value)}
+          />
         </div>
 
         <div className="flex flex-col gap-2">
@@ -59,8 +95,8 @@ const BasicInfoSection: React.FC = () => {
                   : 'border-slate-300 hover:border-[#eacea9]'
               }`}
             >
-              <span className={ruta ? 'text-slate-900 font-medium' : 'text-slate-400'}>
-                {ruta || t('fleet.add.basic.selectRoute')}
+              <span className={rutaKey ? 'text-slate-900 font-medium' : 'text-slate-400'}>
+                {rutaKey ? ROUTE_LABELS[rutaKey as RouteKey] : t('fleet.add.basic.selectRoute')}
               </span>
               <span className="material-symbols-outlined text-[18px] text-slate-400">
                 {openRuta ? 'expand_less' : 'expand_more'}
@@ -73,14 +109,14 @@ const BasicInfoSection: React.FC = () => {
                   {ROUTE_KEYS.map((key) => (
                     <button
                       key={key}
-                      onClick={() => { setRuta(t(`fleet.add.basic.routes.${key}`)); setOpenRuta(false); }}
+                      onClick={() => { onRutaKeyChange(key); setOpenRuta(false); }}
                       className={`w-full px-4 py-2.5 text-sm text-left transition-colors ${
-                        ruta === t(`fleet.add.basic.routes.${key}`)
+                        rutaKey === key
                           ? 'bg-[#eacea9] text-[#0e1a34] font-bold'
                           : 'text-[#0e1a34] hover:bg-[#eacea9]/10'
                       }`}
                     >
-                      {t(`fleet.add.basic.routes.${key}`)}
+                      {ROUTE_LABELS[key]}
                     </button>
                   ))}
                 </div>

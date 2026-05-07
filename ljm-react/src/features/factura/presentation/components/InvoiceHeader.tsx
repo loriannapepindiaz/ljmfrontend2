@@ -1,5 +1,6 @@
 import { Anchor, Bell, User, ShipWheel } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
+import type { InvoiceViewData } from "../invoiceData";
 
 export default function InvoiceHeader() {
   return (
@@ -8,7 +9,7 @@ export default function InvoiceHeader() {
         className="text-xl italic tracking-tight text-[#eacea9]"
         style={{ fontFamily: "'Noto Serif', serif" }}
       >
-        The Nautical Curator
+        Curador Náutico
       </div>
 
       <nav className="hidden items-center gap-10 md:flex">
@@ -31,7 +32,11 @@ export default function InvoiceHeader() {
   );
 }
 
-export function InvoiceSheetHeader() {
+type InvoiceSheetHeaderProps = {
+  invoice: InvoiceViewData;
+};
+
+export function InvoiceSheetHeader({ invoice }: InvoiceSheetHeaderProps) {
   return (
     <div className="invoice-sheet-header relative z-10 mb-12 flex flex-col justify-between gap-10 md:mb-16 md:flex-row md:items-start">
       <div className="space-y-1">
@@ -60,26 +65,26 @@ export function InvoiceSheetHeader() {
       <div className="space-y-6 text-left md:text-right">
         <div className="inline-block bg-[#eacea9]/10 px-4 py-1">
           <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0e1a34]">
-            Registro Meridiano Marítimo
+            Registro marítimo
           </p>
         </div>
 
         <div className="flex items-center gap-4 md:justify-end">
           <div className="text-left md:text-right">
             <span className="mb-1 block text-[9px] uppercase tracking-widest text-slate-400">
-              N.° de Documento
+              N. de documento
             </span>
             <span
               className="text-xl font-bold"
               style={{ fontFamily: "'Noto Serif', serif" }}
             >
-              Sin documento
+              {invoice.documentNumber}
             </span>
           </div>
 
           <div className="flex h-16 w-16 items-center justify-center border border-slate-200 bg-white p-1">
             <QRCodeSVG
-              value="Sin documento"
+              value={invoice.qrValue}
               size={56}
               bgColor="#ffffff"
               fgColor="#0e1a34"
@@ -92,7 +97,7 @@ export function InvoiceSheetHeader() {
           <div className="flex items-center gap-2 rounded-full border border-[#0e1a34]/10 px-3 py-2">
             <ShipWheel size={16} className="text-[#0e1a34]" />
             <span className="text-[9px] uppercase tracking-[0.35em] text-slate-500">
-              Pendiente de reserva
+              {invoice.statusLabel}
             </span>
           </div>
         </div>

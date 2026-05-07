@@ -7,7 +7,7 @@
     "cruises_add": "Agregar Crucero",
     "reservations": "Reservas",
     "passengers": "Pasajeros",
-    "cabins": "Cabinas",
+    "cabins": "Habitaciones",
     "employees": "Empleados",
     "employees_list": "Lista de Empleados",
     "employees_add": "Agregar Empleado",
@@ -195,8 +195,8 @@
     }
   },
   "cabins": {
-    "title": "Gestión de Cabinas",
-    "search": "Buscar cabina o pasajero...",
+    "title": "Gestión de Habitaciones",
+    "search": "Buscar habitación o pasajero...",
     "filters": {
       "filterBy": "Filtrar por:",
       "allShips": "Todos los Barcos",
@@ -208,18 +208,18 @@
       "clear": "Limpiar"
     },
     "metrics": {
-      "total": "Total Cabinas",
+      "total": "Total Habitaciones",
       "occupied": "Ocupadas",
       "available": "Disponibles",
       "maintenance": "Mantenimiento"
     },
     "table": {
-      "colNumber": "Nº Cabina",
+      "colNumber": "Nº Habitación",
       "colCategory": "Categoría",
       "colStatus": "Estado",
       "colGuest": "Información del Huésped",
       "colActions": "Acciones",
-      "empty": "No hay cabinas registradas",
+      "empty": "No hay habitaciones registradas",
       "prev": "Anterior",
       "next": "Siguiente"
     }
@@ -232,6 +232,7 @@
       "all": "Todos",
       "paid": "Pagados",
       "pending": "Pendientes",
+      "refunded": "Reembolsados",
       "last30Days": "Últimos 30 días"
     },
     "metrics": {
@@ -258,15 +259,15 @@
     "filters": {
       "search": "Buscar por nombre, ID o viaje...",
       "all": "Todos",
-      "elite": "Élite Platino",
-      "gold": "Miembro Oro",
-      "silver": "Plata",
-      "diamond": "Diamante"
+      "elite": "Admiral",
+      "gold": "Navegante",
+      "silver": "Explorer",
+      "diamond": "Commodore"
     },
     "metrics": {
       "total": "Total Pasajeros",
-      "platinum": "Élite Platino",
-      "gold": "Miembros Oro",
+      "platinum": "Admiral",
+      "gold": "Navegante",
       "recent": "Viajeros Recientes"
     },
     "table": {

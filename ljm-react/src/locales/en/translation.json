@@ -7,7 +7,7 @@
     "cruises_add": "Add Cruise",
     "reservations": "Reservations",
     "passengers": "Passengers",
-    "cabins": "Cabins",
+    "cabins": "Rooms",
     "employees": "Employees",
     "employees_list": "Employee List",
     "employees_add": "Add Employee",
@@ -195,8 +195,8 @@
     }
   },
   "cabins": {
-    "title": "Cabin Management",
-    "search": "Search cabin or passenger...",
+    "title": "Room Management",
+    "search": "Search room or passenger...",
     "filters": {
       "filterBy": "Filter by:",
       "allShips": "All Ships",
@@ -208,18 +208,18 @@
       "clear": "Clear"
     },
     "metrics": {
-      "total": "Total Cabins",
+      "total": "Total Rooms",
       "occupied": "Occupied",
       "available": "Available",
       "maintenance": "Maintenance"
     },
     "table": {
-      "colNumber": "Cabin No.",
+      "colNumber": "Room No.",
       "colCategory": "Category",
       "colStatus": "Status",
       "colGuest": "Guest Information",
       "colActions": "Actions",
-      "empty": "No cabins registered",
+      "empty": "No rooms registered",
       "prev": "Previous",
       "next": "Next"
     }

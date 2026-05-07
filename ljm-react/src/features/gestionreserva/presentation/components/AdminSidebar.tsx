@@ -3,7 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAdminPreferences } from '../../../../context/AdminPreferencesContext';
 import { clearAdminSession, getStoredAdminSession } from '../../../../lib/api';
 
-const AdminSidebar: React.FC = () => {
+type AdminSidebarProps = {
+  activeItem?: string;
+};
+
+const AdminSidebar: React.FC<AdminSidebarProps> = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { t, timezone, locale } = useAdminPreferences();
@@ -124,7 +128,7 @@ const AdminSidebar: React.FC = () => {
 
             <button onClick={() => navigate('/admin/cabinas')} className={isActive('/admin/cabinas') ? activeStyle : inactiveStyle}>
               <span className="material-symbols-outlined text-[22px]">bed</span>
-              <span className="text-sm font-medium">{t('sidebar.cabins')}</span>
+              <span className="text-sm font-medium">Habitaciones</span>
             </button>
 
             <div>

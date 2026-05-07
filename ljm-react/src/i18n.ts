@@ -110,7 +110,7 @@ const translations: Record<Language, Record<TranslationKey, string>> = {
 
 export const LANGUAGE_OPTIONS: Array<{ code: Language; label: Record<Language, string> }> = [
   { code: 'es', label: { es: 'Espanol (ES)', en: 'Spanish (ES)' } },
-  { code: 'en', label: { es: 'Ingles (US)', en: 'English (US)' } },
+  { code: 'en', label: { es: 'Inglés (US)', en: 'English (US)' } },
 ];
 
 export const TIMEZONE_OPTIONS = [

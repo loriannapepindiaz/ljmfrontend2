@@ -31,7 +31,7 @@ const FleetMasterpieces: React.FC = () => {
             Obras Maestras de la Ingenieria
           </h2>
           <p className="max-w-2xl mx-auto text-lg" style={{ color: '#6b7280' }}>
-            Cada embarcacion de la flota LJM Sealine es un testimonio del diseno sofisticado y la innovacion tecnologica.
+            Cada embarcación de la flota LJM Sealine es un testimonio del diseño sofisticado y la innovación tecnológica.
           </p>
         </div>
 

@@ -38,12 +38,17 @@ const PersonalizationPage: FC = () => {
     experienceApi.list()
       .then((res) => {
         const data = res.data.length > 0
-          ? res.data.map((e) => ({
-              ...e,
-              imagen_url: staticById[e.id]?.image ?? e.imagen_url,
-              nombre: staticById[e.id]?.title ?? e.nombre,
-              descripcion: staticById[e.id]?.description ?? e.descripcion,
-            }))
+          ? res.data
+              .map((e) => ({
+                ...e,
+                imagen_url: staticById[e.id]?.image ?? e.imagen_url,
+                nombre: staticById[e.id]?.title ?? e.nombre,
+                descripcion: staticById[e.id]?.description ?? e.descripcion,
+              }))
+              // keep only the first occurrence of each name (removes admin-duplicates)
+              .filter((e, idx, arr) =>
+                arr.findIndex(x => x.nombre.toLowerCase() === e.nombre.toLowerCase()) === idx,
+              )
           : staticFallback;
         setExperiences(data);
       })
@@ -97,10 +102,10 @@ const PersonalizationPage: FC = () => {
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
               <div className="max-w-3xl">
                 <h1 className="text-4xl md:text-6xl font-serif font-bold text-[#0e1a34] mb-4 leading-tight uppercase tracking-[0.2em]">
-                  Enriquezca su travesia
+                  Enriquezca su travesía
                 </h1>
                 <p className="text-lg text-[#0e1a34]/50 font-light leading-relaxed max-w-2xl">
-                  Disene cada detalle de su odisea por el Mediterraneo. Anada experiencias exclusivas a bordo.
+                  Diseñe cada detalle de su odisea por el Mediterráneo. Añada experiencias exclusivas a bordo.
                 </p>
               </div>
 

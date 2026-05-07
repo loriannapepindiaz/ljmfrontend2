@@ -1,28 +1,105 @@
 import React from 'react';
+import type { ManageBookingData } from '../../../manageyourbooking/presentation/manageBookingData';
 
-const sections = [
-  { icon: 'restaurant_menu', titulo: 'Gastronomia' },
-  { icon: 'spa', titulo: 'Spa y Bienestar' },
-  { icon: 'explore', titulo: 'Excursiones' },
+const Sk: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div className={`animate-pulse rounded-lg bg-white/10 ${className}`} />
+);
+
+type StatCard = {
+  icon: string;
+  label: string;
+  value: string;
+  sub?: string;
+  accent?: boolean;
+};
+
+const buildStats = (booking: ManageBookingData): StatCard[] => [
+  {
+    icon: 'calendar_month',
+    label: 'Duración',
+    value: booking.nights ? `${booking.nights}` : '—',
+    sub: booking.nights ? 'noches' : 'Por confirmar',
+    accent: Boolean(booking.nights),
+  },
+  {
+    icon: 'group',
+    label: 'Pasajeros',
+    value: String(booking.guestCount ?? booking.guests.length ?? 1),
+    sub: `${(booking.guestCount ?? booking.guests.length ?? 1) === 1 ? 'persona' : 'personas'} a bordo`,
+  },
+  {
+    icon: 'payments',
+    label: 'Estado de pago',
+    value: booking.paymentStatus,
+    sub: booking.total,
+    accent: booking.paymentStatus.toLowerCase().includes('pagad'),
+  },
+  {
+    icon: 'explore',
+    label: 'Experiencias',
+    value: booking.excursions.length > 0 ? String(booking.excursions.length) : '0',
+    sub: booking.excursions.length > 0 ? 'confirmadas' : 'Sin registrar',
+    accent: booking.excursions.length > 0,
+  },
+  {
+    icon: 'concierge',
+    label: 'Mayordomo',
+    value: booking.butler?.included ? 'Incluido' : 'No incluido',
+    sub: booking.butler?.name || undefined,
+    accent: booking.butler?.included,
+  },
+  {
+    icon: 'pets',
+    label: 'Compañero animal',
+    value: booking.animalCompanion ? booking.animalCompanion.nombre : 'No registrado',
+    sub: booking.animalCompanion ? booking.animalCompanion.tipoAnimal : undefined,
+    accent: Boolean(booking.animalCompanion),
+  },
 ];
 
-const HighlightsRow: React.FC = () => {
+type Props = {
+  booking: ManageBookingData | null;
+  isLoading?: boolean;
+};
+
+const HighlightsRow: React.FC<Props> = ({ booking, isLoading }) => {
+  if (isLoading && !booking) return (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {[0, 1, 2, 3, 4, 5].map(i => (
+        <div key={i} className="rounded-2xl p-5 border border-white/8 bg-white/[0.03] space-y-3">
+          <Sk className="size-9 rounded-xl" />
+          <Sk className="h-3 w-20" />
+          <Sk className="h-6 w-16" />
+          <Sk className="h-3 w-24" />
+        </div>
+      ))}
+    </div>
+  );
+
+  if (!booking) return null;
+
+  const stats = buildStats(booking);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {sections.map((item) => (
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {stats.map(stat => (
         <div
-          key={item.titulo}
-          className="p-6 rounded-2xl flex flex-col gap-4 transition-colors border border-[#eacea9]/5"
-          style={{ background: 'rgba(14, 26, 52, 0.7)', backdropFilter: 'blur(12px)' }}
+          key={stat.label}
+          className="group rounded-2xl p-5 border border-white/8 bg-white/[0.03] hover:bg-white/[0.06] hover:border-[#c8a96e]/20 transition-all duration-200 flex flex-col gap-3"
         >
-          <div className="size-12 rounded-xl bg-[#eacea9]/10 flex items-center justify-center text-[#eacea9]">
-            <span className="material-symbols-outlined text-2xl">{item.icon}</span>
+          <div className={`size-9 rounded-xl flex items-center justify-center ${stat.accent ? 'bg-[#c8a96e]/15 border border-[#c8a96e]/20' : 'bg-white/5 border border-white/8'}`}>
+            <span className={`material-symbols-outlined text-lg ${stat.accent ? 'text-[#c8a96e]' : 'text-slate-400'}`}>
+              {stat.icon}
+            </span>
           </div>
           <div>
-            <h4 className="text-white font-bold mb-1">{item.titulo}</h4>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
-              Sin datos registrados para esta reserva.
+            <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-slate-500 mb-1">{stat.label}</p>
+            <p className={`text-lg font-black leading-none ${stat.accent ? 'text-[#eacea9]' : 'text-white'}`}>
+              {stat.value}
             </p>
+            {stat.sub && (
+              <p className="text-[10px] text-slate-500 font-medium mt-1 leading-tight">{stat.sub}</p>
+            )}
           </div>
         </div>
       ))}

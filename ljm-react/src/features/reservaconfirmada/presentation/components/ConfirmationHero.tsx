@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
-const ConfirmationHero = () => {
+type ConfirmationHeroProps = {
+  voyageName: string;
+};
+
+const ConfirmationHero = ({ voyageName }: ConfirmationHeroProps) => {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const ConfirmationHero = () => {
           checked ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
         }`}
       >
-        ¡Reserva Confirmada!
+        Reserva Confirmada!
       </h1>
 
       <p
@@ -41,7 +45,8 @@ const ConfirmationHero = () => {
         }`}
       >
         Tu viaje a bordo de{" "}
-        <span className="text-[#c8a96e] font-medium">The Majestic Pearl</span> comienza pronto.
+        <span className="mx-1 inline-block text-[#c8a96e] font-medium">{voyageName}</span>
+        comienza pronto.
       </p>
     </section>
   );

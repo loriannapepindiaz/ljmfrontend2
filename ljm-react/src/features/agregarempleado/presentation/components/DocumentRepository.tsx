@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const DOC_KEYS = [
-  { key: 'passport',    pendiente: true  },
-  { key: 'maritime',    pendiente: true  },
-  { key: 'medical',     pendiente: true  },
-  { key: 'logbook',     pendiente: false },
-  { key: 'background',  pendiente: false },
-] as const;
+interface DocumentRepositoryProps {
+  onFilesChange: (files: File[]) => void;
+}
 
-const DocumentRepository: React.FC = () => {
+const DocumentRepository: React.FC<DocumentRepositoryProps> = ({ onFilesChange }) => {
   const { t } = useTranslation();
+  const [files, setFiles] = useState<File[]>([]);
+
+  const syncInputFiles = (input: HTMLInputElement | null, nextFiles: File[]) => {
+    if (!input) return;
+    const dataTransfer = new DataTransfer();
+    nextFiles.forEach((file) => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+  };
+
+  const updateFiles = (nextFiles: File[]) => {
+    setFiles(nextFiles);
+    onFilesChange(nextFiles);
+    const input = document.querySelector<HTMLInputElement>('input[name="documentos"]');
+    syncInputFiles(input, nextFiles);
+  };
+
+  const removeFile = (fileToRemove: File) => {
+    updateFiles(files.filter((file) => file !== fileToRemove));
+  };
 
   return (
     <section className="bg-white rounded-xl shadow-sm overflow-hidden">
@@ -22,18 +37,29 @@ const DocumentRepository: React.FC = () => {
 
           <div className="col-span-12 md:col-span-5 space-y-4">
             <h3 className="text-xs font-bold uppercase text-slate-500 tracking-wider">
-              {t('employees.add.docs.required')}
+              Archivos seleccionados
             </h3>
-            <ul className="space-y-3">
-              {DOC_KEYS.map((doc) => (
-                <li key={doc.key} className="flex items-center gap-3 text-xs text-slate-600">
-                  <span className={`material-symbols-outlined text-sm ${doc.pendiente ? 'text-amber-500' : 'text-slate-300'}`}>
-                    {doc.pendiente ? 'pending_actions' : 'check_circle'}
-                  </span>
-                  {t(`employees.add.docs.${doc.key}`)}
-                </li>
-              ))}
-            </ul>
+            {files.length === 0 ? (
+              <p className="text-xs text-slate-400">No has cargado documentos.</p>
+            ) : (
+              <ul className="space-y-3">
+                {files.map((file) => (
+                  <li key={`${file.name}-${file.size}`} className="flex items-center gap-3 text-xs text-slate-600">
+                    <span className="material-symbols-outlined text-sm text-[#0e1a34]">description</span>
+                    <span className="min-w-0 flex-1 truncate">{file.name}</span>
+                    <span className="text-[10px] text-slate-400">{Math.ceil(file.size / 1024)} KB</span>
+                    <button
+                      type="button"
+                      onClick={() => removeFile(file)}
+                      className="rounded-md p-1 text-slate-300 transition-colors hover:bg-rose-50 hover:text-rose-500"
+                      title="Quitar documento"
+                    >
+                      <span className="material-symbols-outlined text-[16px]">close</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div className="col-span-12 md:col-span-7">
@@ -43,7 +69,20 @@ const DocumentRepository: React.FC = () => {
               <p className="text-[10px] text-slate-400 mt-2 uppercase tracking-widest text-center">
                 {t('employees.add.docs.dragFiles')}<br />(PDF, JPG, PNG hasta 10MB)
               </p>
-              <input type="file" multiple className="hidden" />
+              <input
+                name="documentos"
+                type="file"
+                multiple
+                className="hidden"
+                onChange={(event) => {
+                  const newFiles = Array.from(event.target.files ?? []);
+                  const merged = [
+                    ...files,
+                    ...newFiles.filter(f => !files.some(p => p.name === f.name && p.size === f.size)),
+                  ];
+                  updateFiles(merged);
+                }}
+              />
             </label>
           </div>
 

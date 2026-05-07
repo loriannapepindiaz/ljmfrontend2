@@ -21,7 +21,7 @@ const fallbackExperience: SelectedExperience = {
   location: 'Arrecifes de Positano',
   rating: '4.9',
   image: 'https://images.unsplash.com/photo-1546026423-cc4642628d2b?q=80&w=2000&auto=format&fit=crop',
-  description: 'Una expedicion silenciosa a traves de los jardines sumergidos del Mediterraneo.',
+  description: 'Una expedición silenciosa a través de los jardines sumergidos del Mediterráneo.',
 };
 
 type Gallery = { detail: string; equipment: string; yacht: string };
@@ -110,7 +110,7 @@ const CoralImmersionPage: React.FC = () => {
     () => [
       {
         icon: Clock3,
-        title: 'Duracion',
+        title: 'Duración',
         value: 'No registrada',
         text: '',
       },
@@ -118,7 +118,7 @@ const CoralImmersionPage: React.FC = () => {
         icon: Star,
         title: 'Nivel',
         value: backendExperience?.categoria ?? selectedExperience.location ?? 'Sin datos',
-        text: rating !== 'Sin datos' ? `Calificacion: ${rating}` : '',
+        text: rating !== 'Sin datos' ? `Calificación: ${rating}` : '',
       },
       {
         icon: BadgeCheck,
@@ -251,9 +251,9 @@ const CoralImmersionPage: React.FC = () => {
         </section>
 
         <section className="bg-[#f5f6f8] px-6 py-32 text-center">
-          <h2 className="font-['Playfair_Display'] text-4xl text-[#101828]">Listo para reservar?</h2>
+          <h2 className="font-['Playfair_Display'] text-4xl text-[#101828]">¿Listo para reservar?</h2>
           <p className="mx-auto mt-5 max-w-xl text-sm leading-6 text-slate-500">
-            Las plazas se gestionan segun disponibilidad y datos registrados para cada experiencia.
+            Las plazas se gestionan según disponibilidad y datos registrados para cada experiencia.
           </p>
           <button
             onClick={() => navigate('/destinations')}
@@ -262,7 +262,7 @@ const CoralImmersionPage: React.FC = () => {
             Ver destinos disponibles
           </button>
           <p className="mt-10 text-[8px] uppercase tracking-[0.26em] text-slate-400">
-            Atencion personalizada 24/7 para miembros
+            Atención personalizada 24/7 para miembros
           </p>
         </section>
       </main>
