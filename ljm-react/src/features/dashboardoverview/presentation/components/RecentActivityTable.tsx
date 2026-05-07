@@ -1,214 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import type { ActivityRow } from '../../data/dashboardService';
 
-const RecentActivityTable: React.FC = () => {
+interface RecentActivityTableProps {
+  activity: ActivityRow[];
+  loading: boolean;
+}
+
+const STATUS_STYLES: Record<string, string> = {
+  Confirmado: 'bg-green-50 text-green-600 border border-green-200',
+  Pendiente:  'bg-amber-50 text-amber-600 border border-amber-200',
+  Pagado:     'bg-blue-50 text-blue-600 border border-blue-200',
+};
+
+const RecentActivityTable: React.FC<RecentActivityTableProps> = ({ activity, loading }) => {
   const { t } = useTranslation();
-  const [showFilter, setShowFilter] = useState(false);
-  const [filterDay, setFilterDay] = useState('');
-  const [filterMonth, setFilterMonth] = useState('');
-  const [filterYear, setFilterYear] = useState('');
-  const [view, setView] = useState<'main' | 'month' | 'year'>('main');
-
-  const handleClear = () => {
-    setFilterDay('');
-    setFilterMonth('');
-    setFilterYear('');
-  };
-
-  const months = t('reports.monthsShort', { returnObjects: true }) as string[];
-  const monthsFull = t('reports.months', { returnObjects: true }) as string[];
-
-  const years = ['2025', '2026', '2027', '2028', '2029', '2030'];
+  const navigate = useNavigate();
 
   return (
     <div className="xl:col-span-2 bg-white border border-[#0e1a34]/10 rounded-xl shadow-sm flex flex-col">
 
-      <div className="p-6 border-b border-[#0e1a34]/10 flex items-center justify-between">
+      <div className="p-6 border-b border-[#0e1a34]/10">
         <h3 className="text-lg font-bold text-[#0e1a34]">{t('dashboard.recentActivity.title')}</h3>
-        <button
-          onClick={() => { setShowFilter(!showFilter); setView('main'); }}
-          className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-bold transition-all border ${
-            showFilter
-              ? 'bg-[#eacea9] text-[#0e1a34] border-[#eacea9]'
-              : 'bg-white text-[#0e1a34]/60 border-[#0e1a34]/10 hover:border-[#eacea9] hover:text-[#0e1a34]'
-          }`}
-        >
-          <span className="material-symbols-outlined text-[18px]">tune</span>
-          {t('dashboard.recentActivity.filter')}
-        </button>
       </div>
-
-      {/* Modal */}
-      {showFilter && (
-        <>
-          <div className="fixed inset-0 z-40 bg-black/25 backdrop-blur-sm" onClick={() => setShowFilter(false)} />
-          <div
-            className="fixed z-50 bg-white rounded-2xl shadow-2xl border border-[#0e1a34]/10 w-96"
-            style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-          >
-            {/* Header */}
-            <div className="flex items-center justify-between p-5 border-b border-slate-100">
-              <div className="flex items-center gap-3">
-                <div className="size-9 rounded-xl bg-[#eacea9]/30 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-[20px] text-[#0e1a34]">calendar_month</span>
-                </div>
-                <div>
-                  <h4 className="text-base font-bold text-[#0e1a34]">{t('dashboard.recentActivity.filterByDate')}</h4>
-                  <p className="text-[11px] text-[#0e1a34]/40">{t('dashboard.recentActivity.selectParams')}</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowFilter(false)}
-                className="size-8 flex items-center justify-center rounded-lg hover:bg-slate-100 text-[#0e1a34]/40 hover:text-[#0e1a34] transition-colors"
-              >
-                <span className="material-symbols-outlined text-[18px]">close</span>
-              </button>
-            </div>
-
-            {/* Vista principal */}
-            {view === 'main' && (
-              <div className="p-5 flex flex-col gap-4">
-
-                {/* Día */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.day')}</label>
-                  <input
-                    type="number"
-                    min={1}
-                    max={31}
-                    value={filterDay}
-                    onChange={(e) => setFilterDay(e.target.value)}
-                    placeholder={t('dashboard.recentActivity.dayPlaceholder')}
-                    className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-[#0e1a34] placeholder-[#0e1a34]/30 focus:ring-2 focus:ring-[#eacea9]/50 outline-none bg-slate-50/50"
-                  />
-                </div>
-
-                {/* Mes */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.month')}</label>
-                  <button
-                    onClick={() => setView('month')}
-                    className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-left flex items-center justify-between bg-slate-50/50 hover:border-[#eacea9] transition-all"
-                  >
-                    <span className={filterMonth ? 'text-[#0e1a34] font-medium' : 'text-[#0e1a34]/30'}>
-                      {filterMonth ? monthsFull[parseInt(filterMonth) - 1] : t('dashboard.recentActivity.selectMonth')}
-                    </span>
-                    <span className="material-symbols-outlined text-[18px] text-[#0e1a34]/40">chevron_right</span>
-                  </button>
-                </div>
-
-                {/* Año */}
-                <div className="flex flex-col gap-1.5">
-                  <label className="text-[11px] font-bold text-[#0e1a34]/50 uppercase tracking-wider">{t('dashboard.recentActivity.year')}</label>
-                  <button
-                    onClick={() => setView('year')}
-                    className="w-full border border-[#0e1a34]/10 rounded-xl px-4 py-3 text-sm text-left flex items-center justify-between bg-slate-50/50 hover:border-[#eacea9] transition-all"
-                  >
-                    <span className={filterYear ? 'text-[#0e1a34] font-medium' : 'text-[#0e1a34]/30'}>
-                      {filterYear || t('dashboard.recentActivity.selectYear')}
-                    </span>
-                    <span className="material-symbols-outlined text-[18px] text-[#0e1a34]/40">chevron_right</span>
-                  </button>
-                </div>
-
-                {/* Resumen activo */}
-                {(filterDay || filterMonth || filterYear) && (
-                  <div className="px-3 py-2 bg-[#eacea9]/20 rounded-lg flex items-center gap-2">
-                    <span className="material-symbols-outlined text-[16px] text-[#0e1a34]/60">filter_alt</span>
-                    <p className="text-xs text-[#0e1a34]/60 font-medium">
-                      {[filterDay && `Día ${filterDay}`, filterMonth && monthsFull[parseInt(filterMonth) - 1], filterYear].filter(Boolean).join(' · ')}
-                    </p>
-                  </div>
-                )}
-
-                <div className="border-t border-slate-100 pt-4 flex gap-3">
-                  <button
-                    onClick={handleClear}
-                    className="flex-1 py-3 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/60 hover:bg-slate-50 transition-all"
-                  >
-                    {t('dashboard.recentActivity.clear')}
-                  </button>
-                  <button
-                    onClick={() => { console.log({ filterDay, filterMonth, filterYear }); setShowFilter(false); }}
-                    className="flex-1 py-3 rounded-xl bg-[#eacea9] text-[#0e1a34] text-xs font-bold hover:bg-[#d4af37] transition-all flex items-center justify-center gap-2"
-                  >
-                    <span className="material-symbols-outlined text-[16px]">check</span>
-                    {t('dashboard.recentActivity.applyFilter')}
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Vista meses */}
-            {view === 'month' && (
-              <div className="p-5">
-                <button
-                  onClick={() => setView('main')}
-                  className="flex items-center gap-2 text-sm font-bold text-[#0e1a34]/60 hover:text-[#0e1a34] mb-4 transition-colors"
-                >
-                  <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-                  {t('dashboard.recentActivity.selectMonth')}
-                </button>
-                <div className="grid grid-cols-3 gap-2">
-                  {months.map((m, i) => (
-                    <button
-                      key={m}
-                      onClick={() => { setFilterMonth(String(i + 1)); setView('main'); }}
-                      className={`py-3 rounded-xl text-sm font-bold transition-all border ${
-                        filterMonth === String(i + 1)
-                          ? 'bg-[#eacea9] text-[#0e1a34] border-[#eacea9] shadow-sm'
-                          : 'bg-slate-50 text-[#0e1a34]/70 border-slate-100 hover:border-[#eacea9] hover:text-[#0e1a34]'
-                      }`}
-                    >
-                      {m}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => { setFilterMonth(''); setView('main'); }}
-                  className="mt-4 w-full py-2.5 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/50 hover:bg-slate-50 transition-all"
-                >
-                  {t('dashboard.recentActivity.allMonths')}
-                </button>
-              </div>
-            )}
-
-            {/* Vista años */}
-            {view === 'year' && (
-              <div className="p-5">
-                <button
-                  onClick={() => setView('main')}
-                  className="flex items-center gap-2 text-sm font-bold text-[#0e1a34]/60 hover:text-[#0e1a34] mb-4 transition-colors"
-                >
-                  <span className="material-symbols-outlined text-[18px]">arrow_back</span>
-                  {t('dashboard.recentActivity.selectYear')}
-                </button>
-                <div className="grid grid-cols-3 gap-2">
-                  {years.map((y) => (
-                    <button
-                      key={y}
-                      onClick={() => { setFilterYear(y); setView('main'); }}
-                      className={`py-3 rounded-xl text-sm font-bold transition-all border ${
-                        filterYear === y
-                          ? 'bg-[#eacea9] text-[#0e1a34] border-[#eacea9] shadow-sm'
-                          : 'bg-slate-50 text-[#0e1a34]/70 border-slate-100 hover:border-[#eacea9] hover:text-[#0e1a34]'
-                      }`}
-                    >
-                      {y}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  onClick={() => { setFilterYear(''); setView('main'); }}
-                  className="mt-4 w-full py-2.5 rounded-xl border border-[#0e1a34]/10 text-xs font-bold text-[#0e1a34]/50 hover:bg-slate-50 transition-all"
-                >
-                  {t('dashboard.recentActivity.allYears')}
-                </button>
-              </div>
-            )}
-          </div>
-        </>
-      )}
 
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse">
@@ -222,18 +37,44 @@ const RecentActivityTable: React.FC = () => {
             </tr>
           </thead>
           <tbody className="text-sm text-[#0e1a34]/80 divide-y divide-[#0e1a34]/5">
-            <tr>
-              <td colSpan={5} className="px-6 py-16 text-center text-slate-400 text-sm">
-                <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">inbox</span>
-                {t('dashboard.recentActivity.empty')}
-              </td>
-            </tr>
+            {loading ? (
+              <tr>
+                <td colSpan={5} className="px-6 py-16 text-center text-slate-400 text-sm">
+                  <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300 animate-pulse">hourglass_empty</span>
+                  Cargando actividad...
+                </td>
+              </tr>
+            ) : activity.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="px-6 py-16 text-center text-slate-400 text-sm">
+                  <span className="material-symbols-outlined text-[40px] block mb-3 text-slate-300">inbox</span>
+                  {t('dashboard.recentActivity.empty')}
+                </td>
+              </tr>
+            ) : (
+              activity.map((row) => (
+                <tr key={row.id} className="hover:bg-[#0e1a34]/[0.02] transition-colors">
+                  <td className="px-6 py-4 font-mono text-xs text-[#0e1a34]/50">#{row.id}</td>
+                  <td className="px-6 py-4 font-medium">{row.guest}</td>
+                  <td className="px-6 py-4 text-[#0e1a34]/60">{row.ship}</td>
+                  <td className="px-6 py-4">
+                    <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-bold ${STATUS_STYLES[row.status] ?? 'bg-slate-100 text-slate-600'}`}>
+                      {row.status}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 font-bold">{row.total}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
       <div className="p-6 bg-white border-t border-[#0e1a34]/10 flex justify-center">
-        <button className="bg-[#0e1a34] text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-[#1a2a4a] transition-all shadow-md flex items-center gap-2">
+        <button
+          onClick={() => navigate('/admin/reservas')}
+          className="bg-[#0e1a34] text-white px-6 py-2 rounded-xl font-bold text-sm hover:bg-[#1a2a4a] transition-all shadow-md flex items-center gap-2"
+        >
           {t('dashboard.recentActivity.viewAll')}
           <span className="material-symbols-outlined text-sm">arrow_forward</span>
         </button>

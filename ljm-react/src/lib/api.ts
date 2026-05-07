@@ -1,4 +1,11 @@
 export const API_BASE_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000/api';
+
+export const getBackendMediaUrl = (path: string | null | undefined): string | null => {
+  if (!path) return null;
+  if (path.startsWith('http') || path.startsWith('blob:')) return path;
+  const origin = API_BASE_URL.replace(/\/api\/?$/, '');
+  return `${origin}${path}`;
+};
 export const ADMIN_SESSION_EVENT = 'ljm-admin-session-change';
 
 export type AuthUser = {

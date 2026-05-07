@@ -1,7 +1,7 @@
 import { API_BASE_URL } from '../../../lib/api';
 import type {
   AdminReserva,
-  CabinaItem,
+  HabitacionItem,
   CreateReservaPayload,
   PasajeroItem,
   UpdateReservaPayload,
@@ -76,12 +76,12 @@ export const reservaService = {
     return handleResponse<PasajeroItem[]>(res);
   },
 
-  getCabinasCatalogo: async (crucero_id?: string): Promise<CabinaItem[]> => {
+  getHabitacionesCatalogo: async (crucero_id?: string): Promise<HabitacionItem[]> => {
     const params = new URLSearchParams();
     if (crucero_id) params.set('id_crucero', crucero_id);
     const res = await fetch(`${API_BASE_URL}/cabinas/habitaciones?${params.toString()}`, {
       headers: authHeaders(),
     });
-    return handleResponse<CabinaItem[]>(res);
+    return handleResponse<HabitacionItem[]>(res);
   },
 };

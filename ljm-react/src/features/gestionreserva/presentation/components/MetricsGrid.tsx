@@ -15,15 +15,15 @@ interface MetricsGridProps {
   loading?: boolean;
 }
 
-const iconColors: Record<string, string> = {
-  calendar_month:  'text-slate-500',
-  check_circle:    'text-green-500',
-  hourglass_empty: 'text-amber-500',
-  attach_money:    'text-blue-500',
+const iconStyles: Record<string, { bg: string; text: string }> = {
+  calendar_month:  { bg: 'bg-blue-50',      text: 'text-blue-500'   },
+  check_circle:    { bg: 'bg-green-50',     text: 'text-green-600'  },
+  hourglass_empty: { bg: 'bg-amber-50',     text: 'text-amber-500'  },
+  attach_money:    { bg: 'bg-[#0e1a34]/5',  text: 'text-[#0e1a34]' },
 };
 
 const Skeleton: React.FC = () => (
-  <div className="h-9 w-28 bg-slate-100 rounded animate-pulse mb-2" />
+  <div className="h-8 w-20 bg-slate-100 rounded animate-pulse mt-1 mb-2" />
 );
 
 const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics, loading }) => {
@@ -68,38 +68,37 @@ const MetricsGrid: React.FC<MetricsGridProps> = ({ metrics, loading }) => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-      {resolvedMetrics.map((metric) => (
-        <div
-          key={metric.label}
-          className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow"
-        >
-          {/* Label + icono arriba */}
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-              {metric.label}
-            </p>
-            <span className={`material-symbols-outlined text-[22px] ${iconColors[metric.icon] ?? 'text-slate-400'}`}>
-              {metric.icon}
-            </span>
-          </div>
+      {resolvedMetrics.map((metric) => {
+        const ic = iconStyles[metric.icon] ?? { bg: 'bg-slate-50', text: 'text-slate-500' };
+        return (
+          <div
+            key={metric.label}
+            className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <div className={`p-2 ${ic.bg} ${ic.text} rounded-lg`}>
+                <span className="material-symbols-outlined">{metric.icon}</span>
+              </div>
+            </div>
 
-          {/* Valor grande */}
-          {loading
-            ? <Skeleton />
-            : <p className="text-3xl font-bold text-[#0e1a34] mb-2">{metric.value}</p>
-          }
+            <p className="text-slate-500 text-sm font-medium">{metric.label}</p>
 
-          {/* Trend abajo */}
-          <div className="flex items-center gap-1">
-            <span className={`material-symbols-outlined text-[14px] ${metric.trendUp ? 'text-green-500' : 'text-red-500'}`}>
-              {metric.trendUp ? 'trending_up' : 'trending_down'}
-            </span>
-            <span className={`text-xs font-bold ${metric.trendUp ? 'text-green-500' : 'text-red-500'}`}>
-              {metric.trendText || metric.trend}
-            </span>
+            {loading
+              ? <Skeleton />
+              : <h3 className="text-2xl font-bold text-[#0e1a34] mt-1 mb-2">{metric.value}</h3>
+            }
+
+            <div className="flex items-center gap-1">
+              <span className={`material-symbols-outlined text-[14px] ${metric.trendUp ? 'text-green-500' : 'text-red-500'}`}>
+                {metric.trendUp ? 'trending_up' : 'trending_down'}
+              </span>
+              <span className={`text-xs font-bold ${metric.trendUp ? 'text-green-500' : 'text-red-500'}`}>
+                {metric.trendText || metric.trend}
+              </span>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

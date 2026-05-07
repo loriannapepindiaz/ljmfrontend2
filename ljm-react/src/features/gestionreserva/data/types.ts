@@ -11,7 +11,7 @@ export interface AdminReserva {
   viaje_nombre: string | null;
   crucero_id: string | null;
   cabin: string;
-  cabina_id: string | null;
+  habitacion_id: string | null;
   status: ReservationStatus;
   total: string;
   monto_total: number;
@@ -43,7 +43,7 @@ export interface ViajeItem {
   crucero_nombre: string | null;
 }
 
-export interface CabinaItem {
+export interface HabitacionItem {
   id: string;
   numero_cabina: string | null;
   categoria: string | null;

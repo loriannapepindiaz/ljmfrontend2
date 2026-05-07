@@ -47,7 +47,7 @@ const ReportesPage: React.FC = () => {
     return (
       data.ingresos_mensuales > 0 ||
       data.tasa_ocupacion > 0 ||
-      data.satisfaccion_cliente > 0 ||
+      (data.satisfaccion_cliente > 0 || data.satisfaccion_total > 0) ||
       data.crecimiento_reservas !== 0 ||
       data.ingresos_por_mes.some((item) => item.total > 0) ||
       data.ingresos_por_servicio.some((item) => item.total > 0 || item.porcentaje > 0) ||

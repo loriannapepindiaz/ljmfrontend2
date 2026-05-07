@@ -130,7 +130,7 @@ const PagosPage: React.FC = () => {
     <>
       <div className="flex h-screen overflow-hidden">
         <AdminSidebar />
-        <main className="flex-1 overflow-y-auto bg-[#f6f7f8]">
+        <main className="no-scrollbar flex-1 overflow-y-auto bg-[#f6f7f8]">
           <div className="p-8">
             <PagosHeader onAddClick={() => setShowCreate(true)} />
             <PagosMetrics

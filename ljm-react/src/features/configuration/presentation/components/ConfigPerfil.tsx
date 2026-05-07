@@ -3,6 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { ADMIN_SESSION_EVENT, getStoredAdminSession } from '../../../../lib/api';
 import { useTheme } from '../../../../context/ThemeContext';
 
+const getInitials = (name: string) => {
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return '?';
+  if (parts.length === 1) return parts[0][0].toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
 const ConfigPerfil: React.FC = () => {
   const { t } = useTranslation();
   const { tema } = useTheme();
@@ -40,15 +47,10 @@ const ConfigPerfil: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-8 items-start">
 
           {/* Avatar */}
-          <div className="relative group shrink-0">
-            <div className={`size-32 rounded-full overflow-hidden border-4 border-[#eacea9] shadow-md flex items-center justify-center ${
-              tema === 'oscuro' ? 'bg-slate-700' : 'bg-slate-200'
-            }`}>
-              <span className={`material-symbols-outlined text-[48px] ${tema === 'oscuro' ? 'text-slate-300' : 'text-slate-400'}`}>person</span>
-            </div>
-            <button className="absolute bottom-0 right-0 bg-[#0e1a34] text-white p-2 rounded-full border-2 border-white shadow-lg hover:bg-slate-800 transition-colors">
-              <span className="material-symbols-outlined text-base">photo_camera</span>
-            </button>
+          <div className="size-28 rounded-full border-4 border-[#eacea9] shadow-md flex items-center justify-center bg-[#0e1a34] shrink-0">
+            <span className="text-3xl font-bold text-[#eacea9] select-none tracking-wide">
+              {getInitials(nombre || adminUser?.username || '?')}
+            </span>
           </div>
 
           {/* Campos */}

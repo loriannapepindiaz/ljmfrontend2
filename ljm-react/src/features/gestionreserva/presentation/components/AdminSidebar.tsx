@@ -128,7 +128,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = () => {
 
             <button onClick={() => navigate('/admin/cabinas')} className={isActive('/admin/cabinas') ? activeStyle : inactiveStyle}>
               <span className="material-symbols-outlined text-[22px]">bed</span>
-              <span className="text-sm font-medium">{t('sidebar.cabins')}</span>
+              <span className="text-sm font-medium">Habitaciones</span>
             </button>
 
             <div>

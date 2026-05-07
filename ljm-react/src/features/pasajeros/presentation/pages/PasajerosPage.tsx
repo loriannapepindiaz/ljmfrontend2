@@ -71,13 +71,14 @@ const PasajerosPage: React.FC = () => {
         <AdminSidebar activeItem="Pasajeros" />
         <main className="flex-1 flex flex-col overflow-hidden bg-[#f6f7f8]">
           <PasajerosHeader onAddClick={() => navigate('/anadiracompanante')} />
-          <div className="flex-1 overflow-y-auto p-8 space-y-8">
+          <div className="no-scrollbar flex-1 overflow-y-auto p-8 space-y-8">
 
             <PasajerosMetrics
               total={metrics.total}
               platinum={metrics.platinum}
               gold={metrics.gold}
               recent={metrics.recent}
+              loading={loading}
             />
 
             <PasajerosFilters

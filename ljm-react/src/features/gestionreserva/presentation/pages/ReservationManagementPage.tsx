@@ -133,9 +133,8 @@ const ReservationManagementPage: React.FC = () => {
           <AdminHeader
             title={t('reservations.title')}
             subtitle="Supervise el estado de las reservas, filtre resultados y gestione cada solicitud desde un solo panel."
-            onAddClick={() => setShowCreate(true)}
           />
-          <div className="flex-1 overflow-auto p-8">
+          <div className="no-scrollbar flex-1 overflow-auto p-8">
             <MetricsGrid metrics={METRICS} loading={loading} />
             <ReservationFilters
               activeFilter={filterKey}

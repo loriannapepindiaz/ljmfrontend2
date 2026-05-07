@@ -14,7 +14,7 @@ const CrucerosTabs: React.FC<CrucerosTabsProps> = ({ activeTab, onTabChange, cou
   const { t } = useTranslation();
 
   return (
-    <div className="flex border-b border-slate-200 mb-8 overflow-x-auto">
+    <div className="no-scrollbar flex border-b border-slate-200 mb-8 overflow-x-auto" style={{ scrollbarWidth: 'none' } as React.CSSProperties}>
       {TAB_KEYS.map((tab) => (
         <button
           key={tab}

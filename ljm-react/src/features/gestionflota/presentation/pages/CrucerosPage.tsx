@@ -77,7 +77,7 @@ const CrucerosPage: React.FC = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <AdminSidebar activeItem="Cruceros" />
-      <main className="flex-1 overflow-y-auto bg-white">
+      <main className="no-scrollbar flex-1 overflow-y-auto bg-white">
         <CrucerosHeader onAddClick={() => navigate('/admin/cruceros/agregar')} />
         <div className="p-8">
           <CrucerosTabs activeTab={activeTab} onTabChange={setActiveTab} counts={counts} />

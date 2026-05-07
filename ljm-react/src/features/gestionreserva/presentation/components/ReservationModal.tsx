@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { AdminReserva, CabinaItem, ReservationStatus } from '../../data/types';
+import type { AdminReserva, HabitacionItem, ReservationStatus } from '../../data/types';
 import { STATUS_STYLES } from '../../data/types';
 import { reservaService } from '../../data/reservaService';
 
@@ -86,19 +86,19 @@ const DetailRow: React.FC<{ label: string; value: React.ReactNode }> = ({ label,
 const ReservationModal: React.FC<ReservationModalProps> = ({ reserva, mode, onClose, onSaved }) => {
   const [currentMode, setCurrentMode] = useState(mode);
   const [estado, setEstado] = useState<ReservationStatus>(reserva.status);
-  const [cabina, setCabina] = useState(reserva.cabina_id ?? '');
+  const [cabina, setCabina] = useState(reserva.habitacion_id ?? '');
   const [monto, setMonto] = useState(String(reserva.monto_total));
   const [observaciones, setObservaciones] = useState(
     isJsonString(reserva.observaciones) ? '' : (reserva.observaciones ?? '')
   );
-  const [cabinas, setCabinas] = useState<CabinaItem[]>([]);
+  const [cabinas, setCabinas] = useState<HabitacionItem[]>([]);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setCurrentMode(mode);
     setEstado(reserva.status);
-    setCabina(reserva.cabina_id ?? '');
+    setCabina(reserva.habitacion_id ?? '');
     setMonto(String(reserva.monto_total));
     setObservaciones(isJsonString(reserva.observaciones) ? '' : (reserva.observaciones ?? ''));
     setError(null);
@@ -107,7 +107,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ reserva, mode, onCl
   useEffect(() => {
     if (currentMode === 'edit' && reserva.crucero_id) {
       reservaService
-        .getCabinasCatalogo(reserva.crucero_id)
+        .getHabitacionesCatalogo(reserva.crucero_id)
         .then(setCabinas)
         .catch(() => setCabinas([]));
     }
@@ -174,7 +174,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ reserva, mode, onCl
               <DetailRow label="Email" value={reserva.guest_email} />
               <DetailRow label="Barco" value={reserva.ship} />
               {reserva.viaje_nombre && <DetailRow label="Viaje" value={reserva.viaje_nombre} />}
-              <DetailRow label="Cabina" value={reserva.cabin} />
+              <DetailRow label="Habitación" value={reserva.cabin} />
               <DetailRow
                 label="Estado"
                 value={
@@ -207,7 +207,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ reserva, mode, onCl
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cabina</label>
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Habitación</label>
                 <select
                   className={inputClass}
                   value={cabina}
@@ -221,7 +221,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ reserva, mode, onCl
                   ))}
                 </select>
                 {!reserva.crucero_id && (
-                  <p className="text-xs text-slate-400">Sin crucero asociado; no se puede filtrar cabinas.</p>
+                  <p className="text-xs text-slate-400">Sin crucero asociado; no se puede filtrar habitaciones.</p>
                 )}
               </div>
 

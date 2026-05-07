@@ -20,6 +20,7 @@ export type ReportesData = {
   ingresos_mensuales: number;
   tasa_ocupacion: number;
   satisfaccion_cliente: number;
+  satisfaccion_total: number;
   crecimiento_reservas: number;
   ingresos_por_mes: IngresoPorMes[];
   ingresos_por_servicio: IngresoPorServicio[];

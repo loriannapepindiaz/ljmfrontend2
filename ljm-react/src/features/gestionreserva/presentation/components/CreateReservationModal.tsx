@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import type { AdminReserva, CabinaItem, PasajeroItem, ViajeItem } from '../../data/types';
+import type { AdminReserva, HabitacionItem, PasajeroItem, ViajeItem } from '../../data/types';
 import { reservaService } from '../../data/reservaService';
 
 interface CreateReservationModalProps {
@@ -12,7 +12,7 @@ const inputClass = 'w-full rounded-lg border border-slate-300 focus:ring-2 focus
 const CreateReservationModal: React.FC<CreateReservationModalProps> = ({ onClose, onCreated }) => {
   const [pasajeros, setPasajeros] = useState<PasajeroItem[]>([]);
   const [viajes, setViajes] = useState<ViajeItem[]>([]);
-  const [cabinas, setCabinas] = useState<CabinaItem[]>([]);
+  const [cabinas, setCabinas] = useState<HabitacionItem[]>([]);
 
   const [selectedPasajero, setSelectedPasajero] = useState('');
   const [selectedViaje, setSelectedViaje] = useState('');
@@ -47,7 +47,7 @@ const CreateReservationModal: React.FC<CreateReservationModalProps> = ({ onClose
     setLoadingCabinas(true);
     setSelectedCabina('');
     reservaService
-      .getCabinasCatalogo(selectedViajeData.crucero_id)
+      .getHabitacionesCatalogo(selectedViajeData.crucero_id)
       .then(setCabinas)
       .catch(() => setCabinas([]))
       .finally(() => setLoadingCabinas(false));
@@ -144,11 +144,11 @@ const CreateReservationModal: React.FC<CreateReservationModalProps> = ({ onClose
                   </select>
                 </div>
 
-                {/* Cabina */}
+                {/* Habitación */}
                 <div className="flex flex-col gap-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Cabina</label>
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-500">Habitación</label>
                   {loadingCabinas ? (
-                    <p className="text-xs text-slate-400 py-2">Cargando cabinas...</p>
+                    <p className="text-xs text-slate-400 py-2">Cargando habitaciones...</p>
                   ) : (
                     <select
                       className={inputClass}
@@ -159,13 +159,13 @@ const CreateReservationModal: React.FC<CreateReservationModalProps> = ({ onClose
                       <option value="">Sin asignar</option>
                       {cabinas.map((c) => (
                         <option key={c.id} value={c.id}>
-                          Cabina {c.numero_cabina} {c.categoria ? `— ${c.categoria}` : ''} {c.estado ? `(${c.estado})` : ''}
+                          Habitación {c.numero_cabina} {c.categoria ? `— ${c.categoria}` : ''} {c.estado ? `(${c.estado})` : ''}
                         </option>
                       ))}
                     </select>
                   )}
                   {!selectedViaje && (
-                    <p className="text-xs text-slate-400">Selecciona un viaje para filtrar cabinas.</p>
+                    <p className="text-xs text-slate-400">Selecciona un viaje para filtrar habitaciones.</p>
                   )}
                 </div>
 
